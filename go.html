@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Redirecting…</title>
+  <meta name="robots" content="noindex,nofollow" />
+  <style>
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;margin:0;padding:24px;}
+    .box{max-width:720px;margin:0 auto;}
+    code{background:#f4f4f4;padding:2px 6px;border-radius:6px;}
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1>Redirecting…</h1>
+    <p>If you are not redirected, <a id="fallback" href="#">click here</a>.</p>
+    <p style="opacity:.7;font-size:13px">Note: This page is for routing only.</p>
+  </div>
+
+  <script>
+    // 1) PUT YOUR AFF LINK HERE
+    const AFF_URL = "PASTE_YOUR_AFFILIATE_URL_HERE";
+
+    // 2) Optional: static UTM (keep neutral for finance)
+    const STATIC_PARAMS = {
+      utm_source: "inpage_push",
+      utm_medium: "push",
+      utm_campaign: "jp_finance_edu"
+    };
+
+    // 3) Pass-through params from traffic source (example common keys)
+    const PASS_KEYS = ["subid","clickid","zoneid","campaignid","adid","siteid","publisher","placement"];
+
+    function buildUrl() {
+      const inUrl = new URL(window.location.href);
+      const outUrl = new URL(AFF_URL);
+
+      // add static params (only if not already present)
+      for (const [k,v] of Object.entries(STATIC_PARAMS)) {
+        if (!outUrl.searchParams.has(k)) outUrl.searchParams.set(k, v);
+      }
+
+      // pass-through selected params
+      PASS_KEYS.forEach(k => {
+        const val = inUrl.searchParams.get(k);
+        if (val && !outUrl.searchParams.has(k)) outUrl.searchParams.set(k, val);
+      });
+
+      return outUrl.toString();
+    }
+
+    function countClick() {
+      // Local-only counter (for your own device). Not server analytics.
+      const key = "pl_clicks_total";
+      const n = parseInt(localStorage.getItem(key) || "0", 10) + 1;
+      localStorage.setItem(key, String(n));
+    }
+
+    (function(){
+      try { countClick(); } catch(e) {}
+      const target = buildUrl();
+      document.getElementById("fallback").href = target;
+      // short delay to allow page paint
+      setTimeout(() => window.location.replace(target), 120);
+    })();
+  </script>
+</body>
+</html>
