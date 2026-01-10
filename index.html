@@ -79,8 +79,39 @@
       padding:14px 0;
     }
     .brand{
-      display:flex; align-items:center; gap:12px;
-      min-width:220px;
+  display:flex;
+  align-items:center;
+}
+
+.brand-link{
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+  text-decoration:none;
+}
+
+.fxfacts-logo{
+  height:32px;
+  width:auto;
+}
+
+.tagline{
+  font-size:11px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:rgba(232,238,252,.65);
+}
+
+/* Mobile tuning */
+@media(max-width:760px){
+  .fxfacts-logo{
+    height:28px;
+  }
+  .tagline{
+    font-size:10px;
+  }
+}
+
     }
     .logo-placeholder{
       width:44px; height:44px;
@@ -649,13 +680,48 @@
     <div class="container">
       <div class="header-inner">
         <!-- Placeholder TOP-LEFT for your website logo -->
-        <a class="brand" href="#top" aria-label="トップへ">
-          <div class="FXfacts.png" aria-label="ロゴ（差し替え用プレースホルダー）">
-            <span>LOGO</span>
-          </div>
+        <div class="brand">
+  <a href="https://fxfacts.com" class="brand-link" aria-label="FXfacts Home">
+    <!-- SVG logo here -->
+    <svg class="fxfacts-logo"
+     width="160"
+     height="36"
+     viewBox="0 0 480 110"
+     xmlns="http://www.w3.org/2000/svg"
+     role="img"
+     aria-label="FXfacts - Forex Facts. No Hype.">
+
+  <!-- Icon -->
+  <g transform="translate(0,10)">
+    <rect x="0" y="30" width="14" height="40" rx="2" fill="#1dbf73"/>
+    <rect x="22" y="10" width="14" height="60" rx="2" fill="#ffffff"/>
+    <rect x="44" y="38" width="14" height="32" rx="2" fill="#ff4d4d"/>
+
+    <path d="M-5 70 C30 20, 80 20, 95 5"
+          fill="none"
+          stroke="#2f6bff"
+          stroke-width="6"
+          stroke-linecap="round"/>
+    <polygon points="95,5 82,8 90,18" fill="#2f6bff"/>
+  </g>
+
+  <!-- Text -->
+  <text x="120" y="70"
+        font-size="56"
+        font-weight="800"
+        fill="#e8eefc"
+        font-family="system-ui, -apple-system, Segoe UI, Arial">
+    FXfacts
+  </text>
+</svg>
+
+    <!-- paste SVG code above -->
+    <span class="tagline">Forex facts. No hype.</span>
+  </a>
+</div>
           <div>
             <div style="font-weight:900; letter-spacing:.04em; line-height:1.05;">あなたのサイト名</div>
-            <div style="color:rgba(255,255,255,.65); font-size:12px; font-weight:700;">Japan-friendly Push Campaign</div>
+            <div style="color:rgba(255,255,255,.65); font-size:12px; font-weight:700;"/div>
           </div>
         </a>
 
