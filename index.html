@@ -3,684 +3,1007 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>XMTrading｜情報型プレランダー</title>
-  <meta name="description" content="XMTrading（エックスエム）の特徴・メリット/デメリットを中立的に整理した情報型プレランダー。ボーナスや取引環境、口座開設導線を分かりやすく案内。" />
-  <meta name="theme-color" content="#0b1220" />
+  <meta name="theme-color" content="#B00020" />
+  <title>XMTrading おみくじプロモーション | 新春運試しキャンペーン</title>
+  <meta name="description" content="新春おみくじプロモーション。抽選で100名様に最大$5,000の出金可能現金。期間: 2026/01/05〜01/30。" />
 
-  <!-- Performance: preconnect/dns-prefetch (set your final domains) -->
-  <link rel="preconnect" href="https://example.com" crossorigin>
-  <link rel="dns-prefetch" href="//example.com">
+  <!-- Japanese typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;900&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --bg:#0b1220;
-      --card:#0f1a2e;
-      --text:#e8eefc;
-      --muted:#a9b7d3;
-      --line:rgba(255,255,255,.10);
-      --brand:#2f6bff;
-      --brand2:#1f4fd6;
-      --ok:#1dbf73;
-      --warn:#ff4d4d;
-      --shadow:0 18px 50px rgba(0,0,0,.35);
-      --radius:18px;
-      --max:1080px;
-      --btnShadow: 0 12px 28px rgba(47,107,255,.25);
-      --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", "Hiragino Kaku Gothic ProN",
-              "Hiragino Sans", "Noto Sans JP", "Yu Gothic", "Meiryo", Arial, "Apple Color Emoji","Segoe UI Emoji";
-    }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      font-family:var(--font);
-      background:
-        radial-gradient(900px 500px at 10% 0%, rgba(47,107,255,.18), transparent 60%),
-        radial-gradient(700px 450px at 90% 10%, rgba(29,191,115,.14), transparent 55%),
-        linear-gradient(180deg, #070c16 0%, #0b1220 60%, #070c16 100%);
-      color:var(--text);
-      line-height:1.7;
-    }
-    a{color:inherit}
-    .container{max-width:var(--max); margin:0 auto; padding:28px 18px 90px;}
-    .topbar{
-      display:flex; align-items:center; justify-content:space-between; gap:14px;
-      padding:14px 16px; border:1px solid var(--line); border-radius:999px;
-      background:rgba(15,26,46,.72); backdrop-filter: blur(10px);
-    }
-    .badge{
-      display:inline-flex; align-items:center; gap:8px;
-      padding:6px 12px; border-radius:999px;
-      background:rgba(47,107,255,.15); border:1px solid rgba(47,107,255,.30);
-      color:#cfe0ff; font-size:12px; font-weight:700;
-      letter-spacing:.02em;
-      white-space:nowrap;
-    }
-    .disclaimer{
-      font-size:12px; color:var(--muted);
-      opacity:.95;
-      text-align:right;
+      --bg: #0b0b10;
+      --card: rgba(255,255,255,.06);
+      --card2: rgba(255,255,255,.085);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.72);
+      --muted2: rgba(255,255,255,.60);
+      --line: rgba(255,255,255,.14);
+
+      --red: #B00020;     /* lucky red */
+      --red2:#E01B2D;
+      --gold:#D6B25E;     /* elegant gold */
+      --gold2:#F2D07A;
+
+      --shadow: 0 20px 60px rgba(0,0,0,.45);
+      --shadow2: 0 12px 30px rgba(0,0,0,.35);
+      --radius: 22px;
+
+      --maxw: 1120px;
     }
 
-    header.hero{
-      margin-top:18px;
-      padding:26px 20px;
-      border-radius:var(--radius);
-      border:1px solid var(--line);
-      background:linear-gradient(180deg, rgba(15,26,46,.85), rgba(15,26,46,.55));
-      box-shadow: var(--shadow);
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family:"Noto Sans JP", system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1400px 700px at 20% -10%, rgba(224,27,45,.35), transparent 60%),
+        radial-gradient(1100px 600px at 95% 0%, rgba(214,178,94,.18), transparent 55%),
+        radial-gradient(900px 700px at 70% 95%, rgba(224,27,45,.20), transparent 60%),
+        var(--bg);
+      overflow-x:hidden;
+    }
+
+    a{ color:inherit; text-decoration:none; }
+    .container{ width:min(var(--maxw), calc(100% - 44px)); margin:0 auto; }
+
+    /* Seigaiha overlay (wave pattern) via inline SVG data URI */
+    .seigaiha{
+      position:fixed; inset:0;
+      pointer-events:none;
+      opacity:.18;
+      mix-blend-mode:screen;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='92' viewBox='0 0 160 92'%3E%3Cg fill='none' stroke='%23D6B25E' stroke-opacity='0.55' stroke-width='2'%3E%3Cpath d='M0 92c20-26 40-26 60 0'/%3E%3Cpath d='M0 92c30-39 60-39 90 0'/%3E%3Cpath d='M0 92c40-52 80-52 120 0'/%3E%3Cpath d='M40 92c20-26 40-26 60 0'/%3E%3Cpath d='M40 92c30-39 60-39 90 0'/%3E%3Cpath d='M80 92c20-26 40-26 60 0'/%3E%3C/g%3E%3C/svg%3E");
+      background-size:200px 120px;
+      filter: blur(.2px);
+    }
+
+    /* Header */
+    header{
+      position:sticky;
+      top:0;
+      z-index:50;
+      backdrop-filter: blur(12px);
+      background: linear-gradient(to bottom, rgba(11,11,16,.72), rgba(11,11,16,.25));
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .header-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:14px 0;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px;
+      min-width:220px;
+    }
+    .logo-placeholder{
+      width:44px; height:44px;
+      border-radius:14px;
+      background:
+        radial-gradient(22px 22px at 30% 30%, rgba(242,208,122,.35), transparent 55%),
+        linear-gradient(135deg, rgba(224,27,45,.55), rgba(176,0,32,.25));
+      border:1px solid rgba(214,178,94,.35);
+      box-shadow: 0 10px 30px rgba(0,0,0,.35);
+      display:grid; place-items:center;
       position:relative;
       overflow:hidden;
     }
-    header.hero:before{
+    .logo-placeholder:before{
       content:"";
-      position:absolute; inset:-2px;
-      background:
-        radial-gradient(520px 240px at 20% 20%, rgba(47,107,255,.20), transparent 62%),
-        radial-gradient(520px 240px at 80% 40%, rgba(29,191,115,.14), transparent 62%);
-      pointer-events:none;
+      position:absolute; inset:-60%;
+      background: conic-gradient(from 220deg, transparent, rgba(242,208,122,.22), transparent);
+      animation: spin 10s linear infinite;
     }
-    .hero-inner{position:relative}
-    h1{
-      margin:0 0 10px;
-      font-size: clamp(22px, 3.1vw, 34px);
-      letter-spacing:.02em;
-      line-height:1.35;
+    .logo-placeholder span{
+      position:relative;
+      font-weight:900;
+      letter-spacing:.12em;
+      font-size:12px;
+      color:rgba(255,255,255,.88);
     }
-    .lead{
-      margin:0;
+    @keyframes spin { to{ transform:rotate(360deg); } }
+
+    nav{
+      display:flex; align-items:center; gap:18px;
       color:var(--muted);
-      font-size:14.5px;
-      max-width: 72ch;
+      font-weight:600;
+      font-size:14px;
+      white-space:nowrap;
+    }
+    nav a{
+      padding:8px 10px;
+      border-radius:12px;
+      border:1px solid transparent;
+      transition:.2s ease;
+    }
+    nav a:hover{
+      color:var(--text);
+      border-color:rgba(214,178,94,.25);
+      background:rgba(255,255,255,.04);
     }
 
-    .cta-row{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top:16px;
+    .header-cta{
+      display:flex; align-items:center; gap:10px;
+      min-width:240px;
+      justify-content:flex-end;
     }
+
+    /* CTA shimmer buttons */
     .btn{
+      position:relative;
       display:inline-flex; align-items:center; justify-content:center;
       gap:10px;
       padding:12px 16px;
-      border-radius:12px;
-      font-weight:800;
-      text-decoration:none;
-      border:1px solid rgba(255,255,255,.12);
-      background:rgba(255,255,255,.06);
+      border-radius:999px;
+      border:1px solid rgba(214,178,94,.28);
+      background: rgba(255,255,255,.04);
       color:var(--text);
-      min-width: 190px;
-      transition: transform .12s ease, background .12s ease, border-color .12s ease, opacity .2s ease;
-      user-select:none;
+      font-weight:800;
+      letter-spacing:.02em;
       cursor:pointer;
-      will-change: transform;
+      user-select:none;
+      transition: transform .16s ease, box-shadow .16s ease, background .16s ease, border-color .16s ease;
+      box-shadow: 0 10px 28px rgba(0,0,0,.25);
+      overflow:hidden;
+      isolation:isolate;
     }
-    .btn:hover{transform: translateY(-1px); border-color:rgba(255,255,255,.18); background:rgba(255,255,255,.09)}
-    .btn:active{transform: translateY(0px); opacity:.92}
-    .btn-primary{
-      background:linear-gradient(180deg, var(--brand), var(--brand2));
-      border-color:rgba(47,107,255,.55);
-      box-shadow: var(--btnShadow);
+    .btn.primary{
+      border-color: rgba(214,178,94,.45);
+      background: linear-gradient(135deg, rgba(224,27,45,.95), rgba(176,0,32,.72));
     }
-    .btn-primary:hover{background:linear-gradient(180deg, #3a76ff, #1c47c3)}
-    .btn-secondary{
-      background:rgba(47,107,255,.12);
-      border-color:rgba(47,107,255,.35);
-      color:#d8e6ff;
+    .btn.primary:after{
+      content:"";
+      position:absolute;
+      inset:-80% -40%;
+      background: linear-gradient(90deg, transparent, rgba(242,208,122,.55), transparent);
+      transform: rotate(18deg) translateX(-60%);
+      animation: shimmer 2.8s ease-in-out infinite;
+      z-index:0;
+    }
+    .btn.primary > span, .btn.primary > svg{ position:relative; z-index:1; }
+    .btn:hover{ transform: translateY(-1px); box-shadow: 0 14px 36px rgba(0,0,0,.32); }
+    .btn:active{ transform: translateY(0px) scale(.99); }
+    .btn.small{ padding:10px 14px; font-size:14px; font-weight:800; }
+    @keyframes shimmer{
+      0%{ transform: rotate(18deg) translateX(-80%); opacity:.0; }
+      10%{ opacity:1; }
+      50%{ opacity:1; }
+      100%{ transform: rotate(18deg) translateX(80%); opacity:.0; }
     }
 
-    .grid{
-      margin-top:16px;
-      display:grid;
-      gap:14px;
-      grid-template-columns: repeat(12, 1fr);
+    @media (prefers-reduced-motion: reduce){
+      .btn.primary:after, .logo-placeholder:before{ animation:none !important; }
+      *{ scroll-behavior:auto !important; }
     }
-    .card{
-      grid-column: span 12;
-      border-radius:var(--radius);
-      border:1px solid var(--line);
-      background:rgba(15,26,46,.72);
+
+    /* Hero */
+    .hero{
+      position:relative;
+      padding:56px 0 34px;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:26px;
+      align-items:stretch;
+    }
+    .hero-card{
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+      border:1px solid rgba(255,255,255,.10);
       box-shadow: var(--shadow);
-      padding:18px 18px;
+      padding:26px;
       position:relative;
       overflow:hidden;
     }
-    @media(min-width: 920px){
-      .card.half{grid-column: span 6;}
-      .card.twoThird{grid-column: span 8;}
-      .card.oneThird{grid-column: span 4;}
+    .hero-card:before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(640px 340px at 20% 10%, rgba(224,27,45,.35), transparent 55%),
+        radial-gradient(520px 320px at 88% 30%, rgba(242,208,122,.22), transparent 55%),
+        radial-gradient(520px 420px at 40% 120%, rgba(224,27,45,.18), transparent 55%);
+      opacity:.85;
+      pointer-events:none;
     }
-    .card h2{
-      margin:0 0 8px;
-      font-size:18px;
-      letter-spacing:.02em;
-    }
-    .card p{margin:0; color:var(--muted)}
-    .section-title{
-      display:flex; align-items:center; justify-content:space-between; gap:12px;
-      margin-bottom: 10px;
-    }
-    .kicker{
-      font-size:12px;
-      color:#cfe0ff;
-      opacity:.95;
-      font-weight:800;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-    }
-    .divider{
-      height:1px; background:var(--line); margin:14px 0;
-    }
+    .hero-card > *{ position:relative; z-index:1; }
 
-    .frame{
-      border-radius:16px;
-      padding:14px 14px;
-      border:1px solid rgba(255,255,255,.14);
-      background:rgba(255,255,255,.04);
-    }
-    .frame.green{
-      border-color: rgba(29,191,115,.45);
-      background: rgba(29,191,115,.08);
-    }
-    .frame.red{
-      border-color: rgba(255,77,77,.45);
-      background: rgba(255,77,77,.07);
-    }
-    ul.clean{
-      margin:0; padding-left: 1.15em;
-      color:var(--text);
-    }
-    ul.clean li{margin:6px 0; color: var(--text)}
-    ul.clean li span{color:var(--muted)}
-    .note{
-      margin-top:10px;
-      font-size:12px;
-      color:var(--muted);
-      opacity:.95;
-    }
-
-    .faq{
-      display:grid;
-      gap:10px;
-      margin-top: 12px;
-    }
-    details{
-      border:1px solid var(--line);
-      border-radius:14px;
-      background:rgba(255,255,255,.03);
-      padding:12px 12px;
-    }
-    summary{
-      cursor:pointer;
+    .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background: rgba(214,178,94,.12);
+      border:1px solid rgba(214,178,94,.22);
+      color: rgba(255,255,255,.86);
       font-weight:800;
+      font-size:13px;
+      letter-spacing:.03em;
+    }
+    .h1{
+      margin:14px 0 10px;
+      font-size: clamp(30px, 3.6vw, 46px);
+      line-height:1.12;
       letter-spacing:.01em;
+      font-weight:900;
     }
-    details p{margin:8px 0 0; color:var(--muted)}
-    footer{
-      margin-top:18px;
-      color:var(--muted);
-      font-size:12px;
+    .sub{
+      margin:0 0 18px;
+      color: var(--muted);
+      line-height:1.75;
+      font-size: 15.5px;
+    }
+    .hero-meta{
+      display:flex; flex-wrap:wrap;
+      gap:10px;
+      margin: 16px 0 18px;
+    }
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:9px 12px;
+      border-radius:999px;
+      background: rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.12);
+      color: rgba(255,255,255,.84);
+      font-weight:700;
+      font-size:13px;
+    }
+    .hero-actions{
+      display:flex; flex-wrap:wrap;
+      gap:12px;
+      margin-top:10px;
+      align-items:center;
+    }
+    .fine{
+      margin-top:14px;
+      color: var(--muted2);
+      font-size:12.5px;
+      line-height:1.6;
+    }
+    .fine a{ text-decoration:underline; text-underline-offset:2px; }
+
+    /* Hero side visual */
+    .visual{
+      border-radius: var(--radius);
+      border:1px solid rgba(255,255,255,.10);
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.02));
+      box-shadow: var(--shadow2);
+      overflow:hidden;
+      position:relative;
+      min-height: 360px;
+    }
+    .visual:before{
+      content:"";
+      position:absolute; inset:-1px;
+      background:
+        radial-gradient(520px 320px at 40% 20%, rgba(224,27,45,.32), transparent 58%),
+        radial-gradient(520px 320px at 70% 70%, rgba(242,208,122,.18), transparent 60%);
+      opacity:.9;
+    }
+    .scene{
+      position:absolute; inset:0;
+      display:grid;
+      place-items:center;
+      padding:18px;
+    }
+    .scene-inner{
+      width:min(340px, 88%);
+      aspect-ratio: 1 / 1;
+      position:relative;
+    }
+    .lantern{
+      position:absolute;
+      width:84px; height:118px;
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(224,27,45,.95), rgba(176,0,32,.55));
+      border:1px solid rgba(242,208,122,.35);
+      box-shadow: 0 22px 50px rgba(0,0,0,.35);
+      filter: saturate(1.02);
       opacity:.95;
-      padding: 8px 2px;
     }
-    .mini-cta{
-      margin-top: 12px;
-      display:flex; gap:10px; flex-wrap:wrap;
+    .lantern:before{
+      content:"";
+      position:absolute; left:50%; top:-18px;
+      width:10px; height:22px;
+      transform: translateX(-50%);
+      border-radius:10px;
+      background: rgba(242,208,122,.75);
+      box-shadow: 0 10px 22px rgba(242,208,122,.18);
     }
-    .muted-link{
-      color:#cfe0ff;
-      text-decoration:underline;
-      text-underline-offset: 3px;
+    .lantern:after{
+      content:"";
+      position:absolute; left:10px; right:10px; top:42px; height:1px;
+      background: rgba(242,208,122,.38);
     }
+    .lantern.l1{ left:10px; top:22px; transform: rotate(-7deg); }
+    .lantern.l2{ right:6px; top:34px; transform: rotate(9deg); width:76px; height:108px; opacity:.9; }
 
-    /* ===== Mobile sticky CTA bar ===== */
-    .sticky-cta{
-      position: fixed;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      padding: 10px 12px calc(10px + env(safe-area-inset-bottom, 0px));
-      background: rgba(11,18,32,.92);
-      border-top: 1px solid rgba(255,255,255,.10);
-      backdrop-filter: blur(10px);
-      z-index: 50;
-      display: none; /* desktop hidden */
+    .omikuji{
+      position:absolute;
+      left:50%; top:55%;
+      transform: translate(-50%,-50%) rotate(-2deg);
+      width: 62%;
+      height: 64%;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.72));
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.28);
+      box-shadow: 0 30px 70px rgba(0,0,0,.40);
+      overflow:hidden;
     }
-    .sticky-cta .wrap{
-      max-width: var(--max);
-      margin: 0 auto;
-      display: grid;
-      gap: 10px;
-      grid-template-columns: 1fr 1fr;
+    .omikuji .topbar{
+      height:14%;
+      background: linear-gradient(90deg, rgba(224,27,45,.92), rgba(176,0,32,.82));
+      border-bottom:1px solid rgba(214,178,94,.25);
     }
-    .sticky-cta .btn{
-      min-width: 0;
-      padding: 12px 12px;
-      border-radius: 14px;
-      font-size: 14px;
-    }
-    @media(max-width: 760px){
-      .sticky-cta{display:block;}
-      .container{padding-bottom: 140px;} /* avoid content behind sticky bar */
-      .disclaimer{display:none;}
-    }
-
-    /* ===== Lightweight preloader ===== */
-    .preloader{
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      background: #070c16;
-      display: grid;
-      place-items: center;
-      transition: opacity .20s ease, visibility .20s ease;
-    }
-    .preloader.hide{
-      opacity: 0;
-      visibility: hidden;
-    }
-    .spinner{
-      width: 42px;
-      height: 42px;
-      border-radius: 999px;
-      border: 3px solid rgba(255,255,255,.18);
-      border-top-color: rgba(47,107,255,.85);
-      animation: spin .75s linear infinite;
-    }
-    .preloader .label{
-      margin-top: 12px;
-      font-size: 12px;
-      color: rgba(255,255,255,.65);
+    .omikuji .ink{
+      padding:14px 16px 16px;
+      color: rgba(25,25,25,.88);
+      font-weight:900;
       letter-spacing:.08em;
-      text-transform: uppercase;
       text-align:center;
     }
-    @keyframes spin { to { transform: rotate(360deg); } }
+    .omikuji .ink .big{ font-size: clamp(22px, 2.2vw, 28px); }
+    .omikuji .ink .small{
+      margin-top:10px;
+      font-weight:800;
+      letter-spacing:.10em;
+      font-size:12px;
+      opacity:.85;
+      line-height:1.9;
+    }
 
-    .brand{
-  display:flex;
-  align-items:center;
-}
+    .coin{
+      position:absolute;
+      width:58px; height:58px;
+      border-radius:999px;
+      background:
+        radial-gradient(18px 18px at 30% 28%, rgba(255,255,255,.55), transparent 58%),
+        radial-gradient(24px 24px at 58% 62%, rgba(176,0,32,.14), transparent 65%),
+        linear-gradient(135deg, rgba(242,208,122,.95), rgba(214,178,94,.65));
+      border:1px solid rgba(255,255,255,.28);
+      box-shadow: 0 18px 40px rgba(0,0,0,.35);
+      opacity:.95;
+    }
+    .coin:before{
+      content:"";
+      position:absolute; inset:10px;
+      border-radius:999px;
+      border: 2px solid rgba(176,0,32,.18);
+    }
+    .coin.c1{ left:18px; bottom:18px; transform: rotate(10deg); }
+    .coin.c2{ right:18px; bottom:14px; width:50px; height:50px; transform: rotate(-8deg); opacity:.9; }
 
-.brand-link{
-  display:flex;
-  flex-direction:column;
-  gap:2px;
-  text-decoration:none;
-}
+    /* Sakura petals */
+    .petal{
+      position:absolute;
+      width:14px; height:10px;
+      background: rgba(255,192,203,.82);
+      border-radius: 10px 10px 10px 10px;
+      filter: drop-shadow(0 8px 12px rgba(0,0,0,.25));
+      opacity:.75;
+      transform: rotate(12deg);
+      animation: drift 7.8s ease-in-out infinite;
+    }
+    .petal:before{
+      content:"";
+      position:absolute; left:-5px; top:1px;
+      width:10px; height:8px;
+      background: rgba(255,192,203,.74);
+      border-radius: 10px;
+      transform: rotate(-22deg);
+      opacity:.9;
+    }
+    .petal.p1{ left:16px; top:14px; animation-delay: -1.6s; }
+    .petal.p2{ right:14px; top:18px; animation-delay: -3.2s; }
+    .petal.p3{ left:44%; top:6px; animation-delay: -5s; opacity:.6; }
+    @keyframes drift{
+      0%{ transform: translate(0,0) rotate(10deg); }
+      50%{ transform: translate(0,16px) rotate(-10deg); }
+      100%{ transform: translate(0,0) rotate(10deg); }
+    }
 
-.fxfacts-logo{
-  height:32px;
-  width:auto;
-}
+    /* Sections */
+    section{ padding: 26px 0; }
+    .section-head{
+      display:flex; align-items:flex-end; justify-content:space-between;
+      gap:16px;
+      margin-bottom: 14px;
+    }
+    h2{
+      margin:0;
+      font-size: clamp(22px, 2.4vw, 30px);
+      letter-spacing:.02em;
+      font-weight:900;
+    }
+    .lead{
+      margin: 0;
+      color: var(--muted);
+      line-height:1.8;
+      font-size: 14.8px;
+      max-width: 72ch;
+    }
 
-.tagline{
-  font-size:11px;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-  color:rgba(232,238,252,.65);
-}
+    .grid-3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:14px;
+    }
+    .grid-2{
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap:14px;
+    }
+    .card{
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,.065), rgba(255,255,255,.03));
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow: var(--shadow2);
+      padding:18px;
+      position:relative;
+      overflow:hidden;
+    }
+    .card:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(520px 260px at 20% 0%, rgba(224,27,45,.18), transparent 55%),
+        radial-gradient(520px 260px at 95% 40%, rgba(242,208,122,.10), transparent 55%);
+      opacity:.85;
+      pointer-events:none;
+    }
+    .card > *{ position:relative; z-index:1; }
 
-/* Mobile tuning */
-@media(max-width:760px){
-  .fxfacts-logo{
-    height:28px;
-  }
-  .tagline{
-    font-size:10px;
-  }
-}
+    .tier{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px;
+      margin-bottom: 10px;
+    }
+    .tier .name{
+      font-weight: 900;
+      letter-spacing:.08em;
+      font-size: 18px;
+      display:flex; align-items:center; gap:10px;
+    }
+    .tier .tag{
+      font-size:12px;
+      font-weight:800;
+      color: rgba(255,255,255,.86);
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(214,178,94,.26);
+      background: rgba(214,178,94,.10);
+      white-space:nowrap;
+    }
+    .amount{
+      font-size: 34px;
+      font-weight: 900;
+      letter-spacing:.01em;
+      margin: 6px 0 2px;
+      background: linear-gradient(90deg, rgba(242,208,122,.95), rgba(255,255,255,.92));
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+    .desc{
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 13.8px;
+      line-height:1.75;
+    }
 
+    .steps{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap:14px;
+    }
+    .step{
+      padding:16px;
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.035);
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow: var(--shadow2);
+      position:relative;
+      overflow:hidden;
+    }
+    .step:before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background: radial-gradient(360px 180px at 20% 0%, rgba(224,27,45,.15), transparent 60%);
+      opacity:.9;
+      pointer-events:none;
+    }
+    .step > *{ position:relative; z-index:1; }
+    .icon{
+      width:40px; height:40px;
+      border-radius: 14px;
+      display:grid; place-items:center;
+      background: rgba(224,27,45,.18);
+      border:1px solid rgba(224,27,45,.28);
+      margin-bottom:10px;
+    }
+    .step h3{
+      margin:0 0 6px;
+      font-size: 15.5px;
+      font-weight: 900;
+      letter-spacing:.03em;
+    }
+    .step p{
+      margin:0;
+      color: var(--muted);
+      font-size: 13.5px;
+      line-height:1.75;
+    }
+
+    .list{
+      margin: 10px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height:1.85;
+      font-size: 14px;
+    }
+    .list li{ margin: 6px 0; }
+
+    /* CTA band */
+    .cta-band{
+      padding: 22px;
+      border-radius: calc(var(--radius) + 6px);
+      background:
+        radial-gradient(620px 280px at 15% 0%, rgba(224,27,45,.35), transparent 58%),
+        radial-gradient(620px 300px at 90% 40%, rgba(242,208,122,.18), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+      border: 1px solid rgba(255,255,255,.12);
+      box-shadow: var(--shadow);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      position:relative;
+      overflow:hidden;
+    }
+    .cta-band:after{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background-image:
+        radial-gradient(1px 1px at 12% 20%, rgba(255,255,255,.22), transparent 50%),
+        radial-gradient(1px 1px at 72% 34%, rgba(255,255,255,.20), transparent 50%),
+        radial-gradient(1px 1px at 38% 78%, rgba(255,255,255,.16), transparent 50%);
+      opacity:.8;
+      pointer-events:none;
+    }
+    .cta-band > *{ position:relative; z-index:1; }
+
+    .trust{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      justify-content:flex-end;
+    }
+    .trust .pill{ background: rgba(255,255,255,.05); }
+
+    /* Footer */
+    footer{
+      padding: 26px 0 46px;
+      color: rgba(255,255,255,.62);
+      border-top:1px solid rgba(255,255,255,.10);
+      margin-top: 18px;
+    }
+    .footer-grid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:16px;
+      align-items:start;
+    }
+    .footnote{
+      font-size: 12.6px;
+      line-height: 1.85;
+      margin: 0;
+    }
+    .footlinks{
+      display:flex;
+      gap:12px;
+      justify-content:flex-end;
+      flex-wrap:wrap;
+      font-size: 12.6px;
+    }
+    .footlinks a{
+      color: rgba(255,255,255,.70);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .hero-grid{ grid-template-columns: 1fr; }
+      .visual{ min-height: 320px; }
+      .steps{ grid-template-columns: repeat(2, 1fr); }
+      .grid-3{ grid-template-columns: 1fr; }
+      .grid-2{ grid-template-columns: 1fr; }
+      nav{ display:none; }
+      .header-cta{ min-width:auto; }
+    }
+    @media (max-width: 520px){
+      .container{ width: min(var(--maxw), calc(100% - 28px)); }
+      .hero{ padding-top: 40px; }
+      .hero-card{ padding: 20px; }
+      .cta-band{ flex-direction:column; align-items:flex-start; }
+      .trust{ justify-content:flex-start; }
+      .steps{ grid-template-columns: 1fr; }
+      .logo-placeholder{ width:42px; height:42px; }
+    }
   </style>
 </head>
 
 <body>
-  <!-- Preloader: hides instantly on DOMContentLoaded (fast CWV; no heavy JS) -->
-  <div class="preloader" id="preloader" aria-hidden="true">
-    <div>
-      <div class="spinner" role="status" aria-label="Loading"></div>
-      <div class="label">Loading</div>
-    </div>
-  </div>
+  <div class="seigaiha" aria-hidden="true"></div>
 
-  <div class="container">
-    <!-- TOP BAR -->
-    <div class="topbar">
-      <div class="brand">
-  <a href="https://fxfacts.com" class="brand-link" aria-label="FXfacts Home">
-    <!-- SVG logo here -->
-    <!-- paste SVG code above -->
-    <span class="tagline">Forex facts. No hype.</span>
-  </a>
-</div>
+  <header>
+    <div class="container">
+      <div class="header-inner">
+        <!-- Placeholder TOP-LEFT for your website logo -->
+        <a class="brand" href="#top" aria-label="トップへ">
+          <div class="logo-placeholder" aria-label="ロゴ（差し替え用プレースホルダー）">
+            <span>LOGO</span>
+          </div>
+          <div>
+            <div style="font-weight:900; letter-spacing:.04em; line-height:1.05;">あなたのサイト名</div>
+            <div style="color:rgba(255,255,255,.65); font-size:12px; font-weight:700;">Japan-friendly Push Campaign</div>
+          </div>
+        </a>
 
-      <div class="disclaimer">※投資にはリスクがあります。必ずご自身で判断してください。</div>
-    </div>
+        <nav aria-label="ページ内ナビゲーション">
+          <a href="#prizes">賞金</a>
+          <a href="#howto">参加方法</a>
+          <a href="#features">XMの魅力</a>
+          <a href="#faq">注意事項</a>
+        </nav>
 
-    <!-- HERO -->
-    <header class="hero" id="top">
-      <div class="hero-inner">
-        <h1>日本人に人気No.1の海外FXブローカー。豊富なボーナスと、リクオートが無い安定した取引環境が特徴</h1>
-        <p class="lead">
-          XMTrading（エックス エム）は、今や海外FX業者を利用する日本人の殆どが口座を保有する人気のブローカーです。人気の理由は、
-          大手ブローカーである信頼感と、口座開設時や入金時に付与される様々なボーナスプログラムです。
-          季節的なプロモーションも開始され毎回盛り上がりを見せています。加えて、低スプレッドタイプの仕様改善や最大レバレッジの引き上げなど、
-          ユーザーの声を取り込んだサービス改善にも積極的な姿勢がみられます。質の良いバランスがとれたサービスの提供により、
-          初めて海外FX口座を開設する方の取り込みに成功しています。
-        </p>
-
-        <!-- CTA (after section) -->
-        <div class="cta-row">
-          <a class="btn btn-primary js-cta" data-cta="real_open" href="#" rel="noopener sponsored" target="_blank">リアル口座開設</a>
-          <a class="btn btn-secondary js-cta" data-cta="official" href="#" rel="noopener sponsored" target="_blank">オフィシャルサイトへ</a>
+        <div class="header-cta">
+          <a class="btn small" href="#howto" aria-label="参加条件を見る">
+            <span>条件を見る</span>
+          </a>
+          <a class="btn small primary" href="https://example.com/track/register" aria-label="今すぐ参加（外部リンク）">
+            <span>今すぐ参加</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M9 18l6-6-6-6" stroke="rgba(255,255,255,.9)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
         </div>
-
-        <p class="note">
-          参考情報：XMTradingの概要・特徴（fxsignupレビュー内容を元に整理）。本ページは情報提供を目的としています。
-        </p>
       </div>
-    </header>
+    </div>
+  </header>
 
-    <div class="grid">
-      <!-- SECTION: WHY -->
-      <section class="card twoThird">
-        <div class="section-title">
-          <div>
-            <div class="kicker">WHY XM?</div>
-            <h2>海外FX選びで迷っていませんか？</h2>
+  <main id="top">
+    <div class="container">
+      <section class="hero">
+        <div class="hero-grid">
+          <div class="hero-card">
+            <div class="badge">
+              <span aria-hidden="true">🎌</span>
+              <span>新春・おみくじ運試し</span>
+              <span style="opacity:.8;">｜</span>
+              <span style="color:rgba(242,208,122,.95);">総額 $100,000</span>
+            </div>
+
+            <h1 class="h1">抽選で100名様に<br>出金可能な現金が当たる</h1>
+            <p class="sub">
+              期間中に条件を達成すると自動エントリー。大吉・中吉・小吉のいずれかが当選し、最大 <b>$5,000</b> を獲得できます。
+              <br><span style="color:rgba(242,208,122,.92); font-weight:800;">開催期間：</span><b>2026/01/05〜2026/01/30</b>
+            </p>
+
+            <div class="hero-meta">
+              <div class="pill" title="当選通知日">
+                <span aria-hidden="true">📩</span>
+                <span>当選連絡：2026/02/11</span>
+              </div>
+              <div class="pill" title="対象者">
+                <span aria-hidden="true">✅</span>
+                <span>有効化済みリアル口座</span>
+              </div>
+              <div class="pill" title="日本居住者限定">
+                <span aria-hidden="true">🇯🇵</span>
+                <span>日本居住者対象</span>
+              </div>
+            </div>
+
+            <div class="hero-actions">
+              <a class="btn primary" href="https://example.com/track/register" aria-label="参加登録へ（外部リンク）">
+                <span>参加登録して運試しを始める</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M5 12h12" stroke="rgba(255,255,255,.92)" stroke-width="2.2" stroke-linecap="round"/>
+                  <path d="M13 6l6 6-6 6" stroke="rgba(255,255,255,.92)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+              <a class="btn" href="#prizes" aria-label="賞金を見る">
+                <span>賞金を見る</span>
+              </a>
+            </div>
+
+            <p class="fine">
+              ※ 本ページはキャンペーンの要点を分かりやすく整理したランディングページです。実際の参加条件・規約は必ず公式/特設ページをご確認ください。
+            </p>
           </div>
-        </div>
 
-        <p>
-          数ある海外FX業者の中で、どこを使うべきか迷っていませんか？もし、安全性の高さと取引のしやすさを両立したいなら、
-          XMTrading（エックスエム）が最もおすすめな選択肢の一つです。<br><br>
-          XMは2009年に設立され、10年以上にわたって安定したサービスを提供し続けている老舗の海外FX業者です。
-          全世界で多数の口座が開設されており、日本人トレーダーからの人気も高いとされています。<br><br>
-          その人気の理由は、豪華なボーナスキャンペーンと最大1,000倍のハイレバレッジにあります。
-          口座開設ボーナスを活用すれば、自己資金ゼロからでもリアルトレードを開始できる点が魅力です。<br><br>
-          この記事では、XMが多くのトレーダーに選ばれる理由を、メリット・デメリットの両面から分かりやすく整理します。
-        </p>
+          <aside class="visual" aria-label="新春ビジュアル（装飾）">
+            <div class="scene">
+              <div class="scene-inner">
+                <div class="lantern l1" aria-hidden="true"></div>
+                <div class="lantern l2" aria-hidden="true"></div>
 
-        <!-- CTA (after section) -->
-        <div class="mini-cta">
-          <a class="btn btn-primary js-cta" data-cta="real_open" href="#" rel="noopener sponsored" target="_blank">リアル口座開設</a>
-          <a class="btn btn-secondary js-cta" data-cta="official" href="#" rel="noopener sponsored" target="_blank">オフィシャルサイトへ</a>
+                <div class="omikuji" aria-hidden="true">
+                  <div class="topbar"></div>
+                  <div class="ink">
+                    <div class="big">大吉</div>
+                    <div class="small">運気上昇<br>チャンス到来</div>
+                  </div>
+                </div>
+
+                <div class="coin c1" aria-hidden="true"></div>
+                <div class="coin c2" aria-hidden="true"></div>
+
+                <div class="petal p1" aria-hidden="true"></div>
+                <div class="petal p2" aria-hidden="true"></div>
+                <div class="petal p3" aria-hidden="true"></div>
+              </div>
+            </div>
+          </aside>
         </div>
       </section>
 
-      <!-- SECTION: QUICK VIEW -->
-      <aside class="card oneThird">
-        <div class="section-title">
+      <section id="prizes">
+        <div class="section-head">
           <div>
-            <div class="kicker">QUICK VIEW</div>
-            <h2>結論：こんな人に向く</h2>
+            <h2>賞金（大吉・中吉・小吉）</h2>
+            <p class="lead">当選者100名に総額$100,000を分配。あなたの運試しが、今年のスタートダッシュになるかもしれません。</p>
           </div>
         </div>
 
-        <ul class="clean">
-          <li><strong>ボーナス重視</strong> <span>— 口座開設/入金特典を活用したい</span></li>
-          <li><strong>ハイレバ</strong> <span>— 最大レバレッジを有効活用したい</span></li>
-          <li><strong>取引ツール</strong> <span>— MT4/MT5やスマホアプリで運用したい</span></li>
-          <li><strong>サポート</strong> <span>— 日本語対応を重視したい</span></li>
-        </ul>
+        <div class="grid-3" role="list">
+          <div class="card" role="listitem">
+            <div class="tier">
+              <div class="name">大吉 <span style="font-weight:700; opacity:.75; letter-spacing:0;">(5名)</span></div>
+              <div class="tag">最上位</div>
+            </div>
+            <div class="amount">$5,000</div>
+            <p class="desc">出金可能な現金をプレゼント。新春の運を最大化。</p>
+          </div>
 
-        <div class="divider"></div>
-        <p class="note">
-          ※条件・キャンペーンは変更される可能性があります。最新情報は公式ページをご確認ください。
-        </p>
+          <div class="card" role="listitem">
+            <div class="tier">
+              <div class="name">中吉 <span style="font-weight:700; opacity:.75; letter-spacing:0;">(15名)</span></div>
+              <div class="tag">人気</div>
+            </div>
+            <div class="amount">$2,000</div>
+            <p class="desc">堅実に狙える当選枠。取引の追い風に。</p>
+          </div>
 
-        <!-- CTA (after section) -->
-        <div class="mini-cta">
-          <a class="btn btn-primary js-cta" data-cta="real_open" href="#" rel="noopener sponsored" target="_blank">リアル口座開設</a>
-          <a class="btn btn-secondary js-cta" data-cta="official" href="#" rel="noopener sponsored" target="_blank">オフィシャルサイトへ</a>
+          <div class="card" role="listitem">
+            <div class="tier">
+              <div class="name">小吉 <span style="font-weight:700; opacity:.75; letter-spacing:0;">(80名)</span></div>
+              <div class="tag">当選多数</div>
+            </div>
+            <div class="amount">$600</div>
+            <p class="desc">当選者多数でチャンス拡大。まずはここから。</p>
+          </div>
         </div>
-      </aside>
+      </section>
 
-      <!-- SECTION: ADVANTAGES -->
-      <section class="card half">
-        <div class="section-title">
+      <section id="howto">
+        <div class="section-head">
           <div>
-            <div class="kicker">ADVANTAGES</div>
-            <h2>XMのメリット（強み）</h2>
+            <h2>参加方法（4ステップ）</h2>
+            <p class="lead">条件達成で自動エントリー。さらに取引量に応じて抽選権も追加されます。</p>
           </div>
         </div>
 
-        <div class="frame green">
-          <ul class="clean">
-            <li>豪華な15,000円口座開設ボーナスを提供</li>
-            <li>合計10,500ドルの入金ボーナスが受け取れる</li>
-            <li>MT4 / MT5やXMアプリなど取引ツールが充実</li>
-            <li>スワップポイントが平均以上</li>
-            <li>最大1,000倍のハイレバレッジを利用できる</li>
-            <li>有効証拠金によるレバレッジ制限が緩い</li>
-            <li>500円から入金可能！1万円チャレンジにも最適</li>
-            <li>入出金手続きが早い</li>
-            <li>ウェビナーやXMブログなどお役立ちコンテンツが盛りだくさん</li>
-            <li>スワップ計算機や証拠金計算機が使える</li>
-            <li>コピートレードを手軽に利用できる</li>
-            <li>条件を満たすとBeeksFX社の無料VPSが使える</li>
+        <div class="steps">
+          <div class="step">
+            <div class="icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z" stroke="rgba(255,255,255,.86)" stroke-width="2" stroke-linecap="round"/>
+                <path d="M4 20a8 8 0 0 1 16 0" stroke="rgba(255,255,255,.86)" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3>STEP 1｜口座を準備</h3>
+            <p>有効化済みのリアル口座（MT4/MT5）を用意。</p>
+          </div>
+
+          <div class="step">
+            <div class="icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M4 12h16" stroke="rgba(255,255,255,.86)" stroke-width="2" stroke-linecap="round"/>
+                <path d="M12 4v16" stroke="rgba(255,255,255,.86)" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3>STEP 2｜参加登録</h3>
+            <p>特設ページ経由で参加登録を完了。</p>
+          </div>
+
+          <div class="step">
+            <div class="icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M12 6v6l4 2" stroke="rgba(255,255,255,.86)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M21 12a9 9 0 1 1-9-9 9 9 0 0 1 9 9Z" stroke="rgba(255,255,255,.86)" stroke-width="2"/>
+              </svg>
+            </div>
+            <h3>STEP 3｜入金</h3>
+            <p>期間中に <b>$300相当額以上</b> を入金。</p>
+          </div>
+
+          <div class="step">
+            <div class="icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M3 17l6-6 4 4 7-7" stroke="rgba(255,255,255,.86)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M21 7v6h-6" stroke="rgba(255,255,255,.86)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3>STEP 4｜取引でエントリー</h3>
+            <p>対象銘柄で <b>往復3ロット</b> 取引で自動エントリー。</p>
+          </div>
+        </div>
+
+        <div class="grid-2" style="margin-top:14px;">
+          <div class="card">
+            <h3 style="margin:0 0 8px; font-weight:900; letter-spacing:.03em;">対象銘柄</h3>
+            <p class="desc" style="margin:0;">FX / Gold / Silver / BTCEUR / BTCUSD / BTCJPY / BTCGBP</p>
+            <ul class="list">
+              <li>条件達成後、<b>往復2スタンダードロット</b>（または200マイクロロット）ごとに抽選権が追加。</li>
+              <li>ロットカウントは対象銘柄の条件に従います。</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3 style="margin:0 0 8px; font-weight:900; letter-spacing:.03em;">重要ポイント</h3>
+            <ul class="list" style="margin-top:0;">
+              <li>日本居住者が対象。</li>
+              <li>当選者には <b>2026/02/11</b> にメール通知。</li>
+              <li>必ずキャンペーン規約・注意事項をご確認のうえご参加ください。</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="features">
+        <div class="section-head">
+          <div>
+            <h2>XMの魅力（日本ユーザー向け）</h2>
+            <p class="lead">訴求しやすい代表的なメリットを、読みやすく整理しました。</p>
+          </div>
+        </div>
+
+        <div class="grid-3" role="list">
+          <div class="card" role="listitem">
+            <div class="tier">
+              <div class="name">ボーナスが豪華</div>
+              <div class="tag">お得</div>
+            </div>
+            <p class="desc" style="margin:0;">
+              口座開設ボーナス <b>15,000円</b>、入金ボーナス合計 <b>$10,500</b> など、スタートを後押し。
+            </p>
+          </div>
+
+          <div class="card" role="listitem">
+            <div class="tier">
+              <div class="name">最大レバレッジ 1,000倍</div>
+              <div class="tag">高効率</div>
+            </div>
+            <p class="desc" style="margin:0;">
+              チャンスを逃しにくい取引環境。戦略に合わせた運用がしやすい。
+            </p>
+          </div>
+
+          <div class="card" role="listitem">
+            <div class="tier">
+              <div class="name">MT4/MT5・アプリ対応</div>
+              <div class="tag">便利</div>
+            </div>
+            <p class="desc" style="margin:0;">
+              定番プラットフォーム + スマホアプリで、外出先でも快適に取引。
+            </p>
+          </div>
+        </div>
+
+        <div class="grid-2" style="margin-top:14px;">
+          <div class="card">
+            <h3 style="margin:0 0 8px; font-weight:900; letter-spacing:.03em;">安心して進めるために</h3>
+            <p class="desc" style="margin:0;">
+              日本語サポート（平日24時間/完全日本語対応等）や資金管理面など、信頼性を重視する観点でも情報が整理されています。
+            </p>
+          </div>
+          <div class="card">
+            <h3 style="margin:0 0 8px; font-weight:900; letter-spacing:.03em;">Push向け最適化ポイント</h3>
+            <ul class="list" style="margin-top:0;">
+              <li>最上部CTA + 下部CTAの二段構えでCV導線を強化</li>
+              <li>「期間」「参加条件」「当選通知日」をファーストビューで明示</li>
+              <li>小吉（当選多数）を強調して心理的ハードルを低下</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section aria-label="Final call to action">
+        <div class="cta-band">
+          <div>
+            <div style="font-weight:900; font-size:20px; letter-spacing:.02em;">新春の運試しを、今すぐ。</div>
+            <div style="color:rgba(255,255,255,.72); margin-top:6px; line-height:1.7;">
+              条件達成で自動エントリー。追加取引で抽選権も増やせます。
+            </div>
+          </div>
+
+          <div style="display:flex; flex-direction:column; align-items:flex-end; gap:10px;">
+            <a class="btn primary" href="https://example.com/track/register" aria-label="参加登録（外部リンク）">
+              <span>参加登録して抽選にエントリー</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M5 12h12" stroke="rgba(255,255,255,.92)" stroke-width="2.2" stroke-linecap="round"/>
+                <path d="M13 6l6 6-6 6" stroke="rgba(255,255,255,.92)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+            <div class="trust" aria-label="Trust indicators">
+              <div class="pill"><span aria-hidden="true">🔒</span><span>日本語対応</span></div>
+              <div class="pill"><span aria-hidden="true">⚡</span><span>最短導線</span></div>
+              <div class="pill"><span aria-hidden="true">🏮</span><span>新春限定</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="faq">
+        <div class="section-head">
+          <div>
+            <h2>注意事項 / 免責</h2>
+            <p class="lead">誤解を防ぐため、ランディングページ側でも明確に表示しておくことを推奨します。</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <ul class="list" style="margin-top:0;">
+            <li>本キャンペーンの対象/条件/規約は変更される可能性があります。必ず特設ページ・公式情報をご確認ください。</li>
+            <li>投資には元本割れのリスクがあります。ご自身の判断と責任のもとでお取引ください。</li>
+            <li>本ページは広告/プロモーション用のLPテンプレートです。リンク先は貴社の計測URLへ置き換えてください。</li>
           </ul>
         </div>
-
-        <!-- CTA (after section) -->
-        <div class="mini-cta">
-          <a class="btn btn-primary js-cta" data-cta="real_open" href="#" rel="noopener sponsored" target="_blank">リアル口座開設</a>
-          <a class="btn btn-secondary js-cta" data-cta="official" href="#" rel="noopener sponsored" target="_blank">オフィシャルサイトへ</a>
-        </div>
-      </section>
-
-      <!-- SECTION: CONS -->
-      <section class="card half">
-        <div class="section-title">
-          <div>
-            <div class="kicker">CONSIDERATIONS</div>
-            <h2>XMのデメリット（注意点）</h2>
-          </div>
-        </div>
-
-        <div class="frame red">
-          <ul class="clean">
-            <li>口座タイプによってはスプレッド/手数料が割高に感じる場合がある</li>
-            <li>条件（休眠・出金方法など）により手数料が発生することがある</li>
-            <li>キャンペーン/ボーナスは適用条件がある（規約確認が必要）</li>
-            <li>経済指標時など相場状況によりスプレッド拡大が起こり得る</li>
-            <li>レバレッジは利益機会と同時に損失リスクも増幅する</li>
-          </ul>
-        </div>
-
-        <p class="note">
-          ※デメリットは「使い方・口座タイプ・相場環境」によって体感が変わります。事前に取引条件と規約をご確認ください。
-        </p>
-
-        <!-- CTA (after section) -->
-        <div class="mini-cta">
-          <a class="btn btn-primary js-cta" data-cta="real_open" href="#" rel="noopener sponsored" target="_blank">リアル口座開設</a>
-          <a class="btn btn-secondary js-cta" data-cta="official" href="#" rel="noopener sponsored" target="_blank">オフィシャルサイトへ</a>
-        </div>
-      </section>
-
-      <!-- SECTION: FAQ -->
-      <section class="card">
-        <div class="section-title">
-          <div>
-            <div class="kicker">Q&A</div>
-            <h2>よくある質問</h2>
-          </div>
-        </div>
-
-        <div class="faq">
-          <details>
-            <summary>Q. ボーナスだけで取引を始められますか？</summary>
-            <p>
-              口座開設ボーナス等が提供されている場合、条件を満たすことで自己資金を抑えて取引を開始できるケースがあります。
-              ただし、付与条件・利用条件・出金条件などがあるため、必ず公式条件を確認してください。
-            </p>
-          </details>
-
-          <details>
-            <summary>Q. 最大1,000倍レバレッジは誰でも使えますか？</summary>
-            <p>
-              口座タイプや有効証拠金、銘柄、取引条件によって最大レバレッジは変動します。ハイレバは損失リスクも高まるため、
-              ロット管理・損切り・証拠金維持率の管理が重要です。
-            </p>
-          </details>
-
-          <details>
-            <summary>Q. 口座開設の流れは？</summary>
-            <p>
-              一般的には「登録 → 本人確認（KYC）→ 口座有効化 → 入金/ボーナス受取（対象の場合）→ 取引開始」となります。
-              ページ内の「リアル口座開設」ボタンから進めてください。
-            </p>
-          </details>
-        </div>
-
-        <!-- CTA (after section) -->
-        <div class="mini-cta">
-          <a class="btn btn-primary js-cta" data-cta="real_open" href="#" rel="noopener sponsored" target="_blank">リアル口座開設</a>
-          <a class="btn btn-secondary js-cta" data-cta="official" href="#" rel="noopener sponsored" target="_blank">オフィシャルサイトへ</a>
-        </div>
-
-        <p class="note">
-          参照元レビュー：
-          <a class="muted-link" href="https://fxsignup.com/review/xem/" target="_blank" rel="noopener">fxsignup.com（XMTradingレビュー）</a>
-        </p>
-      </section>
-
-      <!-- SECTION: FINAL CTA -->
-      <section class="card">
-        <div class="section-title">
-          <div>
-            <div class="kicker">SUMMARY</div>
-            <h2>まとめ：XMTradingは「ボーナス×取引環境」を重視する人に適した選択肢</h2>
-          </div>
-        </div>
-
-        <p>
-          XMTrading（エックスエム）は、ボーナス施策の豊富さ、MT4/MT5などの取引環境、サポート体制などを重視する層に選ばれやすいブローカーです。
-          一方で、口座タイプや相場状況によりコスト面の体感が変わるため、条件を理解した上で活用することが重要です。
-        </p>
-
-        <!-- CTA (after section) -->
-        <div class="cta-row">
-          <a class="btn btn-primary js-cta" data-cta="real_open" href="#" rel="noopener sponsored" target="_blank">リアル口座開設</a>
-          <a class="btn btn-secondary js-cta" data-cta="official" href="#" rel="noopener sponsored" target="_blank">オフィシャルサイトへ</a>
-        </div>
-
-        <footer>
-          本ページは情報提供を目的としており、特定の投資成果を保証するものではありません。投資判断はご自身の責任で行ってください。
-        </footer>
       </section>
     </div>
-  </div>
+  </main>
 
-  <!-- Mobile Sticky CTA Bar -->
-  <div class="sticky-cta" role="region" aria-label="Sticky call to action">
-    <div class="wrap">
-      <a class="btn btn-primary js-cta" data-cta="real_open_sticky" href="#" rel="noopener sponsored" target="_blank">リアル口座開設</a>
-      <a class="btn btn-secondary js-cta" data-cta="official_sticky" href="#" rel="noopener sponsored" target="_blank">オフィシャルサイトへ</a>
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <p class="footnote">
+          © <span id="y"></span> Your Brand. All rights reserved.<br>
+          ※ 本ページはキャンペーン情報を要約したもので、正式な条件は各提供元の案内に従います。
+        </p>
+        <div class="footlinks">
+          <a href="#top">トップへ</a>
+          <a href="#howto">参加方法</a>
+          <a href="#prizes">賞金</a>
+          <a href="#features">XMの魅力</a>
+        </div>
+      </div>
     </div>
-  </div>
+  </footer>
 
   <script>
-    /*
-      UTM + tracking placeholders
-      - Replace BASE_REAL_URL and BASE_OFFICIAL_URL with your final destination URLs.
-      - Optionally pass clickid / subid from your push network (e.g., ?clickid=...).
-      - This script will:
-        1) Read incoming query params from this page (utm_*, clickid/subid, etc.)
-        2) Apply them to all CTA links
-        3) Append/override with your default UTM placeholders when missing
-        4) Provide a minimal click event hook for tracking
+    // Small, safe enhancements (no dependencies)
+    document.getElementById("y").textContent = new Date().getFullYear();
 
-      Recommended workflow:
-      - Your push URL: https://yourdomain.com/lp.html?utm_source={source}&utm_campaign={campaign}&clickid={clickid}
-      - Set defaults below as fallback.
-    */
-
-    // 1) DESTINATION URLS (replace)
-    const BASE_REAL_URL     = "https://YOUR_AFF_LINK_REAL.example.com/";     // e.g. offer/real
-    const BASE_OFFICIAL_URL = "https://YOUR_AFF_LINK_OFFICIAL.example.com/"; // e.g. offer/official
-
-    // 2) Default UTM placeholders (fallback if not provided in incoming URL)
-    const DEFAULT_UTM = {
-      utm_source:   "{utm_source}",   // push network macro or your placeholder
-      utm_medium:   "push",
-      utm_campaign: "{utm_campaign}",
-      utm_content:  "{utm_content}",
-      utm_term:     "{utm_term}"
-    };
-
-    // 3) Optional: add your affiliate sub params placeholders
-    // Example: many networks use clickid / subid / sub1..sub5
-    const DEFAULT_SUBS = {
-      clickid: "{clickid}",
-      subid:   "{subid}",
-      sub1:    "{sub1}",
-      sub2:    "{sub2}",
-      sub3:    "{sub3}",
-      sub4:    "{sub4}",
-      sub5:    "{sub5}"
-    };
-
-    function getQueryParams() {
-      const p = {};
-      const qs = new URLSearchParams(window.location.search);
-      qs.forEach((v, k) => { p[k] = v; });
-      return p;
-    }
-
-    function buildUrl(base, incoming) {
-      const url = new URL(base);
-      const out = new URLSearchParams(url.search);
-
-      // Merge: (1) incoming params first
-      Object.keys(incoming).forEach(k => {
-        if (incoming[k] !== "" && incoming[k] != null) out.set(k, incoming[k]);
+    // Smooth scrolling (respects reduced motion via CSS)
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener("click", (e) => {
+        const id = a.getAttribute("href");
+        if (!id || id === "#") return;
+        const el = document.querySelector(id);
+        if (!el) return;
+        e.preventDefault();
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
       });
-
-      // (2) apply default UTMs if missing
-      Object.keys(DEFAULT_UTM).forEach(k => {
-        if (!out.has(k) || !out.get(k)) out.set(k, DEFAULT_UTM[k]);
-      });
-
-      // (3) apply default subs if missing (optional)
-      Object.keys(DEFAULT_SUBS).forEach(k => {
-        if (!out.has(k) || !out.get(k)) out.set(k, DEFAULT_SUBS[k]);
-      });
-
-      url.search = out.toString();
-      return url.toString();
-    }
-
-    function wireCtas() {
-      const incoming = getQueryParams();
-
-      // Set final hrefs
-      const realUrl = buildUrl(BASE_REAL_URL, incoming);
-      const officialUrl = buildUrl(BASE_OFFICIAL_URL, incoming);
-
-      document.querySelectorAll('.js-cta').forEach(a => {
-        const cta = a.getAttribute('data-cta') || "";
-        // Route by CTA type
-        if (cta.includes("official")) a.href = officialUrl;
-        else a.href = realUrl;
-
-        // Minimal click hook (replace with your tracker/pixel if needed)
-        a.addEventListener('click', () => {
-          // Example placeholders:
-          // window.dataLayer = window.dataLayer || [];
-          // window.dataLayer.push({ event: "cta_click", cta, href: a.href });
-          // Or: new Image().src = "https://your-tracker/pixel?cta="+encodeURIComponent(cta)+"&clickid="+encodeURIComponent(incoming.clickid||"");
-        }, { passive: true });
-      });
-    }
-
-    // Lightweight preloader hide (fast CWV): hide as soon as DOM is ready
-    document.addEventListener('DOMContentLoaded', () => {
-      const pre = document.getElementById('preloader');
-      if (pre) pre.classList.add('hide');
-      wireCtas();
     });
   </script>
 </body>
