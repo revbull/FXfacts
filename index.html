@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>海外FXとは？日本の投資家が知っておくべき基本</title>
+  <meta name="description" content="国内FXとの違い・仕組み・注意点を中立的に解説。リスクを理解したうえで公式情報を確認しましょう。" />
+
+  <style>
+    :root{
+      --bg:#0b1220;
+      --card:#0f1b33;
+      --muted:#a9b7d0;
+      --text:#eaf0ff;
+      --border:rgba(255,255,255,.10);
+      --accent:#5aa7ff;
+      --accent2:#79d7ff;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 16px;
+      --max: 860px;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic", sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 10% 0%, rgba(90,167,255,.22), transparent 60%),
+        radial-gradient(900px 500px at 90% 10%, rgba(121,215,255,.16), transparent 60%),
+        linear-gradient(180deg, #071024, #060a14 60%, #05070f);
+      line-height:1.65;
+    }
+
+    a{ color:inherit; text-decoration:none; }
+    .wrap{ max-width:var(--max); margin:0 auto; padding:20px 16px 90px; }
+
+    header{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px; padding:10px 0 0;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      color:var(--muted); font-weight:600; letter-spacing:.2px;
+    }
+    .dot{
+      width:10px; height:10px; border-radius:999px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 0 0 6px rgba(90,167,255,.12);
+    }
+    .badge{
+      font-size:12px; color:var(--muted);
+      border:1px solid var(--border);
+      padding:6px 10px; border-radius:999px;
+      background: rgba(255,255,255,.03);
+    }
+
+    .hero{
+      margin-top:18px;
+      padding:22px 18px;
+      border:1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .hero h1{
+      margin:0 0 10px;
+      font-size: clamp(22px, 4.2vw, 34px);
+      line-height:1.25;
+      letter-spacing:.2px;
+    }
+    .hero p{
+      margin:0;
+      color:var(--muted);
+      font-size: 14px;
+    }
+
+    .grid{
+      margin-top:14px;
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:14px;
+    }
+
+    .card{
+      border:1px solid var(--border);
+      background: rgba(15,27,51,.65);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:18px;
+      backdrop-filter: blur(6px);
+    }
+
+    .card h2{
+      margin:0 0 10px;
+      font-size: 18px;
+      letter-spacing:.2px;
+    }
+    .card p{ margin:0; color:var(--text); }
+    .muted{ color:var(--muted); }
+
+    .bullets{
+      margin:10px 0 0;
+      padding:0;
+      list-style:none;
+      display:grid;
+      gap:8px;
+    }
+    .bullets li{
+      display:flex; gap:10px; align-items:flex-start;
+      color:var(--text);
+    }
+    .tick{
+      flex:0 0 auto;
+      width:20px; height:20px; border-radius:6px;
+      background: rgba(90,167,255,.16);
+      border:1px solid rgba(90,167,255,.35);
+      display:grid; place-items:center;
+      margin-top:2px;
+    }
+    .tick svg{ width:14px; height:14px; opacity:.95; }
+
+    .compare{
+      margin-top:10px;
+      width:100%;
+      border-collapse: collapse;
+      overflow:hidden;
+      border-radius: 14px;
+      border:1px solid var(--border);
+    }
+    .compare th, .compare td{
+      padding:10px 12px;
+      border-bottom:1px solid var(--border);
+      vertical-align:top;
+      font-size: 13px;
+    }
+    .compare th{
+      text-align:left;
+      color:var(--muted);
+      font-weight:700;
+      background: rgba(255,255,255,.03);
+      width:34%;
+    }
+    .compare tr:last-child th, .compare tr:last-child td{ border-bottom:none; }
+
+    .risk{
+      border:1px solid rgba(255,96,96,.35);
+      background: rgba(255,96,96,.08);
+    }
+    .risk h2{ display:flex; align-items:center; gap:10px; }
+    .pill{
+      font-size:12px;
+      padding:4px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,96,96,.35);
+      color:#ffd0d0;
+      background: rgba(255,96,96,.10);
+    }
+
+    .cta{
+      margin-top:14px;
+      border:1px solid rgba(90,167,255,.35);
+      background: linear-gradient(135deg, rgba(90,167,255,.18), rgba(121,215,255,.10));
+    }
+    .ctaRow{
+      display:flex; flex-direction:column; gap:10px;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding:14px 16px;
+      border-radius: 14px;
+      font-weight:800;
+      letter-spacing:.2px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color:#061024;
+      border:0;
+      cursor:pointer;
+      box-shadow: 0 10px 22px rgba(90,167,255,.18);
+      transition: transform .08s ease, filter .15s ease;
+      user-select:none;
+      text-align:center;
+    }
+    .btn:active{ transform: translateY(1px); filter: brightness(.96); }
+    .btn small{
+      font-weight:700;
+      opacity:.85;
+    }
+
+    .ctaNote{
+      font-size:12px;
+      color: var(--muted);
+      margin:0;
+    }
+
+    footer{
+      margin-top:14px;
+      color: var(--muted);
+      font-size: 12px;
+      padding: 6px 2px 0;
+    }
+
+    /* Sticky CTA (optional): shown on small screens */
+    .sticky{
+      position:fixed;
+      left:0; right:0; bottom:0;
+      padding:10px 12px;
+      background: rgba(6,10,20,.86);
+      border-top:1px solid var(--border);
+      backdrop-filter: blur(10px);
+    }
+    .sticky .inner{
+      max-width:var(--max);
+      margin:0 auto;
+      display:flex;
+      gap:10px;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .sticky .label{
+      font-size:12px;
+      color:var(--muted);
+      line-height:1.35;
+      max-width:55%;
+    }
+    .sticky .btn{
+      padding:12px 14px;
+      border-radius: 12px;
+      font-size: 13px;
+      white-space:nowrap;
+    }
+
+    @media (min-width: 860px){
+      .grid{ gap:16px; }
+      .card{ padding:20px; }
+      .ctaRow{
+        flex-direction:row;
+        align-items:center;
+        justify-content:space-between;
+      }
+      .ctaRow .btn{ min-width: 320px; }
+      .sticky{ display:none; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <header aria-label="page header">
+      <div class="brand">
+        <span class="dot" aria-hidden="true"></span>
+        <span>海外FX入門ガイド</span>
+      </div>
+      <div class="badge">教育目的 / 中立解説</div>
+    </header>
+
+    <section class="hero" aria-label="hero">
+      <h1>海外FXとは？日本の投資家が知っておくべき基本</h1>
+      <p>国内FXとの違い・仕組み・注意点を中立的に解説します。投資判断はご自身の責任で行ってください。</p>
+    </section>
+
+    <main class="grid" aria-label="content">
+
+      <!-- 2) Background -->
+      <section class="card" aria-label="background">
+        <h2>背景：なぜ「海外FX」を調べる人がいるのか</h2>
+        <p class="muted">
+          日本では金融規制が厳しく、取引条件やサービス内容に一定の制限があります。
+          そのため一部の投資家は、海外FXという選択肢について情報収集を行っています。
+          まずは仕組みとリスクを理解し、公式情報を確認することが重要です。
+        </p>
+      </section>
+
+      <!-- 3) Basics -->
+      <section class="card" aria-label="basics">
+        <h2>海外FXの基本的な仕組み</h2>
+        <p class="muted">海外FXは、海外の事業者が提供する取引サービスを利用して為替取引を行う形態です。以下の点を押さえておきましょう。</p>
+
+        <ul class="bullets">
+          <li>
+            <span class="tick" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span>取引口座は海外事業者で開設されることが多い</span>
+          </li>
+          <li>
+            <span class="tick" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span>日本の法律・規制が直接適用されない場合がある</span>
+          </li>
+          <li>
+            <span class="tick" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span>為替変動により損失が発生する可能性がある（元本保証なし）</span>
+          </li>
+        </ul>
+      </section>
+
+      <!-- 4) Differences -->
+      <section class="card" aria-label="comparison">
+        <h2>国内FXと海外FXの主な違い（一般的な傾向）</h2>
+        <p class="muted">事業者や口座タイプによって異なります。あくまで「比較観点」の例です。</p>
+
+        <table class="compare" aria-label="comparison table">
+          <tr>
+            <th>規制・監督</th>
+            <td>国内：日本の枠組み / 海外：国・地域ごとの枠組み（確認が重要）</td>
+          </tr>
+          <tr>
+            <th>取引条件</th>
+            <td>提供条件が異なる場合がある（詳細は各社の公式情報を参照）</td>
+          </tr>
+          <tr>
+            <th>取引ツール</th>
+            <td>対応プラットフォームや機能が異なる（例：注文方式・分析機能）</td>
+          </tr>
+          <tr>
+            <th>サポート</th>
+            <td>日本語対応の有無・対応時間などに差が出る</td>
+          </tr>
+        </table>
+      </section>
+
+      <!-- 5) Tools -->
+      <section class="card" aria-label="tools">
+        <h2>取引環境・ツールの見方</h2>
+        <p class="muted">
+          海外FXを検討する場合、手数料や条件だけでなく「ツール」「約定」「サポート」など、運用面の比較が重要です。
+          代表的には、チャート機能・注文機能・モバイル対応・サポート品質などを確認します。
+        </p>
+      </section>
+
+      <!-- 6) Example broker mention -->
+      <section class="card" aria-label="example">
+        <h2>事例として名前が挙がる業者について</h2>
+        <p class="muted">
+          情報収集中に例として取り上げられる海外FX業者の一つに、XMが挙げられることがあります。
+          ただし、取引条件や提供範囲は変更される可能性があるため、最終的には公式情報で確認してください。
+        </p>
+      </section>
+
+      <!-- 7) Risk -->
+      <section class="card risk" aria-label="risk">
+        <h2>リスクと注意点 <span class="pill">重要</span></h2>
+        <p class="muted">
+          為替取引は価格変動により損失が生じる可能性があります。元本保証はなく、短期間で意思決定すると誤解やトラブルの原因になります。
+          口座開設・取引の前に、手数料・条件・利用規約・リスク説明を必ず確認してください。
+        </p>
+      </section>
+
+      <!-- 8) CTA -->
+      <section class="card cta" aria-label="cta">
+        <h2>公式情報を確認する</h2>
+        <div class="ctaRow">
+          <p class="muted" style="margin:0;">
+            条件・サポート・取引ツールなどは、公式ページで最新情報を確認するのが確実です。
+          </p>
+
+          <a class="btn" href="YOUR_AFFILIATE_URL_HERE" rel="nofollow noopener" target="_blank" aria-label="公式サイトで詳細を確認する">
+            公式サイトで詳細を確認する
+            <small aria-hidden="true">→</small>
+          </a>
+        </div>
+        <p class="ctaNote">※ 本ページは情報提供を目的としており、投資助言ではありません。投資判断はご自身の責任で行ってください。</p>
+      </section>
+
+      <footer aria-label="footer">
+        <div>免責事項：本コンテンツは一般情報であり、特定の成果や利益を保証するものではありません。</div>
+      </footer>
+    </main>
+  </div>
+
+  <!-- Sticky CTA for mobile -->
+  <div class="sticky" aria-label="sticky cta">
+    <div class="inner">
+      <div class="label">最新の条件・サポートは公式情報で確認してください</div>
+      <a class="btn" href="YOUR_AFFILIATE_URL_HERE" rel="nofollow noopener" target="_blank">
+        公式を確認
+      </a>
+    </div>
+  </div>
+
+  <!-- Optional: lightweight click tracking hook (no external scripts) -->
+  <script>
+    (function () {
+      const ctas = document.querySelectorAll('a[href="YOUR_AFFILIATE_URL_HERE"]');
+      ctas.forEach(a => {
+        a.addEventListener('click', () => {
+          // Replace with your tracker pixel / endpoint if needed.
+          // Example (commented): navigator.sendBeacon('/click', JSON.stringify({ts: Date.now()}));
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
