@@ -297,6 +297,24 @@
       text-align:center;
     }
     @keyframes spin { to { transform: rotate(360deg); } }
+    .logo-wrap{
+  display:flex;
+  align-items:center;
+}
+
+.site-logo{
+  height:32px;        /* perfect for top bar */
+  width:auto;
+  display:block;
+}
+
+/* Mobile adjustment */
+@media(max-width:760px){
+  .site-logo{
+    height:28px;
+  }
+}
+
   </style>
 </head>
 
@@ -312,7 +330,12 @@
   <div class="container">
     <!-- TOP BAR -->
     <div class="topbar">
-      <div class="badge">情報提供ページ（プレランダー）</div>
+      <div class="logo-wrap">
+  <img src="/assets/img/fxfacts-logo.png"
+       alt="FXfacts - Forex Information"
+       class="site-logo">
+</div>
+
       <div class="disclaimer">※投資にはリスクがあります。必ずご自身で判断してください。</div>
     </div>
 
