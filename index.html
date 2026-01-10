@@ -297,6 +297,41 @@
       text-align:center;
     }
     @keyframes spin { to { transform: rotate(360deg); } }
+
+    .brand{
+  display:flex;
+  align-items:center;
+}
+
+.brand-link{
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+  text-decoration:none;
+}
+
+.fxfacts-logo{
+  height:32px;
+  width:auto;
+}
+
+.tagline{
+  font-size:11px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:rgba(232,238,252,.65);
+}
+
+/* Mobile tuning */
+@media(max-width:760px){
+  .fxfacts-logo{
+    height:28px;
+  }
+  .tagline{
+    font-size:10px;
+  }
+}
+
   </style>
 </head>
 
