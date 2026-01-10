@@ -2,15 +2,11 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
-  <!-- Mobile-friendly viewport + safe-area -->
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>XMTrading おみくじプロモーション 2026</title>
 
-  <!-- Faster font loading -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <!-- Consider self-hosting fonts later for maximum speed; keeping Google Fonts for now -->
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Shippori+Mincho:wght@700&display=swap" rel="stylesheet">
 
   <style>
@@ -26,7 +22,6 @@
     *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 
     body{
-      /* Fast fallback first, webfont second */
       font-family: system-ui, -apple-system, "Segoe UI", "Hiragino Kaku Gothic ProN",
                    "Noto Sans JP", "Yu Gothic", Meiryo, sans-serif;
       background-color: var(--bg-cream);
@@ -34,9 +29,8 @@
       line-height: 1.6;
       overflow-x: hidden;
 
-      /* Replace fixed overlay texture with a light, cheap pattern */
-      background-image:
-        radial-gradient(rgba(0,0,0,0.03) 1px, transparent 1px);
+      /* Lightweight pattern */
+      background-image: radial-gradient(rgba(0,0,0,0.03) 1px, transparent 1px);
       background-size: 10px 10px;
     }
 
@@ -52,7 +46,7 @@
     }
 
     .hero{
-      padding: 36px 16px 20px;
+      padding: 36px 16px 18px;
       text-align:center;
       background: var(--white);
       position:relative;
@@ -63,7 +57,7 @@
       color: var(--white);
       padding: 4px 12px;
       font-size: 0.85rem;
-      font-weight: 800;
+      font-weight: 900;
       display:inline-block;
       margin-bottom: 14px;
       border-radius: 999px;
@@ -85,6 +79,27 @@
       display:block;
     }
 
+    .subcopy{font-size:0.98rem}
+
+    .supporting-line{
+      margin-top: 10px;
+      font-size: 0.85rem;
+      color:#555;
+      font-weight: 700;
+    }
+
+    .disclosure{
+      margin-top: 12px;
+      font-size: 0.78rem;
+      color: #666;
+      line-height: 1.45;
+      text-align: left;
+      max-width: 680px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .disclosure strong{color: var(--jp-black);}
+
     .prize-list{
       padding: 16px;
       display:flex;
@@ -101,7 +116,7 @@
       justify-content:space-between;
       align-items:center;
       box-shadow: var(--shadow);
-      border-radius: 10px;
+      border-radius: 12px;
     }
 
     .tier-name{
@@ -127,24 +142,77 @@
       margin: 10px 0 6px;
     }
 
+    .section{padding: 18px 16px;}
+
+    .card{
+      background: var(--white);
+      border: 1px solid #eee;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      padding: 16px;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .section h3{
+      margin-bottom: 10px;
+      font-size: 1.05rem;
+    }
+
+    /* Steps */
+    .steps{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .step{
+      display:flex;
+      gap: 12px;
+      align-items:flex-start;
+      padding: 12px;
+      border: 1px solid #eee;
+      border-radius: 12px;
+      background: #fff;
+    }
+
+    .step-num{
+      min-width: 36px;
+      height: 36px;
+      border-radius: 999px;
+      background: var(--jp-red);
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+    }
+
+    .step-title{font-weight: 900;}
+    .step-desc{font-size: 0.95rem;color:#444;margin-top:2px;}
+
+    /* Features */
     .features{
-      padding: 28px 16px 140px; /* leave room for fixed CTA */
+      padding: 18px 16px 140px; /* reserve space for CTA */
     }
 
     .feature-grid{
       display:grid;
       grid-template-columns: 1fr 1fr;
       gap: 10px;
-      margin-top: 14px;
+      margin-top: 12px;
     }
+
     .feature-card{
       background: var(--white);
       padding: 14px;
       font-size: 0.9rem;
-      border-radius: 10px;
+      border-radius: 12px;
       border: 1px solid #eee;
       box-shadow: var(--shadow);
     }
+
     .feature-card strong{
       color: var(--jp-red);
       display:block;
@@ -152,15 +220,35 @@
       font-weight: 900;
     }
 
+    /* FAQ */
+    details{
+      border: 1px solid #eee;
+      border-radius: 12px;
+      background: #fff;
+      padding: 12px 14px;
+    }
+    details + details{margin-top:10px;}
+    summary{
+      cursor:pointer;
+      font-weight:900;
+      list-style:none;
+    }
+    summary::-webkit-details-marker{display:none;}
+    .faq-a{
+      margin-top: 8px;
+      color:#444;
+      font-size: 0.95rem;
+    }
+
     footer{
-      padding: 24px 16px 160px;
+      padding: 22px 16px 160px;
       font-size: 0.75rem;
       color: #777;
       text-align:center;
       line-height: 1.5;
     }
 
-    /* Fixed CTA: safe-area aware and thumb-friendly */
+    /* Fixed CTA: safe-area aware */
     .cta-container{
       position: fixed;
       left: 0;
@@ -172,13 +260,20 @@
       border-top: 1px solid #eee;
     }
 
-    /* Only enable blur where supported; blur is expensive on mobile GPUs */
     @supports ((-webkit-backdrop-filter: blur(6px)) or (backdrop-filter: blur(6px))) {
       .cta-container{
         background: rgba(255,255,255,0.90);
         -webkit-backdrop-filter: blur(6px);
         backdrop-filter: blur(6px);
       }
+    }
+
+    .cta-preline{
+      font-size: 0.78rem;
+      color: #666;
+      text-align:center;
+      margin-bottom: 6px;
+      font-weight: 700;
     }
 
     .cta-button{
@@ -192,10 +287,9 @@
       font-size: 1.15rem;
       font-weight: 900;
       box-shadow: var(--cta-shadow);
-      will-change: transform; /* keep minimal */
+      will-change: transform;
     }
 
-    /* Reduce animation load; keep a subtle effect */
     @media (prefers-reduced-motion: no-preference) {
       .cta-button{ animation: pulse 2.2s ease-in-out infinite; }
       @keyframes pulse {
@@ -205,10 +299,16 @@
       }
     }
 
-    /* Improve tap feel */
     .cta-button:active{ transform: scale(0.99); }
 
-    /* Slightly larger typography on larger phones */
+    .cta-note{
+      margin-top: 8px;
+      font-size: 0.75rem;
+      color:#666;
+      text-align:center;
+      line-height: 1.35;
+    }
+
     @media (min-width: 390px){
       h1{ font-size: 2.0rem; }
       .prize-pool{ font-size: 2.8rem; }
@@ -231,10 +331,19 @@
   </header>
 
   <section class="hero">
-    <span class="hero-badge">2026年 新春限定企画</span>
-    <h1>XMTrading おみくじ<br>プロモーション</h1>
+    <span class="hero-badge" id="heroBadge">2026年 新春限定企画</span>
+
+    <h1 id="heroTitle">XMTrading おみくじ<br>プロモーション</h1>
+
     <span class="prize-pool">$100,000</span>
-    <p>取引するだけで、最大$5,000の現金が当たるチャンス！</p>
+
+    <p class="subcopy" id="heroSub">取引するだけで、最大$5,000の現金が当たるチャンス！</p>
+    <div class="supporting-line" id="heroSupport">入金不要ボーナスあり・日本語対応</div>
+
+    <p class="disclosure">
+      <strong>※ ご案内について</strong><br>
+      本ページはXMTradingの情報を紹介するアフィリエイトサイトです。最新の条件・詳細は、必ずリンク先（公式サイト）でご確認ください。
+    </p>
   </section>
 
   <div class="prize-list">
@@ -258,13 +367,71 @@
     <p>入金不要！今すぐトレードを開始できます。</p>
   </section>
 
+  <section class="section">
+    <div class="card">
+      <h3>参加方法（かんたん3ステップ）</h3>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div>
+            <div class="step-title">無料で口座開設</div>
+            <div class="step-desc" id="step1Desc">ボタンからXMTrading公式サイトへ移動し、案内に従って登録します。</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div>
+            <div class="step-title">取引を開始</div>
+            <div class="step-desc">ボーナスや条件は公式ページにてご確認ください。</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div>
+            <div class="step-title">抽選で現金チャンス</div>
+            <div class="step-desc">対象条件を満たすと、現金獲得のチャンスがあります。</div>
+          </div>
+        </div>
+      </div>
+
+      <p class="disclosure" style="margin-top:12px;">
+        ※ キャンペーン内容・当選条件・対象期間は変更される場合があります。最新情報はリンク先をご確認ください。
+      </p>
+    </div>
+  </section>
+
   <section class="features">
-    <h3>信頼のスペック</h3>
-    <div class="feature-grid">
-      <div class="feature-card"><strong>レバレッジ</strong>最大1000倍</div>
-      <div class="feature-card"><strong>サポート</strong>24時間 日本語</div>
-      <div class="feature-card"><strong>ユーザー</strong>世界1000万人</div>
-      <div class="feature-card"><strong>ライセンス</strong>11の規制機関</div>
+    <div class="card" style="padding:16px;">
+      <h3 style="margin-bottom:8px;">信頼のスペック</h3>
+      <div class="feature-grid">
+        <div class="feature-card"><strong>レバレッジ</strong>最大1000倍</div>
+        <div class="feature-card"><strong>サポート</strong>24時間 日本語</div>
+        <div class="feature-card"><strong>ユーザー</strong>世界1000万人</div>
+        <div class="feature-card"><strong>運営</strong>複数の国際金融ライセンスのもとで運営</div>
+      </div>
+    </div>
+
+    <div style="margin-top:18px;" class="card">
+      <h3>よくある質問（FAQ）</h3>
+
+      <details>
+        <summary>入金は必要ですか？</summary>
+        <div class="faq-a">口座開設ボーナスは「入金不要」と案内されています。適用条件・対象可否は公式ページでご確認ください。</div>
+      </details>
+
+      <details>
+        <summary>スマホだけでも参加できますか？</summary>
+        <div class="faq-a">はい、スマートフォンのみで登録〜開始まで可能です。手続きは案内に従って進めてください。</div>
+      </details>
+
+      <details>
+        <summary>日本語サポートはありますか？</summary>
+        <div class="faq-a">日本語対応サポートが案内されています。受付時間や対応範囲は公式ページをご確認ください。</div>
+      </details>
+
+      <p class="disclosure" style="margin-top:12px;">
+        ※ 本ページは投資助言ではありません。取引には損失が発生する可能性があります。
+      </p>
     </div>
   </section>
 
@@ -274,30 +441,67 @@
   </footer>
 
   <div class="cta-container">
-    <a href="https://your-aff-link.com" class="cta-button" id="mainCTA" rel="noopener">今すぐ参加する（無料）</a>
+    <div class="cta-preline" id="ctaPreline">入金不要・スマホ対応・日本語サポート</div>
+    <a href="https://your-aff-link.com" class="cta-button" id="mainCTA" rel="noopener">
+      <span id="ctaText">公式サイトで詳細を見る</span>
+    </a>
+    <div class="cta-note" id="ctaNote">※ ボタンからXMTrading公式サイトへ直接移動します</div>
   </div>
 
   <script>
     /**
-     * PropellerAds clickid capture:
-     * Target URL example: your-site.com/?clickid=${SUBID}
-     * Appends as: aff_sub=<clickid>
+     * 1) OS-based copy (Android vs iOS) for JP behavior
+     * 2) PropellerAds ClickID helper
+     *    Target URL in PropellerAds: your-site.com/?clickid=${SUBID}
+     *    Appends clickid to affiliate link as: aff_sub=<clickid>
      */
     (function () {
-      const cta = document.getElementById("mainCTA");
+      var ua = navigator.userAgent || "";
+      var isIOS = /iPhone|iPad|iPod/i.test(ua);
+      var isAndroid = /Android/i.test(ua);
+
+      var heroBadge = document.getElementById("heroBadge");
+      var heroTitle = document.getElementById("heroTitle");
+      var heroSub = document.getElementById("heroSub");
+      var heroSupport = document.getElementById("heroSupport");
+      var ctaText = document.getElementById("ctaText");
+      var ctaPreline = document.getElementById("ctaPreline");
+      var ctaNote = document.getElementById("ctaNote");
+
+      // Defaults are iOS-trust-first; adjust for Android reward-forward.
+      if (isAndroid) {
+        heroBadge.textContent = "2026年 新春限定キャンペーン";
+        heroTitle.innerHTML = "取引するだけで現金チャンス<br>XMTrading おみくじ";
+        heroSub.textContent = "最大$5,000獲得のチャンス。今すぐスマホから無料で参加。";
+        heroSupport.textContent = "入金不要ボーナスあり・日本語対応";
+        ctaPreline.textContent = "入金不要・スマホ対応・日本語サポート";
+        ctaText.textContent = "今すぐ公式サイトへ（無料）";
+        ctaNote.textContent = "※ タップ後すぐ公式サイトへ移動します";
+      }
+
+      if (isIOS) {
+        heroBadge.textContent = "XMTrading 公式キャンペーン情報";
+        heroTitle.innerHTML = "XMTrading おみくじ<br>新春限定プロモーション";
+        heroSub.textContent = "取引条件を満たすと、現金ボーナスが当たるチャンス。";
+        heroSupport.textContent = "スマートフォン対応・日本語サポート";
+        ctaPreline.textContent = "スマホ対応・日本語サポート";
+        ctaText.textContent = "公式サイトで詳細を見る";
+        ctaNote.textContent = "※ ボタンからXMTrading公式サイトへ直接移動します";
+      }
+
+      // PropellerAds clickid capture and append to XM link
+      var cta = document.getElementById("mainCTA");
       if (!cta) return;
 
-      const clickId = new URLSearchParams(window.location.search).get("clickid");
+      var clickId = new URLSearchParams(window.location.search).get("clickid");
       if (!clickId) return;
 
-      // Robust URL building (handles existing query params safely)
       try {
-        const url = new URL(cta.href, window.location.href);
+        var url = new URL(cta.href, window.location.href);
         url.searchParams.set("aff_sub", clickId);
         cta.href = url.toString();
       } catch (e) {
-        // Fallback to string concat if URL API fails (unlikely on modern mobile)
-        const sep = cta.href.includes("?") ? "&" : "?";
+        var sep = cta.href.indexOf("?") >= 0 ? "&" : "?";
         cta.href = cta.href + sep + "aff_sub=" + encodeURIComponent(clickId);
       }
     })();
