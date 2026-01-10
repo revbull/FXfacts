@@ -1,826 +1,652 @@
-diff --git a/index.html b/index.html
-index 43c1106695735dfe6dcd3974bed8b7d90216a257..ff8e6ecd7c1028ad2b840eeed92ab35ef4f7c7d6 100644
---- a/index.html
-+++ b/index.html
-@@ -1,96 +1,88 @@
- <!doctype html>
- <html lang="ja">
- <head>
- <meta charset="utf-8" />
- <meta name="viewport" content="width=device-width,initial-scale=1" />
- <title>XMTrading｜情報型プレランダー</title>
- <meta name="description" content="XMTrading（エックスエム）の特徴・メリット/デメリットを中立的に整理した情報型プレランダー。ボーナスや取引環境、口座開設導線を分かりやすく案内。" />
- <meta name="theme-color" content="#0b1220" />
- 
--<!-- Performance: preconnect/dns-prefetch (set your final domains) -->
- <link rel="preconnect" href="https://example.com" crossorigin>
--<link rel="dns-prefetch" href="//[example.com](http://example.com)">
-+<link rel="dns-prefetch" href="//example.com">
- 
- <style>
- :root{
- --bg:#0b1220;
- --card:#0f1a2e;
- --text:#e8eefc;
- --muted:#a9b7d3;
- --line:rgba(255,255,255,.10);
- --brand:#2f6bff;
- --brand2:#1f4fd6;
- --ok:#1dbf73;
- --warn:#ff4d4d;
- --shadow:0 18px 50px rgba(0,0,0,.35);
- --radius:18px;
- --max:1080px;
- --btnShadow: 0 12px 28px rgba(47,107,255,.25);
- --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", "Hiragino Kaku Gothic ProN",
- "Hiragino Sans", "Noto Sans JP", "Yu Gothic", "Meiryo", Arial, "Apple Color Emoji","Segoe UI Emoji";
- }
- *{box-sizing:border-box}
- html{scroll-behavior:smooth}
- body{
- margin:0;
- font-family:var(--font);
- background:
- radial-gradient(900px 500px at 10% 0%, rgba(47,107,255,.18), transparent 60%),
- radial-gradient(700px 450px at 90% 10%, rgba(29,191,115,.14), transparent 55%),
--
--linear-gradient(180deg, #070c16 0%, #0b1220 60%, #070c16 100%);
--
--color:var(--text);
--
--line-height:1.7;x 450px at 90% 10%, rgba(29,191,115,.14), transparent 55%),
- linear-gradient(180deg, #070c16 0%, #0b1220 60%, #070c16 100%);
- color:var(--text);
- line-height:1.7;
- }
- a{color:inherit}
- .container{max-width:var(--max); margin:0 auto; padding:28px 18px 90px;}
- .topbar{
- display:flex; align-items:center; justify-content:space-between; gap:14px;
- padding:14px 16px; border:1px solid var(--line); border-radius:999px;
- background:rgba(15,26,46,.72); backdrop-filter: blur(10px);
- }
- .badge{
- display:inline-flex; align-items:center; gap:8px;
- padding:6px 12px; border-radius:999px;
- background:rgba(47,107,255,.15); border:1px solid rgba(47,107,255,.30);
- color:#cfe0ff; font-size:12px; font-weight:700;
- letter-spacing:.02em;
- white-space:nowrap;
- }
- .disclaimer{
- font-size:12px; color:var(--muted);
- opacity:.95;
- text-align:right;
- }
- 
--```
- header.hero{
-   margin-top:18px;
-   padding:26px 20px;
-   border-radius:var(--radius);
-   border:1px solid var(--line);
-   background:linear-gradient(180deg, rgba(15,26,46,.85), rgba(15,26,46,.55));
-   box-shadow: var(--shadow);
-   position:relative;
-   overflow:hidden;
- }
- header.hero:before{
-   content:"";
-   position:absolute; inset:-2px;
-   background:
-     radial-gradient(520px 240px at 20% 20%, rgba(47,107,255,.20), transparent 62%),
-     radial-gradient(520px 240px at 80% 40%, rgba(29,191,115,.14), transparent 62%);
-   pointer-events:none;
- }
- .hero-inner{position:relative}
- h1{
-   margin:0 0 10px;
-   font-size: clamp(22px, 3.1vw, 34px);
-   letter-spacing:.02em;
-   line-height:1.35;
- }
-@@ -209,54 +201,50 @@ ul.clean li span{color:var(--muted)}
- 
- .faq{
-   display:grid;
-   gap:10px;
-   margin-top: 12px;
- }
- details{
-   border:1px solid var(--line);
-   border-radius:14px;
-   background:rgba(255,255,255,.03);
-   padding:12px 12px;
- }
- summary{
-   cursor:pointer;
-   font-weight:800;
-   letter-spacing:.01em;
- }
- details p{margin:8px 0 0; color:var(--muted)}
- footer{
-   margin-top:18px;
-   color:var(--muted);
-   font-size:12px;
-   opacity:.95;
-   padding: 8px 2px;
- }
--.mini-cta{
--  margin-top: 12px;
--  display:flex; gap:10px; flex-wrap:wrap;
--}
- .muted-link{
-   color:#cfe0ff;
-   text-decoration:underline;
-   text-underline-offset: 3px;
- }
- 
- /* ===== Mobile sticky CTA bar ===== */
- .sticky-cta{
-   position: fixed;
-   left: 0;
-   right: 0;
-   bottom: 0;
-   padding: 10px 12px calc(10px + env(safe-area-inset-bottom, 0px));
-   background: rgba(11,18,32,.92);
-   border-top: 1px solid rgba(255,255,255,.10);
-   backdrop-filter: blur(10px);
-   z-index: 50;
-   display: none; /* desktop hidden */
- }
- .sticky-cta .wrap{
-   max-width: var(--max);
-   margin: 0 auto;
-   display: grid;
-   gap: 10px;
-   grid-template-columns: 1fr 1fr;
-@@ -282,427 +270,361 @@ footer{
-   display: grid;
-   place-items: center;
-   transition: opacity .20s ease, visibility .20s ease;
- }
- .preloader.hide{
-   opacity: 0;
-   visibility: hidden;
- }
- .spinner{
-   width: 42px;
-   height: 42px;
-   border-radius: 999px;
-   border: 3px solid rgba(255,255,255,.18);
-   border-top-color: rgba(47,107,255,.85);
-   animation: spin .75s linear infinite;
- }
- .preloader .label{
-   margin-top: 12px;
-   font-size: 12px;
-   color: rgba(255,255,255,.65);
-   letter-spacing:.08em;
-   text-transform: uppercase;
-   text-align:center;
- }
- @keyframes spin { to { transform: rotate(360deg); } }
--.logo-wrap{
--
--```
--
--display:flex;
--align-items:center;
--}
- 
--.site-logo{
--height:32px;        /* perfect for top bar */
--width:auto;
--display:block;
--}
--
--/* Mobile adjustment */
--@media(max-width:760px){
--.site-logo{
--height:28px;
--}
--}
- .brand{
--display:flex;
--align-items:center;
-+  display:flex;
-+  align-items:center;
-+  justify-content:space-between;
-+  gap:12px;
- }
--
- .brand-link{
--display:flex;
--flex-direction:column;
--gap:2px;
--text-decoration:none;
-+  display:flex;
-+  flex-direction:column;
-+  gap:2px;
-+  text-decoration:none;
- }
--
--.fxfacts-logo{
--height:32px;
--width:auto;
-+.brand-title{
-+  font-size:16px;
-+  font-weight:800;
-+  letter-spacing:.02em;
- }
--
- .tagline{
--font-size:11px;
--letter-spacing:.12em;
--text-transform:uppercase;
--color:rgba(232,238,252,.65);
-+  font-size:11px;
-+  letter-spacing:.12em;
-+  text-transform:uppercase;
-+  color:rgba(232,238,252,.65);
- }
--
--/* Mobile tuning */
- @media(max-width:760px){
--.fxfacts-logo{
--height:28px;
-+  .tagline{font-size:10px;}
- }
--.tagline{
--font-size:10px;
-+.quick-stats{
-+  display:grid;
-+  gap:10px;
-+  margin-top:12px;
- }
-+.stat{
-+  display:flex;
-+  align-items:center;
-+  justify-content:space-between;
-+  border:1px solid rgba(255,255,255,.12);
-+  background:rgba(255,255,255,.04);
-+  border-radius:12px;
-+  padding:10px 12px;
-+  font-size:13px;
- }
--
-+.stat strong{font-size:14px;}
- </style>
- </head>
- 
- <body>
--<!-- Preloader: hides instantly on DOMContentLoaded (fast CWV; no heavy JS) -->
- <div class="preloader" id="preloader" aria-hidden="true">
--<div>
--<div class="spinner" role="status" aria-label="Loading"></div>
--<div class="label">Loading</div>
--</div>
-+  <div>
-+    <div class="spinner" role="status" aria-label="Loading"></div>
-+    <div class="label">Loading</div>
-+  </div>
- </div>
- 
- <div class="container">
--<!-- TOP BAR -->
--<div class="brand">
--<a href="https://fxfacts.com" class="brand-link" aria-label="FXfacts Home">
--<!-- SVG logo here -->
--<!-- paste SVG code above -->
--<span class="tagline">Forex facts. No hype.</span>
--</a>
--</div>
--
--```
--  <div class="disclaimer">※投資にはリスクがあります。必ずご自身で判断してください。</div>
--</div>
--
--<!-- HERO -->
--<header class="hero" id="top">
--  <div class="hero-inner">
--    <h1>日本人に人気No.1の海外FXブローカー。豊富なボーナスと、リクオートが無い安定した取引環境が特徴</h1>
--    <p class="lead">
--      XMTrading（エックス エム）は、今や海外FX業者を利用する日本人の殆どが口座を保有する人気のブローカーです。人気の理由は、
--      大手ブローカーである信頼感と、口座開設時や入金時に付与される様々なボーナスプログラムです。
--      季節的なプロモーションも開始され毎回盛り上がりを見せています。加えて、低スプレッドタイプの仕様改善や最大レバレッジの引き上げなど、
--      ユーザーの声を取り込んだサービス改善にも積極的な姿勢がみられます。質の良いバランスがとれたサービスの提供により、
--      初めて海外FX口座を開設する方の取り込みに成功しています。
--    </p>
--
--    <!-- CTA (after section) -->
--    <div class="cta-row">
--      <a class="btn btn-primary js-cta" data-cta="real_open" href="#" rel="noopener sponsored" target="_blank">リアル口座開設</a>
--      <a class="btn btn-secondary js-cta" data-cta="official" href="#" rel="noopener sponsored" target="_blank">オフィシャルサイトへ</a>
-+  <div class="topbar">
-+    <div class="brand">
-+      <a href="https://fxfacts.com" class="brand-link" aria-label="FXfacts Home">
-+        <span class="brand-title">FXfacts</span>
-+        <span class="tagline">Forex facts. No hype.</span>
-+      </a>
-     </div>
--
--    <p class="note">
--      参考情報：XMTradingの概要・特徴（fxsignupレビュー内容を元に整理）。本ページは情報提供を目的としています。
--    </p>
-+    <span class="badge">中立レビュー</span>
-+    <div class="disclaimer">※投資にはリスクがあります。必ずご自身で判断してください。</div>
-   </div>
--</header>
--
--<div class="grid">
--  <!-- SECTION: WHY -->
--  <section class="card twoThird">
--    <div class="section-title">
--      <div>
--        <div class="kicker">WHY XM?</div>
--        <h2>海外FX選びで迷っていませんか？</h2>
--      </div>
--    </div>
- 
--    <p>
--      数ある海外FX業者の中で、どこを使うべきか迷っていませんか？もし、安全性の高さと取引のしやすさを両立したいなら、
--      XMTrading（エックスエム）が最もおすすめな選択肢の一つです。<br><br>
--      XMは2009年に設立され、10年以上にわたって安定したサービスを提供し続けている老舗の海外FX業者です。
--      全世界で多数の口座が開設されており、日本人トレーダーからの人気も高いとされています。<br><br>
--      その人気の理由は、豪華なボーナスキャンペーンと最大1,000倍のハイレバレッジにあります。
--      口座開設ボーナスを活用すれば、自己資金ゼロからでもリアルトレードを開始できる点が魅力です。<br><br>
--      この記事では、XMが多くのトレーダーに選ばれる理由を、メリット・デメリットの両面から分かりやすく整理します。
--    </p>
--
--    <!-- CTA (after section) -->
--    <div class="mini-cta">
--      <a class="btn btn-primary js-cta" data-cta="real_open" href="#" rel="noopener sponsored" target="_blank">リアル口座開設</a>
--      <a class="btn btn-secondary js-cta" data-cta="official" href="#" rel="noopener sponsored" target="_blank">オフィシャルサイトへ</a>
--    </div>
--  </section>
--
--  <!-- SECTION: QUICK VIEW -->
--  <aside class="card oneThird">
--    <div class="section-title">
--      <div>
--        <div class="kicker">QUICK VIEW</div>
--        <h2>結論：こんな人に向く</h2>
-+  <header class="hero" id="top">
-+    <div class="hero-inner">
-+      <h1>日本のトレーダー向けに、XMTradingの魅力と注意点を端的に整理</h1>
-+      <p class="lead">
-+        XMTrading（エックス エム）は、ボーナス施策の豊富さと安定した取引環境で選ばれる海外FXブローカーです。
-+        本ページでは、信頼性・コスト感・サポートなどを分かりやすくまとめ、検討に必要な情報を整理します。
-+      </p>
-+
-+      <div class="cta-row">
-+        <a class="btn btn-primary js-cta" data-cta="real_open" href="#" rel="noopener sponsored" target="_blank">リアル口座開設</a>
-+        <a class="btn btn-secondary js-cta" data-cta="official" href="#" rel="noopener sponsored" target="_blank">公式サイトを確認</a>
-       </div>
--    </div>
- 
--    <ul class="clean">
--      <li><strong>ボーナス重視</strong> <span>— 口座開設/入金特典を活用したい</span></li>
--      <li><strong>ハイレバ</strong> <span>— 最大レバレッジを有効活用したい</span></li>
--      <li><strong>取引ツール</strong> <span>— MT4/MT5やスマホアプリで運用したい</span></li>
--      <li><strong>サポート</strong> <span>— 日本語対応を重視したい</span></li>
--    </ul>
--
--    <div class="divider"></div>
--    <p class="note">
--      ※条件・キャンペーンは変更される可能性があります。最新情報は公式ページをご確認ください。
--    </p>
--
--    <!-- CTA (after section) -->
--    <div class="mini-cta">
--      <a class="btn btn-primary js-cta" data-cta="real_open" href="#" rel="noopener sponsored" target="_blank">リアル口座開設</a>
--      <a class="btn btn-secondary js-cta" data-cta="official" href="#" rel="noopener sponsored" target="_blank">オフィシャルサイトへ</a>
-+      <p class="note">
-+        参考情報：XMTradingの概要・特徴（第三者レビュー内容を元に整理）。本ページは情報提供を目的としています。
-+      </p>
-     </div>
--  </aside>
--
--  <!-- SECTION: ADVANTAGES -->
--  <section class="card half">
--    <div class="section-title">
--      <div>
--        <div class="kicker">ADVANTAGES</div>
--        <h2>XMのメリット（強み）</h2>
-+  </header>
-+
-+  <div class="grid">
-+    <section class="card twoThird">
-+      <div class="section-title">
-+        <div>
-+          <div class="kicker">WHY XM?</div>
-+          <h2>海外FX選びで迷っている方へ</h2>
-+        </div>
-       </div>
--    </div>
- 
--    <div class="frame green">
--      <ul class="clean">
--        <li>豪華な15,000円口座開設ボーナスを提供</li>
--        <li>合計10,500ドルの入金ボーナスが受け取れる</li>
--        <li>MT4 / MT5やXMアプリなど取引ツールが充実</li>
--        <li>スワップポイントが平均以上</li>
--        <li>最大1,000倍のハイレバレッジを利用できる</li>
--        <li>有効証拠金によるレバレッジ制限が緩い</li>
--        <li>500円から入金可能！1万円チャレンジにも最適</li>
--        <li>入出金手続きが早い</li>
--        <li>ウェビナーやXMブログなどお役立ちコンテンツが盛りだくさん</li>
--        <li>スワップ計算機や証拠金計算機が使える</li>
--        <li>コピートレードを手軽に利用できる</li>
--        <li>条件を満たすとBeeksFX社の無料VPSが使える</li>
--      </ul>
--    </div>
-+      <p>
-+        取引コスト、安全性、サポート体制のバランスを重視するなら、XMTradingは検討しやすい選択肢です。
-+        2009年設立の実績があり、世界中で利用者が増えています。キャンペーンやツール面だけでなく、
-+        初心者の学習支援やサポートの手厚さも特徴です。
-+      </p>
- 
--    <!-- CTA (after section) -->
--    <div class="mini-cta">
--      <a class="btn btn-primary js-cta" data-cta="real_open" href="#" rel="noopener sponsored" target="_blank">リアル口座開設</a>
--      <a class="btn btn-secondary js-cta" data-cta="official" href="#" rel="noopener sponsored" target="_blank">オフィシャルサイトへ</a>
--    </div>
--  </section>
--
--  <!-- SECTION: CONS -->
--  <section class="card half">
--    <div class="section-title">
--      <div>
--        <div class="kicker">CONSIDERATIONS</div>
--        <h2>XMのデメリット（注意点）</h2>
-+      <div class="divider"></div>
-+
-+      <div class="quick-stats">
-+        <div class="stat"><span>設立</span><strong>2009年</strong></div>
-+        <div class="stat"><span>対応プラットフォーム</span><strong>MT4 / MT5 / モバイル</strong></div>
-+        <div class="stat"><span>日本語サポート</span><strong>対応</strong></div>
-+      </div>
-+    </section>
-+
-+    <aside class="card oneThird">
-+      <div class="section-title">
-+        <div>
-+          <div class="kicker">QUICK VIEW</div>
-+          <h2>結論：こんな人に向く</h2>
-+        </div>
-       </div>
--    </div>
- 
--    <div class="frame red">
-       <ul class="clean">
--        <li>口座タイプによってはスプレッド/手数料が割高に感じる場合がある</li>
--        <li>条件（休眠・出金方法など）により手数料が発生することがある</li>
--        <li>キャンペーン/ボーナスは適用条件がある（規約確認が必要）</li>
--        <li>経済指標時など相場状況によりスプレッド拡大が起こり得る</li>
--        <li>レバレッジは利益機会と同時に損失リスクも増幅する</li>
-+        <li><strong>ボーナス重視</strong> <span>— 口座開設/入金特典を活用したい</span></li>
-+        <li><strong>ハイレバ</strong> <span>— 最大レバレッジを活用したい</span></li>
-+        <li><strong>取引ツール</strong> <span>— MT4/MT5やスマホで運用したい</span></li>
-+        <li><strong>サポート</strong> <span>— 日本語対応を重視したい</span></li>
-       </ul>
--    </div>
- 
--    <p class="note">
--      ※デメリットは「使い方・口座タイプ・相場環境」によって体感が変わります。事前に取引条件と規約をご確認ください。
--    </p>
--
--    <!-- CTA (after section) -->
--    <div class="mini-cta">
--      <a class="btn btn-primary js-cta" data-cta="real_open" href="#" rel="noopener sponsored" target="_blank">リアル口座開設</a>
--      <a class="btn btn-secondary js-cta" data-cta="official" href="#" rel="noopener sponsored" target="_blank">オフィシャルサイトへ</a>
--    </div>
--  </section>
--
--  <!-- SECTION: FAQ -->
--  <section class="card">
--    <div class="section-title">
--      <div>
--        <div class="kicker">Q&A</div>
--        <h2>よくある質問</h2>
-+      <div class="divider"></div>
-+      <p class="note">
-+        ※条件・キャンペーンは変更される可能性があります。最新情報は公式ページをご確認ください。
-+      </p>
-+    </aside>
-+
-+    <section class="card half">
-+      <div class="section-title">
-+        <div>
-+          <div class="kicker">ADVANTAGES</div>
-+          <h2>XMのメリット（強み）</h2>
-+        </div>
-       </div>
--    </div>
- 
--    <div class="faq">
--      <details>
--        <summary>Q. ボーナスだけで取引を始められますか？</summary>
--        <p>
--          口座開設ボーナス等が提供されている場合、条件を満たすことで自己資金を抑えて取引を開始できるケースがあります。
--          ただし、付与条件・利用条件・出金条件などがあるため、必ず公式条件を確認してください。
--        </p>
--      </details>
--
--      <details>
--        <summary>Q. 最大1,000倍レバレッジは誰でも使えますか？</summary>
--        <p>
--          口座タイプや有効証拠金、銘柄、取引条件によって最大レバレッジは変動します。ハイレバは損失リスクも高まるため、
--          ロット管理・損切り・証拠金維持率の管理が重要です。
--        </p>
--      </details>
--
--      <details>
--        <summary>Q. 口座開設の流れは？</summary>
--        <p>
--          一般的には「登録 → 本人確認（KYC）→ 口座有効化 → 入金/ボーナス受取（対象の場合）→ 取引開始」となります。
--          ページ内の「リアル口座開設」ボタンから進めてください。
--        </p>
--      </details>
--    </div>
-+      <div class="frame green">
-+        <ul class="clean">
-+          <li>口座開設ボーナスなど、初期費用を抑えたスタートが可能</li>
-+          <li>MT4 / MT5 / スマホアプリなど多彩な取引環境</li>
-+          <li>入出金の手続きが比較的スムーズ</li>
-+          <li>日本語サポートと学習コンテンツが充実</li>
-+          <li>レバレッジ設定が柔軟で、資金管理しやすい</li>
-+        </ul>
-+      </div>
-+    </section>
-+
-+    <section class="card half">
-+      <div class="section-title">
-+        <div>
-+          <div class="kicker">CONSIDERATIONS</div>
-+          <h2>XMのデメリット（注意点）</h2>
-+        </div>
-+      </div>
- 
--    <!-- CTA (after section) -->
--    <div class="mini-cta">
--      <a class="btn btn-primary js-cta" data-cta="real_open" href="#" rel="noopener sponsored" target="_blank">リアル口座開設</a>
--      <a class="btn btn-secondary js-cta" data-cta="official" href="#" rel="noopener sponsored" target="_blank">オフィシャルサイトへ</a>
--    </div>
-+      <div class="frame red">
-+        <ul class="clean">
-+          <li>口座タイプによってスプレッド/手数料が異なる</li>
-+          <li>キャンペーン適用には条件確認が必要</li>
-+          <li>相場状況によりスプレッドが拡大する可能性がある</li>
-+          <li>ハイレバは利益機会と同時に損失リスクも増幅する</li>
-+        </ul>
-+      </div>
- 
--    <p class="note">
--      参照元レビュー：
--      \<a class="muted-link" href="https://fxsignup.com/review/xm/" target="_blank" rel="noopener"\>[fxsignup.com](http://fxsignup.com)（XMTradingレビュー）\</a\>
--    </p>
--  </section>
--
--  <!-- SECTION: FINAL CTA -->
--  <section class="card">
--    <div class="section-title">
--      <div>
--        <div class="kicker">SUMMARY</div>
--        <h2>まとめ：XMTradingは「ボーナス×取引環境」を重視する人に適した選択肢</h2>
-+      <p class="note">
-+        ※使い方・口座タイプ・相場環境で体感が変わります。事前に取引条件と規約をご確認ください。
-+      </p>
-+    </section>
-+
-+    <section class="card">
-+      <div class="section-title">
-+        <div>
-+          <div class="kicker">Q&A</div>
-+          <h2>よくある質問</h2>
-+        </div>
-       </div>
--    </div>
- 
--    <p>
--      XMTrading（エックスエム）は、ボーナス施策の豊富さ、MT4/MT5などの取引環境、サポート体制などを重視する層に選ばれやすいブローカーです。
--      一方で、口座タイプや相場状況によりコスト面の体感が変わるため、条件を理解した上で活用することが重要です。
--    </p>
-+      <div class="faq">
-+        <details>
-+          <summary>Q. ボーナスだけで取引を始められますか？</summary>
-+          <p>
-+            口座開設ボーナス等が提供されている場合、条件を満たすことで自己資金を抑えて取引を開始できるケースがあります。
-+            ただし、付与条件・利用条件・出金条件などがあるため、必ず公式条件を確認してください。
-+          </p>
-+        </details>
-+
-+        <details>
-+          <summary>Q. 最大レバレッジは誰でも使えますか？</summary>
-+          <p>
-+            口座タイプや有効証拠金、銘柄、取引条件によって最大レバレッジは変動します。ハイレバは損失リスクも高まるため、
-+            ロット管理・損切り・証拠金維持率の管理が重要です。
-+          </p>
-+        </details>
-+
-+        <details>
-+          <summary>Q. 口座開設の流れは？</summary>
-+          <p>
-+            一般的には「登録 → 本人確認（KYC）→ 口座有効化 → 入金/ボーナス受取（対象の場合）→ 取引開始」となります。
-+            ページ内の「リアル口座開設」ボタンから進めてください。
-+          </p>
-+        </details>
-+      </div>
- 
--    <!-- CTA (after section) -->
--    <div class="cta-row">
--      <a class="btn btn-primary js-cta" data-cta="real_open" href="#" rel="noopener sponsored" target="_blank">リアル口座開設</a>
--      <a class="btn btn-secondary js-cta" data-cta="official" href="#" rel="noopener sponsored" target="_blank">オフィシャルサイトへ</a>
--    </div>
-+      <p class="note">
-+        参照元レビュー：
-+        <a class="muted-link" href="https://fxsignup.com/review/xm/" target="_blank" rel="noopener">fxsignup.com（XMTradingレビュー）</a>
-+      </p>
-+    </section>
-+
-+    <section class="card">
-+      <div class="section-title">
-+        <div>
-+          <div class="kicker">SUMMARY</div>
-+          <h2>まとめ：ボーナスと取引環境のバランスで選ぶなら有力候補</h2>
-+        </div>
-+      </div>
- 
--    <footer>
--      本ページは情報提供を目的としており、特定の投資成果を保証するものではありません。投資判断はご自身の責任で行ってください。
--    </footer>
--  </section>
--</div>
-+      <p>
-+        XMTradingは、ボーナス施策の豊富さ、MT4/MT5を中心とした取引環境、サポート体制を重視する層に支持されています。
-+        口座タイプや相場状況でコスト感が変わるため、条件を理解した上でご活用ください。
-+      </p>
- 
--</summary>
--```
-+      <div class="cta-row">
-+        <a class="btn btn-primary js-cta" data-cta="real_open" href="#" rel="noopener sponsored" target="_blank">リアル口座開設</a>
-+        <a class="btn btn-secondary js-cta" data-cta="official" href="#" rel="noopener sponsored" target="_blank">公式サイトを確認</a>
-+      </div>
- 
-+      <footer>
-+        本ページは情報提供を目的としており、特定の投資成果を保証するものではありません。投資判断はご自身の責任で行ってください。
-+      </footer>
-+    </section>
-+  </div>
- </div>
- 
--<!-- Mobile Sticky CTA Bar -->
- <div class="sticky-cta" role="region" aria-label="Sticky call to action">
--<div class="wrap">
--<a class="btn btn-primary js-cta" data-cta="real_open_sticky" href="#" rel="noopener sponsored" target="_blank">リアル口座開設</a>
--<a class="btn btn-secondary js-cta" data-cta="official_sticky" href="#" rel="noopener sponsored" target="_blank">オフィシャルサイトへ</a>
--</div>
-+  <div class="wrap">
-+    <a class="btn btn-primary js-cta" data-cta="real_open_sticky" href="#" rel="noopener sponsored" target="_blank">リアル口座開設</a>
-+    <a class="btn btn-secondary js-cta" data-cta="official_sticky" href="#" rel="noopener sponsored" target="_blank">公式サイトを確認</a>
-+  </div>
- </div>
- 
- <script>
- /*
- UTM + tracking placeholders
- - Replace BASE_REAL_URL and BASE_OFFICIAL_URL with your final destination URLs.
- - Optionally pass clickid / subid from your push network (e.g., ?clickid=...).
- - This script will:
--1) Read incoming query params from this page (utm_*, clickid/subid, etc.)
--2) Apply them to all CTA links
--3) Append/override with your default UTM placeholders when missing
--4) Provide a minimal click event hook for tracking
--
--```
--    Recommended workflow:
--  - Your push URL: https://yourdomain.com/lp.html?utm_source={source}&utm_campaign={campaign}&clickid={clickid}
--  - Set defaults below as fallback.
-+  1) Read incoming query params from this page (utm_*, clickid/subid, etc.)
-+  2) Apply them to all CTA links
-+  3) Append/override with your default UTM placeholders when missing
-+  4) Provide a minimal click event hook for tracking
- */
--// 1) DESTINATION URLS (replace)
--const BASE_REAL_URL     = "https://YOUR_AFF_LINK_REAL.example.com/";     // e.g. offer/real
--const BASE_REAL_URL     = "https://YOUR_AFF_LINK_REAL.example.com/";     // REPLACE WITH YOUR REAL ACCOUNT AFFILIATE LINK
--const BASE_OFFICIAL_URL = "https://YOUR_AFF_LINK_OFFICIAL.example.com/"; // REPLACE WITH YOUR OFFICIAL SITE AFFILIATE LINK
-+
-+const BASE_REAL_URL = "https://YOUR_AFF_LINK_REAL.example.com/";
-+const BASE_OFFICIAL_URL = "https://YOUR_AFF_LINK_OFFICIAL.example.com/";
- const DEFAULT_UTM = {
--  utm_source:   "{utm_source}",   // push network macro or your placeholder
--  utm_medium:   "push",
-+  utm_source: "{utm_source}",
-+  utm_medium: "push",
-   utm_campaign: "{utm_campaign}",
--  utm_content:  "{utm_content}",
--  utm_term:     "{utm_term}"
-+  utm_content: "{utm_content}",
-+  utm_term: "{utm_term}"
- };
- 
--// Example: many networks use clickid / subid / sub1..sub5
- const DEFAULT_SUBS = {
-   clickid: "{clickid}",
--  subid:   "{subid}",
--  sub1:    "{sub1}",
--  sub2:    "{sub2}",
--  sub3:    "{sub3}",
--  sub4:    "{sub4}",
--  sub5:    "{sub5}"
-+  subid: "{subid}",
-+  sub1: "{sub1}",
-+  sub2: "{sub2}",
-+  sub3: "{sub3}",
-+  sub4: "{sub4}",
-+  sub5: "{sub5}"
- };
- 
- function getQueryParams() {
--  const qs = new URLSearchParams([window.location.search](http://window.location.search));
--  qs.forEach((v, k) => { p[k] = v; });
--  return p;
-+  const params = new URLSearchParams(window.location.search);
-+  const data = {};
-+  params.forEach((value, key) => {
-+    data[key] = value;
-+  });
-+  return data;
- }
- 
- function buildUrl(base, incoming) {
-   const url = new URL(base);
-+  const out = url.searchParams;
- 
--  // Merge: (1) incoming params first
--  Object.keys(incoming).forEach(k => {
--    if (incoming[k] !== "" && incoming[k] != null) out.set(k, incoming[k]);
-+  Object.keys(incoming).forEach(key => {
-+    if (incoming[key] !== "" && incoming[key] != null) {
-+      out.set(key, incoming[key]);
-+    }
-+  });
- 
--  // (2) apply default UTMs if missing
--  Object.keys(DEFAULT_UTM).forEach(k => {
--    if (!out.has(k) || !out.get(k)) out.set(k, DEFAULT_UTM[k]);
-+  Object.keys(DEFAULT_UTM).forEach(key => {
-+    if (!out.has(key) || !out.get(key)) {
-+      out.set(key, DEFAULT_UTM[key]);
-+    }
-   });
--  // (3) apply default subs if missing (optional)
--  Object.keys(DEFAULT_SUBS).forEach(k => {
--    if (!out.has(k) || !out.get(k)) out.set(k, DEFAULT_SUBS[k]);
-+
-+  Object.keys(DEFAULT_SUBS).forEach(key => {
-+    if (!out.has(key) || !out.get(key)) {
-+      out.set(key, DEFAULT_SUBS[key]);
-+    }
-   });
- 
-   return url.toString();
- }
- 
- function wireCtas() {
-   const incoming = getQueryParams();
--  // Set final hrefs
-   const realUrl = buildUrl(BASE_REAL_URL, incoming);
-   const officialUrl = buildUrl(BASE_OFFICIAL_URL, incoming);
- 
--    const cta = a.getAttribute('data-cta') || "";
--    // Route by CTA type
--    if (cta.includes("official")) a.href = officialUrl;
-+  document.querySelectorAll('.js-cta').forEach(anchor => {
-+    const cta = anchor.getAttribute('data-cta') || "";
-+    if (cta.includes("official")) {
-+      anchor.href = officialUrl;
-+    } else {
-+      anchor.href = realUrl;
-+    }
- 
--    // Minimal click hook (replace with your tracker/pixel if needed)
--    a.addEventListener('click', () => {
--      // Example placeholders:
--      // window.dataLayer.push({ event: "cta_click", cta, href: a.href });
--      // Or: new Image().src = "<[https://your-tracker/pixel?cta="+encodeURIComponent(cta)+"&clickid="+encodeURIComponent(incoming.clickid||">")](https://your-tracker/pixel?cta="+encodeURIComponent(cta)+"&clickid="+encodeURIComponent(incoming.clickid||">"));
-+    anchor.addEventListener('click', () => {
-+      // window.dataLayer?.push({ event: "cta_click", cta, href: anchor.href });
-     }, { passive: true });
-   });
- }
- 
- document.addEventListener('DOMContentLoaded', () => {
-   const pre = document.getElementById('preloader');
-   if (pre) pre.classList.add('hide');
-   wireCtas();
- });
--
--```
--
- </script>
- </body>
- </html>
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>XMTrading｜情報型プレランダー</title>
+  <meta name="description" content="XMTrading（エックスエム）の特徴・メリット/デメリットを中立的に整理した情報型プレランダー。ボーナスや取引環境、口座開設導線を分かりやすく案内。" />
+  <meta name="theme-color" content="#0b1220" />
+
+  <!-- Performance: preconnect/dns-prefetch (set your final domains) -->
+  <link rel="preconnect" href="https://example.com" crossorigin>
+  <link rel="dns-prefetch" href="//example.com">
+
+  <style>
+    :root{
+      --bg:#0b1220;
+      --card:#0f1a2e;
+      --text:#e8eefc;
+      --muted:#a9b7d3;
+      --line:rgba(255,255,255,.10);
+      --brand:#2f6bff;
+      --brand2:#1f4fd6;
+      --ok:#1dbf73;
+      --warn:#ff4d4d;
+      --shadow:0 18px 50px rgba(0,0,0,.35);
+      --radius:18px;
+      --max:1080px;
+      --btnShadow: 0 12px 28px rgba(47,107,255,.25);
+      --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", "Hiragino Kaku Gothic ProN",
+              "Hiragino Sans", "Noto Sans JP", "Yu Gothic", "Meiryo", Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:var(--font);
+      background:
+        radial-gradient(900px 500px at 10% 0%, rgba(47,107,255,.18), transparent 60%),
+        radial-gradient(700px 450px at 90% 10%, rgba(29,191,115,.14), transparent 55%),
+        linear-gradient(180deg, #070c16 0%, #0b1220 60%, #070c16 100%);
+      color:var(--text);
+      line-height:1.7;
+    }
+    a{color:inherit}
+    .container{max-width:var(--max); margin:0 auto; padding:28px 18px 90px;}
+    .topbar{
+      display:flex; align-items:center; justify-content:space-between; gap:14px;
+      padding:14px 16px; border:1px solid var(--line); border-radius:999px;
+      background:rgba(15,26,46,.72); backdrop-filter: blur(10px);
+    }
+    .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:6px 12px; border-radius:999px;
+      background:rgba(47,107,255,.15); border:1px solid rgba(47,107,255,.30);
+      color:#cfe0ff; font-size:12px; font-weight:700;
+      letter-spacing:.02em;
+      white-space:nowrap;
+    }
+    .disclaimer{
+      font-size:12px; color:var(--muted);
+      opacity:.95;
+      text-align:right;
+    }
+
+    header.hero{
+      margin-top:18px;
+      padding:26px 20px;
+      border-radius:var(--radius);
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(15,26,46,.85), rgba(15,26,46,.55));
+      box-shadow: var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+    header.hero:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(520px 240px at 20% 20%, rgba(47,107,255,.20), transparent 62%),
+        radial-gradient(520px 240px at 80% 40%, rgba(29,191,115,.14), transparent 62%);
+      pointer-events:none;
+    }
+    .hero-inner{position:relative}
+    h1{
+      margin:0 0 10px;
+      font-size: clamp(22px, 3.1vw, 34px);
+      letter-spacing:.02em;
+      line-height:1.35;
+    }
+    .lead{
+      margin:0;
+      color:var(--muted);
+      font-size:14.5px;
+      max-width: 72ch;
+    }
+
+    .cta-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:16px;
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      padding:12px 16px;
+      border-radius:12px;
+      font-weight:800;
+      text-decoration:none;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.06);
+      color:var(--text);
+      min-width: 190px;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease, opacity .2s ease;
+      user-select:none;
+      cursor:pointer;
+      will-change: transform;
+    }
+    .btn:hover{transform: translateY(-1px); border-color:rgba(255,255,255,.18); background:rgba(255,255,255,.09)}
+    .btn:active{transform: translateY(0px); opacity:.92}
+    .btn-primary{
+      background:linear-gradient(180deg, var(--brand), var(--brand2));
+      border-color:rgba(47,107,255,.55);
+      box-shadow: var(--btnShadow);
+    }
+    .btn-primary:hover{background:linear-gradient(180deg, #3a76ff, #1c47c3)}
+    .btn-secondary{
+      background:rgba(47,107,255,.12);
+      border-color:rgba(47,107,255,.35);
+      color:#d8e6ff;
+    }
+
+    .grid{
+      margin-top:16px;
+      display:grid;
+      gap:14px;
+      grid-template-columns: repeat(12, 1fr);
+    }
+    .card{
+      grid-column: span 12;
+      border-radius:var(--radius);
+      border:1px solid var(--line);
+      background:rgba(15,26,46,.72);
+      box-shadow: var(--shadow);
+      padding:18px 18px;
+      position:relative;
+      overflow:hidden;
+    }
+    @media(min-width: 920px){
+      .card.half{grid-column: span 6;}
+      .card.twoThird{grid-column: span 8;}
+      .card.oneThird{grid-column: span 4;}
+    }
+    .card h2{
+      margin:0 0 8px;
+      font-size:18px;
+      letter-spacing:.02em;
+    }
+    .card p{margin:0; color:var(--muted)}
+    .section-title{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      margin-bottom: 10px;
+    }
+    .kicker{
+      font-size:12px;
+      color:#cfe0ff;
+      opacity:.95;
+      font-weight:800;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+    .divider{
+      height:1px; background:var(--line); margin:14px 0;
+    }
+
+    .frame{
+      border-radius:16px;
+      padding:14px 14px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.04);
+    }
+    .frame.green{
+      border-color: rgba(29,191,115,.45);
+      background: rgba(29,191,115,.08);
+    }
+    .frame.red{
+      border-color: rgba(255,77,77,.45);
+      background: rgba(255,77,77,.07);
+    }
+    ul.clean{
+      margin:0; padding-left: 1.15em;
+      color:var(--text);
+    }
+    ul.clean li{margin:6px 0; color: var(--text)}
+    ul.clean li span{color:var(--muted)}
+    .note{
+      margin-top:10px;
+      font-size:12px;
+      color:var(--muted);
+      opacity:.95;
+    }
+
+    .faq{
+      display:grid;
+      gap:10px;
+      margin-top: 12px;
+    }
+    details{
+      border:1px solid var(--line);
+      border-radius:14px;
+      background:rgba(255,255,255,.03);
+      padding:12px 12px;
+    }
+    summary{
+      cursor:pointer;
+      font-weight:800;
+      letter-spacing:.01em;
+    }
+    details p{margin:8px 0 0; color:var(--muted)}
+    footer{
+      margin-top:18px;
+      color:var(--muted);
+      font-size:12px;
+      opacity:.95;
+      padding: 8px 2px;
+    }
+    .mini-cta{
+      margin-top: 12px;
+      display:flex; gap:10px; flex-wrap:wrap;
+    }
+    .muted-link{
+      color:#cfe0ff;
+      text-decoration:underline;
+      text-underline-offset: 3px;
+    }
+
+    /* ===== Mobile sticky CTA bar ===== */
+    .sticky-cta{
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 10px 12px calc(10px + env(safe-area-inset-bottom, 0px));
+      background: rgba(11,18,32,.92);
+      border-top: 1px solid rgba(255,255,255,.10);
+      backdrop-filter: blur(10px);
+      z-index: 50;
+      display: none; /* desktop hidden */
+    }
+    .sticky-cta .wrap{
+      max-width: var(--max);
+      margin: 0 auto;
+      display: grid;
+      gap: 10px;
+      grid-template-columns: 1fr 1fr;
+    }
+    .sticky-cta .btn{
+      min-width: 0;
+      padding: 12px 12px;
+      border-radius: 14px;
+      font-size: 14px;
+    }
+    @media(max-width: 760px){
+      .sticky-cta{display:block;}
+      .container{padding-bottom: 140px;} /* avoid content behind sticky bar */
+      .disclaimer{display:none;}
+    }
+
+    /* ===== Lightweight preloader ===== */
+    .preloader{
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: #070c16;
+      display: grid;
+      place-items: center;
+      transition: opacity .20s ease, visibility .20s ease;
+    }
+    .preloader.hide{
+      opacity: 0;
+      visibility: hidden;
+    }
+    .spinner{
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
+      border: 3px solid rgba(255,255,255,.18);
+      border-top-color: rgba(47,107,255,.85);
+      animation: spin .75s linear infinite;
+    }
+    .preloader .label{
+      margin-top: 12px;
+      font-size: 12px;
+      color: rgba(255,255,255,.65);
+      letter-spacing:.08em;
+      text-transform: uppercase;
+      text-align:center;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+
+<body>
+  <!-- Preloader: hides instantly on DOMContentLoaded (fast CWV; no heavy JS) -->
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <div>
+      <div class="spinner" role="status" aria-label="Loading"></div>
+      <div class="label">Loading</div>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- TOP BAR -->
+    <div class="topbar">
+      <div class="brand">
+  <a href="https://fxfacts.com" class="brand-link" aria-label="FXfacts Home">
+    <!-- SVG logo here -->
+    <!-- paste SVG code above -->
+    <span class="tagline">Forex facts. No hype.</span>
+  </a>
+</div>
+
+      <div class="disclaimer">※投資にはリスクがあります。必ずご自身で判断してください。</div>
+    </div>
+
+    <!-- HERO -->
+    <header class="hero" id="top">
+      <div class="hero-inner">
+        <h1>日本人に人気No.1の海外FXブローカー。豊富なボーナスと、リクオートが無い安定した取引環境が特徴</h1>
+        <p class="lead">
+          XMTrading（エックス エム）は、今や海外FX業者を利用する日本人の殆どが口座を保有する人気のブローカーです。人気の理由は、
+          大手ブローカーである信頼感と、口座開設時や入金時に付与される様々なボーナスプログラムです。
+          季節的なプロモーションも開始され毎回盛り上がりを見せています。加えて、低スプレッドタイプの仕様改善や最大レバレッジの引き上げなど、
+          ユーザーの声を取り込んだサービス改善にも積極的な姿勢がみられます。質の良いバランスがとれたサービスの提供により、
+          初めて海外FX口座を開設する方の取り込みに成功しています。
+        </p>
+
+        <!-- CTA (after section) -->
+        <div class="cta-row">
+          <a class="btn btn-primary js-cta" data-cta="real_open" href="#" rel="noopener sponsored" target="_blank">リアル口座開設</a>
+          <a class="btn btn-secondary js-cta" data-cta="official" href="#" rel="noopener sponsored" target="_blank">オフィシャルサイトへ</a>
+        </div>
+
+        <p class="note">
+          参考情報：XMTradingの概要・特徴（fxsignupレビュー内容を元に整理）。本ページは情報提供を目的としています。
+        </p>
+      </div>
+    </header>
+
+    <div class="grid">
+      <!-- SECTION: WHY -->
+      <section class="card twoThird">
+        <div class="section-title">
+          <div>
+            <div class="kicker">WHY XM?</div>
+            <h2>海外FX選びで迷っていませんか？</h2>
+          </div>
+        </div>
+
+        <p>
+          数ある海外FX業者の中で、どこを使うべきか迷っていませんか？もし、安全性の高さと取引のしやすさを両立したいなら、
+          XMTrading（エックスエム）が最もおすすめな選択肢の一つです。<br><br>
+          XMは2009年に設立され、10年以上にわたって安定したサービスを提供し続けている老舗の海外FX業者です。
+          全世界で多数の口座が開設されており、日本人トレーダーからの人気も高いとされています。<br><br>
+          その人気の理由は、豪華なボーナスキャンペーンと最大1,000倍のハイレバレッジにあります。
+          口座開設ボーナスを活用すれば、自己資金ゼロからでもリアルトレードを開始できる点が魅力です。<br><br>
+          この記事では、XMが多くのトレーダーに選ばれる理由を、メリット・デメリットの両面から分かりやすく整理します。
+        </p>
+
+        <!-- CTA (after section) -->
+        <div class="mini-cta">
+          <a class="btn btn-primary js-cta" data-cta="real_open" href="#" rel="noopener sponsored" target="_blank">リアル口座開設</a>
+          <a class="btn btn-secondary js-cta" data-cta="official" href="#" rel="noopener sponsored" target="_blank">オフィシャルサイトへ</a>
+        </div>
+      </section>
+
+      <!-- SECTION: QUICK VIEW -->
+      <aside class="card oneThird">
+        <div class="section-title">
+          <div>
+            <div class="kicker">QUICK VIEW</div>
+            <h2>結論：こんな人に向く</h2>
+          </div>
+        </div>
+
+        <ul class="clean">
+          <li><strong>ボーナス重視</strong> <span>— 口座開設/入金特典を活用したい</span></li>
+          <li><strong>ハイレバ</strong> <span>— 最大レバレッジを有効活用したい</span></li>
+          <li><strong>取引ツール</strong> <span>— MT4/MT5やスマホアプリで運用したい</span></li>
+          <li><strong>サポート</strong> <span>— 日本語対応を重視したい</span></li>
+        </ul>
+
+        <div class="divider"></div>
+        <p class="note">
+          ※条件・キャンペーンは変更される可能性があります。最新情報は公式ページをご確認ください。
+        </p>
+
+        <!-- CTA (after section) -->
+        <div class="mini-cta">
+          <a class="btn btn-primary js-cta" data-cta="real_open" href="#" rel="noopener sponsored" target="_blank">リアル口座開設</a>
+          <a class="btn btn-secondary js-cta" data-cta="official" href="#" rel="noopener sponsored" target="_blank">オフィシャルサイトへ</a>
+        </div>
+      </aside>
+
+      <!-- SECTION: ADVANTAGES -->
+      <section class="card half">
+        <div class="section-title">
+          <div>
+            <div class="kicker">ADVANTAGES</div>
+            <h2>XMのメリット（強み）</h2>
+          </div>
+        </div>
+
+        <div class="frame green">
+          <ul class="clean">
+            <li>豪華な15,000円口座開設ボーナスを提供</li>
+            <li>合計10,500ドルの入金ボーナスが受け取れる</li>
+            <li>MT4 / MT5やXMアプリなど取引ツールが充実</li>
+            <li>スワップポイントが平均以上</li>
+            <li>最大1,000倍のハイレバレッジを利用できる</li>
+            <li>有効証拠金によるレバレッジ制限が緩い</li>
+            <li>500円から入金可能！1万円チャレンジにも最適</li>
+            <li>入出金手続きが早い</li>
+            <li>ウェビナーやXMブログなどお役立ちコンテンツが盛りだくさん</li>
+            <li>スワップ計算機や証拠金計算機が使える</li>
+            <li>コピートレードを手軽に利用できる</li>
+            <li>条件を満たすとBeeksFX社の無料VPSが使える</li>
+          </ul>
+        </div>
+
+        <!-- CTA (after section) -->
+        <div class="mini-cta">
+          <a class="btn btn-primary js-cta" data-cta="real_open" href="#" rel="noopener sponsored" target="_blank">リアル口座開設</a>
+          <a class="btn btn-secondary js-cta" data-cta="official" href="#" rel="noopener sponsored" target="_blank">オフィシャルサイトへ</a>
+        </div>
+      </section>
+
+      <!-- SECTION: CONS -->
+      <section class="card half">
+        <div class="section-title">
+          <div>
+            <div class="kicker">CONSIDERATIONS</div>
+            <h2>XMのデメリット（注意点）</h2>
+          </div>
+        </div>
+
+        <div class="frame red">
+          <ul class="clean">
+            <li>口座タイプによってはスプレッド/手数料が割高に感じる場合がある</li>
+            <li>条件（休眠・出金方法など）により手数料が発生することがある</li>
+            <li>キャンペーン/ボーナスは適用条件がある（規約確認が必要）</li>
+            <li>経済指標時など相場状況によりスプレッド拡大が起こり得る</li>
+            <li>レバレッジは利益機会と同時に損失リスクも増幅する</li>
+          </ul>
+        </div>
+
+        <p class="note">
+          ※デメリットは「使い方・口座タイプ・相場環境」によって体感が変わります。事前に取引条件と規約をご確認ください。
+        </p>
+
+        <!-- CTA (after section) -->
+        <div class="mini-cta">
+          <a class="btn btn-primary js-cta" data-cta="real_open" href="#" rel="noopener sponsored" target="_blank">リアル口座開設</a>
+          <a class="btn btn-secondary js-cta" data-cta="official" href="#" rel="noopener sponsored" target="_blank">オフィシャルサイトへ</a>
+        </div>
+      </section>
+
+      <!-- SECTION: FAQ -->
+      <section class="card">
+        <div class="section-title">
+          <div>
+            <div class="kicker">Q&A</div>
+            <h2>よくある質問</h2>
+          </div>
+        </div>
+
+        <div class="faq">
+          <details>
+            <summary>Q. ボーナスだけで取引を始められますか？</summary>
+            <p>
+              口座開設ボーナス等が提供されている場合、条件を満たすことで自己資金を抑えて取引を開始できるケースがあります。
+              ただし、付与条件・利用条件・出金条件などがあるため、必ず公式条件を確認してください。
+            </p>
+          </details>
+
+          <details>
+            <summary>Q. 最大1,000倍レバレッジは誰でも使えますか？</summary>
+            <p>
+              口座タイプや有効証拠金、銘柄、取引条件によって最大レバレッジは変動します。ハイレバは損失リスクも高まるため、
+              ロット管理・損切り・証拠金維持率の管理が重要です。
+            </p>
+          </details>
+
+          <details>
+            <summary>Q. 口座開設の流れは？</summary>
+            <p>
+              一般的には「登録 → 本人確認（KYC）→ 口座有効化 → 入金/ボーナス受取（対象の場合）→ 取引開始」となります。
+              ページ内の「リアル口座開設」ボタンから進めてください。
+            </p>
+          </details>
+        </div>
+
+        <!-- CTA (after section) -->
+        <div class="mini-cta">
+          <a class="btn btn-primary js-cta" data-cta="real_open" href="#" rel="noopener sponsored" target="_blank">リアル口座開設</a>
+          <a class="btn btn-secondary js-cta" data-cta="official" href="#" rel="noopener sponsored" target="_blank">オフィシャルサイトへ</a>
+        </div>
+
+        <p class="note">
+          参照元レビュー：
+          <a class="muted-link" href="https://fxsignup.com/review/xem/" target="_blank" rel="noopener">fxsignup.com（XMTradingレビュー）</a>
+        </p>
+      </section>
+
+      <!-- SECTION: FINAL CTA -->
+      <section class="card">
+        <div class="section-title">
+          <div>
+            <div class="kicker">SUMMARY</div>
+            <h2>まとめ：XMTradingは「ボーナス×取引環境」を重視する人に適した選択肢</h2>
+          </div>
+        </div>
+
+        <p>
+          XMTrading（エックスエム）は、ボーナス施策の豊富さ、MT4/MT5などの取引環境、サポート体制などを重視する層に選ばれやすいブローカーです。
+          一方で、口座タイプや相場状況によりコスト面の体感が変わるため、条件を理解した上で活用することが重要です。
+        </p>
+
+        <!-- CTA (after section) -->
+        <div class="cta-row">
+          <a class="btn btn-primary js-cta" data-cta="real_open" href="#" rel="noopener sponsored" target="_blank">リアル口座開設</a>
+          <a class="btn btn-secondary js-cta" data-cta="official" href="#" rel="noopener sponsored" target="_blank">オフィシャルサイトへ</a>
+        </div>
+
+        <footer>
+          本ページは情報提供を目的としており、特定の投資成果を保証するものではありません。投資判断はご自身の責任で行ってください。
+        </footer>
+      </section>
+    </div>
+  </div>
+
+  <!-- Mobile Sticky CTA Bar -->
+  <div class="sticky-cta" role="region" aria-label="Sticky call to action">
+    <div class="wrap">
+      <a class="btn btn-primary js-cta" data-cta="real_open_sticky" href="#" rel="noopener sponsored" target="_blank">リアル口座開設</a>
+      <a class="btn btn-secondary js-cta" data-cta="official_sticky" href="#" rel="noopener sponsored" target="_blank">オフィシャルサイトへ</a>
+    </div>
+  </div>
+
+  <script>
+    /*
+      UTM + tracking placeholders
+      - Replace BASE_REAL_URL and BASE_OFFICIAL_URL with your final destination URLs.
+      - Optionally pass clickid / subid from your push network (e.g., ?clickid=...).
+      - This script will:
+        1) Read incoming query params from this page (utm_*, clickid/subid, etc.)
+        2) Apply them to all CTA links
+        3) Append/override with your default UTM placeholders when missing
+        4) Provide a minimal click event hook for tracking
+
+      Recommended workflow:
+      - Your push URL: https://yourdomain.com/lp.html?utm_source={source}&utm_campaign={campaign}&clickid={clickid}
+      - Set defaults below as fallback.
+    */
+
+    // 1) DESTINATION URLS (replace)
+    const BASE_REAL_URL     = "https://YOUR_AFF_LINK_REAL.example.com/";     // e.g. offer/real
+    const BASE_OFFICIAL_URL = "https://YOUR_AFF_LINK_OFFICIAL.example.com/"; // e.g. offer/official
+
+    // 2) Default UTM placeholders (fallback if not provided in incoming URL)
+    const DEFAULT_UTM = {
+      utm_source:   "{utm_source}",   // push network macro or your placeholder
+      utm_medium:   "push",
+      utm_campaign: "{utm_campaign}",
+      utm_content:  "{utm_content}",
+      utm_term:     "{utm_term}"
+    };
+
+    // 3) Optional: add your affiliate sub params placeholders
+    // Example: many networks use clickid / subid / sub1..sub5
+    const DEFAULT_SUBS = {
+      clickid: "{clickid}",
+      subid:   "{subid}",
+      sub1:    "{sub1}",
+      sub2:    "{sub2}",
+      sub3:    "{sub3}",
+      sub4:    "{sub4}",
+      sub5:    "{sub5}"
+    };
+
+    function getQueryParams() {
+      const p = {};
+      const qs = new URLSearchParams(window.location.search);
+      qs.forEach((v, k) => { p[k] = v; });
+      return p;
+    }
+
+    function buildUrl(base, incoming) {
+      const url = new URL(base);
+      const out = new URLSearchParams(url.search);
+
+      // Merge: (1) incoming params first
+      Object.keys(incoming).forEach(k => {
+        if (incoming[k] !== "" && incoming[k] != null) out.set(k, incoming[k]);
+      });
+
+      // (2) apply default UTMs if missing
+      Object.keys(DEFAULT_UTM).forEach(k => {
+        if (!out.has(k) || !out.get(k)) out.set(k, DEFAULT_UTM[k]);
+      });
+
+      // (3) apply default subs if missing (optional)
+      Object.keys(DEFAULT_SUBS).forEach(k => {
+        if (!out.has(k) || !out.get(k)) out.set(k, DEFAULT_SUBS[k]);
+      });
+
+      url.search = out.toString();
+      return url.toString();
+    }
+
+    function wireCtas() {
+      const incoming = getQueryParams();
+
+      // Set final hrefs
+      const realUrl = buildUrl(BASE_REAL_URL, incoming);
+      const officialUrl = buildUrl(BASE_OFFICIAL_URL, incoming);
+
+      document.querySelectorAll('.js-cta').forEach(a => {
+        const cta = a.getAttribute('data-cta') || "";
+        // Route by CTA type
+        if (cta.includes("official")) a.href = officialUrl;
+        else a.href = realUrl;
+
+        // Minimal click hook (replace with your tracker/pixel if needed)
+        a.addEventListener('click', () => {
+          // Example placeholders:
+          // window.dataLayer = window.dataLayer || [];
+          // window.dataLayer.push({ event: "cta_click", cta, href: a.href });
+          // Or: new Image().src = "https://your-tracker/pixel?cta="+encodeURIComponent(cta)+"&clickid="+encodeURIComponent(incoming.clickid||"");
+        }, { passive: true });
+      });
+    }
+
+    // Lightweight preloader hide (fast CWV): hide as soon as DOM is ready
+    document.addEventListener('DOMContentLoaded', () => {
+      const pre = document.getElementById('preloader');
+      if (pre) pre.classList.add('hide');
+      wireCtas();
+    });
+  </script>
+</body>
+</html>
