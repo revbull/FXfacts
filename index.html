@@ -314,6 +314,40 @@
     height:28px;
   }
 }
+    .brand{
+  display:flex;
+  align-items:center;
+}
+
+.brand-link{
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+  text-decoration:none;
+}
+
+.fxfacts-logo{
+  height:32px;
+  width:auto;
+}
+
+.tagline{
+  font-size:11px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:rgba(232,238,252,.65);
+}
+
+/* Mobile tuning */
+@media(max-width:760px){
+  .fxfacts-logo{
+    height:28px;
+  }
+  .tagline{
+    font-size:10px;
+  }
+}
+
 
   </style>
 </head>
@@ -329,12 +363,14 @@
 
   <div class="container">
     <!-- TOP BAR -->
-    <div class="topbar">
-      <div class="logo-wrap">
-  <img src="/assets/img/fxfacts-logo.png"
-       alt="FXfacts - Forex Information"
-       class="site-logo">
+   <div class="brand">
+  <a href="https://fxfacts.com" class="brand-link" aria-label="FXfacts Home">
+    <!-- SVG logo here -->
+    <!-- paste SVG code above -->
+    <span class="tagline">Forex facts. No hype.</span>
+  </a>
 </div>
+
 
       <div class="disclaimer">※投資にはリスクがあります。必ずご自身で判断してください。</div>
     </div>
