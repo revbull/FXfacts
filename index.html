@@ -1,19 +1,22 @@
 <!doctype html>
 <html lang="ja">
 <head>
-  <!-- Google Tag Manager -->
-  <script>
-  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-XXXXXXX');
-  </script>
-  <!-- End Google Tag Manager -->
-
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>XMTrading おみくじプロモーション 2026</title>
+
+  <!-- GA4 (gtag.js) ONLY - no GTM -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DTMQSP8BPQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    // GA4 config
+    gtag('config', 'G-DTMQSP8BPQ', {
+      send_page_view: true
+    });
+  </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,7 +31,6 @@
       --shadow: 0 4px 10px rgba(0,0,0,0.06);
       --cta-shadow: 0 10px 20px rgba(188,0,45,0.25);
     }
-
     *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 
     body{
@@ -38,7 +40,6 @@
       color: var(--jp-black);
       line-height: 1.6;
       overflow-x: hidden;
-
       background-image: radial-gradient(rgba(0,0,0,0.03) 1px, transparent 1px);
       background-size: 10px 10px;
     }
@@ -200,9 +201,7 @@
     .step-title{font-weight: 900;}
     .step-desc{font-size: 0.95rem;color:#444;margin-top:2px;}
 
-    .features{
-      padding: 18px 16px 140px;
-    }
+    .features{ padding: 18px 16px 140px; }
 
     .feature-grid{
       display:grid;
@@ -240,11 +239,7 @@
       list-style:none;
     }
     summary::-webkit-details-marker{display:none;}
-    .faq-a{
-      margin-top: 8px;
-      color:#444;
-      font-size: 0.95rem;
-    }
+    .faq-a{ margin-top: 8px; color:#444; font-size: 0.95rem; }
 
     footer{
       padding: 22px 16px 160px;
@@ -322,11 +317,6 @@
 </head>
 
 <body>
-  <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
-  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-  <!-- End Google Tag Manager (noscript) -->
-
   <header>
     <svg width="140" height="32" viewBox="0 0 480 110" xmlns="http://www.w3.org/2000/svg" aria-label="FXfacts ロゴ" role="img">
       <g transform="translate(0,10)">
@@ -452,18 +442,27 @@
 
   <div class="cta-container">
     <div class="cta-preline" id="ctaPreline">入金不要・スマホ対応・日本語サポート</div>
+
+    <!-- Your affiliate link -->
     <a href="https://clicks.affstrack.com/c?c=1120254&l=en&p=1" class="cta-button" id="mainCTA" rel="noopener">
       <span id="ctaText">公式サイトで詳細を見る</span>
     </a>
+
     <div class="cta-note" id="ctaNote">※ ボタンからXMTrading公式サイトへ直接移動します</div>
   </div>
 
   <script>
     (function () {
+      // --- Helpers ---
+      var qs = new URLSearchParams(window.location.search);
+      var clickId = qs.get("clickid") || ""; // PropellerAds: ?clickid=${SUBID}
+
       var ua = navigator.userAgent || "";
       var isIOS = /iPhone|iPad|iPod/i.test(ua);
       var isAndroid = /Android/i.test(ua);
+      var os = isIOS ? "iOS" : (isAndroid ? "Android" : "Other");
 
+      // --- OS-based copy ---
       var heroBadge = document.getElementById("heroBadge");
       var heroTitle = document.getElementById("heroTitle");
       var heroSub = document.getElementById("heroSub");
@@ -480,9 +479,7 @@
         ctaPreline.textContent = "入金不要・スマホ対応・日本語サポート";
         ctaText.textContent = "今すぐ公式サイトへ（無料）";
         ctaNote.textContent = "※ タップ後すぐ公式サイトへ移動します";
-      }
-
-      if (isIOS) {
+      } else if (isIOS) {
         heroBadge.textContent = "XMTrading 公式キャンペーン情報";
         heroTitle.innerHTML = "XMTrading おみくじ<br>新春限定プロモーション";
         heroSub.textContent = "取引条件を満たすと、現金ボーナスが当たるチャンス。";
@@ -492,11 +489,9 @@
         ctaNote.textContent = "※ ボタンからXMTrading公式サイトへ直接移動します";
       }
 
+      // --- Append clickid to affiliate link as aff_sub ---
       var cta = document.getElementById("mainCTA");
       if (!cta) return;
-
-      // Append clickid to affiliate link
-      var clickId = new URLSearchParams(window.location.search).get("clickid");
 
       if (clickId) {
         try {
@@ -509,27 +504,75 @@
         }
       }
 
-      // Reliable GTM tracking: dataLayer event + small delay before redirect
+      // --- Quality events (optional but useful for push optimization) ---
+      // 1) engaged_10s
+      var engagedSent = false;
+      setTimeout(function () {
+        if (engagedSent) return;
+        engagedSent = true;
+        if (typeof gtag === "function") {
+          gtag("event", "engaged_10s", {
+            clickid: clickId,
+            os: os,
+            page_path: window.location.pathname,
+            transport_type: "beacon"
+          });
+        }
+      }, 10000);
+
+      // 2) scroll_50
+      var scrollSent = false;
+      function onScroll() {
+        if (scrollSent) return;
+        var doc = document.documentElement;
+        var scrolled = (window.scrollY || doc.scrollTop || 0);
+        var height = (doc.scrollHeight - doc.clientHeight) || 1;
+        var pct = scrolled / height;
+
+        if (pct >= 0.5) {
+          scrollSent = true;
+          window.removeEventListener("scroll", onScroll, { passive: true });
+          if (typeof gtag === "function") {
+            gtag("event", "scroll_50", {
+              clickid: clickId,
+              os: os,
+              page_path: window.location.pathname,
+              transport_type: "beacon"
+            });
+          }
+        }
+      }
+      window.addEventListener("scroll", onScroll, { passive: true });
+
+      // --- CTA click event with reliable redirect (push-safe) ---
       cta.addEventListener("click", function (e) {
-        if (!window.dataLayer) return;
+        // If GA is blocked, don't break navigation
+        if (typeof gtag !== "function") return;
 
         e.preventDefault();
         var targetUrl = cta.href;
 
-        window.dataLayer.push({
-          event: "cta_click_dl",
-          clickid: clickId || "",
+        // Send event then redirect
+        gtag("event", "cta_click", {
           link_url: targetUrl,
-          os: isIOS ? "iOS" : (isAndroid ? "Android" : "Other"),
-          page_path: window.location.pathname
+          clickid: clickId,
+          os: os,
+          page_path: window.location.pathname,
+          transport_type: "beacon",
+          event_callback: function () {
+            window.location.href = targetUrl;
+          }
         });
 
+        // Fallback redirect
         setTimeout(function () {
           window.location.href = targetUrl;
-        }, 200);
+        }, 400);
+
       }, { passive: false });
 
     })();
   </script>
 </body>
 </html>
+
