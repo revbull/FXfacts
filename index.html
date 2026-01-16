@@ -5,56 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>XMTrading おみくじプロモーション 2026</title>
 
- 
-
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Shippori+Mincho:wght@700&display=swap" rel="stylesheet">
 
-  <style><script async src="https://www.googletagmanager.com/gtag/js?id=G-DTMQSP8BPQ"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){ dataLayer.push(arguments); }
-  gtag('js', new Date());
+  <!-- GA4 (gtag.js) ONLY - no GTM -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DTMQSP8BPQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
 
-  // 1. Функция за вземане на параметри от URL
-  function getUrlParameter(name) {
-    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-    var results = regex.exec(location.search);
-    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
-  }
+    // DebugView only when URL includes ?debug_mode=1 (or just ?debug_mode)
+    var __qs = new URLSearchParams(window.location.search);
+    var __isDebug = __qs.has('debug_mode');
 
-  // 2. Дефиниране на списъка с параметри от PropellerAds, които искате да следите
-  var propellerParams = {
-    'browser': getUrlParameter('browser'),
-    'browserversion': getUrlParameter('browserversion'),
-    'clickid': getUrlParameter('clickid'), // Много важно за postback
-    'country': getUrlParameter('country'),
-    'device': getUrlParameter('device'),
-    'language': getUrlParameter('language'),
-    'os': getUrlParameter('os'),
-    'osversion': getUrlParameter('osversion'),
-    'region': getUrlParameter('region'),
-    'subzone_id': getUrlParameter('subzone_id'),
-    'zoneid': getUrlParameter('zoneid'), // Zone ID от PropellerAds
-    'useragent': getUrlParameter('useragent'),
-    'user_activity': getUrlParameter('user_activity'),
-    'cost': getUrlParameter('cost')
-  };
+    // GA4 config
+    gtag('config', 'G-DTMQSP8BPQ', {
+      send_page_view: true,
+      debug_mode: __isDebug
+    });
+  </script>
 
-  // Проверка за Debug Mode
-  var isDebug = new URLSearchParams(window.location.search).has('debug_mode');
-
-  // 3. Обединяване на конфигурацията с параметрите
-  // Това изпраща параметрите към GA4 с всеки page_view
-  gtag('config', 'G-DTMQSP8BPQ', {
-    'send_page_view': true,
-    'debug_mode': isDebug,
-    ...propellerParams // Разпъва обекта с параметрите тук
-  });
-</script>
+  <style>
     :root{
       --jp-red:#BC002D;
       --jp-black:#1a1a1a;
@@ -476,7 +449,7 @@
     <div class="cta-preline" id="ctaPreline">入金不要・スマホ対応・日本語サポート</div>
 
     <!-- Your affiliate link -->
-    <a href="https://clicks.affstrack.com/c?c=1120254&l=en&p=1" class="cta-button" id="mainCTA" rel="noopener">
+    <a href="https://clicks.affstrack.com/c?c=1120254&l=en&p=1" class="cta-button" id="mainCTA" target="_self" rel="noopener">
       <span id="ctaText">公式サイトで詳細を見る</span>
     </a>
 
@@ -484,270 +457,265 @@
   </div>
 
   <script>
-(function () {
-  // -----------------------------
-  // TIMERS
-  // -----------------------------
-  var t0 = (typeof performance !== "undefined" && performance.now) ? performance.now() : Date.now();
+  (function () {
+    // ---------------------------------------
+    // Shared helpers
+    // ---------------------------------------
+    var qs = new URLSearchParams(window.location.search);
 
-  // -----------------------------
-  // READ URL PARAMS
-  // Recommended Propeller target URL includes: ?utm_prid=${SUBID}
-  // -----------------------------
-  var qs = new URLSearchParams(window.location.search);
-
-  var utm_prid = qs.get("utm_prid") || "";                  // Propeller example param
-  var clickid  = qs.get("clickid") || qs.get("subid") || ""; // your param
-  var subid    = qs.get("subid") || clickid || "";
-
-  // Placement identifiers
-  var zoneid = qs.get("zoneid") || qs.get("zone_id") || qs.get("zone") || "";
-  var creative_id = qs.get("creative_id") || qs.get("creativeid") || qs.get("crid") || qs.get("creative") || "";
-
-  // Use utm_prid as primary Propeller visitor id, fallback to clickid
-  var propVisitorId = utm_prid || clickid || "";
-
-  // -----------------------------
-  // DEVICE / CONTEXT
-  // -----------------------------
-  var ua = navigator.userAgent || "";
-  var lang = (navigator.language || navigator.userLanguage || "").toLowerCase();
-  var ref = document.referrer || "";
-  var page_path = window.location.pathname || "";
-
-  var isIOS = /iPhone|iPad|iPod/i.test(ua);
-  var isAndroid = /Android/i.test(ua);
-  var os = isIOS ? "iOS" : (isAndroid ? "Android" : "Other");
-
-  var device_type = /Mobi|Android|iPhone|iPad|iPod/i.test(ua) ? "mobile" : "desktop";
-
-  function detectBrowser(u) {
-    u = (u || "").toLowerCase();
-    if (u.includes("edg/")) return "Edge";
-    if (u.includes("opr/") || u.includes("opera")) return "Opera";
-    if (u.includes("chrome/") && !u.includes("edg/") && !u.includes("opr/")) return "Chrome";
-    if (u.includes("safari/") && !u.includes("chrome/")) return "Safari";
-    if (u.includes("firefox/")) return "Firefox";
-    return "Other";
-  }
-  var browser = detectBrowser(ua);
-
-  var screen_res = (window.screen && screen.width && screen.height) ? (screen.width + "x" + screen.height) : "";
-
-  // -----------------------------
-  // COOKIE HELPERS (Propeller approach)
-  // Store visitor id in cookie for 30 days
-  // -----------------------------
-  function setCookie(name, value, days) {
-    try {
-      var date = new Date();
-      date.setTime(date.getTime() + (days*24*60*60*1000));
-      document.cookie = name + "=" + encodeURIComponent(value || "") +
-        "; expires=" + date.toUTCString() + "; path=/; SameSite=Lax";
-    } catch(e) {}
-  }
-
-  function getCookie(name) {
-    try {
-      return ("; " + document.cookie).split("; " + name + "=").pop().split(";")[0] || "";
-    } catch(e) { return ""; }
-  }
-
-  // Save Propeller visitor id cookie (their example uses prop_visitor_id)
-  if (propVisitorId) {
-    setCookie("prop_visitor_id", propVisitorId, 30);
-  }
-
-  // -----------------------------
-  // OS-based copy (unchanged)
-  // -----------------------------
-  var heroBadge = document.getElementById("heroBadge");
-  var heroTitle = document.getElementById("heroTitle");
-  var heroSub = document.getElementById("heroSub");
-  var heroSupport = document.getElementById("heroSupport");
-  var ctaText = document.getElementById("ctaText");
-  var ctaPreline = document.getElementById("ctaPreline");
-  var ctaNote = document.getElementById("ctaNote");
-
-  if (isAndroid) {
-    heroBadge.textContent = "2026年 新春限定キャンペーン";
-    heroTitle.innerHTML = "取引するだけで現金チャンス<br>XMTrading おみくじ";
-    heroSub.textContent = "最大$5,000獲得のチャンス。今すぐスマホから無料で参加。";
-    heroSupport.textContent = "入金不要ボーナスあり・日本語対応";
-    ctaPreline.textContent = "入金不要・スマホ対応・日本語サポート";
-    ctaText.textContent = "今すぐ公式サイトへ（無料）";
-    ctaNote.textContent = "※ タップ後すぐ公式サイトへ移動します";
-  } else if (isIOS) {
-    heroBadge.textContent = "XMTrading 公式キャンペーン情報";
-    heroTitle.innerHTML = "XMTrading おみくじ<br>新春限定プロモーション";
-    heroSub.textContent = "取引条件を満たすと、現金ボーナスが当たるチャンス。";
-    heroSupport.textContent = "スマートフォン対応・日本語サポート";
-    ctaPreline.textContent = "スマホ対応・日本語サポート";
-    ctaText.textContent = "公式サイトで詳細を見る";
-    ctaNote.textContent = "※ ボタンからXMTrading公式サイトへ直接移動します";
-  }
-
-  // -----------------------------
-  // Affiliate link append: clickid -> aff_sub
-  // -----------------------------
-  var cta = document.getElementById("mainCTA");
-  if (!cta) return;
-
-  if (clickid) {
-    try {
-      var url = new URL(cta.href, window.location.href);
-      url.searchParams.set("aff_sub", clickid);
-      cta.href = url.toString();
-    } catch (e) {
-      var sep = cta.href.indexOf("?") >= 0 ? "&" : "?";
-      cta.href = cta.href + sep + "aff_sub=" + encodeURIComponent(clickid);
-    }
-  }
-
-  // -----------------------------
-  // SCROLL DEPTH (0..100)
-  // -----------------------------
-  function computeScrollDepthPct() {
-    var doc = document.documentElement;
-    var scrolled = (window.scrollY || doc.scrollTop || 0);
-    var height = (doc.scrollHeight - doc.clientHeight) || 1;
-    var pct = Math.max(0, Math.min(1, scrolled / height));
-    return Math.round(pct * 100);
-  }
-
-  var maxScroll = 0;
-  function onScroll() {
-    var pct = computeScrollDepthPct();
-    if (pct > maxScroll) maxScroll = pct;
-  }
-  window.addEventListener("scroll", onScroll, { passive: true });
-
-  // -----------------------------
-  // GA4: engaged_10s (with full params)
-  // -----------------------------
-  setTimeout(function () {
-    if (typeof gtag !== "function") return;
-    gtag("event", "engaged_10s", {
-      zoneid: zoneid,
-      creative_id: creative_id,
-      clickid: clickid,
-      subid: subid,
-      os: os,
-      device_type: device_type,
-      browser: browser,
-      lang: lang,
-      page_path: page_path,
-      ref: ref,
-      screen: screen_res,
-      scroll_depth: maxScroll,
-      transport_type: "beacon"
-    });
-  }, 10000);
-
-  // GA4: scroll_depth event once at 50%+
-  var scrollSent = false;
-  function scroll50Check() {
-    if (scrollSent) return;
-    var pct = computeScrollDepthPct();
-    if (pct >= 50) {
-      scrollSent = true;
-      window.removeEventListener("scroll", scroll50Check, { passive: true });
-      if (typeof gtag === "function") {
-        gtag("event", "scroll_depth", {
-          zoneid: zoneid,
-          creative_id: creative_id,
-          clickid: clickid,
-          subid: subid,
-          os: os,
-          device_type: device_type,
-          browser: browser,
-          lang: lang,
-          page_path: page_path,
-          ref: ref,
-          screen: screen_res,
-          scroll_depth: Math.max(maxScroll, pct),
-          transport_type: "beacon"
+    function saveIfPresent(obj) {
+      try {
+        Object.keys(obj).forEach(function (k) {
+          if (obj[k]) localStorage.setItem("fx_" + k, obj[k]);
         });
+      } catch (e) {}
+    }
+
+    function pick(key) {
+      // URL first, then storage fallback (useful if user refreshes / params drop)
+      return qs.get(key) || localStorage.getItem("fx_" + key) || "";
+    }
+
+    // Capture once from URL and persist (does NOT require CTA click)
+    var captured = {
+      browser: qs.get("browser") || "",
+      browserversion: qs.get("browserversion") || "",
+      clickid: qs.get("clickid") || "",
+      country: qs.get("country") || "",
+      device: qs.get("device") || "",
+      language: qs.get("language") || "",
+      os: qs.get("os") || "",
+      osversion: qs.get("osversion") || "",
+      region: qs.get("region") || "",
+      subzone_id: qs.get("subzone_id") || "",
+      zoneid: qs.get("zoneid") || "",
+      useragent: qs.get("useragent") || "",
+      user_activity: qs.get("user_activity") || "",
+      cost: qs.get("cost") || ""
+    };
+    saveIfPresent(captured);
+
+    // ---------------------------------------
+    // Send lp_view on EVERY page open (so you always get zoneid)
+    // ---------------------------------------
+    if (typeof gtag === "function") {
+      gtag("event", "lp_view", {
+        zoneid: pick("zoneid"),
+        subzone_id: pick("subzone_id"),
+        clickid: pick("clickid"),
+        browser: pick("browser"),
+        browserversion: pick("browserversion"),
+        country: pick("country"),
+        region: pick("region"),
+        device: pick("device"),
+        language: pick("language"),
+        os: pick("os"),
+        osversion: pick("osversion"),
+        useragent: pick("useragent"),
+        user_activity: pick("user_activity"),
+        cost: pick("cost"),
+        page_path: window.location.pathname || "",
+        transport_type: "beacon"
+      });
+    }
+
+    // ---------------------------------------
+    // Timer (time_to_click)
+    // ---------------------------------------
+    var t0 = (typeof performance !== "undefined" && performance.now) ? performance.now() : Date.now();
+
+    // ---------------------------------------
+    // Device/context (derived)
+    // ---------------------------------------
+    var ua = navigator.userAgent || "";
+    var lang = (navigator.language || navigator.userLanguage || "").toLowerCase();
+    var ref = document.referrer || "";
+    var page_path = window.location.pathname || "";
+
+    var isIOS = /iPhone|iPad|iPod/i.test(ua);
+    var isAndroid = /Android/i.test(ua);
+    var osDerived = isIOS ? "iOS" : (isAndroid ? "Android" : "Other");
+    var device_type = /Mobi|Android|iPhone|iPad|iPod/i.test(ua) ? "mobile" : "desktop";
+
+    function detectBrowser(u) {
+      u = (u || "").toLowerCase();
+      if (u.includes("edg/")) return "Edge";
+      if (u.includes("opr/") || u.includes("opera")) return "Opera";
+      if (u.includes("chrome/") && !u.includes("edg/") && !u.includes("opr/")) return "Chrome";
+      if (u.includes("safari/") && !u.includes("chrome/")) return "Safari";
+      if (u.includes("firefox/")) return "Firefox";
+      return "Other";
+    }
+    var browserDerived = detectBrowser(ua);
+    var screen_res = (window.screen && screen.width && screen.height) ? (screen.width + "x" + screen.height) : "";
+
+    // ---------------------------------------
+    // Scroll depth tracking
+    // ---------------------------------------
+    function computeScrollDepthPct() {
+      var doc = document.documentElement;
+      var scrolled = (window.scrollY || doc.scrollTop || 0);
+      var height = (doc.scrollHeight - doc.clientHeight) || 1;
+      var pct = Math.max(0, Math.min(1, scrolled / height));
+      return Math.round(pct * 100);
+    }
+
+    var maxScroll = 0;
+    function onScroll() {
+      var pct = computeScrollDepthPct();
+      if (pct > maxScroll) maxScroll = pct;
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    // ---------------------------------------
+    // GA4: engaged_10s (still useful for quality)
+    // ---------------------------------------
+    setTimeout(function () {
+      if (typeof gtag !== "function") return;
+      gtag("event", "engaged_10s", {
+        zoneid: pick("zoneid"),
+        subzone_id: pick("subzone_id"),
+        clickid: pick("clickid"),
+        os: pick("os") || osDerived,
+        device_type: device_type,
+        browser: pick("browser") || browserDerived,
+        lang: lang,
+        page_path: page_path,
+        ref: ref,
+        screen: screen_res,
+        scroll_depth: maxScroll,
+        transport_type: "beacon"
+      });
+    }, 10000);
+
+    // GA4: scroll_depth event once at 50%+
+    var scrollSent = false;
+    function scroll50Check() {
+      if (scrollSent) return;
+      var pct = computeScrollDepthPct();
+      if (pct >= 50) {
+        scrollSent = true;
+        window.removeEventListener("scroll", scroll50Check, { passive: true });
+        if (typeof gtag === "function") {
+          gtag("event", "scroll_depth", {
+            zoneid: pick("zoneid"),
+            subzone_id: pick("subzone_id"),
+            clickid: pick("clickid"),
+            os: pick("os") || osDerived,
+            device_type: device_type,
+            browser: pick("browser") || browserDerived,
+            lang: lang,
+            page_path: page_path,
+            ref: ref,
+            screen: screen_res,
+            scroll_depth: Math.max(maxScroll, pct),
+            transport_type: "beacon"
+          });
+        }
       }
     }
-  }
-  window.addEventListener("scroll", scroll50Check, { passive: true });
+    window.addEventListener("scroll", scroll50Check, { passive: true });
 
-  // -----------------------------
-  // PROPELLER "CONVERSION" PING
-  // Your postback:
-  // http://ad.propellerads.com/conversion.php?aid=1063015&pid=&tid=114050&visitor_id={external_id}&payout={payout}
-  //
-  // We'll send visitor_id=<prop_visitor_id cookie> (or propVisitorId) and payout=0
-  // This mirrors their method of firing conversion.php with visitor_id from cookie. :contentReference[oaicite:5]{index=5}
-  // -----------------------------
-  function firePropellerConversionPing() {
-    var vid = getCookie("prop_visitor_id") || propVisitorId || "";
-    if (!vid) return;
+    // ---------------------------------------
+    // OS-based copy (unchanged)
+    // ---------------------------------------
+    var heroBadge = document.getElementById("heroBadge");
+    var heroTitle = document.getElementById("heroTitle");
+    var heroSub = document.getElementById("heroSub");
+    var heroSupport = document.getElementById("heroSupport");
+    var ctaText = document.getElementById("ctaText");
+    var ctaPreline = document.getElementById("ctaPreline");
+    var ctaNote = document.getElementById("ctaNote");
 
-    var base = "https://ad.propellerads.com/conversion.php";
-    var params = new URLSearchParams();
-    params.set("aid", "1063015");
-    params.set("pid", ""); // keep empty if required by your setup
-    params.set("tid", "114050");
-    params.set("visitor_id", vid);
-    params.set("payout", "0"); // micro-conversion; change if you use values
+    if (isAndroid) {
+      heroBadge.textContent = "2026年 新春限定キャンペーン";
+      heroTitle.innerHTML = "取引するだけで現金チャンス<br>XMTrading おみくじ";
+      heroSub.textContent = "最大$5,000獲得のチャンス。今すぐスマホから無料で参加。";
+      heroSupport.textContent = "入金不要ボーナスあり・日本語対応";
+      ctaPreline.textContent = "入金不要・スマホ対応・日本語サポート";
+      ctaText.textContent = "今すぐ公式サイトへ（無料）";
+      ctaNote.textContent = "※ タップ後すぐ公式サイトへ移動します";
+    } else if (isIOS) {
+      heroBadge.textContent = "XMTrading 公式キャンペーン情報";
+      heroTitle.innerHTML = "XMTrading おみくじ<br>新春限定プロモーション";
+      heroSub.textContent = "取引条件を満たすと、現金ボーナスが当たるチャンス。";
+      heroSupport.textContent = "スマートフォン対応・日本語サポート";
+      ctaPreline.textContent = "スマホ対応・日本語サポート";
+      ctaText.textContent = "公式サイトで詳細を見る";
+      ctaNote.textContent = "※ ボタンからXMTrading公式サイトへ直接移動します";
+    }
 
-    // Cache-buster
-    params.set("_ts", String(Date.now()));
+    // ---------------------------------------
+    // Append clickid to affiliate link as aff_sub (if present)
+    // ---------------------------------------
+    var cta = document.getElementById("mainCTA");
+    if (!cta) return;
 
-    // Use Image beacon to avoid CORS issues and not block navigation
-    var img = new Image();
-    img.src = base + "?" + params.toString();
-  }
+    var clickid = pick("clickid");
+    if (clickid) {
+      try {
+        var url = new URL(cta.href, window.location.href);
+        url.searchParams.set("aff_sub", clickid);
+        cta.href = url.toString();
+      } catch (e) {
+        var sep = cta.href.indexOf("?") >= 0 ? "&" : "?";
+        cta.href = cta.href + sep + "aff_sub=" + encodeURIComponent(clickid);
+      }
+    }
 
-  // -----------------------------
-  // CTA click: GA4 + Propeller ping + redirect
-  // -----------------------------
-  cta.addEventListener("click", function (e) {
-    // If GA is blocked, still navigate, but still try Propeller ping
-    e.preventDefault();
+    // ---------------------------------------
+    // CTA click: GA4 event + reliable redirect
+    // ---------------------------------------
+    cta.addEventListener("click", function (e) {
+      // If GA is blocked, don't break navigation
+      if (typeof gtag !== "function") return;
 
-    var targetUrl = cta.href;
-    var now = (typeof performance !== "undefined" && performance.now) ? performance.now() : Date.now();
-    var time_to_click = Math.round(now - t0);
-    var scroll_depth = Math.max(maxScroll, computeScrollDepthPct());
+      e.preventDefault();
 
-    // 1) Propeller micro-conversion ping (does not block)
-    firePropellerConversionPing();
+      var targetUrl = cta.href;
+      var now = (typeof performance !== "undefined" && performance.now) ? performance.now() : Date.now();
+      var time_to_click = Math.round(now - t0);
+      var scroll_depth = Math.max(maxScroll, computeScrollDepthPct());
 
-    // 2) GA4 event (best-effort)
-    if (typeof gtag === "function") {
       gtag("event", "cta_click", {
         link_url: targetUrl,
-        zoneid: zoneid,
-        creative_id: creative_id,
-        clickid: clickid,
-        subid: subid,
-        os: os,
+
+        // Propeller params
+        zoneid: pick("zoneid"),
+        subzone_id: pick("subzone_id"),
+        clickid: pick("clickid"),
+        browser: pick("browser"),
+        browserversion: pick("browserversion"),
+        country: pick("country"),
+        region: pick("region"),
+        device: pick("device"),
+        language: pick("language"),
+        os: pick("os"),
+        osversion: pick("osversion"),
+        useragent: pick("useragent"),
+        user_activity: pick("user_activity"),
+        cost: pick("cost"),
+
+        // Derived
+        os_derived: osDerived,
         device_type: device_type,
-        browser: browser,
+        browser_derived: browserDerived,
         lang: lang,
         page_path: page_path,
         ref: ref,
         screen: screen_res,
         time_to_click: time_to_click,
         scroll_depth: scroll_depth,
+
         transport_type: "beacon",
         event_callback: function () { window.location.href = targetUrl; }
       });
 
       // Fallback redirect
       setTimeout(function () { window.location.href = targetUrl; }, 450);
-      return;
-    }
+    }, { passive: false });
 
-    // If GA blocked, just redirect with short delay
-    setTimeout(function () { window.location.href = targetUrl; }, 120);
-  }, { passive: false });
-
-})();
-</script>
-
+  })();
+  </script>
 </body>
 </html>
