@@ -6,15 +6,22 @@
   <title>XMTrading おみくじプロモーション 2026</title>
 
   <!-- GA4 (gtag.js) ONLY - no GTM -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DTMQSP8BPQ"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){ dataLayer.push(arguments); }
-    gtag('js', new Date());
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DTMQSP8BPQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  gtag('js', new Date());
 
-    // GA4 config
-    gtag('config', 'G-DTMQSP8BPQ', { send_page_view: true });
-  </script>
+  // Enable DebugView only when URL contains ?debug_mode=1 (or just ?debug_mode)
+  var isDebug = new URLSearchParams(window.location.search).has('debug_mode');
+
+  // GA4 config
+  gtag('config', 'G-DTMQSP8BPQ', {
+    send_page_view: true,
+    debug_mode: isDebug
+  });
+</script>
+
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
