@@ -5,29 +5,56 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>XMTrading おみくじプロモーション 2026</title>
 
-  <!-- GA4 (gtag.js) ONLY - no GTM -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-DTMQSP8BPQ"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){ dataLayer.push(arguments); }
-  gtag('js', new Date());
-
-  // Enable DebugView only when URL contains ?debug_mode=1 (or just ?debug_mode)
-  var isDebug = new URLSearchParams(window.location.search).has('debug_mode');
-
-  // GA4 config
-  gtag('config', 'G-DTMQSP8BPQ', {
-    send_page_view: true,
-    debug_mode: isDebug
-  });
-</script>
+ 
 
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Shippori+Mincho:wght@700&display=swap" rel="stylesheet">
 
-  <style>
+  <style><script async src="https://www.googletagmanager.com/gtag/js?id=G-DTMQSP8BPQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  gtag('js', new Date());
+
+  // 1. Функция за вземане на параметри от URL
+  function getUrlParameter(name) {
+    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+    var results = regex.exec(location.search);
+    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+  }
+
+  // 2. Дефиниране на списъка с параметри от PropellerAds, които искате да следите
+  var propellerParams = {
+    'browser': getUrlParameter('browser'),
+    'browserversion': getUrlParameter('browserversion'),
+    'clickid': getUrlParameter('clickid'), // Много важно за postback
+    'country': getUrlParameter('country'),
+    'device': getUrlParameter('device'),
+    'language': getUrlParameter('language'),
+    'os': getUrlParameter('os'),
+    'osversion': getUrlParameter('osversion'),
+    'region': getUrlParameter('region'),
+    'subzone_id': getUrlParameter('subzone_id'),
+    'zoneid': getUrlParameter('zoneid'), // Zone ID от PropellerAds
+    'useragent': getUrlParameter('useragent'),
+    'user_activity': getUrlParameter('user_activity'),
+    'cost': getUrlParameter('cost')
+  };
+
+  // Проверка за Debug Mode
+  var isDebug = new URLSearchParams(window.location.search).has('debug_mode');
+
+  // 3. Обединяване на конфигурацията с параметрите
+  // Това изпраща параметрите към GA4 с всеки page_view
+  gtag('config', 'G-DTMQSP8BPQ', {
+    'send_page_view': true,
+    'debug_mode': isDebug,
+    ...propellerParams // Разпъва обекта с параметрите тук
+  });
+</script>
     :root{
       --jp-red:#BC002D;
       --jp-black:#1a1a1a;
