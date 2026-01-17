@@ -399,6 +399,31 @@
       .hero-body{ padding: 16px 16px 18px; }
       .comp-kpis{ grid-template-columns: 1fr 1fr 1fr; }
     }
+    /* --- Anti-bot gate UI (does not touch tracking) --- */
+.gate-locked {
+  pointer-events: none !important;
+  opacity: 0.55 !important;
+  filter: grayscale(0.25);
+}
+
+.gate-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 110px;
+  transform: translateX(-50%);
+  max-width: min(520px, calc(100% - 32px));
+  background: rgba(17, 24, 39, 0.92);
+  color: #fff;
+  padding: 10px 12px;
+  border-radius: 12px;
+  font-size: 0.86rem;
+  line-height: 1.4;
+  z-index: 9999;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  display: none;
+}
+.gate-toast strong { font-weight: 900; }
+
   </style>
 </head>
 
@@ -896,5 +921,126 @@
 
   })();
   </script>
+  <script>
+(function () {
+  // -----------------------------
+  // Anti-bot gate (no tracking changes)
+  // Conditions to unlock:
+  //  - tab is visible
+  //  - time on page >= 6s
+  //  - scroll depth >= 50%
+  // -----------------------------
+
+  var MIN_TIME_MS = 6000;
+  var MIN_SCROLL_PCT = 50;
+
+  // Collect ALL affiliate links on the page
+  // (covers hero CTA, cards CTA, image link, sticky CTA)
+  var affiliateLinks = Array.prototype.slice.call(
+    document.querySelectorAll('a[href*="clicks.affstrack.com"]')
+  );
+
+  if (!affiliateLinks.length) return;
+
+  // Create a toast (small message) to explain why click is blocked
+  var toast = document.createElement("div");
+  toast.className = "gate-toast";
+  toast.innerHTML = '<strong>確認：</strong>読み込み後、少しスクロールしてからボタンが有効になります。';
+  document.body.appendChild(toast);
+
+  function showToast() {
+    toast.style.display = "block";
+    clearTimeout(showToast._t);
+    showToast._t = setTimeout(function(){ toast.style.display = "none"; }, 1800);
+  }
+
+  // Lock UI initially (does not alter href, so your existing click tracking remains intact)
+  affiliateLinks.forEach(function (a) {
+    a.classList.add("gate-locked");
+    a.setAttribute("aria-disabled", "true");
+  });
+
+  var start = (typeof performance !== "undefined" && performance.now) ? performance.now() : Date.now();
+  var maxScrollSeen = 0;
+  var unlocked = false;
+
+  function scrollDepthPct() {
+    var doc = document.documentElement;
+    var scrolled = (window.scrollY || doc.scrollTop || 0);
+    var height = (doc.scrollHeight - doc.clientHeight) || 1;
+    var pct = Math.max(0, Math.min(1, scrolled / height));
+    return Math.round(pct * 100);
+  }
+
+  function canUnlock() {
+    if (document.visibilityState !== "visible") return false;
+    var now = (typeof performance !== "undefined" && performance.now) ? performance.now() : Date.now();
+    var elapsed = now - start;
+    var pct = Math.max(maxScrollSeen, scrollDepthPct());
+    maxScrollSeen = pct;
+
+    return (elapsed >= MIN_TIME_MS && pct >= MIN_SCROLL_PCT);
+  }
+
+  function unlockAll() {
+    if (unlocked) return;
+    unlocked = true;
+
+    affiliateLinks.forEach(function (a) {
+      a.classList.remove("gate-locked");
+      a.removeAttribute("aria-disabled");
+    });
+
+    // Once unlocked, remove the blocking click handler
+    document.removeEventListener("click", gateClickBlocker, true);
+    window.removeEventListener("scroll", onScroll, { passive: true });
+    document.removeEventListener("visibilitychange", tick);
+  }
+
+  function tick() {
+    if (unlocked) return;
+    if (canUnlock()) unlockAll();
+  }
+
+  function onScroll() {
+    if (unlocked) return;
+    var pct = scrollDepthPct();
+    if (pct > maxScrollSeen) maxScrollSeen = pct;
+    tick();
+  }
+
+  // Capture-phase click blocker:
+  // - runs BEFORE your existing CTA click handler
+  // - if locked -> prevent navigation and show toast
+  function gateClickBlocker(e) {
+    if (unlocked) return;
+
+    var target = e.target;
+    if (!target) return;
+
+    // Find closest link
+    var a = target.closest ? target.closest('a[href*="clicks.affstrack.com"]') : null;
+    if (!a) return;
+
+    // Block click while locked
+    e.preventDefault();
+    e.stopPropagation();
+    showToast();
+  }
+
+  // Start listeners
+  document.addEventListener("click", gateClickBlocker, true);
+  window.addEventListener("scroll", onScroll, { passive: true });
+  document.addEventListener("visibilitychange", tick);
+
+  // Also check on timer (covers users who wait then scroll slightly)
+  var interval = setInterval(function () {
+    if (unlocked) { clearInterval(interval); return; }
+    tick();
+  }, 250);
+
+})();
+</script>
+
 </body>
 </html>
