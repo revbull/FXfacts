@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>XMTrading コンテスト｜毎月総額$140,000の出金可能賞金（公式条件は要確認）</title>
+  <title>XMTrading コンテスト｜毎月総額$120,000（公式条件は要確認）</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -78,7 +78,6 @@
       overflow-x: hidden;
     }
 
-    /* Header */
     header{
       padding: 12px 16px;
       background: rgba(255,255,255,0.92);
@@ -92,11 +91,7 @@
       -webkit-backdrop-filter: blur(8px);
     }
 
-    /* Hero (mobile-first, thumb-friendly) */
-    .hero{
-      padding: 18px 16px 14px;
-      position:relative;
-    }
+    .hero{ padding: 18px 16px 14px; }
     .hero-wrap{
       max-width: 860px;
       margin: 0 auto;
@@ -155,7 +150,7 @@
     .hero-lead{
       font-size: 1.02rem;
       color: #1f2937;
-      font-weight: 800;
+      font-weight: 900;
     }
     .hero-metrics{
       display:grid;
@@ -170,19 +165,10 @@
       padding: 12px;
       box-shadow: var(--shadow2);
     }
-    .metric .k{
-      font-size: 0.78rem;
-      color: var(--xm-gray);
-      font-weight: 800;
-      margin-bottom: 4px;
-    }
-    .metric .v{
-      font-size: 1.25rem;
-      font-weight: 900;
-      color: var(--xm-black);
-      letter-spacing: 0.01em;
-    }
+    .metric .k{ font-size: 0.78rem; color: var(--xm-gray); font-weight: 900; margin-bottom: 4px; }
+    .metric .v{ font-size: 1.25rem; font-weight: 900; color: var(--xm-black); letter-spacing: 0.01em; }
     .metric .v strong{ color: var(--xm-red); }
+
     .hero-points{
       display:flex;
       flex-wrap:wrap;
@@ -198,7 +184,7 @@
       background:#fff;
       border:1px solid var(--line);
       font-size: 0.86rem;
-      font-weight: 800;
+      font-weight: 900;
       color:#111827;
     }
     .pill svg{ width:16px;height:16px; flex:0 0 16px; }
@@ -225,7 +211,7 @@
       text-align:center;
       font-size: 0.78rem;
       color: var(--xm-gray);
-      font-weight: 700;
+      font-weight: 800;
       line-height:1.35;
     }
 
@@ -241,7 +227,6 @@
     }
     .disclosure strong{color: var(--xm-black);}
 
-    /* Sections */
     .section{ padding: 14px 16px; }
     .container{ max-width: 860px; margin: 0 auto; }
 
@@ -261,7 +246,6 @@
     }
     .muted{ color: var(--xm-gray); font-size: 0.92rem; }
 
-    /* Competition cards */
     .comp-grid{
       display:grid;
       grid-template-columns: 1fr;
@@ -284,11 +268,7 @@
       background: linear-gradient(180deg, rgba(227,27,35,0.08), rgba(255,255,255,1));
       border-bottom: 1px solid var(--line);
     }
-    .comp-title{
-      font-weight: 900;
-      font-size: 1.02rem;
-      line-height:1.3;
-    }
+    .comp-title{ font-weight: 900; font-size: 1.02rem; line-height:1.3; }
     .tag{
       display:inline-flex;
       align-items:center;
@@ -336,76 +316,11 @@
       border: 1px solid var(--line);
       border-radius: 14px;
       background: #fff;
-      font-weight: 800;
+      font-weight: 900;
     }
     .rank-row span{ color: var(--xm-gray); font-weight: 900; }
     .rank-row strong{ font-size: 1.02rem; }
 
-    /* Steps */
-    .steps{
-      display:grid;
-      grid-template-columns: 1fr;
-      gap: 10px;
-      margin-top: 10px;
-    }
-    .step{
-      display:flex;
-      gap: 12px;
-      align-items:flex-start;
-      padding: 12px;
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      background: #fff;
-    }
-    .step-num{
-      min-width: 36px;
-      height: 36px;
-      border-radius: 999px;
-      background: var(--xm-red);
-      color: #fff;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 900;
-    }
-    .step-title{font-weight: 900;}
-    .step-desc{font-size: 0.95rem;color:#374151;margin-top:2px;}
-
-    /* Proof image */
-    .proof a{ text-decoration:none; }
-    .proof-img{
-      width: 100%;
-      height: auto;
-      display:block;
-      border-radius: 14px;
-      border: 1px solid var(--line);
-      box-shadow: var(--shadow2);
-    }
-    .proof-cap{
-      margin-top: 10px;
-      font-size: 0.82rem;
-      color: var(--xm-gray);
-      font-weight: 700;
-      line-height: 1.4;
-    }
-
-    /* FAQ */
-    details{
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      background: #fff;
-      padding: 12px 14px;
-    }
-    details + details{margin-top:10px;}
-    summary{
-      cursor:pointer;
-      font-weight:900;
-      list-style:none;
-    }
-    summary::-webkit-details-marker{display:none;}
-    .faq-a{ margin-top: 8px; color:#374151; font-size: 0.95rem; line-height:1.65; }
-
-    /* Footer */
     footer{
       padding: 18px 16px 160px;
       font-size: 0.75rem;
@@ -424,7 +339,6 @@
       box-shadow: var(--shadow2);
     }
 
-    /* Sticky CTA (kept) */
     .cta-container{
       position: fixed;
       left: 0;
@@ -444,7 +358,7 @@
     }
     .cta-preline{
       font-size: 0.80rem;
-      color: #4b5563;
+      color: #111827;
       text-align:center;
       margin-bottom: 6px;
       font-weight: 900;
@@ -477,10 +391,9 @@
       color:#6b7280;
       text-align:center;
       line-height: 1.35;
-      font-weight: 700;
+      font-weight: 800;
     }
 
-    /* Desktop tweaks */
     @media (min-width: 480px){
       h1{ font-size: 1.95rem; }
       .hero-body{ padding: 16px 16px 18px; }
@@ -503,29 +416,29 @@
     </svg>
   </header>
 
-  <!-- HERO (mobile-optimized) -->
+  <!-- HERO -->
   <section class="hero">
     <div class="hero-wrap">
       <div class="hero-topbar">
         <span class="hero-badge" id="heroBadge"><span class="dot" aria-hidden="true"></span>XMTrading 公式コンテスト情報</span>
-        <div class="hero-mini">参加費無料*<br>出金可能な賞金*</div>
+        <div class="hero-mini">公式ページで確認<br>利用規約適用</div>
       </div>
 
       <div class="hero-body">
-        <h1 id="heroTitle">毎月総額$140,000<br>コンテストで上位を狙う</h1>
+        <h1 id="heroTitle">毎月総額$120,000<br>コンテストで上位を狙う</h1>
 
         <div class="hero-lead" id="heroSub">
-          上位入賞で、最大$15,000の出金可能な賞金*。リアル（月間）／デモ（週間）から選んでチャレンジ。
+          トレードコンテストにチャレンジ！上位にランクインして毎月最大$12,000の出金可能な賞金*を獲得しよう。
         </div>
 
         <div class="hero-metrics" aria-label="ハイライト">
           <div class="metric">
             <div class="k">毎月の賞金総額</div>
-            <div class="v"><strong>$140,000</strong></div>
+            <div class="v"><strong>$120,000</strong></div>
           </div>
           <div class="metric">
-            <div class="k">最高額（リアル月間）</div>
-            <div class="v"><strong>$15,000</strong></div>
+            <div class="k">最大（毎月）</div>
+            <div class="v"><strong>$12,000</strong></div>
           </div>
         </div>
 
@@ -544,30 +457,29 @@
           </span>
         </div>
 
-        <!-- Inline CTA for higher CTR (still same affiliate link) -->
         <div class="hero-cta-inline">
           <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=6" class="cta-inline-btn" id="heroInlineCTA" target="_self" rel="noopener">
-            今すぐ公式サイトで条件を見る
+            登録しましょう！
           </a>
-          <div class="cta-inline-sub">※ タップでXMTrading公式（当社紹介リンク）へ移動します</div>
+          <div class="cta-inline-sub">※ タップで公式サイトへ移動します（利用規約をご確認ください）</div>
         </div>
 
         <div class="disclosure">
           <strong>※ 重要（必ずご確認ください）</strong><br>
-          本ページはXMTradingのコンテスト情報を紹介するアフィリエイトページであり、投資助言ではありません。<br>
-          参加可否・対象口座・参加要件・賞金の出金可否・利用規約（T&amp;C）は、必ずリンク先（公式サイト）で最新内容をご確認ください。<br>
+          本ページはXMTradingの情報を紹介するアフィリエイトページであり、投資助言ではありません。<br>
+          参加条件・対象口座・賞金の扱い（出金可否含む）・利用規約（T&amp;C）は、必ずリンク先（公式サイト）で最新内容をご確認ください。<br>
           証拠金取引には高いリスクが伴い、損失が発生する可能性があります。
         </div>
       </div>
     </div>
   </section>
 
-  <!-- MAIN CONTENT -->
+  <!-- MAIN -->
   <section class="section">
     <div class="container">
       <div class="card">
         <h2>開催中の主なコンテスト（公式表記どおり）</h2>
-        <p class="muted">「リアル（月間）」と「デモ（週間）」の2タイプ。いずれも <strong>参加費無料*</strong>・<strong>出金可能な賞金*</strong> が案内されています（詳細は公式T&amp;C参照）。</p>
+        <p class="muted">数値はXMTrading公式ページの表記に合わせています。参加条件・対象口座・詳細は公式の利用規約（T&amp;C）をご確認ください。</p>
 
         <div class="comp-grid">
           <!-- REAL / MONTHLY -->
@@ -575,7 +487,7 @@
             <div class="comp-head">
               <div>
                 <div class="comp-title">リアル（月間）｜トップトレーダー決着戦</div>
-                <div class="muted">今月のコンテストに参加して、取引で賞金を獲得しよう。</div>
+                <div class="muted">今月のコンテストに参加して、取引で賞金を獲得しよう！</div>
               </div>
               <span class="tag ok">リアル</span>
             </div>
@@ -583,20 +495,20 @@
               <div class="comp-kpis">
                 <div class="kpi">
                   <div class="k">入賞者</div>
-                  <div class="v"><strong>100</strong>名</div>
+                  <div class="v"><strong>75</strong>名</div>
                 </div>
                 <div class="kpi">
                   <div class="k">賞金総額</div>
-                  <div class="v"><strong>$100,000</strong></div>
+                  <div class="v"><strong>$80,000</strong></div>
                 </div>
                 <div class="kpi">
-                  <div class="k">最高賞金</div>
-                  <div class="v"><strong>$15,000</strong></div>
+                  <div class="k">最大</div>
+                  <div class="v"><strong>$12,000</strong></div>
                 </div>
               </div>
 
               <div class="rank" aria-label="順位別賞金">
-                <div class="rank-row"><span>1位</span><strong>$15,000</strong></div>
+                <div class="rank-row"><span>1位</span><strong>$12,000</strong></div>
                 <div class="rank-row"><span>2位</span><strong>$10,000</strong></div>
                 <div class="rank-row"><span>3位</span><strong>$7,000</strong></div>
               </div>
@@ -612,7 +524,7 @@
             <div class="comp-head">
               <div>
                 <div class="comp-title">デモ（週間）｜ウィークリーデモコンペ</div>
-                <div class="muted">仮想資金でリスクなしで参加し、賞金獲得のチャンス。</div>
+                <div class="muted">仮想の資金でリスクなしで参加して、出金可能な賞金を獲得するチャンス！</div>
               </div>
               <span class="tag warn">デモ</span>
             </div>
@@ -624,71 +536,62 @@
                 </div>
                 <div class="kpi">
                   <div class="k">賞金総額</div>
-                  <div class="v"><strong>$10,000</strong></div>
+                  <div class="v"><strong>$20,000</strong></div>
                 </div>
                 <div class="kpi">
-                  <div class="k">最高賞金</div>
-                  <div class="v"><strong>$1,500</strong></div>
+                  <div class="k">最大</div>
+                  <div class="v"><strong>$2,500</strong></div>
                 </div>
               </div>
 
               <div class="rank" aria-label="順位別賞金">
-                <div class="rank-row"><span>1位</span><strong>$1,500</strong></div>
-                <div class="rank-row"><span>2位</span><strong>$1,000</strong></div>
-                <div class="rank-row"><span>3位</span><strong>$700</strong></div>
+                <div class="rank-row"><span>1位</span><strong>$2,500</strong></div>
+                <div class="rank-row"><span>2位</span><strong>$2,000</strong></div>
+                <div class="rank-row"><span>3位</span><strong>$1,500</strong></div>
               </div>
 
               <p class="disclosure" style="margin-top:12px;">
-                * 「リスクなし」はデモ口座での取引を指します。賞金の扱い（出金可否含む）・条件・規約は公式サイトで必ずご確認ください。
+                * 「リスクなし」はデモ口座での取引を指します。賞金の扱い（出金可否含む）・条件・規約は必ず公式サイトでご確認ください。
               </p>
             </div>
           </div>
-
         </div>
       </div>
 
-      <!-- Requested new card -->
+      <!-- Requested card to prevent misunderstandings -->
       <div class="card" style="margin-top:12px;">
         <h2>リアル/デモをもっと詳しく（条件・対象口座など）</h2>
         <p class="muted">
-          誤解を防ぐため、数値は増やさず「確認すべきポイント」だけを整理しています。最終判断は必ず公式の利用規約（T&amp;C）と会員ページの表示に従ってください。
+          誤解を防ぐため、数値を増やさず「確認すべきポイント」だけを整理しています。最終判断は必ず公式の利用規約（T&amp;C）と会員ページの表示に従ってください。
         </p>
 
         <div class="steps" style="margin-top:12px;">
           <div class="step">
             <div class="step-num">1</div>
             <div>
-              <div class="step-title">対象口座・参加要件の確認</div>
-              <div class="step-desc">
-                コンテストごとに「参加できる口座種類」「プロフィール認証の要否」「参加要件」が異なる場合があります。公式ページと会員ページで一致を確認してください。
-              </div>
+              <div class="step-title">対象口座・参加要件</div>
+              <div class="step-desc">参加できる口座種類、認証の要否、参加要件はコンテストごとに異なる場合があります。公式ページと会員ページで必ず確認してください。</div>
             </div>
           </div>
-
           <div class="step">
             <div class="step-num">2</div>
             <div>
               <div class="step-title">賞金の扱い（出金可否・条件）</div>
-              <div class="step-desc">
-                「出金可能な賞金*」の条件、反映タイミング、制限事項（手続き・本人確認等）は規約で定義されます。短文の要約だけで判断しないでください。
-              </div>
+              <div class="step-desc">反映タイミング、制限事項、本人確認等は規約に基づきます。要約だけで判断せず公式T&amp;Cをご確認ください。</div>
             </div>
           </div>
-
           <div class="step">
             <div class="step-num">3</div>
             <div>
-              <div class="step-title">ランキング計算・失格条件の有無</div>
-              <div class="step-desc">
-                ランキング算定方法、取引制限、禁止行為、失格条件などはT&amp;Cに記載されることがあります。必ず公式の全文を確認してください。
-              </div>
+              <div class="step-title">ランキング計算・禁止事項</div>
+              <div class="step-desc">ランキング算定方法、取引制限、禁止行為、失格条件などはT&amp;Cに記載される場合があります。必ず公式の全文を確認してください。</div>
             </div>
           </div>
         </div>
 
         <div style="margin-top:12px;">
           <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=6" class="cta-inline-btn" target="_self" rel="noopener">
-            公式で「条件・対象口座」を確認する
+            登録しましょう！
           </a>
           <div class="cta-inline-sub">※ 参加前にT&amp;Cと会員ページ表示を確認することで誤解を防げます</div>
         </div>
@@ -698,104 +601,18 @@
         </p>
       </div>
 
-      <!-- How to join (from official flow, rewritten in JP-friendly conversion tone) -->
+      <!-- Proof image -->
       <div class="card" style="margin-top:12px;">
-        <h2>コンテスト参加方法（最短の流れ）</h2>
-        <p class="muted">「迷わず進める」ことを最優先に、公式の参加手順をベースに整理しています。</p>
-
-        <div class="steps">
-          <div class="step">
-            <div class="step-num">1</div>
-            <div>
-              <div class="step-title">ログイン／口座登録 → プロフィール認証</div>
-              <div class="step-desc" id="step1Desc">
-                口座にログイン、または未開設なら口座を開設し、必要に応じてプロフィール認証を行います（コンテスト参加要件として求められる場合があります）。
-              </div>
-            </div>
-          </div>
-
-          <div class="step">
-            <div class="step-num">2</div>
-            <div>
-              <div class="step-title">会員ページの「コンテスト」へ</div>
-              <div class="step-desc">
-                コンテストページにアクセスし、開催中／今後のコンテストを確認します。
-              </div>
-            </div>
-          </div>
-
-          <div class="step">
-            <div class="step-num">3</div>
-            <div>
-              <div class="step-title">参加するコンテストを選び、要件を満たして取引</div>
-              <div class="step-desc">
-                参加要件を満たしたうえで取引を行い、上位入賞を目指します。ランキングや規約は公式表示に従ってください。
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div style="margin-top:12px;">
-          <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=6" class="cta-inline-btn" target="_self" rel="noopener">
-            今すぐ公式で参加方法を確認する
-          </a>
-          <div class="cta-inline-sub">※ 参加条件はコンテストごとに異なる場合があります</div>
-        </div>
-
-        <p class="disclosure" style="margin-top:12px;">
-          ※ 本ページの情報は理解を助ける目的の要約です。最終的な参加可否・条件は公式の利用規約（T&amp;C）に従います。
-        </p>
-      </div>
-
-      <!-- Proof image card (clickable to CTA) -->
-      <div class="card proof" style="margin-top:12px;">
         <h2>公式画像（証跡）</h2>
-        <p class="muted">XMTrading公式素材のスクリーンショットです。タップで公式ページへ移動して、同じ表記を確認できます。</p>
+        <p class="muted">XMTrading公式素材の画像です。タップで公式ページへ移動して、同じ表記を確認できます。</p>
 
         <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=6" target="_self" rel="noopener" aria-label="公式サイトへ移動">
-          <img src="XMpromo17.png" alt="XMTrading 公式コンテスト情報のスクリーンショット" class="proof-img">
+          <img src="XMpromo17.png" alt="XMTrading 公式コンテスト情報のスクリーンショット" style="width:100%;height:auto;display:block;border-radius:14px;border:1px solid var(--line);box-shadow: var(--shadow2);">
         </a>
 
-        <div class="proof-cap">
+        <div style="margin-top:10px;font-size:0.82rem;color:var(--xm-gray);font-weight:800;line-height:1.4;">
           ※ 画像は参考です。表示内容は更新される場合があります。最新の条件・金額・対象は、必ず公式ページでご確認ください。
         </div>
-      </div>
-
-      <!-- FAQ (compliance stronger) -->
-      <div class="card" style="margin-top:12px;">
-        <h2>よくある質問（FAQ）</h2>
-
-        <details>
-          <summary>本当に参加費はかかりませんか？</summary>
-          <div class="faq-a">
-            公式ページでは「参加費無料*」と案内されています。ただし、参加要件（対象口座・認証・その他条件）や例外は利用規約（T&amp;C）で定義されるため、参加前に必ず公式で確認してください。
-          </div>
-        </details>
-
-        <details>
-          <summary>「出金可能な賞金*」は必ず出金できますか？</summary>
-          <div class="faq-a">
-            賞金の出金可否、反映条件、制限事項、本人確認要件などは規約に基づきます。短い説明だけで判断せず、公式T&amp;Cの全文と会員ページの表示を必ず確認してください。
-          </div>
-        </details>
-
-        <details>
-          <summary>デモでも賞金が狙えるのは本当ですか？</summary>
-          <div class="faq-a">
-            公式ページではデモ（週間）コンテストが案内されています。賞金の扱い（出金条件等）や参加ルールは必ず公式規約に従ってください。
-          </div>
-        </details>
-
-        <details>
-          <summary>このページはXMTradingの公式サイトですか？</summary>
-          <div class="faq-a">
-            いいえ。本ページはXMTradingの情報を紹介するアフィリエイトページです。表示内容は理解を助けるための要約であり、公式規約の代替ではありません。必ず公式ページで最新情報をご確認ください。
-          </div>
-        </details>
-
-        <p class="disclosure" style="margin-top:12px;">
-          ※ 本ページは投資助言ではありません。証拠金取引は高リスクであり、投下資本を上回る損失が発生する可能性があります。余裕資金で取引し、必要に応じて専門家へご相談ください。
-        </p>
       </div>
     </div>
   </section>
@@ -803,22 +620,21 @@
   <footer>
     <div class="fine">
       <p><strong>リスク警告：</strong>証拠金取引（FX/CFD等）には高いリスクが伴い、損失が発生する可能性があります。取引開始前に、仕組み・リスク・手数料等を十分に理解してください。</p>
-      <p style="margin-top:10px;"><strong>広告・提携に関する開示：</strong>本ページにはアフィリエイトリンクが含まれ、リンク経由の申込・条件達成等により当サイトが報酬を得る場合があります。これにより、表示順位や掲載方法が影響を受ける可能性があります。</p>
+      <p style="margin-top:10px;"><strong>広告・提携に関する開示：</strong>本ページにはアフィリエイトリンクが含まれ、リンク経由の申込・条件達成等により当サイトが報酬を得る場合があります。</p>
       <p style="margin-top:10px;"><strong>免責事項：</strong>本ページは一般的な情報提供を目的としており、投資助言・勧誘・推奨を意図するものではありません。キャンペーン内容・賞金・参加要件・対象口座・利用規約（T&amp;C）は変更される場合があります。最終的な条件は必ず公式サイトの最新情報に従ってください。</p>
-      <p style="margin-top:10px;"><strong>コンプライアンス：</strong>未成年の利用はお控えください。地域によりサービス提供やプロモーション適用が制限される場合があります。虚偽・誇大な表現を避け、公式情報との照合を推奨します。</p>
       <p style="margin-top:10px;">&copy; 2026 FXfacts</p>
     </div>
   </footer>
 
-  <!-- Sticky CTA (kept, link unchanged) -->
+  <!-- Sticky CTA -->
   <div class="cta-container">
-    <div class="cta-preline" id="ctaPreline">参加費無料*・出金可能な賞金*（条件は公式で確認）</div>
+    <div class="cta-preline" id="ctaPreline">¥13000の取引ボーナスでFX、仮想通貨CFDなどを取引しよう。入金不要。（利用規約適用）</div>
 
     <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=6" class="cta-button" id="mainCTA" target="_self" rel="noopener">
-      <span id="ctaText">公式サイトで条件を確認する</span>
+      <span id="ctaText">登録しましょう！</span>
     </a>
 
-    <div class="cta-note" id="ctaNote">※ タップでXMTrading公式（当社紹介リンク）へ移動します</div>
+    <div class="cta-note" id="ctaNote">※ タップで公式サイトへ移動します（利用規約をご確認ください）</div>
   </div>
 
   <script>
@@ -894,7 +710,7 @@
     // ---------------------------------------
     var ua = navigator.userAgent || "";
     var lang = (navigator.language || navigator.userLanguage || "").toLowerCase();
-    var ref = document.documentElement ? (document.referrer || "") : (document.referrer || "");
+    var ref = document.referrer || "";
     var page_path = window.location.pathname || "";
 
     var isIOS = /iPhone|iPad|iPod/i.test(ua);
@@ -982,7 +798,7 @@
     window.addEventListener("scroll", scroll50Check, { passive: true });
 
     // ---------------------------------------
-    // OS-based copy (unchanged IDs, updated Japanese copy for conversion)
+    // OS-based copy (tightened for push; tracking untouched)
     // ---------------------------------------
     var heroBadge = document.getElementById("heroBadge");
     var heroTitle = document.getElementById("heroTitle");
@@ -993,21 +809,19 @@
     var ctaNote = document.getElementById("ctaNote");
 
     if (isAndroid) {
-      heroBadge.innerHTML = '<span class="dot" aria-hidden="true"></span>XMTrading 公式コンテスト情報';
-      heroTitle.innerHTML = "毎月総額$140,000<br>コンテストで上位を狙う";
-      heroSub.textContent = "最大$15,000の出金可能な賞金*。リアル（月間）／デモ（週間）から選んで参加。";
-      heroSupport.innerHTML = '<span class="pill"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>参加費無料*</span><span class="pill"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 1v22M5 5h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>出金可能な賞金*</span><span class="pill"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 20s8-4 8-10V5l-8-4-8 4v5c0 6 8 10 8 10z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>条件は公式で確認</span>';
-      ctaPreline.textContent = "参加費無料*・出金可能な賞金*（条件は公式で確認）";
-      ctaText.textContent = "今すぐ公式で条件を見る";
-      ctaNote.textContent = "※ タップ後すぐ公式サイトへ移動します";
+      heroBadge.innerHTML = '<span class="dot" aria-hidden="true"></span>XMTrading 公式コンテスト';
+      heroTitle.innerHTML = "毎月総額$120,000<br>賞金コンテスト";
+      heroSub.textContent = "上位入賞で毎月最大$12,000*。まずは公式で条件を確認して参加。";
+      ctaPreline.textContent = "¥13000の取引ボーナスでFX、仮想通貨CFDなどを取引しよう。入金不要。（利用規約適用）";
+      ctaText.textContent = "登録しましょう！";
+      ctaNote.textContent = "※ タップで公式サイトへ移動します（利用規約をご確認ください）";
     } else if (isIOS) {
       heroBadge.innerHTML = '<span class="dot" aria-hidden="true"></span>XMTrading 公式コンテスト情報';
-      heroTitle.innerHTML = "毎月総額$140,000<br>コンテストで上位を狙う";
-      heroSub.textContent = "上位入賞で最大$15,000の出金可能な賞金*。まずは公式で条件を確認。";
-      heroSupport.innerHTML = '<span class="pill"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>参加費無料*</span><span class="pill"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 1v22M5 5h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>出金可能な賞金*</span><span class="pill"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 20s8-4 8-10V5l-8-4-8 4v5c0 6 8 10 8 10z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>条件は公式で確認</span>';
-      ctaPreline.textContent = "参加費無料*・出金可能な賞金*（条件は公式で確認）";
-      ctaText.textContent = "公式サイトで条件を見る";
-      ctaNote.textContent = "※ ボタンからXMTrading公式サイトへ直接移動します";
+      heroTitle.innerHTML = "毎月総額$120,000<br>賞金コンテスト";
+      heroSub.textContent = "参加条件・対象口座は公式T&Cで確認。上位入賞で毎月最大$12,000*。";
+      ctaPreline.textContent = "¥13000の取引ボーナスでFX、仮想通貨CFDなどを取引しよう。入金不要。（利用規約適用）";
+      ctaText.textContent = "登録しましょう！";
+      ctaNote.textContent = "※ 公式サイトへ移動します（条件・対象口座は必ず確認）";
     }
 
     // ---------------------------------------
