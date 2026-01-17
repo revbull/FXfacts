@@ -9,21 +9,45 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Shippori+Mincho:wght@700&display=swap" rel="stylesheet">
 
-  <!-- GA4 (gtag.js) ONLY - no GTM -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-DTMQSP8BPQ"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){ dataLayer.push(arguments); }
     gtag('js', new Date());
 
-    // DebugView only when URL includes ?debug_mode=1 (or just ?debug_mode)
-    var __qs = new URLSearchParams(window.location.search);
-    var __isDebug = __qs.has('debug_mode');
+    // 1. Helper to get URL params safely
+    var getUrlParam = function(name) {
+      var params = new URLSearchParams(window.location.search);
+      return params.get(name) || ''; 
+    };
 
-    // GA4 config
+    // 2. Define PropellerAds parameters to track
+    var adParams = {
+      'browser': getUrlParam('browser'),
+      'browserversion': getUrlParam('browserversion'),
+      'clickid': getUrlParam('clickid'),
+      'country': getUrlParam('country'),
+      'device': getUrlParam('device'),
+      'language': getUrlParam('language'),
+      'os': getUrlParam('os'),
+      'osversion': getUrlParam('osversion'),
+      'region': getUrlParam('region'),
+      'subzone_id': getUrlParam('subzone_id'),
+      'zoneid': getUrlParam('zoneid'),
+      'useragent': getUrlParam('useragent'),
+      'user_activity': getUrlParam('user_activity'),
+      'cost': getUrlParam('cost')
+    };
+
+    // 3. Debug check
+    var isDebug = new URLSearchParams(window.location.search).has('debug_mode');
+
+    // 4. Config GA4 with parameters included
+    // This attaches the params to the default page_view
     gtag('config', 'G-DTMQSP8BPQ', {
-      send_page_view: true,
-      debug_mode: __isDebug
+      'send_page_view': true,
+      'debug_mode': isDebug,
+      ...adParams
     });
   </script>
 
@@ -448,7 +472,6 @@
   <div class="cta-container">
     <div class="cta-preline" id="ctaPreline">入金不要・スマホ対応・日本語サポート</div>
 
-    <!-- Your affiliate link -->
     <a href="https://clicks.affstrack.com/c?c=1120254&l=en&p=1" class="cta-button" id="mainCTA" target="_self" rel="noopener">
       <span id="ctaText">公式サイトで詳細を見る</span>
     </a>
