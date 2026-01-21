@@ -1,6 +1,33 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DTMQSP8BPQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  // --- ЛОГИКА ЗА ХВАЩАНЕ НА URL ПАРАМЕТРИ ---
+  
+  // 1. Създаваме обект, в който ще събираме параметрите
+  var trackingParams = {};
+
+  // 2. Взимаме всички параметри от URL адреса
+  var urlParams = new URLSearchParams(window.location.search);
+
+  // 3. Завъртаме цикъл през всички намерени параметри
+  urlParams.forEach(function(value, key) {
+      // Почистваме ключа от невалидни символи (за всеки случай)
+      var cleanKey = key.replace(/[^a-zA-Z0-9_]/g, '_');
+      
+      // Добавяме ги към обекта
+      trackingParams[cleanKey] = value;
+  });
+
+  // 4. Инициализираме GA4 с тези параметри
+  // Така те ще се прикрепят към всяко събитие (page_view и др.)
+  gtag('config', 'G-DTMQSP8BPQ', trackingParams);
+</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>【2026年最新】XMTrading 13,000円ボーナス受取ガイド｜失敗しない始め方</title>
