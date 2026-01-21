@@ -1,1046 +1,440 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>XMTrading コンテスト｜毎月総額$120,000（公式条件は要確認）</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>【2026年最新】XMTrading 13,000円ボーナス受取ガイド｜失敗しない始め方</title>
+    <meta name="description" content="XMTradingの口座開設ボーナス13,000円の受け取り方と注意点を完全解説。リスクなしでFXを始める手順を画像付きで紹介します。">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Shippori+Mincho:wght@700&display=swap" rel="stylesheet">
-
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DTMQSP8BPQ"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){ dataLayer.push(arguments); }
-    gtag('js', new Date());
-
-    // 1. Helper to get URL params safely
-    var getUrlParam = function(name) {
-      var params = new URLSearchParams(window.location.search);
-      return params.get(name) || '';
-    };
-
-    // 2. Define PropellerAds parameters to track
-    var adParams = {
-      'browser': getUrlParam('browser'),
-      'browserversion': getUrlParam('browserversion'),
-      'clickid': getUrlParam('clickid'),
-      'country': getUrlParam('country'),
-      'device': getUrlParam('device'),
-      'language': getUrlParam('language'),
-      'os': getUrlParam('os'),
-      'osversion': getUrlParam('osversion'),
-      'region': getUrlParam('region'),
-      'subzone_id': getUrlParam('subzone_id'),
-      'zoneid': getUrlParam('zoneid'),
-      'useragent': getUrlParam('useragent'),
-      'user_activity': getUrlParam('user_activity'),
-      'cost': getUrlParam('cost')
-    };
-
-    // 3. Debug check
-    var isDebug = new URLSearchParams(window.location.search).has('debug_mode');
-
-    // 4. Config GA4 with parameters included
-    // This attaches the params to the default page_view
-    gtag('config', 'G-DTMQSP8BPQ', {
-      'send_page_view': true,
-      'debug_mode': isDebug,
-      ...adParams
-    });
-  </script>
-
-  <style>
-    :root{
-      --xm-red:#E31B23;
-      --xm-black:#121212;
-      --xm-gray:#666;
-      --bg:#fbfbfd;
-      --card:#ffffff;
-      --line:#ececf2;
-      --shadow: 0 10px 30px rgba(18,18,18,0.08);
-      --shadow2: 0 6px 18px rgba(18,18,18,0.08);
-      --cta-shadow: 0 14px 30px rgba(227,27,35,0.28);
-      --ok:#0f9d58;
-      --warn:#b26a00;
-    }
-    *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-    body{
-      font-family: system-ui, -apple-system, "Segoe UI", "Hiragino Kaku Gothic ProN",
-                   "Noto Sans JP", "Yu Gothic", Meiryo, sans-serif;
-      background:
-        radial-gradient(1000px 400px at 50% -10%, rgba(227,27,35,0.10), transparent 60%),
-        radial-gradient(800px 350px at 10% 30%, rgba(17,24,39,0.06), transparent 55%),
-        linear-gradient(180deg, #ffffff, var(--bg));
-      color: var(--xm-black);
-      line-height: 1.65;
-      overflow-x: hidden;
-    }
-
-    header{
-      padding: 12px 16px;
-      background: rgba(255,255,255,0.92);
-      display:flex;
-      justify-content:center;
-      border-bottom:1px solid var(--line);
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-    }
-
-    .hero{ padding: 18px 16px 14px; }
-    .hero-wrap{
-      max-width: 860px;
-      margin: 0 auto;
-      background: linear-gradient(180deg, #ffffff, #fff7f8);
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      box-shadow: var(--shadow);
-      overflow:hidden;
-    }
-    .hero-topbar{
-      display:flex;
-      gap:10px;
-      align-items:center;
-      justify-content:space-between;
-      padding: 12px 14px;
-      border-bottom: 1px solid var(--line);
-      background: rgba(255,255,255,0.85);
-    }
-    .hero-badge{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      background: rgba(227,27,35,0.10);
-      color: var(--xm-red);
-      padding: 6px 10px;
-      font-size: 0.82rem;
-      font-weight: 900;
-      border-radius: 999px;
-      letter-spacing: 0.02em;
-      border: 1px solid rgba(227,27,35,0.18);
-      white-space: nowrap;
-    }
-    .hero-badge .dot{
-      width:8px;height:8px;border-radius:99px;background: var(--xm-red);
-      box-shadow: 0 0 0 4px rgba(227,27,35,0.15);
-    }
-    .hero-mini{
-      font-size: 0.78rem;
-      color: var(--xm-gray);
-      font-weight: 700;
-      text-align:right;
-      line-height:1.25;
-    }
-    .hero-body{
-      padding: 14px 14px 16px;
-      display:flex;
-      flex-direction:column;
-      gap:12px;
-    }
-    h1{
-      font-family: "Shippori Mincho", serif;
-      font-size: 1.65rem;
-      line-height: 1.2;
-      letter-spacing: 0.02em;
-    }
-    .hero-lead{
-      font-size: 1.02rem;
-      color: #1f2937;
-      font-weight: 900;
-    }
-    .hero-metrics{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:10px;
-      margin-top: 2px;
-    }
-    .metric{
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      padding: 12px;
-      box-shadow: var(--shadow2);
-    }
-    .metric .k{ font-size: 0.78rem; color: var(--xm-gray); font-weight: 900; margin-bottom: 4px; }
-    .metric .v{ font-size: 1.25rem; font-weight: 900; color: var(--xm-black); letter-spacing: 0.01em; }
-    .metric .v strong{ color: var(--xm-red); }
-
-    .hero-points{
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-      margin-top: 2px;
-    }
-    .pill{
-      display:inline-flex;
-      align-items:center;
-      gap:6px;
-      padding: 8px 10px;
-      border-radius: 999px;
-      background:#fff;
-      border:1px solid var(--line);
-      font-size: 0.86rem;
-      font-weight: 900;
-      color:#111827;
-    }
-    .pill svg{ width:16px;height:16px; flex:0 0 16px; }
-
-    .hero-cta-inline{
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-      margin-top: 4px;
-    }
-    .cta-inline-btn{
-      display:block;
-      text-align:center;
-      text-decoration:none;
-      background: var(--xm-red);
-      color:#fff;
-      padding: 14px 14px;
-      border-radius: 14px;
-      font-size: 1.06rem;
-      font-weight: 900;
-      box-shadow: var(--cta-shadow);
-    }
-    .cta-inline-sub{
-      text-align:center;
-      font-size: 0.78rem;
-      color: var(--xm-gray);
-      font-weight: 800;
-      line-height:1.35;
-    }
-
-    .disclosure{
-      margin-top: 10px;
-      font-size: 0.78rem;
-      color: #4b5563;
-      line-height: 1.55;
-      background: rgba(255,255,255,0.75);
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      padding: 12px;
-    }
-    .disclosure strong{color: var(--xm-black);}
-
-    .section{ padding: 14px 16px; }
-    .container{ max-width: 860px; margin: 0 auto; }
-
-    .card{
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      box-shadow: var(--shadow2);
-      padding: 16px;
-    }
-    .card + .card{ margin-top: 12px; }
-
-    .card h2{
-      font-size: 1.05rem;
-      margin-bottom: 10px;
-      letter-spacing: 0.01em;
-    }
-    .muted{ color: var(--xm-gray); font-size: 0.92rem; }
-
-    .comp-grid{
-      display:grid;
-      grid-template-columns: 1fr;
-      gap: 12px;
-      margin-top: 10px;
-    }
-    .comp{
-      border-radius: 16px;
-      border: 1px solid var(--line);
-      overflow:hidden;
-      background: #fff;
-      box-shadow: var(--shadow2);
-    }
-    .comp-head{
-      padding: 14px 14px 12px;
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:12px;
-      background: linear-gradient(180deg, rgba(227,27,35,0.08), rgba(255,255,255,1));
-      border-bottom: 1px solid var(--line);
-    }
-    .comp-title{ font-weight: 900; font-size: 1.02rem; line-height:1.3; }
-    .tag{
-      display:inline-flex;
-      align-items:center;
-      gap:6px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      font-size: 0.78rem;
-      font-weight: 900;
-      border:1px solid var(--line);
-      background:#fff;
-      white-space: nowrap;
-    }
-    .tag.ok{ color: var(--ok); border-color: rgba(15,157,88,0.22); background: rgba(15,157,88,0.06); }
-    .tag.warn{ color: var(--warn); border-color: rgba(178,106,0,0.22); background: rgba(178,106,0,0.06); }
-    .comp-body{ padding: 12px 14px 14px; }
-    .comp-kpis{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:10px;
-      margin-top: 8px;
-    }
-    .kpi{
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      padding: 12px;
-      background:#fff;
-    }
-    .kpi .k{ font-size:0.78rem; color: var(--xm-gray); font-weight: 900; margin-bottom:4px;}
-    .kpi .v{ font-size:1.18rem; font-weight: 900; }
-    .kpi .v strong{ color: var(--xm-red); }
-
-    .rank{
-      margin-top: 10px;
-      border-top:1px dashed var(--line);
-      padding-top: 10px;
-      display:grid;
-      grid-template-columns: 1fr;
-      gap: 8px;
-    }
-    .rank-row{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding: 10px 12px;
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      background: #fff;
-      font-weight: 900;
-    }
-    .rank-row span{ color: var(--xm-gray); font-weight: 900; }
-    .rank-row strong{ font-size: 1.02rem; }
-
-    footer{
-      padding: 18px 16px 160px;
-      font-size: 0.75rem;
-      color: #6b7280;
-      text-align:center;
-      line-height: 1.65;
-    }
-    footer .fine{
-      max-width: 900px;
-      margin: 0 auto;
-      text-align:left;
-      background: rgba(255,255,255,0.75);
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 14px;
-      box-shadow: var(--shadow2);
-    }
-
-    .cta-container{
-      position: fixed;
-      left: 0;
-      bottom: 0;
-      width: 100%;
-      padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px));
-      background: rgba(255,255,255,0.96);
-      z-index: 100;
-      border-top: 1px solid var(--line);
-    }
-    @supports ((-webkit-backdrop-filter: blur(6px)) or (backdrop-filter: blur(6px))) {
-      .cta-container{
-        background: rgba(255,255,255,0.90);
-        -webkit-backdrop-filter: blur(8px);
-        backdrop-filter: blur(8px);
-      }
-    }
-    .cta-preline{
-      font-size: 0.80rem;
-      color: #111827;
-      text-align:center;
-      margin-bottom: 6px;
-      font-weight: 900;
-    }
-    .cta-button{
-      display:block;
-      background: var(--xm-red);
-      color: #fff;
-      text-align:center;
-      text-decoration:none;
-      padding: 16px 14px;
-      border-radius: 14px;
-      font-size: 1.12rem;
-      font-weight: 900;
-      box-shadow: var(--cta-shadow);
-      will-change: transform;
-    }
-    @media (prefers-reduced-motion: no-preference) {
-      .cta-button{ animation: pulse 2.2s ease-in-out infinite; }
-      @keyframes pulse {
-        0% { transform: scale(1); }
-        50% { transform: scale(1.015); }
-        100% { transform: scale(1); }
-      }
-    }
-    .cta-button:active{ transform: scale(0.99); }
-    .cta-note{
-      margin-top: 8px;
-      font-size: 0.76rem;
-      color:#6b7280;
-      text-align:center;
-      line-height: 1.35;
-      font-weight: 800;
-    }
-
-    @media (min-width: 480px){
-      h1{ font-size: 1.95rem; }
-      .hero-body{ padding: 16px 16px 18px; }
-      .comp-kpis{ grid-template-columns: 1fr 1fr 1fr; }
-    }
-    /* --- Anti-bot gate UI (does not touch tracking) --- */
-.gate-locked {
-  pointer-events: none !important;
-  opacity: 0.55 !important;
-  filter: grayscale(0.25);
-}
-
-.gate-toast {
-  position: fixed;
-  left: 50%;
-  bottom: 110px;
-  transform: translateX(-50%);
-  max-width: min(520px, calc(100% - 32px));
-  background: rgba(17, 24, 39, 0.92);
-  color: #fff;
-  padding: 10px 12px;
-  border-radius: 12px;
-  font-size: 0.86rem;
-  line-height: 1.4;
-  z-index: 9999;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-  display: none;
-}
-.gate-toast strong { font-weight: 900; }
-
-  </style>
-</head>
-
-<body>
-  <header>
-    <svg width="140" height="32" viewBox="0 0 480 110" xmlns="http://www.w3.org/2000/svg" aria-label="FXfacts ロゴ" role="img">
-      <g transform="translate(0,10)">
-        <rect x="0" y="30" width="14" height="40" rx="2" fill="#1dbf73"/>
-        <rect x="22" y="10" width="14" height="60" rx="2" fill="#bc002d"/>
-        <rect x="44" y="38" width="14" height="32" rx="2" fill="#ff4d4d"/>
-        <path d="M-5 70 C30 20, 80 20, 95 5" fill="none" stroke="#2f6bff" stroke-width="6" stroke-linecap="round"/>
-        <polygon points="95,5 82,8 90,18" fill="#2f6bff"/>
-      </g>
-      <text x="120" y="70" font-size="64" font-weight="800" fill="#1a1a1a">FXfacts</text>
-    </svg>
-  </header>
-
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-wrap">
-      <div class="hero-topbar">
-        <span class="hero-badge" id="heroBadge"><span class="dot" aria-hidden="true"></span>XMTrading 公式コンテスト情報</span>
-        <div class="hero-mini">公式ページで確認<br>利用規約適用</div>
-      </div>
-
-      <div class="hero-body">
-        <h1 id="heroTitle">毎月総額$120,000<br>コンテストで上位を狙う</h1>
-
-        <div class="hero-lead" id="heroSub">
-          トレードコンテストにチャレンジ！上位にランクインして毎月最大$12,000の出金可能な賞金*を獲得しよう。
-        </div>
-
-        <div class="hero-metrics" aria-label="ハイライト">
-          <div class="metric">
-            <div class="k">毎月の賞金総額</div>
-            <div class="v"><strong>$120,000</strong></div>
-          </div>
-          <div class="metric">
-            <div class="k">最大（毎月）</div>
-            <div class="v"><strong>$12,000</strong></div>
-          </div>
-        </div>
-
-        <div class="hero-points" id="heroSupport">
-          <span class="pill" aria-label="ポイント1">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            参加費無料*
-          </span>
-          <span class="pill" aria-label="ポイント2">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 1v22M5 5h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            出金可能な賞金*
-          </span>
-          <span class="pill" aria-label="ポイント3">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 20s8-4 8-10V5l-8-4-8 4v5c0 6 8 10 8 10z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            条件は公式で確認
-          </span>
-        </div>
-
-        <div class="hero-cta-inline">
-          <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=6" class="cta-inline-btn" id="heroInlineCTA" target="_self" rel="noopener">
-            登録しましょう！
-          </a>
-          <div class="cta-inline-sub">※ タップで公式サイトへ移動します（利用規約をご確認ください）</div>
-        </div>
-
-        <div class="disclosure">
-          <strong>※ 重要（必ずご確認ください）</strong><br>
-          本ページはXMTradingの情報を紹介するアフィリエイトページであり、投資助言ではありません。<br>
-          参加条件・対象口座・賞金の扱い（出金可否含む）・利用規約（T&amp;C）は、必ずリンク先（公式サイト）で最新内容をご確認ください。<br>
-          証拠金取引には高いリスクが伴い、損失が発生する可能性があります。
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- MAIN -->
-  <section class="section">
-    <div class="container">
-      <div class="card">
-        <h2>開催中の主なコンテスト（公式表記どおり）</h2>
-        <p class="muted">数値はXMTrading公式ページの表記に合わせています。参加条件・対象口座・詳細は公式の利用規約（T&amp;C）をご確認ください。</p>
-
-        <div class="comp-grid">
-          <!-- REAL / MONTHLY -->
-          <div class="comp" aria-label="リアル（月間）トップトレーダー決着戦">
-            <div class="comp-head">
-              <div>
-                <div class="comp-title">リアル（月間）｜トップトレーダー決着戦</div>
-                <div class="muted">今月のコンテストに参加して、取引で賞金を獲得しよう！</div>
-              </div>
-              <span class="tag ok">リアル</span>
-            </div>
-            <div class="comp-body">
-              <div class="comp-kpis">
-                <div class="kpi">
-                  <div class="k">入賞者</div>
-                  <div class="v"><strong>75</strong>名</div>
-                </div>
-                <div class="kpi">
-                  <div class="k">賞金総額</div>
-                  <div class="v"><strong>$80,000</strong></div>
-                </div>
-                <div class="kpi">
-                  <div class="k">最大</div>
-                  <div class="v"><strong>$12,000</strong></div>
-                </div>
-              </div>
-
-              <div class="rank" aria-label="順位別賞金">
-                <div class="rank-row"><span>1位</span><strong>$12,000</strong></div>
-                <div class="rank-row"><span>2位</span><strong>$10,000</strong></div>
-                <div class="rank-row"><span>3位</span><strong>$7,000</strong></div>
-              </div>
-
-              <p class="disclosure" style="margin-top:12px;">
-                * 参加費無料・出金可能な賞金等の表記は公式ページに基づきます。適用条件・対象口座・参加要件・規約は必ず公式サイトでご確認ください。
-              </p>
-            </div>
-          </div>
-
-          <!-- DEMO / WEEKLY -->
-          <div class="comp" aria-label="デモ（週間）ウィークリーデモコンペ">
-            <div class="comp-head">
-              <div>
-                <div class="comp-title">デモ（週間）｜ウィークリーデモコンペ</div>
-                <div class="muted">仮想の資金でリスクなしで参加して、出金可能な賞金を獲得するチャンス！</div>
-              </div>
-              <span class="tag warn">デモ</span>
-            </div>
-            <div class="comp-body">
-              <div class="comp-kpis">
-                <div class="kpi">
-                  <div class="k">入賞者</div>
-                  <div class="v"><strong>50</strong>名</div>
-                </div>
-                <div class="kpi">
-                  <div class="k">賞金総額</div>
-                  <div class="v"><strong>$20,000</strong></div>
-                </div>
-                <div class="kpi">
-                  <div class="k">最大</div>
-                  <div class="v"><strong>$2,500</strong></div>
-                </div>
-              </div>
-
-              <div class="rank" aria-label="順位別賞金">
-                <div class="rank-row"><span>1位</span><strong>$2,500</strong></div>
-                <div class="rank-row"><span>2位</span><strong>$2,000</strong></div>
-                <div class="rank-row"><span>3位</span><strong>$1,500</strong></div>
-              </div>
-
-              <p class="disclosure" style="margin-top:12px;">
-                * 「リスクなし」はデモ口座での取引を指します。賞金の扱い（出金可否含む）・条件・規約は必ず公式サイトでご確認ください。
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Requested card to prevent misunderstandings -->
-      <div class="card" style="margin-top:12px;">
-        <h2>リアル/デモをもっと詳しく（条件・対象口座など）</h2>
-        <p class="muted">
-          誤解を防ぐため、数値を増やさず「確認すべきポイント」だけを整理しています。最終判断は必ず公式の利用規約（T&amp;C）と会員ページの表示に従ってください。
-        </p>
-
-        <div class="steps" style="margin-top:12px;">
-          <div class="step">
-            <div class="step-num">1</div>
-            <div>
-              <div class="step-title">対象口座・参加要件</div>
-              <div class="step-desc">参加できる口座種類、認証の要否、参加要件はコンテストごとに異なる場合があります。公式ページと会員ページで必ず確認してください。</div>
-            </div>
-          </div>
-          <div class="step">
-            <div class="step-num">2</div>
-            <div>
-              <div class="step-title">賞金の扱い（出金可否・条件）</div>
-              <div class="step-desc">反映タイミング、制限事項、本人確認等は規約に基づきます。要約だけで判断せず公式T&amp;Cをご確認ください。</div>
-            </div>
-          </div>
-          <div class="step">
-            <div class="step-num">3</div>
-            <div>
-              <div class="step-title">ランキング計算・禁止事項</div>
-              <div class="step-desc">ランキング算定方法、取引制限、禁止行為、失格条件などはT&amp;Cに記載される場合があります。必ず公式の全文を確認してください。</div>
-            </div>
-          </div>
-        </div>
-
-        <div style="margin-top:12px;">
-          <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=6" class="cta-inline-btn" target="_self" rel="noopener">
-            登録しましょう！
-          </a>
-          <div class="cta-inline-sub">※ 参加前にT&amp;Cと会員ページ表示を確認することで誤解を防げます</div>
-        </div>
-
-        <p class="disclosure" style="margin-top:12px;">
-          ※ 本カードは注意喚起・要点整理であり、公式規約の代替ではありません。内容は変更される場合があります。
-        </p>
-      </div>
-
-      <!-- Proof image -->
-      <div class="card" style="margin-top:12px;">
-        <h2>公式画像（証跡）</h2>
-        <p class="muted">XMTrading公式素材の画像です。タップで公式ページへ移動して、同じ表記を確認できます。</p>
-
-        <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=6" target="_self" rel="noopener" aria-label="公式サイトへ移動">
-          <img src="XMpromo17.png" alt="XMTrading 公式コンテスト情報のスクリーンショット" style="width:100%;height:auto;display:block;border-radius:14px;border:1px solid var(--line);box-shadow: var(--shadow2);">
-        </a>
-
-        <div style="margin-top:10px;font-size:0.82rem;color:var(--xm-gray);font-weight:800;line-height:1.4;">
-          ※ 画像は参考です。表示内容は更新される場合があります。最新の条件・金額・対象は、必ず公式ページでご確認ください。
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <div class="fine">
-      <p><strong>リスク警告：</strong>証拠金取引（FX/CFD等）には高いリスクが伴い、損失が発生する可能性があります。取引開始前に、仕組み・リスク・手数料等を十分に理解してください。</p>
-      <p style="margin-top:10px;"><strong>広告・提携に関する開示：</strong>本ページにはアフィリエイトリンクが含まれ、リンク経由の申込・条件達成等により当サイトが報酬を得る場合があります。</p>
-      <p style="margin-top:10px;"><strong>免責事項：</strong>本ページは一般的な情報提供を目的としており、投資助言・勧誘・推奨を意図するものではありません。キャンペーン内容・賞金・参加要件・対象口座・利用規約（T&amp;C）は変更される場合があります。最終的な条件は必ず公式サイトの最新情報に従ってください。</p>
-      <p style="margin-top:10px;">&copy; 2026 FXfacts</p>
-    </div>
-  </footer>
-
-  <!-- Sticky CTA -->
-  <div class="cta-container">
-    <div class="cta-preline" id="ctaPreline">¥13000の取引ボーナスでFX、仮想通貨CFDなどを取引しよう。入金不要。（利用規約適用）</div>
-
-    <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=6" class="cta-button" id="mainCTA" target="_self" rel="noopener">
-      <span id="ctaText">登録しましょう！</span>
-    </a>
-
-    <div class="cta-note" id="ctaNote">※ タップで公式サイトへ移動します（利用規約をご確認ください）</div>
-  </div>
-
-  <script>
-  (function () {
-    // ---------------------------------------
-    // Shared helpers
-    // ---------------------------------------
-    var qs = new URLSearchParams(window.location.search);
-
-    function saveIfPresent(obj) {
-      try {
-        Object.keys(obj).forEach(function (k) {
-          if (obj[k]) localStorage.setItem("fx_" + k, obj[k]);
-        });
-      } catch (e) {}
-    }
-
-    function pick(key) {
-      // URL first, then storage fallback (useful if user refreshes / params drop)
-      return qs.get(key) || localStorage.getItem("fx_" + key) || "";
-    }
-
-    // Capture once from URL and persist (does NOT require CTA click)
-    var captured = {
-      browser: qs.get("browser") || "",
-      browserversion: qs.get("browserversion") || "",
-      clickid: qs.get("clickid") || "",
-      country: qs.get("country") || "",
-      device: qs.get("device") || "",
-      language: qs.get("language") || "",
-      os: qs.get("os") || "",
-      osversion: qs.get("osversion") || "",
-      region: qs.get("region") || "",
-      subzone_id: qs.get("subzone_id") || "",
-      zoneid: qs.get("zoneid") || "",
-      useragent: qs.get("useragent") || "",
-      user_activity: qs.get("user_activity") || "",
-      cost: qs.get("cost") || ""
-    };
-    saveIfPresent(captured);
-
-    // ---------------------------------------
-    // Send lp_view on EVERY page open (so you always get zoneid)
-    // ---------------------------------------
-    if (typeof gtag === "function") {
-      gtag("event", "lp_view", {
-        zoneid: pick("zoneid"),
-        subzone_id: pick("subzone_id"),
-        clickid: pick("clickid"),
-        browser: pick("browser"),
-        browserversion: pick("browserversion"),
-        country: pick("country"),
-        region: pick("region"),
-        device: pick("device"),
-        language: pick("language"),
-        os: pick("os"),
-        osversion: pick("osversion"),
-        useragent: pick("useragent"),
-        user_activity: pick("user_activity"),
-        cost: pick("cost"),
-        page_path: window.location.pathname || "",
-        transport_type: "beacon"
-      });
-    }
-
-    // ---------------------------------------
-    // Timer (time_to_click)
-    // ---------------------------------------
-    var t0 = (typeof performance !== "undefined" && performance.now) ? performance.now() : Date.now();
-
-    // ---------------------------------------
-    // Device/context (derived)
-    // ---------------------------------------
-    var ua = navigator.userAgent || "";
-    var lang = (navigator.language || navigator.userLanguage || "").toLowerCase();
-    var ref = document.referrer || "";
-    var page_path = window.location.pathname || "";
-
-    var isIOS = /iPhone|iPad|iPod/i.test(ua);
-    var isAndroid = /Android/i.test(ua);
-    var osDerived = isIOS ? "iOS" : (isAndroid ? "Android" : "Other");
-    var device_type = /Mobi|Android|iPhone|iPad|iPod/i.test(ua) ? "mobile" : "desktop";
-
-    function detectBrowser(u) {
-      u = (u || "").toLowerCase();
-      if (u.includes("edg/")) return "Edge";
-      if (u.includes("opr/") || u.includes("opera")) return "Opera";
-      if (u.includes("chrome/") && !u.includes("edg/") && !u.includes("opr/")) return "Chrome";
-      if (u.includes("safari/") && !u.includes("chrome/")) return "Safari";
-      if (u.includes("firefox/")) return "Firefox";
-      return "Other";
-    }
-    var browserDerived = detectBrowser(ua);
-    var screen_res = (window.screen && screen.width && screen.height) ? (screen.width + "x" + screen.height) : "";
-
-    // ---------------------------------------
-    // Scroll depth tracking
-    // ---------------------------------------
-    function computeScrollDepthPct() {
-      var doc = document.documentElement;
-      var scrolled = (window.scrollY || doc.scrollTop || 0);
-      var height = (doc.scrollHeight - doc.clientHeight) || 1;
-      var pct = Math.max(0, Math.min(1, scrolled / height));
-      return Math.round(pct * 100);
-    }
-
-    var maxScroll = 0;
-    function onScroll() {
-      var pct = computeScrollDepthPct();
-      if (pct > maxScroll) maxScroll = pct;
-    }
-    window.addEventListener("scroll", onScroll, { passive: true });
-
-    // ---------------------------------------
-    // GA4: engaged_10s (still useful for quality)
-    // ---------------------------------------
-    setTimeout(function () {
-      if (typeof gtag !== "function") return;
-      gtag("event", "engaged_10s", {
-        zoneid: pick("zoneid"),
-        subzone_id: pick("subzone_id"),
-        clickid: pick("clickid"),
-        os: pick("os") || osDerived,
-        device_type: device_type,
-        browser: pick("browser") || browserDerived,
-        lang: lang,
-        page_path: page_path,
-        ref: ref,
-        screen: screen_res,
-        scroll_depth: maxScroll,
-        transport_type: "beacon"
-      });
-    }, 10000);
-
-    // GA4: scroll_depth event once at 50%+
-    var scrollSent = false;
-    function scroll50Check() {
-      if (scrollSent) return;
-      var pct = computeScrollDepthPct();
-      if (pct >= 50) {
-        scrollSent = true;
-        window.removeEventListener("scroll", scroll50Check, { passive: true });
-        if (typeof gtag === "function") {
-          gtag("event", "scroll_depth", {
-            zoneid: pick("zoneid"),
-            subzone_id: pick("subzone_id"),
-            clickid: pick("clickid"),
-            os: pick("os") || osDerived,
-            device_type: device_type,
-            browser: pick("browser") || browserDerived,
-            lang: lang,
-            page_path: page_path,
-            ref: ref,
-            screen: screen_res,
-            scroll_depth: Math.max(maxScroll, pct),
-            transport_type: "beacon"
-          });
+    <style>
+        :root {
+            --primary: #004d40; /* XM Dark Green-ish */
+            --accent: #d32f2f; /* Urgency Red */
+            --gold: #ffb300; /* Gold for Bonus */
+            --bg-light: #f4f7f6;
+            --text-main: #333;
         }
-      }
-    }
-    window.addEventListener("scroll", scroll50Check, { passive: true });
 
-    // ---------------------------------------
-    // OS-based copy (tightened for push; tracking untouched)
-    // ---------------------------------------
-    var heroBadge = document.getElementById("heroBadge");
-    var heroTitle = document.getElementById("heroTitle");
-    var heroSub = document.getElementById("heroSub");
-    var heroSupport = document.getElementById("heroSupport");
-    var ctaText = document.getElementById("ctaText");
-    var ctaPreline = document.getElementById("ctaPreline");
-    var ctaNote = document.getElementById("ctaNote");
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            line-height: 1.8;
+            margin: 0;
+            padding-bottom: 80px; /* Space for sticky footer */
+        }
 
-    if (isAndroid) {
-      heroBadge.innerHTML = '<span class="dot" aria-hidden="true"></span>XMTrading 公式コンテスト';
-      heroTitle.innerHTML = "毎月総額$120,000<br>賞金コンテスト";
-      heroSub.textContent = "上位入賞で毎月最大$12,000*。まずは公式で条件を確認して参加。";
-      ctaPreline.textContent = "¥13000の取引ボーナスでFX、仮想通貨CFDなどを取引しよう。入金不要。（利用規約適用）";
-      ctaText.textContent = "登録しましょう！";
-      ctaNote.textContent = "※ タップで公式サイトへ移動します（利用規約をご確認ください）";
-    } else if (isIOS) {
-      heroBadge.innerHTML = '<span class="dot" aria-hidden="true"></span>XMTrading 公式コンテスト情報';
-      heroTitle.innerHTML = "毎月総額$120,000<br>賞金コンテスト";
-      heroSub.textContent = "参加条件・対象口座は公式T&Cで確認。上位入賞で毎月最大$12,000*。";
-      ctaPreline.textContent = "¥13000の取引ボーナスでFX、仮想通貨CFDなどを取引しよう。入金不要。（利用規約適用）";
-      ctaText.textContent = "登録しましょう！";
-      ctaNote.textContent = "※ 公式サイトへ移動します（条件・対象口座は必ず確認）";
-    }
+        /* --- Header & Hero --- */
+        header {
+            background: #212121;
+            color: white;
+            padding: 15px 20px;
+            font-size: 0.9rem;
 
-    // ---------------------------------------
-    // Append clickid to affiliate link as aff_sub (if present)
-    // ---------------------------------------
-    var cta = document.getElementById("mainCTA");
-    if (!cta) return;
+            /* ВАЖНИТЕ НАСТРОЙКИ ЗА ПОДРЕЖДАНЕ: */
+            display: flex;                   /* 1. Прави лентата гъвкава */
+            align-items: center;             /* 2. Центрира ги вертикално */
+            justify-content: space-between;  /* 3. Лого вляво, текст вдясно */
+        }
 
-    var clickid = pick("clickid");
-    if (clickid) {
-      try {
-        var url = new URL(cta.href, window.location.href);
-        url.searchParams.set("aff_sub", clickid);
-        cta.href = url.toString();
-      } catch (e) {
-        var sep = cta.href.indexOf("?") >= 0 ? "&" : "?";
-        cta.href = cta.href + sep + "aff_sub=" + encodeURIComponent(clickid);
-      }
-    }
+        .hero {
+            background: linear-gradient(135deg, #212121 0%, #000000 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
 
-    // ---------------------------------------
-    // CTA click: GA4 event + reliable redirect
-    // ---------------------------------------
-    cta.addEventListener("click", function (e) {
-      // If GA is blocked, don't break navigation
-      if (typeof gtag !== "function") return;
+        .hero h1 {
+            font-size: 1.8rem;
+            margin: 0 0 15px 0;
+            line-height: 1.4;
+        }
 
-      e.preventDefault();
+        .hero .highlight {
+            color: var(--gold);
+            font-size: 2.2rem;
+            font-weight: 900;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            display: block;
+            margin-top: 5px;
+        }
 
-      var targetUrl = cta.href;
-      var now = (typeof performance !== "undefined" && performance.now) ? performance.now() : Date.now();
-      var time_to_click = Math.round(now - t0);
-      var scroll_depth = Math.max(maxScroll, computeScrollDepthPct());
+        .hero-badge {
+            background: var(--accent);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
 
-      gtag("event", "cta_click", {
-        link_url: targetUrl,
+        /* --- Container --- */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
 
-        // Propeller params
-        zoneid: pick("zoneid"),
-        subzone_id: pick("subzone_id"),
-        clickid: pick("clickid"),
-        browser: pick("browser"),
-        browserversion: pick("browserversion"),
-        country: pick("country"),
-        region: pick("region"),
-        device: pick("device"),
-        language: pick("language"),
-        os: pick("os"),
-        osversion: pick("osversion"),
-        useragent: pick("useragent"),
-        user_activity: pick("user_activity"),
-        cost: pick("cost"),
+        /* --- Cards & Sections --- */
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
 
-        // Derived
-        os_derived: osDerived,
-        device_type: device_type,
-        browser_derived: browserDerived,
-        lang: lang,
-        page_path: page_path,
-        ref: ref,
-        screen: screen_res,
-        time_to_click: time_to_click,
-        scroll_depth: scroll_depth,
+        h2 {
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 10px;
+            font-size: 1.4rem;
+            margin-top: 0;
+            color: #2c3e50;
+        }
 
-        transport_type: "beacon",
-        event_callback: function () { window.location.href = targetUrl; }
-      });
+        /* --- Conversation Bubble (Manga Style) --- */
+        .chat-box {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            align-items: flex-start;
+        }
+        
+        .chat-face {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #eee;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            border: 2px solid #ddd;
+        }
+        
+        .chat-face.pro { border-color: var(--primary); background: #e0f2f1; }
+        .chat-face.user { border-color: var(--accent); background: #ffebee; }
 
-      // Fallback redirect
-      setTimeout(function () { window.location.href = targetUrl; }, 450);
-    }, { passive: false });
+        .chat-content {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 12px;
+            position: relative;
+            font-size: 0.95rem;
+            width: 100%;
+        }
 
-  })();
-  </script>
-  <script>
-(function () {
-  // -----------------------------
-  // Anti-bot gate (no tracking changes)
-  // Conditions to unlock:
-  //  - tab is visible
-  //  - time on page >= 6s
-  //  - scroll depth >= 50%
-  // -----------------------------
+        .chat-content::after {
+            content: '';
+            position: absolute;
+            top: 20px;
+            width: 0; 
+            height: 0; 
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent; 
+        }
 
-  var MIN_TIME_MS = 2500;
-  var MIN_SCROLL_PCT = 20;
+        .chat-box.left .chat-content::after {
+            left: -10px;
+            border-right: 10px solid #f9f9f9;
+        }
+        .chat-box.right .chat-content::after {
+            right: -10px;
+            border-left: 10px solid #f9f9f9;
+        }
 
-  // Collect ALL affiliate links on the page
-  // (covers hero CTA, cards CTA, image link, sticky CTA)
-  var affiliateLinks = Array.prototype.slice.call(
-    document.querySelectorAll('a[href*="clicks.affstrack.com"]')
-  );
+        /* --- Check Points --- */
+        .check-list {
+            list-style: none;
+            padding: 0;
+        }
+        .check-list li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 12px;
+            font-weight: bold;
+            color: #444;
+        }
+        .check-list li::before {
+            content: '✔';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: 900;
+        }
 
-  if (!affiliateLinks.length) return;
+        /* --- CTA Buttons --- */
+        .cta-box {
+            text-align: center;
+            margin: 30px 0;
+            background: #fff8e1; /* Light yellow bg */
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px dashed var(--gold);
+        }
 
-  // Create a toast (small message) to explain why click is blocked
-  var toast = document.createElement("div");
-  toast.className = "gate-toast";
-  toast.innerHTML = '<strong>確認：</strong>読み込み後、少しスクロールしてからボタンが有効になります。';
-  document.body.appendChild(toast);
+        .btn-main {
+            display: block;
+            width: 100%;
+            max-width: 400px;
+            margin: 10px auto;
+            background: linear-gradient(to bottom, #ffca28, #ff6f00);
+            color: white;
+            font-weight: 900;
+            text-decoration: none;
+            padding: 18px;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            box-shadow: 0 5px 0 #c43800;
+            transition: transform 0.1s;
+            position: relative;
+        }
 
-  function showToast() {
-    toast.style.display = "block";
-    clearTimeout(showToast._t);
-    showToast._t = setTimeout(function(){ toast.style.display = "none"; }, 1800);
-  }
+        .btn-main:active {
+            transform: translateY(3px);
+            box-shadow: 0 2px 0 #c43800;
+        }
+        
+        .btn-sub {
+            display: inline-block;
+            margin-top: 10px;
+            color: #666;
+            text-decoration: underline;
+            font-size: 0.9rem;
+        }
 
-  // Lock UI initially (does not alter href, so your existing click tracking remains intact)
-  affiliateLinks.forEach(function (a) {
-    a.classList.add("gate-locked");
-    a.setAttribute("aria-disabled", "true");
-  });
+        .shiny {
+            position: relative;
+            overflow: hidden;
+        }
+        .shiny::after {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
+            transform: rotate(30deg);
+            animation: shine 3s infinite;
+        }
 
-  var start = (typeof performance !== "undefined" && performance.now) ? performance.now() : Date.now();
-  var maxScrollSeen = 0;
-  var unlocked = false;
+        @keyframes shine {
+            0% { left: -50%; }
+            100% { left: 150%; }
+        }
 
-  function scrollDepthPct() {
-    var doc = document.documentElement;
-    var scrolled = (window.scrollY || doc.scrollTop || 0);
-    var height = (doc.scrollHeight - doc.clientHeight) || 1;
-    var pct = Math.max(0, Math.min(1, scrolled / height));
-    return Math.round(pct * 100);
-  }
+        /* --- Sticky Footer (Mobile) --- */
+        .sticky-footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255,255,255,0.95);
+            border-top: 1px solid #ddd;
+            padding: 10px 15px;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: center;
+            z-index: 999;
+            backdrop-filter: blur(5px);
+        }
 
-  function canUnlock() {
-    if (document.visibilityState !== "visible") return false;
-    var now = (typeof performance !== "undefined" && performance.now) ? performance.now() : Date.now();
-    var elapsed = now - start;
-    var pct = Math.max(maxScrollSeen, scrollDepthPct());
-    maxScrollSeen = pct;
+        .sticky-btn {
+            background: var(--accent);
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 12px 0;
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            animation: pulse 2s infinite;
+        }
 
-    return (elapsed >= MIN_TIME_MS && pct >= MIN_SCROLL_PCT);
-  }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
 
-  function unlockAll() {
-    if (unlocked) return;
-    unlocked = true;
+        /* --- Tables --- */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.9rem;
+        }
+        th {
+            background: #eee;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
 
-    affiliateLinks.forEach(function (a) {
-      a.classList.remove("gate-locked");
-      a.removeAttribute("aria-disabled");
-    });
+        /* --- Disclaimer --- */
+        .disclaimer {
+            font-size: 0.75rem;
+            color: #888;
+            margin-top: 40px;
+            padding: 20px;
+            background: #eee;
+        }
+        
+        /* === НОВО: Стил за логото === */
+        .header-logo {
+            height: 50px; 
+            width: auto;
+            margin-right: 15px;
+        }
+    </style>
+</head>
+<body>
 
-    // Once unlocked, remove the blocking click handler
-    document.removeEventListener("click", gateClickBlocker, true);
-    window.removeEventListener("scroll", onScroll, { passive: true });
-    document.removeEventListener("visibilitychange", tick);
-  }
+    <header>
+        <img src="FXfacts4.png" alt="FXfacts Logo" class="header-logo">
+        <span>FXfacts 編集部監修｜XMTrading公認パートナー情報</span>
+    </header>
 
-  function tick() {
-    if (unlocked) return;
-    if (canUnlock()) unlockAll();
-  }
+    <div class="hero">
+        <span class="hero-badge">2026年1月最新</span>
+        <h1>ノーリスクで海外FXを体験<br><span class="highlight">13,000円ボーナス</span><br>もらうなら今がチャンス</h1>
+        <p style="font-size: 0.9rem; opacity: 0.9;">※入金不要・利益は出金可能</p>
+    </div>
 
-  function onScroll() {
-    if (unlocked) return;
-    var pct = scrollDepthPct();
-    if (pct > maxScrollSeen) maxScrollSeen = pct;
-    tick();
-  }
+    <div class="container">
 
-  // Capture-phase click blocker:
-  // - runs BEFORE your existing CTA click handler
-  // - if locked -> prevent navigation and show toast
-  function gateClickBlocker(e) {
-    if (unlocked) return;
+        <div class="card">
+            <div class="chat-box left">
+                <div class="chat-face user">🤔</div>
+                <div class="chat-content">
+                    <strong>初心者さん</strong><br>
+                    海外FXって怖そう…。自分のお金を入金せずに試せる方法はないの？
+                </div>
+            </div>
+            <div class="chat-box right" style="flex-direction: row-reverse;">
+                <div class="chat-face pro">💡</div>
+                <div class="chat-content">
+                    <strong>編集部</strong><br>
+                    それなら<strong>XMTrading</strong>一択です！今なら口座を作るだけで<span style="color:red;font-weight:bold;">13,000円分の資金</span>がもらえますよ。
+                </div>
+            </div>
 
-    var target = e.target;
-    if (!target) return;
+            <div class="cta-box">
+                <p style="font-weight:bold; margin-bottom:10px;">＼ 最短3分で登録完了 ／</p>
+                <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=1" class="btn-main shiny">13,000円ボーナスを獲得する</a>
+                <a href="#howto" class="btn-sub">受け取り手順を見る &darr;</a>
+            </div>
+        </div>
 
-    // Find closest link
-    var a = target.closest ? target.closest('a[href*="clicks.affstrack.com"]') : null;
-    if (!a) return;
+        <div class="card">
+            <h2>XMTradingが選ばれる3つの理由</h2>
+            <ul class="check-list">
+                <li><strong>自己資金ゼロでスタート:</strong> 13,000円のボーナスだけで取引開始可能！</li>
+                <li><strong>追証なし（借金リスクゼロ）:</strong> 万が一マイナスになっても、XMが補填してくれる「ゼロカットシステム」採用。</li>
+                <li><strong>圧倒的な約定力:</strong> 日本人トレーダー利用率No.1の信頼性。</li>
+            </ul>
+        </div>
 
-    // Block click while locked
-    e.preventDefault();
-    e.stopPropagation();
-    showToast();
-  }
+        <div class="card" id="accounttypes">
+            <h2>失敗しない口座タイプの選び方</h2>
+            <p>ボーナスを貰うには<strong>「Standard口座」</strong>が一番おすすめです。</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>口座タイプ</th>
+                        <th>1.3万ボーナス</th>
+                        <th>入金ボーナス</th>
+                        <th>おすすめ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="background:#fff8e1; font-weight:bold;">
+                        <td>Standard</td>
+                        <td>◎ 対象</td>
+                        <td>◎ 対象</td>
+                        <td>★初心者向</td>
+                    </tr>
+                    <tr>
+                        <td>Micro</td>
+                        <td>◎ 対象</td>
+                        <td>◎ 対象</td>
+                        <td>少額向</td>
+                    </tr>
+                    <tr>
+                        <td>KIWAMI極</td>
+                        <td>◎ 対象</td>
+                        <td>× 対象外</td>
+                        <td>中級者向</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p style="font-size:0.8rem; color:#666;">※KIWAMI極口座はスプレッドが狭いですが、入金ボーナス（100%ボーナス等）が貰えません。最初はStandardが無難です。</p>
+        </div>
 
-  // Start listeners
-  document.addEventListener("click", gateClickBlocker, true);
-  window.addEventListener("scroll", onScroll, { passive: true });
-  document.addEventListener("visibilitychange", tick);
+        <div class="card" id="howto">
+            <h2>3ステップで完了！受け取り手順</h2>
+            <div style="margin-left: 10px; border-left: 3px solid #ddd; padding-left: 20px;">
+                <div style="margin-bottom: 20px;">
+                    <h3 style="font-size:1.1rem; color:var(--primary); margin:0;">STEP 1: 口座開設フォーム入力</h3>
+                    <p>公式サイトから名前や住所をローマ字で入力します。口座タイプは「Standard」を選択。</p>
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <h3 style="font-size:1.1rem; color:var(--primary); margin:0;">STEP 2: 本人確認書類のアップロード</h3>
+                    <p>身分証（免許証など）と住所確認書（公共料金明細など）をスマホで撮影して送信。</p>
+                </div>
+                <div>
+                    <h3 style="font-size:1.1rem; color:var(--primary); margin:0;">STEP 3: ボーナス請求</h3>
+                    <p>承認メールが来たら会員ページへログインし、「ボーナスを請求する」ボタンを押すと即時反映！</p>
+                </div>
+            </div>
+        </div>
 
-  // Also check on timer (covers users who wait then scroll slightly)
-  var interval = setInterval(function () {
-    if (unlocked) { clearInterval(interval); return; }
-    tick();
-  }, 250);
+        <div class="card">
+            <h2>よくある質問 (Q&A)</h2>
+            <details style="margin-bottom:10px; border-bottom:1px solid #eee; padding-bottom:10px;">
+                <summary style="font-weight:bold; cursor:pointer;">Q. ボーナスは出金できますか？</summary>
+                <p style="margin-top:10px; font-size:0.9rem;">A. ボーナス自体（クレジット）は出金できません。しかし、ボーナスを使って稼いだ<strong>利益は全額出金可能</strong>です。</p>
+            </details>
+            <details style="margin-bottom:10px; border-bottom:1px solid #eee; padding-bottom:10px;">
+                <summary style="font-weight:bold; cursor:pointer;">Q. 本当にお金はかかりませんか？</summary>
+                <p style="margin-top:10px; font-size:0.9rem;">A. はい、口座開設ボーナスのみで取引する場合、入金は一切不要です。損失が出てもボーナスが減るだけで、請求が来ることはありません。</p>
+            </details>
+        </div>
 
-})();
-</script>
+        <div class="cta-box" style="background:white; border:none;">
+            <p>キャンペーンは予告なく終了する場合があります。<br>今のうちに権利だけ確保しておきましょう。</p>
+            <a href="YOUR_AFFILIATE_LINK_HERE" class="btn-main shiny">公式ページで口座開設する</a>
+        </div>
+
+    </div>
+
+    <div class="disclaimer">
+        <p><strong>リスク警告：</strong>FXおよびCFD取引はレバレッジを利用する商品であり、元本以上の損失が発生するリスクがあります。投資判断は自己責任にてお願いいたします。</p>
+        <p><strong>広告開示：</strong>当ページはアフィリエイト広告を含みます。リンク先での成約により当サイト運営者が報酬を受け取る場合があります。</p>
+        <p>&copy; 2026 FXfacts 編集部</p>
+    </div>
+
+    <div class="sticky-footer">
+        <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=0" class="sticky-btn">今すぐ13,000円を受け取る ＞</a>
+    </div>
 
 </body>
 </html>
