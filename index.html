@@ -517,6 +517,32 @@
             <a href="https://cloud.xmtrading-cdn.com/static/pdf/System-PDFs/XMTrading-Terms-and-Conditions-Bonus-Program-100-and-20-upto-10000.pdf?v=123d705b39c1a1c798f31bda7b89c556" target="_blank" style="text-decoration:underline;">利用規約</a>が適用されます
         </div>
     </div>
+    <a href="#bot-trap" 
+   style="display:none !important; visibility:hidden !important; opacity:0; position:absolute; left:-9999px;"
+   onclick="gtag('event', 'bot_caught', {'method': 'honeypot_link'});"
+   aria-hidden="true">
+   Do not click here
+</a>
+    <script>
+    // 1. Забрана на десен клик (Context Menu)
+    document.addEventListener('contextmenu', event => event.preventDefault());
+
+    // 2. Забрана на клавишни комбинации за Inspect Element (F12, Ctrl+U, Ctrl+Shift+I)
+    document.onkeydown = function(e) {
+        if(event.keyCode == 123) { // F12
+           return false;
+        }
+        if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) { // Ctrl+Shift+I
+           return false;
+        }
+        if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) { // Ctrl+Shift+C
+           return false;
+        }
+        if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) { // Ctrl+U (View Source)
+           return false;
+        }
+    }
+</script>
 
 </body>
 </html>
