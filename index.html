@@ -6,254 +6,443 @@
     <title>【2026年最新】XMTrading 13,000円ボーナス受取ガイド｜失敗しない始め方</title>
     <meta name="description" content="XMTradingの口座開設ボーナス13,000円の受け取り方と注意点を完全解説。リスクなしでFXを始める手順を画像付きで紹介します。">
 
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+    <!-- Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-DTMQSP8BPQ"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
 
-      // --- ЛОГИКА ЗА ХВАЩАНЕ НА URL ПАРАМЕТРИ ---
+      // URL Parameter Tracking
       var trackingParams = {};
       var urlParams = new URLSearchParams(window.location.search);
-
       urlParams.forEach(function(value, key) {
           var cleanKey = key.replace(/[^a-zA-Z0-9_]/g, '_');
           trackingParams[cleanKey] = value;
       });
-
       gtag('config', 'G-DTMQSP8BPQ', trackingParams);
     </script>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
-
     <style>
+        /* --- Reset & Base --- */
         :root {
-            --primary: #004d40; /* XM Dark Green-ish */
-            --accent: #d32f2f; /* Urgency Red */
-            --gold: #ffb300; /* Gold for Bonus */
-            --bg-light: #f4f7f6;
-            --text-main: #333;
+            --primary: #d32f2f; /* XM Red */
+            --primary-dark: #b71c1c;
+            --secondary: #212121; /* Dark Grey/Black */
+            --accent: #ffb300; /* Gold */
+            --text-main: #333333;
+            --text-light: #666666;
+            --bg-body: #f4f6f8;
+            --bg-card: #ffffff;
+            --line-green: #06c755; /* LINE App Green for Chat */
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
         }
 
         body {
             font-family: 'Noto Sans JP', sans-serif;
-            background-color: var(--bg-light);
+            background-color: var(--bg-body);
             color: var(--text-main);
-            line-height: 1.8;
+            line-height: 1.7;
             margin: 0;
-            padding-bottom: 100px; /* Increased space for sticky footer */
+            padding-bottom: 120px; /* Space for sticky footer */
+            font-feature-settings: "palt";
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* --- Header & Hero --- */
+        a { text-decoration: none; color: inherit; transition: opacity 0.2s; }
+        a:hover { opacity: 0.8; }
+        img { max-width: 100%; height: auto; display: block; }
+
+        /* --- Components --- */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            border: 1px solid rgba(0,0,0,0.02);
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            margin-top: 0;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid var(--primary);
+            font-weight: 700;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 30%;
+            height: 3px;
+            background: var(--gold);
+        }
+
+        h3 {
+            font-size: 1.2rem;
+            margin: 25px 0 10px;
+            color: var(--secondary);
+            display: flex;
+            align-items: center;
+        }
+
+        /* --- Header --- */
         header {
-            background: #212121;
-            color: white;
-            padding: 15px 20px;
-            font-size: 0.9rem;
+            background: white;
+            padding: 12px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-inner {
             display: flex;
             align-items: center;
             justify-content: space-between;
         }
 
         .header-logo {
-            height: 50px;
-            width: auto;
-            margin-right: 15px;
+            height: 40px;
         }
 
+        .header-badge {
+            font-size: 0.75rem;
+            background: #eee;
+            padding: 4px 8px;
+            border-radius: 4px;
+            color: #555;
+            font-weight: bold;
+        }
+
+        /* --- Hero Section --- */
         .hero {
-            background: linear-gradient(135deg, #212121 0%, #000000 100%);
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('xmtrading-bonus-13000.jpg');
+            background-size: cover;
+            background-position: center;
             color: white;
-            padding: 40px 20px;
+            padding: 50px 20px;
             text-align: center;
             position: relative;
-            overflow: hidden;
+        }
+
+        .hero-tag {
+            background: var(--primary);
+            color: white;
+            font-size: 0.85rem;
+            font-weight: bold;
+            padding: 5px 15px;
+            border-radius: 50px;
+            display: inline-block;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
         }
 
         .hero h1 {
             font-size: 1.8rem;
-            margin: 0 0 15px 0;
-            line-height: 1.4;
-        }
-
-        .hero .highlight {
-            color: var(--gold);
-            font-size: 2.2rem;
             font-weight: 900;
+            margin: 0 0 15px;
+            line-height: 1.4;
             text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-            display: block;
-            margin-top: 5px;
         }
 
-        .hero-badge {
-            background: var(--accent);
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-weight: bold;
-            font-size: 0.9rem;
+        .hero h1 span {
+            color: var(--accent);
+            font-size: 2.4rem;
+            background: linear-gradient(to bottom, #ffd700, #ffa000);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             display: inline-block;
-            margin-bottom: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            padding: 0 5px;
         }
 
-        /* --- Container --- */
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
+        /* --- Chat UI --- */
+        .chat-container {
+            background: #7494c0; /* LINE-like background */
             padding: 20px;
-        }
-
-        /* --- Cards & Sections --- */
-        .card {
-            background: white;
             border-radius: 12px;
-            padding: 25px;
             margin-bottom: 30px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
         }
 
-        h2 {
-            border-bottom: 3px solid var(--primary);
-            padding-bottom: 10px;
-            font-size: 1.4rem;
-            margin-top: 0;
-            color: #2c3e50;
-        }
-
-        /* --- Chat Box --- */
-        .chat-box {
+        .chat-bubble {
             display: flex;
-            gap: 15px;
-            margin-bottom: 20px;
+            gap: 12px;
+            margin-bottom: 15px;
             align-items: flex-start;
         }
-        
+
+        .chat-bubble.right {
+            flex-direction: row-reverse;
+        }
+
         .chat-face {
-            width: 60px;
-            height: 60px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
-            background: #eee;
+            background: #fff;
+            border: 2px solid white;
+            overflow: hidden;
             flex-shrink: 0;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
-            border: 2px solid #ddd;
         }
         
-        .chat-face.pro { border-color: var(--primary); background: #e0f2f1; }
-        .chat-face.user { border-color: var(--accent); background: #ffebee; }
-
-        .chat-content {
-            background: #f9f9f9;
-            padding: 15px;
-            border-radius: 12px;
-            position: relative;
-            font-size: 0.95rem;
-            width: 100%;
+        .chat-face svg {
+            width: 24px;
+            height: 24px;
+            fill: #555;
         }
 
-        .chat-content::after {
+        .chat-bubble.right .chat-face svg {
+            fill: var(--primary);
+        }
+
+        .chat-text {
+            background: white;
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            position: relative;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            max-width: 80%;
+        }
+
+        .chat-bubble.left .chat-text {
+            border-top-left-radius: 0;
+        }
+        .chat-bubble.left .chat-text::before {
             content: '';
             position: absolute;
-            top: 20px;
-            width: 0; 
-            height: 0; 
-            border-top: 8px solid transparent;
-            border-bottom: 8px solid transparent; 
+            top: 0;
+            left: -8px;
+            border-top: 8px solid white;
+            border-left: 8px solid transparent;
         }
 
-        .chat-box.left .chat-content::after {
-            left: -10px;
-            border-right: 10px solid #f9f9f9;
+        .chat-bubble.right .chat-text {
+            background: var(--line-green); /* LINE Green */
+            color: white; /* White text on green */
+            border-top-right-radius: 0;
         }
-        .chat-box.right .chat-content::after {
-            right: -10px;
-            border-left: 10px solid #f9f9f9;
-        }
-
-        /* --- Check Points --- */
-        .check-list {
-            list-style: none;
-            padding: 0;
-        }
-        .check-list li {
-            position: relative;
-            padding-left: 30px;
-            margin-bottom: 12px;
-            font-weight: bold;
-            color: #444;
-        }
-        .check-list li::before {
-            content: '✔';
+        .chat-bubble.right .chat-text::before {
+            content: '';
             position: absolute;
-            left: 0;
-            color: var(--primary);
-            font-weight: 900;
+            top: 0;
+            right: -8px;
+            border-top: 8px solid var(--line-green);
+            border-right: 8px solid transparent;
         }
+
+        .chat-text strong {
+            font-weight: 700;
+        }
+        /* Override specifically for the right bubble to ensure readability if bold */
+        .chat-bubble.right .chat-text strong {
+            color: #fff;
+            text-decoration: underline;
+        }
+
 
         /* --- CTA Buttons --- */
-        .cta-box {
+        .cta-wrapper {
             text-align: center;
-            margin: 30px 0;
-            background: #fff8e1;
-            padding: 20px;
-            border-radius: 10px;
-            border: 2px dashed var(--gold);
-        }
-
-        .btn-main {
-            display: block;
-            width: 100%;
-            max-width: 400px;
-            margin: 10px auto;
-            background: linear-gradient(to bottom, #ffca28, #ff6f00);
-            color: white;
-            font-weight: 900;
-            text-decoration: none;
-            padding: 18px;
-            border-radius: 50px;
-            font-size: 1.3rem;
-            box-shadow: 0 5px 0 #c43800;
-            transition: transform 0.1s;
+            margin: 35px 0;
             position: relative;
         }
 
-        .btn-main:active {
-            transform: translateY(3px);
-            box-shadow: 0 2px 0 #c43800;
-        }
-        
-        .btn-sub {
-            display: inline-block;
-            margin-top: 10px;
-            color: #666;
-            text-decoration: underline;
-            font-size: 0.9rem;
-        }
-
-        .shiny {
+        .cta-btn {
+            display: block;
+            width: 100%;
+            max-width: 450px;
+            margin: 0 auto;
+            background: linear-gradient(180deg, #ffca28 0%, #ff6f00 100%);
+            color: white;
+            font-size: 1.4rem;
+            font-weight: 900;
+            padding: 20px;
+            border-radius: 50px;
+            box-shadow: 0 6px 0 #c43800, 0 10px 10px rgba(0,0,0,0.2);
+            transition: all 0.1s;
             position: relative;
             overflow: hidden;
         }
-        .shiny::after {
+
+        .cta-btn:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 #c43800, 0 4px 4px rgba(0,0,0,0.2);
+        }
+
+        .shine-effect::after {
             content: "";
             position: absolute;
             top: -50%;
-            left: -50%;
-            width: 200%;
+            left: -60%;
+            width: 20%;
             height: 200%;
-            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
+            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 100%);
             transform: rotate(30deg);
             animation: shine 3s infinite;
         }
 
         @keyframes shine {
-            0% { left: -50%; }
+            0% { left: -60%; }
+            20% { left: 150%; } /* Faster pass */
             100% { left: 150%; }
+        }
+
+        .cta-sub {
+            display: block;
+            margin-top: 12px;
+            font-size: 0.9rem;
+            color: var(--primary);
+            text-decoration: underline;
+            font-weight: bold;
+        }
+
+        /* --- Features List --- */
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px dashed #eee;
+        }
+        .feature-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .feature-icon {
+            background: var(--primary);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+            font-weight: bold;
+        }
+
+        /* --- Tables --- */
+        .table-responsive {
+            overflow-x: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            background: white;
+        }
+
+        th, td {
+            padding: 12px 10px;
+            border: 1px solid #e0e0e0;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        th {
+            background: var(--secondary);
+            color: white;
+            font-weight: bold;
+        }
+
+        .recommend-col {
+            background: #fff8e1; /* Light Gold */
+            border: 2px solid var(--accent);
+            position: relative;
+        }
+
+        .recommend-badge {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary);
+            color: white;
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 10px;
+            white-space: nowrap;
+        }
+
+        /* --- FAQ / Details --- */
+        details {
+            margin-bottom: 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            background: #fafafa;
+            overflow: hidden;
+        }
+
+        summary {
+            padding: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            background: white;
+            position: relative;
+            padding-right: 40px;
+            list-style: none; /* Hide default triangle */
+        }
+
+        summary::-webkit-details-marker {
+            display: none;
+        }
+
+        summary::after {
+            content: '+';
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        details[open] summary::after {
+            content: '-';
+        }
+
+        details p {
+            padding: 15px;
+            margin: 0;
+            border-top: 1px solid #e0e0e0;
+            font-size: 0.95rem;
         }
 
         /* --- Sticky Footer --- */
@@ -262,31 +451,25 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            background: rgba(255,255,255,0.98);
-            border-top: 1px solid #ddd;
-            padding: 10px 15px;
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            z-index: 999;
-            backdrop-filter: blur(5px);
+            background: white;
+            box-shadow: 0 -4px 10px rgba(0,0,0,0.1);
+            padding: 12px 20px;
+            z-index: 1000;
+            text-align: center;
         }
 
         .sticky-btn {
-            background: var(--accent);
+            display: block;
+            background: var(--primary);
             color: white;
-            text-decoration: none;
-            font-weight: bold;
-            padding: 12px 0;
-            width: 100%;
-            max-width: 600px;
-            text-align: center;
+            font-weight: 700;
+            padding: 15px;
             border-radius: 8px;
             font-size: 1.1rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 10px rgba(211, 47, 47, 0.3);
             animation: pulse 2s infinite;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
         @keyframes pulse {
@@ -295,187 +478,258 @@
             100% { transform: scale(1); }
         }
 
-        /* --- Tables --- */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            font-size: 0.9rem;
-        }
-        th {
-            background: #eee;
-            padding: 10px;
-            border: 1px solid #ddd;
-        }
-        td {
-            padding: 10px;
-            border: 1px solid #ddd;
-            text-align: center;
+        /* --- Utilities --- */
+        .text-center { text-align: center; }
+        .text-red { color: var(--primary); }
+        .font-bold { font-weight: 700; }
+        .mb-2 { margin-bottom: 10px; }
+        .mt-4 { margin-top: 20px; }
+
+        .img-rounded {
+            border-radius: 8px;
+            margin: 15px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
-        /* --- Disclaimer --- */
-        .disclaimer {
-            font-size: 0.75rem;
-            color: #888;
-            margin-top: 40px;
-            padding: 20px;
-            background: #eee;
+        /* --- Steps --- */
+        .step-item {
+            background: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #eee;
+            margin-bottom: 15px;
+        }
+        .step-num {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 2px 10px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.8rem;
+            margin-bottom: 5px;
         }
     </style>
 </head>
 <body>
 
     <header>
-        <img src="FXfacts4.png" alt="FXfacts Logo" class="header-logo">
-        <span>FXfacts 編集部監修｜XMTrading公認パートナー情報</span>
+        <div class="container header-inner">
+            <img src="FXfacts4.png" alt="FXfacts" class="header-logo">
+            <span class="header-badge">公式パートナー情報</span>
+        </div>
     </header>
 
+    <!-- Hero -->
     <div class="hero">
-        <span class="hero-badge">2026年1月最新</span>
-        <h1>ノーリスクで海外FXを体験<br><span class="highlight">13,000円ボーナス</span><br>もらうなら今がチャンス</h1>
-        <p style="font-size: 0.9rem; opacity: 0.9;">※入金不要・利益は出金可能</p>
+        <span class="hero-tag">2026年1月 最新キャンペーン</span>
+        <h1>ノーリスクで海外FXデビュー<br><span>13,000円</span>もらえる！</h1>
+        <p>※入金不要・利益は全額出金OK</p>
     </div>
 
-    <div class="container">
+    <div class="container" style="margin-top: -30px; position: relative; z-index: 10;">
 
+        <!-- Intro Card -->
         <div class="card">
-            <div class="chat-box left">
-                <div class="chat-face user">🤔</div>
-                <div class="chat-content">
-                    <strong>初心者さん</strong><br>
-                    海外FXって怖そう…。自分のお金を入金せずに試せる方法はないの？
+            <div class="chat-container">
+                <div class="chat-bubble left">
+                    <div class="chat-face">
+                        <!-- User Icon -->
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                        </svg>
+                    </div>
+                    <div class="chat-text">
+                        <strong>初心者さん</strong><br>
+                        海外FXって難しそう…<br>自分のお金を使わずに試せませんか？
+                    </div>
                 </div>
-            </div>
-            <div class="chat-box right" style="flex-direction: row-reverse;">
-                <div class="chat-face pro">💡</div>
-                <div class="chat-content">
-                    <strong>編集部</strong><br>
-                    それなら<strong>XMTrading</strong>一択です！今なら口座を作るだけで<span style="color:red;font-weight:bold;">13,000円分の資金</span>がもらえますよ。
+                <div class="chat-bubble right">
+                    <div class="chat-face">
+                        <!-- Lightbulb Icon -->
+                        <svg viewBox="0 0 24 24">
+                            <path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7zm2.85 11.1l-.85.6V16h-4v-2.3l-.85-.6A4.997 4.997 0 0 1 7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.63-.8 3.16-2.15 4.1z"/>
+                        </svg>
+                    </div>
+                    <div class="chat-text">
+                        <strong>編集部</strong><br>
+                        それなら<strong>XMTrading</strong>一択！<br>口座開設だけで<strong>13,000円</strong>もらえます。
+                    </div>
                 </div>
             </div>
 
-            <div class="cta-box">
-                <p style="font-weight:bold; margin-bottom:10px;">＼ 最短3分で登録完了 ／</p>
-                <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=1" class="btn-main shiny">13,000円ボーナスを獲得する</a>
-                <a href="#howto" class="btn-sub">受け取り手順を見る &darr;</a>
+            <div class="cta-wrapper">
+                <p class="mb-2 font-bold">＼ 最短3分で完了！ ／</p>
+                <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=1" class="cta-btn shine-effect">
+                    13,000円ボーナスをもらう<br>
+                    <span style="font-size: 0.9rem; font-weight: normal;">※入金は一切不要です</span>
+                </a>
+                <a href="#howto" class="cta-sub">受け取り手順を確認する &darr;</a>
+            </div>
 
-                <div style="margin-top: 15px; border-top: 1px solid #ddd; padding-top: 10px;">
-                    <a href="https://cloud.xmtrading-cdn.com/static/pdf/System-PDFs/XMTrading-Terms-and-Conditions-Bonus-Program-100-and-20-upto-10000.pdf?v=123d705b39c1a1c798f31bda7b89c556" target="_blank" style="font-size: 0.65rem; color: #999; text-decoration: underline;">
-                        リスク警告：FXとデリバティブ取引には高い損失リスクが伴います。 利用規約適用。
-                    </a>
-                </div>
+            <div class="text-center" style="font-size: 0.7rem; color: #999;">
+                <a href="https://cloud.xmtrading-cdn.com/static/pdf/System-PDFs/XMTrading-Terms-and-Conditions-Bonus-Program-100-and-20-upto-10000.pdf?v=123d705b39c1a1c798f31bda7b89c556" target="_blank" style="text-decoration: underline;">
+                    リスク警告および利用規約が適用されます
+                </a>
             </div>
         </div>
 
+        <!-- Benefits -->
         <div class="card">
             <h2>XMTradingが選ばれる3つの理由</h2>
-            <ul class="check-list">
-                <li><strong>自己資金ゼロでスタート:</strong> 13,000円のボーナスだけで取引開始可能！</li>
-                <li><strong>追証なし（借金リスクゼロ）:</strong> 万が一マイナスになっても、XMが補填してくれる「ゼロカットシステム」採用。</li>
-                <li><strong>圧倒的な約定力:</strong> 日本人トレーダー利用率No.1の信頼性。</li>
+            <img src="XMpromo17.png" alt="XM Promotion" class="img-rounded">
+
+            <ul class="feature-list mt-4">
+                <li class="feature-item">
+                    <span class="feature-icon">1</span>
+                    <div>
+                        <strong class="text-red" style="font-size: 1.1rem;">自己資金ゼロで開始</strong>
+                        <div style="font-size: 0.9rem; margin-top: 5px;">
+                            13,000円のボーナスだけで取引できます。自分の銀行口座から入金する必要はありません。
+                        </div>
+                    </div>
+                </li>
+                <li class="feature-item">
+                    <span class="feature-icon">2</span>
+                    <div>
+                        <strong class="text-red" style="font-size: 1.1rem;">追証なし（借金リスクゼロ）</strong>
+                        <div style="font-size: 0.9rem; margin-top: 5px;">
+                            万が一、相場が急変して残高がマイナスになっても、XMが0円に戻してくれます（ゼロカット）。
+                        </div>
+                    </div>
+                </li>
+                <li class="feature-item">
+                    <span class="feature-icon">3</span>
+                    <div>
+                        <strong class="text-red" style="font-size: 1.1rem;">日本人気No.1の信頼性</strong>
+                        <div style="font-size: 0.9rem; margin-top: 5px;">
+                            出金拒否の噂もなく、日本人トレーダーの利用率が圧倒的No.1です。
+                        </div>
+                    </div>
+                </li>
             </ul>
         </div>
 
+        <!-- Account Types -->
         <div class="card" id="accounttypes">
             <h2>失敗しない口座タイプの選び方</h2>
             <p>ボーナスを貰うには<strong>「Standard口座」</strong>が一番おすすめです。</p>
-            <table>
-                <thead>
-                    <tr>
-                        <th>口座タイプ</th>
-                        <th>1.3万ボーナス</th>
-                        <th>入金ボーナス</th>
-                        <th>おすすめ</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr style="background:#fff8e1; font-weight:bold;">
-                        <td>Standard</td>
-                        <td>◎ 対象</td>
-                        <td>◎ 対象</td>
-                        <td>★初心者向</td>
-                    </tr>
-                    <tr>
-                        <td>Micro</td>
-                        <td>◎ 対象</td>
-                        <td>◎ 対象</td>
-                        <td>少額向</td>
-                    </tr>
-                    <tr>
-                        <td>KIWAMI極</td>
-                        <td>◎ 対象</td>
-                        <td>× 対象外</td>
-                        <td>中級者向</td>
-                    </tr>
-                </tbody>
-            </table>
-            <p style="font-size:0.8rem; color:#666;">※KIWAMI極口座はスプレッドが狭いですが、入金ボーナス（100%ボーナス等）が貰えません。最初はStandardが無難です。</p>
             
-            <div style="display: flex; flex-direction: column; align-items: center; gap: 10px; margin-top: 20px;">
-                <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=1" target="_blank" style="color: var(--primary); font-weight: bold; text-decoration: underline; font-size: 0.95rem;">
-                    すべての口座タイプを見る &gt;
-                </a>
-                
-                <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=1" target="_blank" style="color: var(--primary); font-weight: bold; text-decoration: underline; font-size: 0.95rem;">
-                    全ボーナスキャンペーンを見る &gt;
-                </a>
+            <img src="xmtrading-account-types.jpg" alt="Account Types Comparison" class="img-rounded">
+
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>口座タイプ</th>
+                            <th>1.3万ボーナス</th>
+                            <th>入金ボーナス</th>
+                            <th>ターゲット</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="recommend-col">
+                                <span class="recommend-badge">推奨</span>
+                                <strong>Standard</strong>
+                            </td>
+                            <td class="recommend-col"><strong>◎ 対象</strong></td>
+                            <td class="recommend-col"><strong>◎ 対象</strong></td>
+                            <td class="recommend-col">初心者向</td>
+                        </tr>
+                        <tr>
+                            <td>Micro</td>
+                            <td>◎ 対象</td>
+                            <td>◎ 対象</td>
+                            <td>少額取引向</td>
+                        </tr>
+                        <tr>
+                            <td>KIWAMI極</td>
+                            <td>◎ 対象</td>
+                            <td>× 対象外</td>
+                            <td>スキャルピング</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
+            <p style="font-size:0.8rem; color:#666; margin-top: 10px;">※KIWAMI極口座はスプレッドが狭いですが、入金ボーナスがありません。最初はStandardが無難です。</p>
         </div>
 
+        <!-- How To -->
         <div class="card" id="howto">
             <h2>3ステップで完了！受け取り手順</h2>
-            <div style="margin-left: 10px; border-left: 3px solid #ddd; padding-left: 20px;">
-                <div style="margin-bottom: 20px;">
-                    <h3 style="font-size:1.1rem; color:var(--primary); margin:0;">STEP 1: 口座開設フォーム入力</h3>
-                    <p>公式サイトから名前や住所をローマ字で入力します。口座タイプは「Standard」を選択。</p>
-                </div>
-                <div style="margin-bottom: 20px;">
-                    <h3 style="font-size:1.1rem; color:var(--primary); margin:0;">STEP 2: 本人確認書類のアップロード</h3>
-                    <p>身分証（免許証など）と住所確認書（公共料金明細など）をスマホで撮影して送信。</p>
-                </div>
-                <div>
-                    <h3 style="font-size:1.1rem; color:var(--primary); margin:0;">STEP 3: ボーナス請求</h3>
-                    <p>承認メールが来たら会員ページへログインし、「ボーナスを請求する」ボタンを押すと即時反映！</p>
-                </div>
+            <img src="xmtrading-signup.jpg" alt="Sign Up Process" class="img-rounded">
+
+            <div class="step-item">
+                <span class="step-num">STEP 1</span>
+                <h3 style="margin: 5px 0 10px; font-size: 1.1rem;">口座開設フォームに入力</h3>
+                <p style="font-size: 0.9rem; margin: 0;">
+                    公式サイトから名前、住所などを英語（ローマ字）で入力します。口座タイプは「Standard」を選びましょう。
+                </p>
+            </div>
+
+            <div class="step-item">
+                <span class="step-num">STEP 2</span>
+                <h3 style="margin: 5px 0 10px; font-size: 1.1rem;">本人確認書類をアップロード</h3>
+                <p style="font-size: 0.9rem; margin: 0;">
+                    免許証などの「身分証明書」と、公共料金の明細などの「住所確認書」をスマホで撮影して提出します。
+                </p>
+            </div>
+
+            <div class="step-item">
+                <span class="step-num">STEP 3</span>
+                <h3 style="margin: 5px 0 10px; font-size: 1.1rem;">ボーナスを請求</h3>
+                <p style="font-size: 0.9rem; margin: 0;">
+                    審査完了メールが届いたら会員ページにログイン。「ボーナスを請求する」ボタンを押すと口座に13,000円が反映されます！
+                </p>
             </div>
         </div>
 
+        <!-- FAQ -->
         <div class="card">
             <h2>よくある質問 (Q&A)</h2>
-            <details style="margin-bottom:10px; border-bottom:1px solid #eee; padding-bottom:10px;">
-                <summary style="font-weight:bold; cursor:pointer;">Q. ボーナスは出金できますか？</summary>
-                <p style="margin-top:10px; font-size:0.9rem;">A. ボーナス自体（クレジット）は出金できません。しかし、ボーナスを使って稼いだ<strong>利益は全額出金可能</strong>です。</p>
+            <details>
+                <summary>Q. ボーナスは出金できますか？</summary>
+                <p>A. ボーナス自体（クレジット）は出金できません。しかし、そのボーナスを使って取引し、稼いだ利益は全額出金可能です。</p>
             </details>
-            <details style="margin-bottom:10px; border-bottom:1px solid #eee; padding-bottom:10px;">
-                <summary style="font-weight:bold; cursor:pointer;">Q. 本当にお金はかかりませんか？</summary>
-                <p style="margin-top:10px; font-size:0.9rem;">A. はい、口座開設ボーナスのみで取引する場合、入金は一切不要です。損失が出てもボーナスが減るだけで、請求が来ることはありません。</p>
+            <details>
+                <summary>Q. 本当に無料ですか？</summary>
+                <p>A. はい、口座開設ボーナスのみで取引する場合、お客様の入金は一切不要です。損失が出てもボーナスが消滅するだけで、追加入金を求められることはありません。</p>
+            </details>
+             <details>
+                <summary>Q. マイナンバーは必要ですか？</summary>
+                <p>A. 現時点では、XMTradingの口座開設にマイナンバーの提出は必須ではありません。「いいえ」を選択して進めて問題ありません。</p>
             </details>
         </div>
 
-        <div class="cta-box" style="background:white; border:none;">
-            <p>キャンペーンは予告なく終了する場合があります。<br>今のうちに権利だけ確保しておきましょう。</p>
-            <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=1" class="btn-main shiny">公式ページで口座開設する</a>
-            
+        <!-- Final CTA -->
+        <div class="cta-wrapper" style="margin-bottom: 50px;">
+            <p style="font-size: 0.9rem; margin-bottom: 10px;">キャンペーンは予告なく終了する場合があります。<br>権利だけでも確保しておきましょう。</p>
+            <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=1" class="cta-btn shine-effect">
+                公式ページで口座開設する
+            </a>
             <div style="margin-top: 15px;">
                 <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=1" style="color: #666; font-size: 0.85rem; text-decoration: underline;">
-                    その他のプロモーション・キャンペーン一覧はこちら
+                    その他のボーナスキャンペーンを見る
                 </a>
             </div>
         </div>
 
+        <div class="disclaimer" style="font-size: 0.75rem; color: #888; background: #eee; padding: 20px; border-radius: 8px;">
+            <p><strong>リスク警告：</strong>FXおよびCFD取引はレバレッジを利用する商品であり、元本以上の損失が発生するリスクがあります。投資判断は自己責任にてお願いいたします。</p>
+            <p><strong>広告開示：</strong>当ページはアフィリエイト広告を含みます。リンク先での成約により当サイト運営者が報酬を受け取る場合があります。</p>
+            <p>&copy; 2026 FXfacts 編集部</p>
+        </div>
+
     </div>
 
-    <div class="disclaimer">
-        <p><strong>リスク警告：</strong>FXおよびCFD取引はレバレッジを利用する商品であり、元本以上の損失が発生するリスクがあります。投資判断は自己責任にてお願いいたします。</p>
-        <p><strong>広告開示：</strong>当ページはアフィリエイト広告を含みます。リンク先での成約により当サイト運営者が報酬を受け取る場合があります。</p>
-        <p>&copy; 2026 FXfacts 編集部</p>
-    </div>
-
+    <!-- Sticky Footer -->
     <div class="sticky-footer">
-        <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=0" class="sticky-btn">今すぐ13,000円を受け取る ＞</a>
-        
-        <a href="https://cloud.xmtrading-cdn.com/static/pdf/System-PDFs/XMTrading-Terms-and-Conditions-Bonus-Program-100-and-20-upto-10000.pdf?v=123d705b39c1a1c798f31bda7b89c556" target="_blank" style="display: block; margin-top: 8px; font-size: 0.65rem; color: #555; text-decoration: underline; text-align: center;">
-            リスク警告：FXとデリバティブ取引には高い損失リスクが伴います。 利用規約適用。
+        <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=0" class="sticky-btn">
+            今すぐ13,000円を受け取る ＞
+        </a>
+        <a href="https://cloud.xmtrading-cdn.com/static/pdf/System-PDFs/XMTrading-Terms-and-Conditions-Bonus-Program-100-and-20-upto-10000.pdf?v=123d705b39c1a1c798f31bda7b89c556" target="_blank" style="display: block; margin-top: 8px; font-size: 0.65rem; color: #777; text-decoration: underline;">
+            リスク警告：FXとデリバティブ取引には高い損失リスクが伴います。
         </a>
     </div>
 
