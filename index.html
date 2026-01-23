@@ -462,7 +462,7 @@
             </div>
             
             <div style="text-align: center; margin-top: 15px;">
-                <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=1" target="_blank" style="color: var(--col-primary); font-size: 0.9rem; font-weight: bold; text-decoration: underline; display: inline-flex; align-items: center; gap: 5px;">
+                <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=1" onclick="triggerPropellerConversion()" target="_blank" style="color: var(--col-primary); font-size: 0.9rem; font-weight: bold; text-decoration: underline; display: inline-flex; align-items: center; gap: 5px;">
                     全口座タイプの詳細・比較表を見る
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
                 </a>
@@ -487,7 +487,7 @@
 
         <div class="btn-wrapper" style="margin-bottom: 50px;">
             <p style="font-weight:bold; margin-bottom:10px; color:var(--col-gold);">\ キャンペーン終了前に確保 /</p>
-            <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=0" class="btn-shiny">
+            <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=0" onclick="triggerPropellerConversion()" class="btn-shiny">
                 XM公式ページへ進む ＞
             </a>
             
@@ -510,7 +510,7 @@
     </div>
 
     <div class="sticky-footer">
-        <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=1" class="sticky-btn">
+        <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=1" onclick="triggerPropellerConversion()" class="sticky-btn">
             今すぐ13,000円を受け取る ＞
         </a>
         <div style="font-size:0.6rem; color:#64748b; margin-top:5px;">
@@ -542,6 +542,26 @@
            return false;
         }
     }
+</script>
+
+    <script>
+function triggerPropellerConversion() {
+    // 1. Намираме clickid от адреса на браузъра
+    const urlParams = new URLSearchParams(window.location.search);
+    const clickId = urlParams.get('clickid'); 
+
+    // 2. Ако има clickid, изпращаме сигнал към PropellerAds
+    if (clickId) {
+        // ВАЖНО: Сменихме http на https, за да не го блокира браузърът
+        const postbackUrl = "https://ad.propellerads.com/conversion.php?aid=1063015&pid=&tid=114050&visitor_id=" + clickId;
+        
+        // Изстрелваме "невидим пиксел"
+        const pixel = new Image();
+        pixel.src = postbackUrl;
+        
+        console.log("Conversion fired for: " + clickId);
+    }
+}
 </script>
 
 </body>
