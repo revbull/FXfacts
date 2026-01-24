@@ -551,22 +551,29 @@
     }
 </script>
 
-    <script>
+   <script>
 function triggerPropellerConversion() {
-    // 1. Намираме clickid от адреса на браузъра
+    // --- 1. ПРИНУДИТЕЛЕН СИГНАЛ КЪМ GOOGLE ANALYTICS ---
+    // Това изпраща събитието "XMclick" веднага щом се натисне бутона
+    if (typeof gtag === 'function') {
+        gtag('event', 'XMclick', {
+            'event_category': 'conversion',
+            'event_label': 'CTA_Button_Main',
+            'debug_mode': true
+        });
+        console.log("GA4 Event sent: XMclick");
+    }
+
+    // --- 2. ЛОГИКАТА ЗА PROPELLERADS (Запазваме я) ---
     const urlParams = new URLSearchParams(window.location.search);
     const clickId = urlParams.get('clickid'); 
 
-    // 2. Ако има clickid, изпращаме сигнал към PropellerAds
     if (clickId) {
-        // ВАЖНО: Сменихме http на https, за да не го блокира браузърът
+        // Изпращаме сигнал към PropellerAds
         const postbackUrl = "https://ad.propellerads.com/conversion.php?aid=1063015&pid=&tid=114050&visitor_id=" + clickId;
-        
-        // Изстрелваме "невидим пиксел"
         const pixel = new Image();
         pixel.src = postbackUrl;
-        
-        console.log("Conversion fired for: " + clickId);
+        console.log("Propeller fired for: " + clickId);
     }
 }
 </script>
