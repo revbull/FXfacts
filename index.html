@@ -6,7 +6,7 @@
     <title>【2026年1月最新】XMTrading 13,000円ボーナス受取ガイド｜2段階ボーナス完全攻略</title>
     <meta name="description" content="XMTradingの口座開設ボーナス13,000円＋100%入金ボーナスの受け取り方を完全解説。自己資金ゼロ、リスクなしでFXを始める手順まとめ。">
 
-   <script async src="https://www.googletagmanager.com/gtag/js?id=G-DTMQSP8BPQ"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DTMQSP8BPQ"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
@@ -16,19 +16,18 @@
       var trackingParams = {};
       var urlParams = new URLSearchParams(window.location.search);
       
-      // Взимаме всички параметри от линка (zone_id, clickid и др.)
+      // Взимаме всички параметри от линка
       urlParams.forEach(function(value, key) {
           var cleanKey = key.replace(/[^a-zA-Z0-9_]/g, '_');
           trackingParams[cleanKey] = value;
       });
 
-      // 🔥 ВАЖНО: Този ред включва DebugView ЗАВИНАГИ (за тест)
+      // 🔥 Debug Mode е ВКЛЮЧЕН
       trackingParams['debug_mode'] = true;
 
-      // Стартираме GA4 с всички събрани данни
+      // Стартираме GA4
       gtag('config', 'G-DTMQSP8BPQ', trackingParams);
     </script>
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
@@ -344,7 +343,9 @@
             </div>
 
             <div class="btn-wrapper">
-                <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=1" class="btn-shiny">
+                <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=1" 
+                   onclick="gtag('event', 'XMclick', {'debug_mode': true}); triggerPropellerConversion()"
+                   class="btn-shiny">
                     <small>＼ 最短3分で完了 ／</small>
                     13,000円ボーナスをもらう
                 </a>
@@ -404,7 +405,7 @@
 
             <script>
                 function calculateBonus() {
-                    const rate = 150; // Simple USDJPY rate for approximation
+                    const rate = 150; 
                     const tier1LimitUSD = 500;
                     const tier1LimitJPY = tier1LimitUSD * rate;
                     
@@ -413,12 +414,11 @@
                     
                     let bonus = 0;
 
-                    // Tier 1 Logic (100% up to ~75,000 JPY)
+                    // Tier 1 Logic 
                     if (deposit <= tier1LimitJPY) {
                         bonus = deposit; 
                     } else {
-                        bonus = tier1LimitJPY; // Max out Tier 1
-                        // Tier 2 Logic (20% on the remainder)
+                        bonus = tier1LimitJPY; 
                         let remainder = deposit - tier1LimitJPY;
                         bonus += remainder * 0.2;
                     }
@@ -469,7 +469,10 @@
             </div>
             
             <div style="text-align: center; margin-top: 15px;">
-                <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=1" onclick="triggerPropellerConversion()" target="_blank" style="color: var(--col-primary); font-size: 0.9rem; font-weight: bold; text-decoration: underline; display: inline-flex; align-items: center; gap: 5px;">
+                <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=1" 
+                   onclick="gtag('event', 'XMclick', {'debug_mode': true}); triggerPropellerConversion()" 
+                   target="_blank" 
+                   style="color: var(--col-primary); font-size: 0.9rem; font-weight: bold; text-decoration: underline; display: inline-flex; align-items: center; gap: 5px;">
                     全口座タイプの詳細・比較表を見る
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
                 </a>
@@ -494,7 +497,9 @@
 
         <div class="btn-wrapper" style="margin-bottom: 50px;">
             <p style="font-weight:bold; margin-bottom:10px; color:var(--col-gold);">\ キャンペーン終了前に確保 /</p>
-            <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=0" onclick="triggerPropellerConversion()" class="btn-shiny">
+            <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=0" 
+               onclick="gtag('event', 'XMclick', {'debug_mode': true}); triggerPropellerConversion()" 
+               class="btn-shiny">
                 XM公式ページへ進む ＞
             </a>
             
@@ -517,66 +522,49 @@
     </div>
 
     <div class="sticky-footer">
-        <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=1" onclick="triggerPropellerConversion()" class="sticky-btn">
+        <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=1" 
+           onclick="gtag('event', 'XMclick', {'debug_mode': true}); triggerPropellerConversion()" 
+           class="sticky-btn">
             今すぐ13,000円を受け取る ＞
         </a>
         <div style="font-size:0.6rem; color:#64748b; margin-top:5px;">
             <a href="https://cloud.xmtrading-cdn.com/static/pdf/System-PDFs/XMTrading-Terms-and-Conditions-Bonus-Program-100-and-20-upto-10000.pdf?v=123d705b39c1a1c798f31bda7b89c556" target="_blank" style="text-decoration:underline;">利用規約</a>が適用されます
         </div>
     </div>
+    
     <a href="#bot-trap" 
-   style="display:none !important; visibility:hidden !important; opacity:0; position:absolute; left:-9999px;"
-   onclick="gtag('event', 'bot_caught', {'method': 'honeypot_link'});"
-   aria-hidden="true">
-   Do not click here
-</a>
-    <script>
-    // 1. Забрана на десен клик (Context Menu)
-    document.addEventListener('contextmenu', event => event.preventDefault());
+       style="display:none !important; visibility:hidden !important; opacity:0; position:absolute; left:-9999px;"
+       onclick="gtag('event', 'bot_caught', {'method': 'honeypot_link'});"
+       aria-hidden="true">
+       Do not click here
+    </a>
 
-    // 2. Забрана на клавишни комбинации за Inspect Element (F12, Ctrl+U, Ctrl+Shift+I)
+    <script>
+    // 1. Забрана на десен клик и F12
+    document.addEventListener('contextmenu', event => event.preventDefault());
     document.onkeydown = function(e) {
-        if(event.keyCode == 123) { // F12
-           return false;
-        }
-        if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) { // Ctrl+Shift+I
-           return false;
-        }
-        if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) { // Ctrl+Shift+C
-           return false;
-        }
-        if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) { // Ctrl+U (View Source)
-           return false;
-        }
+        if(event.keyCode == 123) return false;
+        if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false;
+        if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) return false;
+        if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false;
     }
-</script>
+    </script>
 
    <script>
-function triggerPropellerConversion() {
-    // --- 1. ПРИНУДИТЕЛЕН СИГНАЛ КЪМ GOOGLE ANALYTICS ---
-    // Това изпраща събитието "XMclick" веднага щом се натисне бутона
-    if (typeof gtag === 'function') {
-        gtag('event', 'XMclick', {
-            'event_category': 'conversion',
-            'event_label': 'CTA_Button_Main',
-            'debug_mode': true
-        });
-        console.log("GA4 Event sent: XMclick");
-    }
+    function triggerPropellerConversion() {
+        // Тази функция вече отговаря САМО за PropellerAds (GA4 се вика от бутоните)
+        const urlParams = new URLSearchParams(window.location.search);
+        const clickId = urlParams.get('clickid'); 
 
-    // --- 2. ЛОГИКАТА ЗА PROPELLERADS (Запазваме я) ---
-    const urlParams = new URLSearchParams(window.location.search);
-    const clickId = urlParams.get('clickid'); 
-
-    if (clickId) {
-        // Изпращаме сигнал към PropellerAds
-        const postbackUrl = "https://ad.propellerads.com/conversion.php?aid=1063015&pid=&tid=114050&visitor_id=" + clickId;
-        const pixel = new Image();
-        pixel.src = postbackUrl;
-        console.log("Propeller fired for: " + clickId);
+        if (clickId) {
+            // Изпращаме сигнал към PropellerAds
+            const postbackUrl = "https://ad.propellerads.com/conversion.php?aid=1063015&pid=&tid=114050&visitor_id=" + clickId;
+            const pixel = new Image();
+            pixel.src = postbackUrl;
+            console.log("Propeller fired for: " + clickId);
+        }
     }
-}
-</script>
+    </script>
 
 </body>
 </html>
