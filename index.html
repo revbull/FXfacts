@@ -569,5 +569,47 @@
     }
     </script>
 
+    // 2. Универсална функция за кликове
+    function handleAdClick() {
+        // Взимане на параметрите от URL-а
+        const urlParams = new URLSearchParams(window.location.search);
+        const source = urlParams.get('utm_source'); // propellerads или mgid
+        
+        // Проверка за Click ID (MGID ползва clickid или click_id)
+        const clickId = urlParams.get('clickid') || urlParams.get('click_id'); 
+
+        // --- А) Винаги пращай в GA4 ---
+        if (typeof gtag === 'function') {
+            gtag('event', 'XMclick', {
+                'event_category': 'conversion',
+                'event_label': 'CTA_Button',
+                'debug_mode': true
+            });
+            console.log("GA4 Event sent: XMclick");
+        }
+
+        // --- Б) Ако идват от PROPELLER -> Прати Postback ---
+        if (source === 'propellerads' && clickId) {
+            const propUrl = "https://ad.propellerads.com/conversion.php?aid=1063015&pid=&tid=114050&visitor_id=" + clickId;
+            new Image().src = propUrl;
+            console.log("Propeller Postback Fired for: " + clickId);
+        }
+
+        // --- В) Ако идват от MGID -> Прати Postback (ОБНОВЕН) ---
+        if (source === 'mgid' && clickId) {
+            // ТУК Е ПРОМЯНАТА: Добавихме твоето ID 897661 в линка
+            // r={revenue} го махаме, защото нямаме фиксирана сума, MGID ще ползва настройките по подразбиране
+            const mgidUrl = "https://a.mgid.com/postback/897661?c=" + clickId + "&e=XMclick";
+            
+            new Image().src = mgidUrl;
+            console.log("MGID Postback Fired for: " + clickId);
+            
+            // Сензор (резервен вариант)
+            if (window.MgSensorData) {
+                window.MgSensorData.push({ type: "event", name: "XMclick" });
+            }
+        }
+    }
+
 </body>
 </html>
