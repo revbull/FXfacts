@@ -188,17 +188,21 @@
 </head>
 <body>
 
-    <header>
-        <span>Smart Finance Italia</span>
+    <header style="justify-content: space-between;"> <span>Smart Finance Italia</span>
+    
+    <div style="font-size: 1.2rem; cursor: pointer;">
+        <span onclick="location.reload()">🇮🇹</span> <span onclick="forceEnglish()" style="margin-left:10px;">🇬🇧</span>
+    </div>
     </header>
+   
 
     <div class="hero">
         <div class="hero-tag">Social Trading Leader</div>
-        <h1>
-            Non sai fare trading?<br>
-            <span class="green-text">Copia i Migliori.</span>
-        </h1>
-        <p class="hero-sub">Unisciti a 30 milioni di utenti. Replica le mosse dei top investor in automatico.</p>
+        <h1 id="txt-headline">
+    Non sai fare trading?<br>
+    <span class="green-text" id="txt-subheadline">Copia i Migliori.</span>
+</h1>
+        <p class="hero-sub" id="txt-description">Unisciti a 30 milioni di utenti. Replica le mosse dei top investor in automatico.</p>
     </div>
 
     <div class="container">
@@ -235,10 +239,12 @@
                 </div>
                 <div class="trader-gain">+21.3%</div>
             </div>
+            
+            <a href="https://med.etoro.com/B20454_A92557_TClick.aspx" onclick="handleAdClick()" class="btn-etoro" id="txt-main-btn">
+    Inizia a Copiare Ora
+</a>
 
-            <a href="https://med.etoro.com/B20454_A92557_TClick.aspx" onclick="handleAdClick()" class="btn-etoro">
-                Inizia a Copiare Ora
-            </a>
+        
             <p style="font-size:0.7rem; text-align:center; color:#999; margin-top:10px;">
                 *Le performance passate non garantiscono risultati futuri.
             </p>
@@ -282,9 +288,11 @@
     </div>
 
     <div class="sticky-footer">
-        <a href="https://med.etoro.com/B20454_A92557_TClick.aspx" onclick="handleAdClick()" class="btn-etoro" style="margin-top:0; padding:12px; font-size:1rem;">
-            Iscriviti Gratuitamente
-        </a>
+
+        <a href="https://med.etoro.com/B20454_A92557_TClick.aspx" onclick="handleAdClick()" class="btn-etoro" ... id="txt-sticky-btn">
+    Iscriviti Gratuitamente
+</a>
+        
     </div>
 
     <script>
@@ -312,6 +320,32 @@
         }
     }
     </script>
+
+    <script>
+    // Проверка на езика на браузъра
+    var userLang = navigator.language || navigator.userLanguage; 
+    
+    // Ако езикът НЕ започва с "it" (т.е. не е италиански), смени на Английски
+    if (!userLang.startsWith('it')) {
+        
+        // Смяна на текстовете
+        document.getElementById('txt-headline').innerHTML = 'Don\'t know how to trade?<br><span class="green-text">Copy the Best.</span>';
+        document.getElementById('txt-description').innerText = 'Join 30 million users. Automatically replicate the moves of top investors.';
+        document.getElementById('txt-table-title').innerText = 'Top Traders to Copy 📈';
+        document.getElementById('txt-main-btn').innerText = 'Start Copying Now';
+        document.getElementById('txt-sticky-btn').innerText = 'Join for Free';
+        
+        // Смяна на текстовете в балончетата на търговците (по желание, чрез клас)
+        // Тук е по-сложно, така че за начало може да ги оставим, имената са интернационални
+    }
+        function forceEnglish() {
+        document.getElementById('txt-headline').innerHTML = 'Don\'t know how to trade?<br><span class="green-text">Copy the Best.</span>';
+        document.getElementById('txt-description').innerText = 'Join 30 million users. Automatically replicate the moves of top investors.';
+        document.getElementById('txt-table-title').innerText = 'Top Traders to Copy 📈';
+        document.getElementById('txt-main-btn').innerText = 'Start Copying Now';
+        document.getElementById('txt-sticky-btn').innerText = 'Join for Free';
+    }
+</script>
 
 </body>
 </html>
