@@ -561,8 +561,8 @@
        Do not click here
     </a>
 
-    <script>
-    // 1. Забрана на десен клик и F12 (Защита на съдържанието)
+   <script>
+    // 1. Забрана на десен клик и F12 (Защита)
     document.addEventListener('contextmenu', event => event.preventDefault());
     document.onkeydown = function(e) {
         if(event.keyCode == 123) return false;
@@ -571,32 +571,31 @@
         if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false;
     }
 
-    // 2. Основна логика при зареждане на страницата
+    // 2. Основна логика
     document.addEventListener("DOMContentLoaded", function() {
         const urlParams = new URLSearchParams(window.location.search);
         
-        // Взимаме параметрите от URL-а (RichAds, MGID, Propeller)
-        const richAdsClickId = urlParams.get('click_id'); // RichAds
-        const richAdsPubId = urlParams.get('pub_id');     // RichAds Source
+        // Взимаме параметрите (RichAds, MGID, Propeller)
+        // RichAds: Търсим 'click_id' (както сме го задали в Destination URL)
+        const richAdsClickId = urlParams.get('click_id'); 
+        const richAdsPubId = urlParams.get('pub_id');     
         
-        const mgidClickId = urlParams.get('clickid') || urlParams.get('click_id'); // MGID
-        const propClickId = urlParams.get('visitor_id'); // Propeller
+        const mgidClickId = urlParams.get('clickid') || urlParams.get('click_id'); 
+        const propClickId = urlParams.get('visitor_id'); 
 
-        // Базов линк към XM (Твоят афилиейт линк)
+        // ТВОЯТ АФИЛИЕЙТ ЛИНК ЗА XM
         const xmBaseUrl = "https://clicks.affstrack.com/c?c=1120254&l=ja&p=6"; 
 
-        // Намираме всички линкове в сайта
         const links = document.querySelectorAll('a');
 
         links.forEach(link => {
-            // Работим само с линкове към XM или бутони
+            // Работим само с линкове към XM или специални бутони
             if (link.href.includes("clicks.affstrack") || link.getAttribute('href') === "#" || link.classList.contains('btn-shiny') || link.classList.contains('sticky-btn')) {
                 
-                // --- А) Сглобяване на URL за XM (за да виждаш кой откъде идва в XM панела) ---
+                // --- А) Обновяване на линка към XM ---
                 let newUrl = xmBaseUrl;
                 
                 if (richAdsClickId) {
-                    // Ако е RichAds -> слагаме ID-то в subid1, а сайта в subid2
                     newUrl += "&subid1=" + richAdsClickId;
                     if (richAdsPubId) newUrl += "&subid2=" + richAdsPubId;
                 } 
@@ -605,38 +604,34 @@
                     newUrl += "&subid2=mgid";
                 }
 
-                // Обновяваме линка в бутона
                 link.href = newUrl;
 
-                // --- Б) Добавяме "слушател" за клик (за да пратим сигнал обратно към мрежите) ---
+                // --- Б) Изпращане на сигнал при КЛИК (Conversion Tracking) ---
                 link.addEventListener('click', function() {
                     console.log("Button clicked!");
 
-                    // 1. Google Analytics Event
+                    // GA4 Event
                     if (typeof gtag === 'function') {
-                        gtag('event', 'XMclick', {
-                            'event_category': 'conversion',
-                            'event_label': 'CTA_Button'
-                        });
+                        gtag('event', 'XMclick', { 'event_category': 'conversion', 'event_label': 'CTA_Button' });
                     }
 
-                    // 2. RichAds Postback (Soft Conversion при клик)
+                    // --- RICHADS FIX (us.ahows.co) ---
                     if (richAdsClickId) {
-                        // Пращаме сигнал към RichAds, че има клик
-                        const richAdsPostback = 'https://xml.richads.com/log?action=conversion&click_id=' + richAdsClickId;
+                        // ТУК Е ПРОМЯНАТА: Ползваме новия домейн us.ahows.co и параметър key
+                        const richAdsPostback = 'https://us.ahows.co/log?action=conversion&key=' + richAdsClickId;
                         
-                        // Използваме fetch с no-cors, за да мине без грешки
+                        // Изпращаме сигнала
                         fetch(richAdsPostback, { mode: 'no-cors', keepalive: true });
-                        console.log("RichAds Conversion sent for:", richAdsClickId);
+                        console.log("RichAds Conversion sent to us.ahows.co for:", richAdsClickId);
                     }
 
-                    // 3. MGID Postback (ако още ползваш MGID)
+                    // MGID Postback
                     if (mgidClickId) {
                         const mgidPostback = "https://a.mgid.com/postback/897661?c=" + mgidClickId + "&e=XMclick";
                         new Image().src = mgidPostback;
                     }
 
-                    // 4. PropellerAds Postback
+                    // PropellerAds Postback
                     if (propClickId) {
                         const propUrl = "https://ad.propellerads.com/conversion.php?aid=1063015&pid=&tid=114050&visitor_id=" + propClickId;
                         new Image().src = propUrl;
@@ -645,13 +640,6 @@
             }
         });
     });
-
-    // Запазваме старата функция handleAdClick за съвместимост (ако някой бутон я вика директно)
-    function handleAdClick() {
-        // Тази функция вече е излишна, защото логиката е в EventListener-а горе,
-        // но я оставяме празна, за да не гърми грешка в конзолата.
-        console.log("Legacy handleAdClick called");
-    }
 </script>
 
 </body>
