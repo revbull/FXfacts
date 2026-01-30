@@ -562,7 +562,7 @@
     </a>
 
     <script>
-    // 1. Забрана на десен клик и F12
+    // 1. Забрана на десен клик и F12 (Защита на съдържанието)
     document.addEventListener('contextmenu', event => event.preventDefault());
     document.onkeydown = function(e) {
         if(event.keyCode == 123) return false;
@@ -571,47 +571,88 @@
         if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false;
     }
 
-    // 2. Универсална функция за кликове
-    function handleAdClick() {
-        // Взимане на параметрите от URL-а
+    // 2. Основна логика при зареждане на страницата
+    document.addEventListener("DOMContentLoaded", function() {
         const urlParams = new URLSearchParams(window.location.search);
-        const source = urlParams.get('utm_source'); // propellerads или mgid
         
-        // Проверка за Click ID (MGID ползва clickid или click_id)
-        const clickId = urlParams.get('clickid') || urlParams.get('click_id'); 
+        // Взимаме параметрите от URL-а (RichAds, MGID, Propeller)
+        const richAdsClickId = urlParams.get('click_id'); // RichAds
+        const richAdsPubId = urlParams.get('pub_id');     // RichAds Source
+        
+        const mgidClickId = urlParams.get('clickid') || urlParams.get('click_id'); // MGID
+        const propClickId = urlParams.get('visitor_id'); // Propeller
 
-        // --- А) Винаги пращай в GA4 ---
-        if (typeof gtag === 'function') {
-            gtag('event', 'XMclick', {
-                'event_category': 'conversion',
-                'event_label': 'CTA_Button',
-                'debug_mode': true
-            });
-            console.log("GA4 Event sent: XMclick");
-        }
+        // Базов линк към XM (Твоят афилиейт линк)
+        const xmBaseUrl = "https://clicks.affstrack.com/c?c=1120254&l=ja&p=6"; 
 
-        // --- Б) Ако идват от PROPELLER -> Прати Postback ---
-        if (source === 'propellerads' && clickId) {
-            const propUrl = "https://ad.propellerads.com/conversion.php?aid=1063015&pid=&tid=114050&visitor_id=" + clickId;
-            new Image().src = propUrl;
-            console.log("Propeller Postback Fired for: " + clickId);
-        }
+        // Намираме всички линкове в сайта
+        const links = document.querySelectorAll('a');
 
-        // --- В) Ако идват от MGID -> Прати Postback (ОБНОВЕН) ---
-        if (source === 'mgid' && clickId) {
-            // ТУК Е ПРОМЯНАТА: Добавихме твоето ID 897661 в линка
-            const mgidUrl = "https://a.mgid.com/postback/897661?c=" + clickId + "&e=XMclick";
-            
-            new Image().src = mgidUrl;
-            console.log("MGID Postback Fired for: " + clickId);
-            
-            // Сензор (резервен вариант)
-            if (window.MgSensorData) {
-                window.MgSensorData.push({ type: "event", name: "XMclick" });
+        links.forEach(link => {
+            // Работим само с линкове към XM или бутони
+            if (link.href.includes("clicks.affstrack") || link.getAttribute('href') === "#" || link.classList.contains('btn-shiny') || link.classList.contains('sticky-btn')) {
+                
+                // --- А) Сглобяване на URL за XM (за да виждаш кой откъде идва в XM панела) ---
+                let newUrl = xmBaseUrl;
+                
+                if (richAdsClickId) {
+                    // Ако е RichAds -> слагаме ID-то в subid1, а сайта в subid2
+                    newUrl += "&subid1=" + richAdsClickId;
+                    if (richAdsPubId) newUrl += "&subid2=" + richAdsPubId;
+                } 
+                else if (mgidClickId) {
+                    newUrl += "&subid1=" + mgidClickId;
+                    newUrl += "&subid2=mgid";
+                }
+
+                // Обновяваме линка в бутона
+                link.href = newUrl;
+
+                // --- Б) Добавяме "слушател" за клик (за да пратим сигнал обратно към мрежите) ---
+                link.addEventListener('click', function() {
+                    console.log("Button clicked!");
+
+                    // 1. Google Analytics Event
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'XMclick', {
+                            'event_category': 'conversion',
+                            'event_label': 'CTA_Button'
+                        });
+                    }
+
+                    // 2. RichAds Postback (Soft Conversion при клик)
+                    if (richAdsClickId) {
+                        // Пращаме сигнал към RichAds, че има клик
+                        const richAdsPostback = 'https://xml.richads.com/log?action=conversion&click_id=' + richAdsClickId;
+                        
+                        // Използваме fetch с no-cors, за да мине без грешки
+                        fetch(richAdsPostback, { mode: 'no-cors', keepalive: true });
+                        console.log("RichAds Conversion sent for:", richAdsClickId);
+                    }
+
+                    // 3. MGID Postback (ако още ползваш MGID)
+                    if (mgidClickId) {
+                        const mgidPostback = "https://a.mgid.com/postback/897661?c=" + mgidClickId + "&e=XMclick";
+                        new Image().src = mgidPostback;
+                    }
+
+                    // 4. PropellerAds Postback
+                    if (propClickId) {
+                        const propUrl = "https://ad.propellerads.com/conversion.php?aid=1063015&pid=&tid=114050&visitor_id=" + propClickId;
+                        new Image().src = propUrl;
+                    }
+                });
             }
-        }
+        });
+    });
+
+    // Запазваме старата функция handleAdClick за съвместимост (ако някой бутон я вика директно)
+    function handleAdClick() {
+        // Тази функция вече е излишна, защото логиката е в EventListener-а горе,
+        // но я оставяме празна, за да не гърми грешка в конзолата.
+        console.log("Legacy handleAdClick called");
     }
-    </script>
+</script>
 
 </body>
 </html>
