@@ -6,28 +6,23 @@
     <title>Traders Pulse | Futures, Crypto & CFD</title>
     <meta name="description" content="Plateforme de trading tout-en-un. Futures, Options, CFD. Jusqu'à 100 trades sans commission.">
 
-    <script type="text/javascript">
-        (function() {
-            var d = document, w = window;
-            w.MgSensorData = w.MgSensorData || [];
-            w.MgSensorData.push({ cid:897661, project: "a.mgid.com" });
-            var l = "a.mgid.com";
-            var n = d.getElementsByTagName("script")[0];
-            var s = d.createElement("script");
-            s.type = "text/javascript";
-            s.async = true;
-            var dt = !Date.now?new Date().valueOf():Date.now();
-            s.src = "https://" + l + "/mgsensor.js?d=" + dt;
-            n.parentNode.insertBefore(s, n);
-        })();
-    </script>
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://tracking.avapartner.com">
+    
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'G-XXXXXXXXXX');
+
+      // Взимаме параметрите за по-добър GA4 анализ
+      var trackingParams = {};
+      var urlParams = new URLSearchParams(window.location.search);
+      urlParams.forEach(function(value, key) {
+          trackingParams[key] = value;
+      });
+
+      gtag('config', 'G-XXXXXXXXXX', trackingParams);
     </script>
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -345,27 +340,90 @@
         </a>
     </div>
 
-    <script>
-        function handleAdClick() {
-            if (typeof gtag === 'function') {
-                gtag('event', 'AvaConversion', { 'event_category': 'conversion' });
-            }
-        }
-        document.addEventListener("DOMContentLoaded", function() {
-            const links = document.querySelectorAll('a');
-            const urlParams = new URLSearchParams(window.location.search);
-            const clickId = urlParams.get('clickid') || urlParams.get('click_id') || urlParams.get('adclid');
-            links.forEach(link => {
-                link.addEventListener('click', handleAdClick);
-                if (clickId) {
-                    let href = link.getAttribute('href');
-                    if (href && href.includes('avapartner')) {
-                        const separator = href.includes('?') ? '&' : '?';
-                        link.setAttribute('href', href + separator + 'affSub1=' + clickId);
+   <script type="text/javascript">
+    (function() {
+        var d = document, w = window;
+        w.MgSensorData = w.MgSensorData || [];
+        w.MgSensorData.push({ cid:897661, project: "a.mgid.com" });
+        var l = "a.mgid.com";
+        var s = d.createElement("script");
+        s.type = "text/javascript";
+        s.async = true;
+        var dt = !Date.now?new Date().valueOf():Date.now();
+        s.src = "https://" + l + "/mgsensor.js?d=" + dt;
+        d.body.appendChild(s);
+    })();
+   </script>
+
+   <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        
+        // 1. Identify Traffic Source Parameters
+        // RichAds sends "click_id", MGID sends "clickid" or "click_id"
+        const richAdsClickId = urlParams.get('click_id'); 
+        const mgidClickId = urlParams.get('clickid') || urlParams.get('click_id'); 
+        
+        const links = document.querySelectorAll('a');
+
+        links.forEach(link => {
+            // Check if it's an AvaTrade link or Action Button
+            let isTargetLink = link.href.includes("tracking.avapartner") || 
+                               link.classList.contains('btn-main') || 
+                               link.classList.contains('btn-sticky') ||
+                               link.classList.contains('btn-card-action') ||
+                               link.classList.contains('h-link');
+
+            if (isTargetLink) {
+                
+                // --- A) Update Link with Tracking ID for AvaTrade Panel ---
+                let currentHref = link.href;
+                if (currentHref.includes('avapartner')) {
+                    // Decide which ID to pass to AvaTrade (Prioritize RichAds if both exist)
+                    let trackingId = richAdsClickId || mgidClickId;
+
+                    if (trackingId) {
+                        const separator = currentHref.includes('?') ? '&' : '?';
+                        // Using "TrafficSource" as the parameter to see it in AvaTrade reports
+                        link.href = currentHref + separator + 'TrafficSource=' + trackingId;
                     }
                 }
-            });
+
+                // --- B) Conversion Signaling (Postback) on Click ---
+                link.addEventListener('click', function() {
+                    console.log("Conversion Click Triggered");
+
+                    // 1. GA4 Event
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'AvaConversion', { 'event_category': 'conversion' });
+                    }
+
+                    // 2. RichAds Postback (us.ahows.co)
+                    if (richAdsClickId) {
+                         const richAdsPostback = 'https://us.ahows.co/log?action=conversion&key=' + richAdsClickId;
+                         // Use beacon for reliability (works even if page closes)
+                         if (navigator.sendBeacon) {
+                            navigator.sendBeacon(richAdsPostback);
+                        } else {
+                            fetch(richAdsPostback, { mode: 'no-cors', keepalive: true });
+                        }
+                    }
+
+                    // 3. MGID Postback
+                    if (mgidClickId) {
+                        // MGID usually requires an event name like "conversion" or custom
+                        const mgidPostback = "https://a.mgid.com/postback/897661?c=" + mgidClickId + "&e=conversion";
+                        if (navigator.sendBeacon) {
+                            navigator.sendBeacon(mgidPostback);
+                        } else {
+                            new Image().src = mgidPostback;
+                        }
+                    }
+                });
+            }
         });
-    </script>
+    });
+   </script>
+
 </body>
 </html>
