@@ -242,7 +242,7 @@
         </div>
     </header>
 
-   <div class="tradingview-widget-container">
+  <div class="tradingview-widget-container">
       <div class="tradingview-widget-container__widget"></div>
       <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
       {
@@ -284,43 +284,6 @@
     }
       </script>
     </div>
-    ```
-
-### Къде да го сложиш в пълния код?
-
-Ето как трябва да изглежда секцията след `header` и преди `hero`:
-
-```html
-    </header>
-
-    <div class="tradingview-widget-container">
-      <div class="tradingview-widget-container__widget"></div>
-      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
-      {
-      "symbols": [
-        { "proName": "FOREXCOM:SPXUSD", "title": "S&P 500" },
-        { "proName": "FX_IDC:EURUSD", "title": "EUR/USD" },
-        { "proName": "BITSTAMP:BTCUSD", "title": "Bitcoin" },
-        { "proName": "BITSTAMP:ETHUSD", "title": "Ethereum" },
-        { "proName": "TVC:GOLD", "title": "Or" },
-        { "proName": "TVC:USOIL", "title": "Pétrole" }
-      ],
-      "showSymbolLogo": true,
-      "colorTheme": "dark",
-      "isTransparent": false,
-      "displayMode": "adaptive",
-      "locale": "fr"
-    }
-      </script>
-    </div>
-
-    <div class="hero">
-    ```
-
-### Защо това вдига конверсията?
-Когато потребителят види логото на TradingView и реални движещи се цени, подсъзнателно си казва: *"Това е сериозна платформа, свързана с пазара."*
-
-Това е много по-добре от статичен текст, който може да изглежда като измама, ако пазарът върви наобратно.
 
     <div class="hero">
         <h1>
