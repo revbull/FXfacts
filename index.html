@@ -32,7 +32,7 @@
         /* --- CORE VARIABLES --- */
         :root {
             --col-primary: #0f172a; /* Navy */
-            --col-accent: #16a34a;  /* XM GREEN (Updated from Red) */
+            --col-accent: #16a34a;  /* XM GREEN */
             --col-accent-dark: #15803d; 
             --col-gold: #b4860b;    /* Gold */
             --col-bg: #f8fafc;
@@ -56,7 +56,7 @@
         
         a { text-decoration: none; color: inherit; transition: opacity 0.2s; }
         a:hover { opacity: 0.8; }
-        strong { color: #e11d48; font-weight: 900; } /* Keep emphasis red for text */
+        strong { color: #e11d48; font-weight: 900; } 
         .highlight-bg { background: linear-gradient(transparent 60%, #fef08a 60%); padding: 0 2px; }
 
         /* --- HEADER --- */
@@ -74,12 +74,12 @@
             background: #64748b; color: white; padding: 2px 8px; border-radius: 4px; margin-right: 8px; font-weight: bold; font-size: 0.7rem;
         }
 
-        /* --- HERO SECTION (UPDATED FOR HIGH IMPACT) --- */
+        /* --- HERO SECTION --- */
         .hero {
             background: linear-gradient(160deg, #0f172a 0%, #1e293b 100%);
             color: white;
             text-align: center;
-            padding: 30px 20px 80px; /* More padding at bottom */
+            padding: 30px 20px 80px; 
             position: relative;
             clip-path: polygon(0 0, 100% 0, 100% 95%, 50% 100%, 0 95%);
         }
@@ -101,7 +101,7 @@
             margin: 5px 0; letter-spacing: -2px;
         }
 
-        /* NEW: USP GRID (From Criteo Banner) */
+        /* USP GRID */
         .usp-grid {
             display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 20px;
         }
@@ -124,11 +124,10 @@
             box-shadow: var(--shadow-card); border: 1px solid #f1f5f9;
         }
 
-        /* --- BUTTONS (UPDATED TO GREEN) --- */
+        /* --- BUTTONS --- */
         .btn-wrapper { text-align: center; margin: 20px 0; }
         .btn-shiny {
             display: block; width: 100%; max-width: 400px; margin: 0 auto;
-            /* Updated to GREEN Gradient */
             background: linear-gradient(to bottom, #22c55e, #15803d);
             color: white; font-weight: 900; font-size: 1.35rem; padding: 18px 10px;
             border-radius: 100px; 
@@ -267,6 +266,48 @@
             </div>
         </div>
 
+        <div class="card" style="background: linear-gradient(145deg, #fffbeb, #fff); border: 1px solid #fcd34d;">
+            <div style="display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:15px;">
+                <span style="font-size:1.8rem;">🥇</span>
+                <h2 class="section-title" style="margin:0; text-align:left; border:none;">ゴールド(GOLD)取引も<br>XMが最強な理由</h2>
+            </div>
+            
+            <p style="font-size: 0.9rem; text-align:center; margin-bottom: 20px;">
+                国内業者(レバレッジ20倍)と比べて、<br>
+                XMなら<strong>50分の1の資金</strong>で同じ取引が可能です。
+            </p>
+
+            <div class="table-wrapper">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th style="background:#b45309;">比較項目</th>
+                            <th style="background:#f59e0b;">XMTrading</th>
+                            <th style="background:#94a3b8;">国内業者 D社</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="font-weight:bold;">レバレッジ</td>
+                            <td style="color:#b45309; font-weight:bold; background:#fff7ed; font-size:1.1rem;">1000倍</td>
+                            <td>最大20倍</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight:bold;">必要証拠金<br><span style="font-size:0.7rem">(1ロット時)</span></td>
+                            <td style="color:#b45309; font-weight:bold; background:#fff7ed;">約 30,000円</td>
+                            <td>約 1,500,000円</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight:bold;">追証(借金)</td>
+                            <td style="color:#16a34a; font-weight:bold; background:#fff7ed;">なし (ゼロカ)</td>
+                            <td>あり (危険)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <p style="font-size:0.8rem; color:#b45309; text-align:right; margin-top:5px;">※金価格2000ドル/1ドル150円換算の概算</p>
+        </div>
         <div class="card">
             <h2 class="section-title">$10,000超ボーナスの内訳</h2>
             <p style="font-size: 0.9rem; margin-bottom: 20px; text-align:center;">
