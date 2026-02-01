@@ -15,7 +15,6 @@
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
 
-      // Взимаме параметрите за по-добър GA4 анализ
       var trackingParams = {};
       var urlParams = new URLSearchParams(window.location.search);
       urlParams.forEach(function(value, key) {
@@ -93,14 +92,35 @@
         }
         .hero p { color: var(--text-gray); font-size: 1rem; max-width: 650px; margin: 0 auto 28px; }
 
+        /* BUTTONS */
+        .btn-group {
+            display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;
+        }
+
         .btn-main {
             background: var(--accent-blue);
             color: white; padding: 16px 35px; border-radius: 6px;
             font-weight: 700; text-transform: uppercase; text-decoration: none; font-size: 1rem;
             display: inline-block; box-shadow: 0 0 20px rgba(0, 122, 255, 0.4);
             transition: transform 0.2s;
+            border: 2px solid var(--accent-blue);
         }
         .btn-main:hover { transform: translateY(-2px); box-shadow: 0 0 30px rgba(0, 122, 255, 0.6); }
+
+        /* NEW SECONDARY BUTTON STYLE */
+        .btn-outline {
+            background: transparent;
+            color: white; padding: 16px 35px; border-radius: 6px;
+            font-weight: 700; text-transform: uppercase; text-decoration: none; font-size: 1rem;
+            display: inline-block;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.2s;
+        }
+        .btn-outline:hover {
+            border-color: var(--accent-blue);
+            color: var(--accent-blue);
+            transform: translateY(-2px);
+        }
 
         /* --- FEATURES GRID --- */
         .features-section {
@@ -233,16 +253,22 @@
     <div class="hero">
         <h1>
             Pourquoi de plus en plus de traders<br>
-            changent de plateforme en 2025
+            changent de plateforme en 2026
         </h1>
         <p>
             Les marchés évoluent vite. La technologie, les frais et l’exécution
             font aujourd’hui toute la différence — surtout en période volatile.
         </p>
 
-        <a href="https://tracking.avapartner.com/click/?affid=207628&videoId=35222&adTheme=780&controls=true&muted=true&autoplay=false&campaign=225565&campaignName=FR&tag=207628&linkDirection=https%3A%2F%2Fwww.avatrade.fr%3Ftag%3D207628" class="btn-main">
-            Découvrir la plateforme
-        </a>
+        <div class="btn-group">
+            <a href="https://tracking.avapartner.com/click/?affid=207628&videoId=35222&adTheme=780&controls=true&muted=true&autoplay=false&campaign=225565&campaignName=FR&tag=207628&linkDirection=https%3A%2F%2Fwww.avatrade.fr%3Ftag%3D207628" class="btn-main">
+                Découvrir la plateforme
+            </a>
+            
+            <a href="https://tracking.avapartner.com/click/?affid=207628&videoId=35222&adTheme=780&controls=true&muted=true&autoplay=false&campaign=225565&campaignName=FR&tag=207628&linkDirection=https%3A%2F%2Fwww.avatrade.fr%3Ftag%3D207628" class="btn-outline">
+                Télécharger l'App 📱
+            </a>
+        </div>
     </div>
 
     <div class="features-section">
@@ -358,7 +384,6 @@
         const urlParams = new URLSearchParams(window.location.search);
 
         // 1. Идентифициране на трафика
-        // RichAds ползва "click_id", MGID ползва "clickid"
         const richAdsClickId = urlParams.get('click_id');
         const mgidClickId = urlParams.get('clickid') || urlParams.get('click_id');
 
@@ -369,25 +394,24 @@
             let isTargetLink = link.href.includes("tracking.avapartner") ||
                                link.classList.contains('btn-main') ||
                                link.classList.contains('btn-sticky') ||
+                               link.classList.contains('btn-outline') || /* Добавен новия бутон */
                                link.classList.contains('btn-card-action') ||
                                link.classList.contains('h-link');
 
             if (isTargetLink) {
 
-                // --- A) Модификация на линка (добавяне на ID към AvaTrade) ---
+                // --- A) Модификация на линка ---
                 let currentHref = link.href;
                 if (currentHref.includes('avapartner')) {
-                    // Приоритет на RichAds ID, ако има и двете
                     let trackingId = richAdsClickId || mgidClickId;
 
                     if (trackingId) {
                         const separator = currentHref.includes('?') ? '&' : '?';
-                        // Записваме ID-то в "TrafficSource", за да се вижда в репортите
                         link.href = currentHref + separator + 'TrafficSource=' + trackingId;
                     }
                 }
 
-                // --- B) Изпращане на сигнал (Postback) при КЛИК ---
+                // --- B) Postback при КЛИК ---
                 link.addEventListener('click', function() {
                     console.log("Conversion Click Triggered");
 
@@ -396,10 +420,9 @@
                         gtag('event', 'AvaConversion', { 'event_category': 'conversion' });
                     }
 
-                    // 2. RichAds Postback (us.ahows.co)
+                    // 2. RichAds Postback
                     if (richAdsClickId) {
                          const richAdsPostback = 'https://us.ahows.co/log?action=conversion&key=' + richAdsClickId;
-                         // Използваме fetch с keepalive (GET заявка, която не умира при затваряне)
                          fetch(richAdsPostback, { mode: 'no-cors', keepalive: true });
                     }
 
