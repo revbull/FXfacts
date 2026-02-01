@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>【2026年最新】XMTrading レバレッジ1000倍 × 10,500ドルボーナス完全攻略</title>
-    <meta name="description" content="XMTradingの最大10,500ドルボーナスとレバレッジ1000倍を活用して、自己資金ゼロからFXを始める方法。口座開設手順とボーナス受取ガイド。">
+    <meta name="robots" content="noindex, nofollow"> <title>【2026年最新】XMTrading 徹底ガイド｜ボーナス活用術</title>
+    <meta name="description" content="XMTradingの口座開設ボーナスと入金ボーナスを活用する方法を解説。リスクを管理しながらFXを始めるためのガイド。">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,16 +16,18 @@
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
 
-      var trackingParams = {};
+      // Safe parameter extraction (Only allowlist specific params to avoid noise)
       var urlParams = new URLSearchParams(window.location.search);
+      var allowedParams = ['click_id', 'pub_id', 'clickid', 'visitor_id', 'source', 'campaign'];
+      var trackingConfig = {};
       
-      urlParams.forEach(function(value, key) {
-          var cleanKey = key.replace(/[^a-zA-Z0-9_]/g, '_');
-          trackingParams[cleanKey] = value;
+      allowedParams.forEach(function(key) {
+          if(urlParams.has(key)) {
+              trackingConfig[key] = urlParams.get(key);
+          }
       });
 
-      trackingParams['debug_mode'] = true;
-      gtag('config', 'G-DTMQSP8BPQ', trackingParams);
+      gtag('config', 'G-DTMQSP8BPQ', trackingConfig);
     </script>
 
     <style>
@@ -35,12 +37,12 @@
             --col-accent: #16a34a;  
             --col-accent-dark: #15803d; 
             --col-gold: #b4860b;    
-            --col-bg: #e2e8f0; /* Darker background for desktop contrast */
+            --col-bg: #e2e8f0; 
             --col-text: #334155;
             --col-white: #ffffff;
             --shadow-card: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
             --radius: 12px;
-            --content-width: 1000px; /* Max width for desktop */
+            --content-width: 1000px;
         }
 
         /* --- RESET & BASE --- */
@@ -60,13 +62,18 @@
         strong { color: #e11d48; font-weight: 900; } 
         .highlight-bg { background: linear-gradient(transparent 60%, #fef08a 60%); padding: 0 2px; }
 
-        /* --- WRAPPER FOR DESKTOP (Centers content) --- */
+        /* --- WRAPPER --- */
         .main-wrapper {
             max-width: var(--content-width);
             margin: 0 auto;
             background: #fff;
             min-height: 100vh;
             box-shadow: 0 0 50px rgba(0,0,0,0.05);
+        }
+
+        /* --- AD DISCLOSURE (Compliance Fix) --- */
+        .ad-disclosure {
+            background: #f8fafc; color: #94a3b8; font-size: 0.7rem; padding: 5px 20px; text-align: right; border-bottom: 1px solid #f1f5f9;
         }
 
         /* --- HEADER --- */
@@ -76,7 +83,7 @@
             padding: 15px 30px;
             display: flex;
             align-items: center;
-            justify-content: space-between; /* Spread items on desktop */
+            justify-content: space-between; 
             font-size: 0.9rem;
             color: #64748b;
         }
@@ -85,7 +92,7 @@
             background: #64748b; color: white; padding: 4px 10px; border-radius: 4px; margin-right: 10px; font-weight: bold; font-size: 0.75rem;
         }
 
-        /* --- HERO SECTION (DESKTOP OPTIMIZED) --- */
+        /* --- HERO SECTION --- */
         .hero {
             background: linear-gradient(160deg, #0f172a 0%, #1e293b 100%);
             color: white;
@@ -95,17 +102,8 @@
             clip-path: polygon(0 0, 100% 0, 100% 92%, 50% 100%, 0 92%);
         }
         
-        .hero-banner-container {
-            margin-bottom: 30px;
-            text-align: center;
-        }
-        /* Make banner responsive but max 970px */
-        .desktop-banner {
-            max-width: 100%;
-            height: auto;
-            border-radius: 4px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        }
+        .hero-banner-container { margin-bottom: 30px; text-align: center; }
+        .desktop-banner { max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
 
         .hero-tag {
             background: linear-gradient(to right, #fbbf24, #d97706);
@@ -114,21 +112,19 @@
             display: inline-block; margin-bottom: 20px;
         }
 
-        .hero h1 {
-            font-size: 2.8rem; margin: 0; line-height: 1.3; font-weight: 900;
-        }
+        .hero h1 { font-size: 2.8rem; margin: 0; line-height: 1.3; font-weight: 900; }
 
         .hero-amount {
-            display: inline-block; /* Inline on desktop looks better sometimes, or block */
+            display: inline-block; 
             font-size: 4rem; color: #fcd34d;
             text-shadow: 0 3px 0 #78350f; font-family: sans-serif;
             margin: 10px 0; letter-spacing: -2px;
         }
 
-        /* USP GRID - DESKTOP: 4 Columns in 1 Row */
+        /* USP GRID */
         .usp-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr); /* 4 columns! */
+            grid-template-columns: repeat(4, 1fr);
             gap: 15px;
             max-width: 900px;
             margin: 40px auto 0;
@@ -144,8 +140,7 @@
 
         /* --- CONTAINER --- */
         .container {
-            max-width: 800px; /* Tighter reading width */
-            margin: -80px auto 0; padding: 0 20px; position: relative; z-index: 10;
+            max-width: 800px; margin: -80px auto 0; padding: 0 20px; position: relative; z-index: 10;
         }
 
         /* --- CARDS --- */
@@ -175,6 +170,8 @@
             background: rgba(255,255,255,0.5); transform: rotate(25deg); animation: shine 3s infinite ease-in-out;
         }
         @keyframes shine { 0% { left: -60%; } 20% { left: 150%; } 100% { left: 150%; } }
+        /* Performance fix: Disable animation for low-end devices */
+        @media (prefers-reduced-motion: reduce) { .btn-shiny::after { animation: none; } }
 
         /* --- CHAT STYLE --- */
         .chat-section { background: #f0fdf4; border: 2px solid #bbf7d0; }
@@ -245,7 +242,6 @@
         .comparison-table td { border: 1px solid #e2e8f0; padding: 18px; text-align: center; }
         .badge-rec { background: var(--col-accent); color: white; font-size: 0.8rem; padding: 3px 8px; border-radius: 4px; display: inline-block; margin-bottom: 4px; }
         
-        /* Mobile adjustment for USP grid if screen is small desktop */
         @media (max-width: 800px) {
             .usp-grid { grid-template-columns: repeat(2, 1fr); }
             .hero h1 { font-size: 2rem; }
@@ -255,10 +251,14 @@
 <body>
 
 <div class="main-wrapper">
+    <div class="ad-disclosure">
+        広告 (Ad) | 本ページはプロモーションが含まれています
+    </div>
+
     <header>
         <div class="header-left">
             <span class="header-badge" style="background:#64748b;">PR</span>
-            <span style="font-weight:bold; color:#0f172a; font-size: 1.1rem;">XMTrading 徹底解説メディア (徹底ガイド)</span>
+            <span style="font-weight:bold; color:#0f172a; font-size: 1.1rem;">FXfacts: 海外FX研究所 (XM徹底ガイド)</span>
         </div>
         <div style="font-size: 0.8rem; color: #94a3b8;">
             Last Updated: 2026/01
@@ -268,7 +268,7 @@
     <div class="hero">
         
         <div class="hero-banner-container">
-            <a href="https://clicks.affstrack.com/c?m=9327&amp;c=438318" referrerpolicy="no-referrer-when-downgrade" style="display:inline-block;">
+            <a href="https://clicks.affstrack.com/c?m=9327&amp;c=438318" rel="noopener noreferrer" style="display:inline-block;">
                 <img src="https://ads.affstrack.com/i/9327?c=438318" width="970" height="90" alt="XMTrading Bonus" class="desktop-banner">
             </a>
         </div>
@@ -284,7 +284,7 @@
         <div class="hero-tag">2026年1月 最新ボーナス</div>
         
         <h1>
-            <span style="font-size: 1.5rem;">国内人気No.1ブローカー</span><br>
+            <span style="font-size: 1.5rem;">業界最大手のブローカー</span><br>
             口座開設でスタート<br>
             <span class="hero-amount">最大$10,500ボーナス</span>
         </h1>
@@ -303,27 +303,27 @@
             <div class="chat-row">
                 <div class="chat-icon icon-beginner">🤔</div>
                 <div class="chat-bubble">
-                    <strong>「少額資金しかないけど、大きな利益を狙いたい…」</strong><br>
+                    <strong>「少額資金しかないけど、大きな利益を目指したい…」</strong><br>
                     <strong>「海外FXは手数料が高そうで不安…」</strong>
                 </div>
             </div>
             <div class="chat-row reverse">
                 <div class="chat-icon icon-pro">💡</div>
                 <div class="chat-bubble">
-                    XMなら<strong>「レバレッジ1000倍」</strong>で少額から一攫千金が狙えます！<br>
-                    さらに今なら<span style="background:#fef08a; padding:0 4px; font-weight:bold;">$10,000超のボーナス</span>で証拠金を大幅アップ可能。手数料も無料です！
+                    XMなら<strong>「レバレッジ1000倍」</strong>で資金効率よく取引可能！<br>
+                    さらに今なら<span style="background:#fef08a; padding:0 4px; font-weight:bold;">$10,000超のボーナス</span>で証拠金を大幅アップ。入金なしで始める選択肢もあります。
                 </div>
             </div>
 
             <div class="btn-wrapper">
-                <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=0" class="btn-shiny">
+                <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=0" class="btn-shiny" rel="noopener noreferrer">
                     <small>＼ 最短3分で登録完了 ／</small>
                     ボーナスを獲得 (口座開設)
                 </a>
                 <div style="margin-top: 15px; line-height: 1.3;">
                     <p style="font-size: 0.8rem; color: #94a3b8; margin: 5px 0 0 0;">
                         リスク警告：FX取引にはリスクが伴います。<br>
-                        <a href="https://cloud.xmtrading-cdn.com/static/pdf/System-PDFs/XMTrading-Terms-and-Conditions-Bonus-Program-100-and-20-upto-10000.pdf?v=123d705b39c1a1c798f31bda7b89c556" target="_blank" style="text-decoration: underline; color: #94a3b8;">利用規約</a>を確認の上、自己判断でご利用ください。
+                        <a href="https://cloud.xmtrading-cdn.com/static/pdf/System-PDFs/XMTrading-Terms-and-Conditions-Bonus-Program-100-and-20-upto-10000.pdf?v=123d705b39c1a1c798f31bda7b89c556" target="_blank" rel="noopener noreferrer" style="text-decoration: underline; color: #94a3b8;">利用規約</a>を確認の上、自己判断でご利用ください。
                     </p>
                 </div>
             </div>
@@ -332,7 +332,7 @@
         <div class="card" style="background: linear-gradient(145deg, #fffbeb, #fff); border: 1px solid #fcd34d;">
             <div style="display:flex; align-items:center; justify-content:center; gap:15px; margin-bottom:20px;">
                 <span style="font-size:2.5rem;">🥇</span>
-                <h2 class="section-title" style="margin:0; text-align:left; border:none;">ゴールド(GOLD)取引も<br>XMが最強な理由</h2>
+                <h2 class="section-title" style="margin:0; text-align:left; border:none;">ゴールド(GOLD)取引も<br>XMが選ばれる理由</h2>
             </div>
             
             <p style="font-size: 1.1rem; text-align:center; margin-bottom: 25px;">
@@ -371,6 +371,7 @@
             
             <p style="font-size:0.9rem; color:#b45309; text-align:right; margin-top:10px;">※金価格2000ドル/1ドル150円換算の概算</p>
         </div>
+
         <div class="card">
             <h2 class="section-title">$10,000超ボーナスの内訳</h2>
             <p style="font-size: 1rem; margin-bottom: 30px; text-align:center;">
@@ -431,7 +432,7 @@
 
         <div class="btn-wrapper" style="margin-bottom: 50px;">
             <p style="font-weight:bold; margin-bottom:15px; color:var(--col-gold); font-size: 1.2rem;">\ 15年の信頼と実績 /</p>
-            <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=6" class="btn-shiny">
+            <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=6" class="btn-shiny" rel="noopener noreferrer">
                 XM公式ページへ進む ＞
             </a>
         </div>
@@ -444,81 +445,90 @@
             <p style="text-align:center; margin-top:15px;">&copy; 2026 FXfacts 編集部</p>
         </div>
     </div>
-</div> <div class="sticky-footer">
-        <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=6" class="sticky-btn">
-            ボーナスを獲得する ＞
-        </a>
-    </div>
+</div>
+
+<div class="sticky-footer">
+    <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=6" class="sticky-btn" rel="noopener noreferrer">
+        ボーナスを獲得する ＞
+    </a>
+</div>
     
-    <script type="text/javascript">
-    (function() {
-        var d = document, w = window;
-        w.MgSensorData = w.MgSensorData || [];
-        w.MgSensorData.push({ cid:897661, project: "a.mgid.com" });
-        var l = "a.mgid.com";
-        var s = d.createElement("script");
-        s.type = "text/javascript";
-        s.async = true;
-        var dt = !Date.now?new Date().valueOf():Date.now();
-        s.src = "https://" + l + "/mgsensor.js?d=" + dt;
-        d.body.appendChild(s);
-    })();
-   </script>
+<script type="text/javascript">
+(function() {
+    var d = document, w = window;
+    w.MgSensorData = w.MgSensorData || [];
+    w.MgSensorData.push({ cid:897661, project: "a.mgid.com" });
+    var l = "a.mgid.com";
+    var s = d.createElement("script");
+    s.type = "text/javascript";
+    s.async = true;
+    var dt = !Date.now?new Date().valueOf():Date.now();
+    s.src = "https://" + l + "/mgsensor.js?d=" + dt;
+    d.body.appendChild(s);
+})();
+</script>
 
-   <script>
-    document.addEventListener('contextmenu', event => event.preventDefault());
+<script>
+// OPTIMIZED TRACKING LOGIC
+document.addEventListener("DOMContentLoaded", function() {
     
-    document.addEventListener("DOMContentLoaded", function() {
-        const urlParams = new URLSearchParams(window.location.search);
-        
-        const richAdsClickId = urlParams.get('click_id'); 
-        const richAdsPubId = urlParams.get('pub_id');      
-        const mgidClickId = urlParams.get('clickid') || urlParams.get('click_id'); 
-        const propClickId = urlParams.get('visitor_id'); 
+    // 1. Safe Param Extraction (No decoding yet, keep raw for safety first)
+    const urlParams = new URLSearchParams(window.location.search);
+    const richAdsClickId = urlParams.get('click_id'); 
+    const richAdsPubId = urlParams.get('pub_id');      
+    const mgidClickId = urlParams.get('clickid') || urlParams.get('click_id'); 
+    const propClickId = urlParams.get('visitor_id'); 
 
-        const xmBaseUrl = "https://clicks.affstrack.com/c?c=1120254&l=ja&p=6"; 
-        const links = document.querySelectorAll('a');
+    const xmBaseUrl = "https://clicks.affstrack.com/c?c=1120254&l=ja&p=6"; 
+    const links = document.querySelectorAll('a');
 
-        links.forEach(link => {
-            if (link.href.includes("clicks.affstrack") || link.getAttribute('href') === "#" || link.classList.contains('btn-shiny') || link.classList.contains('sticky-btn')) {
-                
-                let newUrl = xmBaseUrl;
-                // If it is the 970x90 banner, keep its unique parameters
-                if (link.href.includes("m=9327")) {
-                     newUrl = link.href;
-                }
+    // Helper to safely append params
+    function appendParams(url, key, value) {
+        if (!value) return url;
+        const separator = url.includes('?') ? '&' : '?';
+        return url + separator + key + '=' + encodeURIComponent(value);
+    }
 
-                if (richAdsClickId) {
-                    newUrl += "&subid1=" + richAdsClickId;
-                    if (richAdsPubId) newUrl += "&subid2=" + richAdsPubId;
-                } 
-                else if (mgidClickId) {
-                    newUrl += "&subid1=" + mgidClickId;
-                    newUrl += "&subid2=mgid";
-                }
-                link.href = newUrl;
-
-                link.addEventListener('click', function() {
-                    console.log("Button clicked!");
-                    if (typeof gtag === 'function') {
-                        gtag('event', 'XMclick', { 'event_category': 'conversion' });
-                    }
-                    if (richAdsClickId) {
-                        const richAdsPostback = 'https://us.ahows.co/log?action=conversion&key=' + richAdsClickId;
-                        fetch(richAdsPostback, { mode: 'no-cors', keepalive: true });
-                    }
-                    if (mgidClickId) {
-                        const mgidPostback = "https://a.mgid.com/postback/897661?c=" + mgidClickId + "&e=XMclick";
-                        if (navigator.sendBeacon) {
-                            navigator.sendBeacon(mgidPostback);
-                        } else {
-                            new Image().src = mgidPostback;
-                        }
-                    }
-                });
+    links.forEach(link => {
+        if (link.href.includes("clicks.affstrack") || link.classList.contains('btn-shiny') || link.classList.contains('sticky-btn')) {
+            
+            let newUrl = xmBaseUrl;
+            // Preserve unique banner URL if present
+            if (link.href.includes("m=9327")) {
+                 newUrl = link.href;
             }
-        });
+
+            if (richAdsClickId) {
+                newUrl = appendParams(newUrl, "subid1", richAdsClickId);
+                if (richAdsPubId) newUrl = appendParams(newUrl, "subid2", richAdsPubId);
+            } 
+            else if (mgidClickId) {
+                newUrl = appendParams(newUrl, "subid1", mgidClickId);
+                newUrl = appendParams(newUrl, "subid2", "mgid");
+            }
+            link.href = newUrl;
+
+            // Tracking Events
+            link.addEventListener('click', function() {
+                if (typeof gtag === 'function') {
+                    gtag('event', 'XMclick', { 'event_category': 'conversion' });
+                }
+                
+                // Postbacks with error handling (simplified)
+                if (richAdsClickId) {
+                    const richAdsPostback = 'https://us.ahows.co/log?action=conversion&key=' + encodeURIComponent(richAdsClickId);
+                    if (navigator.sendBeacon) navigator.sendBeacon(richAdsPostback);
+                    else fetch(richAdsPostback, { mode: 'no-cors', keepalive: true }).catch(()=>{});
+                }
+                if (mgidClickId) {
+                    const mgidPostback = "https://a.mgid.com/postback/897661?c=" + encodeURIComponent(mgidClickId) + "&e=XMclick";
+                    if (navigator.sendBeacon) navigator.sendBeacon(mgidPostback);
+                    else new Image().src = mgidPostback;
+                }
+            });
+        }
     });
+});
 </script>
 
 </body>
