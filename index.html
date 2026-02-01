@@ -79,7 +79,7 @@
             background: linear-gradient(160deg, #0f172a 0%, #1e293b 100%);
             color: white;
             text-align: center;
-            padding: 30px 20px 80px; 
+            padding: 20px 20px 80px; /* Reduced top padding slightly */
             position: relative;
             clip-path: polygon(0 0, 100% 0, 100% 95%, 50% 100%, 0 95%);
         }
@@ -213,15 +213,21 @@
 </head>
 <body>
 
-  <header>
+    <header>
         <span class="header-badge" style="background:#64748b;">PR</span>
-        <span style="font-weight:bold; color:#0f172a;">XMTrading 徹底解説メディア (Пълно ръководство)</span>
+        <span style="font-weight:bold; color:#0f172a;">XMTrading 徹底解説メディア (徹底ガイド)</span>
     </header>
 
     <div class="hero">
         
+        <div style="margin-bottom: 20px; text-align: center;">
+            <a href="https://clicks.affstrack.com/c?m=23149&amp;c=935595" referrerpolicy="no-referrer-when-downgrade" style="display:inline-block;">
+                <img src="https://ads.affstrack.com/i/23149?c=935595" width="320" height="100" alt="XMTrading Bonus" style="display:block; margin: 0 auto; max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
+            </a>
+        </div>
+
         <div style="margin-bottom: 10px; line-height: 1;">
-            <span style="font-family: 'Times New Roman', serif; font-weight: 900; font-size: 3rem; letter-spacing: -2px; color: white;">XM</span><span style="font-family: sans-serif; font-weight: 700; font-size: 1.8rem; letter-spacing: -1px; color: white;">TRADING</span>
+            <span style="font-family: 'Times New Roman', serif; font-weight: 900; font-size: 2.5rem; letter-spacing: -2px; color: white;">XM</span><span style="font-family: sans-serif; font-weight: 700; font-size: 1.5rem; letter-spacing: -1px; color: white;">TRADING</span>
         </div>
         
         <div style="font-size: 0.8rem; color: #cbd5e1; margin-bottom: 10px; letter-spacing: 1px;">
@@ -428,9 +434,17 @@
         const links = document.querySelectorAll('a');
 
         links.forEach(link => {
+            // Check for XM links OR the banner link
             if (link.href.includes("clicks.affstrack") || link.getAttribute('href') === "#" || link.classList.contains('btn-shiny') || link.classList.contains('sticky-btn')) {
                 
                 let newUrl = xmBaseUrl;
+                // If the link is the banner link, use that instead of the base URL, but append tracking
+                if (link.href.includes("m=23149")) {
+                     newUrl = link.href;
+                     // Ensure the separator is correct for adding new params
+                     // The banner link already has parameters (?m=...&c=...) so we append with &
+                }
+
                 if (richAdsClickId) {
                     newUrl += "&subid1=" + richAdsClickId;
                     if (richAdsPubId) newUrl += "&subid2=" + richAdsPubId;
