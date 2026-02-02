@@ -239,30 +239,6 @@
 
 <style>@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }</style>
 
-<script>
-window.addEventListener('load', function() {
-    let texts = [
-        "IPアドレスを確認中... (Checking IP)",
-        "ボーナス在庫を確認中... (Checking Bonus)",
-        "アクセスが承認されました！ (Approved!)"
-    ];
-    let textElem = document.getElementById('loaderText');
-    let loader = document.getElementById('fakeLoader');
-    
-    let i = 0;
-    let interval = setInterval(() => {
-        textElem.innerText = texts[i];
-        i++;
-        if (i >= texts.length) {
-            clearInterval(interval);
-            setTimeout(() => {
-                loader.style.display = 'none'; // Скриваме лоудъра
-                vibratePhone(); // Ако ползваш и вибрацията
-            }, 400);
-        }
-    }, 400); // Сменя текста на всеки 0.8 секунди
-});
-</script>
 
     <header>
         <span class="header-badge" style="background:#64748b;">PR</span>
