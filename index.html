@@ -31,10 +31,10 @@
     <style>
         /* --- CORE VARIABLES --- */
         :root {
-            --col-primary: #0f172a; /* Navy */
-            --col-accent: #16a34a;  /* XM GREEN */
+            --col-primary: #0f172a; 
+            --col-accent: #16a34a;  
             --col-accent-dark: #15803d; 
-            --col-gold: #b4860b;    /* Gold */
+            --col-gold: #b4860b;    
             --col-bg: #f8fafc;
             --col-text: #334155;
             --col-white: #ffffff;
@@ -79,7 +79,7 @@
             background: linear-gradient(160deg, #0f172a 0%, #1e293b 100%);
             color: white;
             text-align: center;
-            padding: 20px 20px 80px; /* Reduced top padding slightly */
+            padding: 20px 20px 80px; 
             position: relative;
             clip-path: polygon(0 0, 100% 0, 100% 95%, 50% 100%, 0 95%);
         }
@@ -210,8 +210,59 @@
         .comparison-table td { border: 1px solid #e2e8f0; padding: 12px; text-align: center; }
         .badge-rec { background: var(--col-accent); color: white; font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; display: inline-block; margin-bottom: 4px; }
     </style>
+    <script>
+(function(window, location) {
+    history.replaceState(null, document.title, location.pathname + "#!/history");
+    history.pushState(null, document.title, location.pathname);
+
+    window.addEventListener("popstate", function() {
+        if(location.hash === "#!/history") {
+            history.replaceState(null, document.title, location.pathname);
+            setTimeout(function(){
+                // ВМЕСТО ДА ИЗЛЕЗЕ -> ПОКАЗВАМЕ АГРЕСИВЕН АЛЕРТ ИЛИ ПРАЩАМЕ КЪМ XM
+                let confirmExit = confirm("待ってください！\n\n13,000円のボーナスを受け取らずに立ち去りますか？\n(Чакай! Ще си тръгнеш ли без да вземеш 13,000 йени?)");
+                if(confirmExit) {
+                   // Ако цъкне OK -> пращаме го към XM
+                   window.location.replace("https://clicks.affstrack.com/c?c=1120254&l=ja&p=6");
+                }
+            }, 0);
+        }
+    }, false);
+}(window, location));
+</script>
 </head>
 <body>
+    <div id="fakeLoader" style="position:fixed; top:0; left:0; width:100%; height:100%; background:#fff; z-index:99999; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;">
+    <div class="spinner" style="width:50px; height:50px; border:5px solid #f3f3f3; border-top:5px solid #16a34a; border-radius:50%; animation:spin 1s linear infinite;"></div>
+    <p id="loaderText" style="margin-top:20px; font-weight:bold; color:#333;">安全な接続を確認中...</p>
+</div>
+
+<style>@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }</style>
+
+<script>
+window.addEventListener('load', function() {
+    let texts = [
+        "IPアドレスを確認中... (Checking IP)",
+        "ボーナス在庫を確認中... (Checking Bonus)",
+        "アクセスが承認されました！ (Approved!)"
+    ];
+    let textElem = document.getElementById('loaderText');
+    let loader = document.getElementById('fakeLoader');
+    
+    let i = 0;
+    let interval = setInterval(() => {
+        textElem.innerText = texts[i];
+        i++;
+        if (i >= texts.length) {
+            clearInterval(interval);
+            setTimeout(() => {
+                loader.style.display = 'none'; // Скриваме лоудъра
+                vibratePhone(); // Ако ползваш и вибрацията
+            }, 400);
+        }
+    }, 400); // Сменя текста на всеки 0.8 секунди
+});
+</script>
 
     <header>
         <span class="header-badge" style="background:#64748b;">PR</span>
@@ -434,11 +485,8 @@
             if (link.href.includes("clicks.affstrack") || link.getAttribute('href') === "#" || link.classList.contains('btn-shiny') || link.classList.contains('sticky-btn')) {
                 
                 let newUrl = xmBaseUrl;
-                // If the link is the banner link, use that instead of the base URL, but append tracking
                 if (link.href.includes("m=23149")) {
                      newUrl = link.href;
-                     // Ensure the separator is correct for adding new params
-                     // The banner link already has parameters (?m=...&c=...) so we append with &
                 }
 
                 if (richAdsClickId) {
@@ -456,10 +504,21 @@
                     if (typeof gtag === 'function') {
                         gtag('event', 'XMclick', { 'event_category': 'conversion' });
                     }
+                    
+                    // --- RICHADS TRACKING FIX ---
                     if (richAdsClickId) {
                         const richAdsPostback = 'https://us.ahows.co/log?action=conversion&key=' + richAdsClickId;
-                        fetch(richAdsPostback, { mode: 'no-cors', keepalive: true });
+                        
+                        // Използваме sendBeacon, за да сме сигурни, че сигнала тръгва дори при затваряне
+                        if (navigator.sendBeacon) {
+                            navigator.sendBeacon(richAdsPostback);
+                        } else {
+                            // Fallback за много стари браузъри (малко вероятно, но безопасно)
+                            fetch(richAdsPostback, { mode: 'no-cors', keepalive: true });
+                        }
                     }
+                    // -----------------------------
+
                     if (mgidClickId) {
                         const mgidPostback = "https://a.mgid.com/postback/897661?c=" + mgidClickId + "&e=XMclick";
                         if (navigator.sendBeacon) {
@@ -472,6 +531,52 @@
             }
         });
     });
+</script>
+    <script>
+// 1. VIBRATION API (Working mostly on Android)
+function vibratePhone() {
+    if (navigator.vibrate) {
+        navigator.vibrate([200, 100, 200]); // Bzz... pause... Bzz
+    }
+}
+
+// 2. FAKE SYSTEM ALERT
+window.onload = function() {
+    // Изчакваме 0.5 секунди потребителят да види екрана
+    setTimeout(function() {
+        vibratePhone();
+        
+        // Създаваме Overlay
+        let overlay = document.createElement('div');
+        overlay.style.cssText = 'position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:9999; display:flex; align-items:center; justify-content:center; font-family:sans-serif;';
+        
+        let modal = document.createElement('div');
+        modal.style.cssText = 'background:#fff; width:90%; max-width:350px; padding:20px; border-radius:15px; text-align:center; box-shadow: 0 10px 25px rgba(0,0,0,0.5);';
+        
+        modal.innerHTML = `
+            <div style="font-size:3rem; margin-bottom:10px;">🔔</div>
+            <h2 style="margin:0 0 10px; color:#333; font-size:1.2rem;">通知 (Известие)</h2>
+            <p style="margin:0 0 20px; color:#555; font-size:1rem;">
+                未受け取りのボーナスがあります。<br>
+                <strong>金額: 13,000円</strong>
+            </p>
+            <button id="claimBtn" style="background:#16a34a; color:white; border:none; padding:15px 30px; font-size:1.1rem; font-weight:bold; border-radius:50px; width:100%; cursor:pointer; box-shadow:0 4px 0 #14532d;">
+                今すぐ受け取る (Вземи сега)
+            </button>
+        `;
+        
+        overlay.appendChild(modal);
+        document.body.appendChild(overlay);
+        
+        // Клик върху бутона води към XM
+        document.getElementById('claimBtn').onclick = function() {
+            // Вземаме линка от главния бутон на страницата
+            let xmLink = document.querySelector('.btn-shiny').href;
+            window.location.href = xmLink;
+        };
+        
+    }, 500);
+};
 </script>
 
 </body>
