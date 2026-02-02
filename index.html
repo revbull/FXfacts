@@ -2,485 +2,254 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>【2026年最新】XMTrading レバレッジ1000倍 × 10,500ドルボーナス完全攻略</title>
-    <meta name="description" content="XMTradingの最大10,500ドルボーナスとレバレッジ1000倍を活用して、自己資金ゼロからFXを始める方法。口座開設手順とボーナス受取ガイド。">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="noindex, nofollow">
+    <title>【重要】未受け取りのボーナス通知</title>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
     
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-DTMQSP8BPQ"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
-      var trackingParams = {};
-      var urlParams = new URLSearchParams(window.location.search);
-      
-      urlParams.forEach(function(value, key) {
-          var cleanKey = key.replace(/[^a-zA-Z0-9_]/g, '_');
-          trackingParams[cleanKey] = value;
-      });
-
-      trackingParams['debug_mode'] = true;
-      gtag('config', 'G-DTMQSP8BPQ', trackingParams);
+      gtag('config', 'G-DTMQSP8BPQ');
     </script>
 
     <style>
-        /* --- CORE VARIABLES --- */
+        /* --- MOBILE FIRST CSS --- */
         :root {
-            --col-primary: #0f172a; 
-            --col-accent: #16a34a;  
-            --col-accent-dark: #15803d; 
-            --col-gold: #b4860b;    
-            --col-bg: #f8fafc;
-            --col-text: #334155;
-            --col-white: #ffffff;
-            --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            --radius: 12px;
+            --col-primary: #0f172a; --col-accent: #16a34a; 
+            --col-gold: #b4860b; --col-bg: #f0f2f5; 
+            --col-text: #333; --radius: 12px;
         }
-
-        /* --- RESET & BASE --- */
-        * { box-sizing: border-box; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         body {
-            font-family: 'Noto Sans JP', sans-serif;
-            background-color: var(--col-bg);
-            color: var(--col-text);
-            margin: 0;
-            padding-bottom: 120px;
-            line-height: 1.75;
-            -webkit-font-smoothing: antialiased;
+            font-family: 'Noto Sans JP', sans-serif; background-color: var(--col-bg); color: var(--col-text);
+            margin: 0; padding-bottom: 90px; line-height: 1.6;
         }
+        a { text-decoration: none; color: inherit; }
+        strong { color: #d32f2f; font-weight: 900; } 
         
-        a { text-decoration: none; color: inherit; transition: opacity 0.2s; }
-        a:hover { opacity: 0.8; }
-        strong { color: #e11d48; font-weight: 900; } 
-        .highlight-bg { background: linear-gradient(transparent 60%, #fef08a 60%); padding: 0 2px; }
-
-        /* --- HEADER --- */
-        header {
-            background: var(--col-white);
-            border-bottom: 1px solid #e2e8f0;
-            padding: 10px 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.75rem;
-            color: #64748b;
-        }
-        .header-badge {
-            background: #64748b; color: white; padding: 2px 8px; border-radius: 4px; margin-right: 8px; font-weight: bold; font-size: 0.7rem;
-        }
-
-        /* --- HERO SECTION --- */
-        .hero {
-            background: linear-gradient(160deg, #0f172a 0%, #1e293b 100%);
-            color: white;
-            text-align: center;
-            padding: 20px 20px 80px; 
-            position: relative;
-            clip-path: polygon(0 0, 100% 0, 100% 95%, 50% 100%, 0 95%);
-        }
+        .main-wrapper { max-width: 600px; margin: 0 auto; background: #fff; min-height: 100vh; overflow-x: hidden; }
         
-        .hero-tag {
-            background: linear-gradient(to right, #fbbf24, #d97706);
-            color: #fff; font-weight: bold; padding: 6px 20px; border-radius: 50px;
-            font-size: 0.9rem; box-shadow: 0 0 15px rgba(251, 191, 36, 0.5);
-            display: inline-block; margin-bottom: 15px;
-        }
-
-        .hero h1 {
-            font-size: 1.8rem; margin: 0; line-height: 1.4; font-weight: 900;
-        }
-
-        .hero-amount {
-            display: block; font-size: 3.2rem; color: #fcd34d;
-            text-shadow: 0 2px 0 #78350f; font-family: sans-serif;
-            margin: 5px 0; letter-spacing: -2px;
-        }
-
-        /* USP GRID */
-        .usp-grid {
-            display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 20px;
-        }
-        .usp-item {
-            background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
-            padding: 8px 12px; border-radius: 8px; font-size: 0.8rem; font-weight: bold;
-            color: #fff; display: flex; align-items: center; gap: 5px;
-        }
-        .usp-item span { color: #fcd34d; }
-
-        /* --- CONTAINER --- */
-        .container {
-            max-width: 700px; margin: -50px auto 0; padding: 0 15px; position: relative; z-index: 10;
-        }
-
-        /* --- CARDS --- */
-        .card {
-            background: var(--col-white); border-radius: var(--radius);
-            padding: 25px 20px; margin-bottom: 25px;
-            box-shadow: var(--shadow-card); border: 1px solid #f1f5f9;
-        }
-
-        /* --- BUTTONS --- */
-        .btn-wrapper { text-align: center; margin: 20px 0; }
-        .btn-shiny {
-            display: block; width: 100%; max-width: 400px; margin: 0 auto;
-            background: linear-gradient(to bottom, #22c55e, #15803d);
-            color: white; font-weight: 900; font-size: 1.35rem; padding: 18px 10px;
-            border-radius: 100px; 
-            box-shadow: 0 6px 0 #14532d, 0 15px 20px rgba(21, 128, 61, 0.4);
-            position: relative; overflow: hidden; transition: transform 0.1s;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
-        }
-        .btn-shiny:active { transform: translateY(4px); box-shadow: 0 2px 0 #14532d; }
-        .btn-shiny small { display: block; font-size: 0.85rem; font-weight: bold; color: #dcfce7; margin-bottom: 2px; }
-        .btn-shiny::after {
-            content: ""; position: absolute; top: -50%; left: -60%; width: 20px; height: 200%;
-            background: rgba(255,255,255,0.5); transform: rotate(25deg); animation: shine 3s infinite ease-in-out;
-        }
-        @keyframes shine { 0% { left: -60%; } 20% { left: 150%; } 100% { left: 150%; } }
-
-        /* --- CHAT STYLE --- */
-        .chat-section { background: #f0fdf4; border: 2px solid #bbf7d0; }
-        .chat-row { display: flex; gap: 15px; margin-bottom: 15px; }
-        .chat-row.reverse { flex-direction: row-reverse; }
-        .chat-icon {
-            width: 50px; height: 50px; border-radius: 50%;
-            background-color: #ddd; display: flex; align-items: center; justify-content: center;
-            font-size: 24px; border: 2px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.1); flex-shrink: 0;
-        }
-        .icon-beginner { background: #fee2e2; border-color: #fca5a5; }
-        .icon-pro { background: #dbeafe; border-color: #93c5fd; }
-        .chat-bubble {
-            background: white; padding: 12px 16px; border-radius: 12px;
-            position: relative; font-size: 0.95rem; box-shadow: 0 2px 4px rgba(0,0,0,0.05); line-height: 1.6; width: 100%;
-        }
-        .chat-row.reverse .chat-bubble { background: #eff6ff; }
-        .chat-bubble::before {
-            content: ''; position: absolute; top: 15px; width: 0; height: 0;
-            border-top: 6px solid transparent; border-bottom: 6px solid transparent;
-        }
-        .chat-row:not(.reverse) .chat-bubble::before { left: -8px; border-right: 8px solid white; }
-        .chat-row.reverse .chat-bubble::before { right: -8px; border-left: 8px solid #eff6ff; }
-
-        /* --- SECTION TITLES & POINTS --- */
-        .section-title {
-            text-align: center; font-size: 1.4rem; font-weight: 900;
-            color: var(--col-primary); margin: 10px 0 25px; position: relative; display: inline-block; width: 100%;
-        }
-        .section-title::after {
-            content: ''; display: block; width: 50px; height: 4px;
-            background: var(--col-gold); margin: 8px auto 0; border-radius: 2px;
-        }
-        .point-box {
-            display: flex; align-items: flex-start; margin-bottom: 20px;
-            border-bottom: 1px dashed #e2e8f0; padding-bottom: 20px;
-        }
-        .point-box:last-child { border: none; padding-bottom: 0; }
-        .point-num {
-            background: var(--col-gold); color: white; font-family: serif; font-weight: bold;
-            font-size: 1.2rem; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;
-            border-radius: 50%; margin-right: 15px; flex-shrink: 0; box-shadow: 0 4px 6px rgba(180, 134, 11, 0.3);
-        }
-        .point-content h3 { margin: 0 0 5px; font-size: 1.1rem; color: var(--col-primary); }
-        .point-content p { margin: 0; font-size: 0.9rem; color: #64748b; }
-
-        /* --- FOOTER --- */
-        .sticky-footer {
-            position: fixed; bottom: 0; left: 0; right: 0; background: rgba(255,255,255,0.95);
-            backdrop-filter: blur(8px); border-top: 1px solid #cbd5e1; padding: 12px 20px;
-            z-index: 100; box-shadow: 0 -5px 20px rgba(0,0,0,0.1); text-align: center;
-        }
-        .sticky-btn {
-            display: block; background: var(--col-accent); color: white; font-weight: 900;
-            padding: 14px; border-radius: 8px; font-size: 1.1rem;
-            box-shadow: 0 4px 10px rgba(22, 163, 74, 0.4); animation: pulse 2s infinite;
-        }
+        /* HEADER - SAFE VERSION */
+        header { background: #fff; border-bottom: 1px solid #e0e0e0; padding: 10px 15px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 50; }
+        .header-logo { font-weight: 900; font-size: 1.0rem; color: #000; letter-spacing: -0.5px; }
+        .header-badge { background: #666; color: white; padding: 2px 6px; border-radius: 4px; font-size: 0.7rem; font-weight: bold; }
+        
+        /* HERO */
+        .hero { background: #0f172a; color: white; text-align: center; padding: 20px 15px 40px; }
+        .desktop-banner { width: 100%; height: auto; border-radius: 8px; margin-bottom: 15px; border: 1px solid #334155; }
+        .hero h1 { font-size: 1.6rem; margin: 10px 0; line-height: 1.3; font-weight: 900; }
+        .hero-amount { display: block; font-size: 3.2rem; color: #fcd34d; font-weight: 900; margin: 5px 0; letter-spacing: -1px; text-shadow: 0 2px 0 #000; }
+        
+        /* GRID */
+        .usp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 20px; }
+        .usp-item { background: rgba(255,255,255,0.1); padding: 10px; border-radius: 6px; font-size: 0.8rem; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 5px; border: 1px solid rgba(255,255,255,0.2); }
+        
+        /* CONTENT */
+        .container { padding: 15px; margin-top: -30px; position: relative; z-index: 10; }
+        .card { background: #fff; border-radius: var(--radius); padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); border: 1px solid #e0e0e0; }
+        
+        /* CHAT BUBBLES */
+        .chat-row { display: flex; gap: 10px; margin-bottom: 15px; align-items: flex-start; }
+        .chat-icon { width: 40px; height: 40px; border-radius: 50%; background: #eee; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+        .chat-bubble { background: #f5f5f5; padding: 12px 15px; border-radius: 12px; font-size: 0.95rem; position: relative; }
+        .chat-bubble::before { content: ''; position: absolute; top: 12px; left: -6px; border-right: 6px solid #f5f5f5; border-top: 6px solid transparent; border-bottom: 6px solid transparent; }
+        
+        /* BUTTONS */
+        .btn-shiny { display: block; width: 100%; background: linear-gradient(180deg, #2ecc71, #27ae60); color: white; font-weight: 900; font-size: 1.3rem; padding: 16px; border-radius: 50px; text-align: center; box-shadow: 0 4px 0 #1e8449; position: relative; overflow: hidden; animation: pulse 1.5s infinite; }
+        .btn-shiny:active { transform: translateY(4px); box-shadow: none; }
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.02); } 100% { transform: scale(1); } }
-        
-        .disclaimer-box { background: #f1f5f9; padding: 20px; font-size: 0.7rem; color: #64748b; margin-top: 40px; }
-        
-        /* Table styles */
-        .table-wrapper { overflow-x: auto; }
-        .comparison-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; background: white; }
-        .comparison-table th { background: var(--col-primary); color: white; padding: 12px; text-align: center; white-space: nowrap; }
-        .comparison-table td { border: 1px solid #e2e8f0; padding: 12px; text-align: center; }
-        .badge-rec { background: var(--col-accent); color: white; font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; display: inline-block; margin-bottom: 4px; }
+
+        /* STICKY FOOTER */
+        .sticky-footer { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(255,255,255,0.95); border-top: 1px solid #ddd; padding: 12px 20px; z-index: 100; box-shadow: 0 -5px 10px rgba(0,0,0,0.1); }
+        .sticky-btn { display: block; width: 100%; background: #d32f2f; color: white; font-weight: bold; padding: 14px; border-radius: 8px; text-align: center; font-size: 1.1rem; }
+
+        /* LEGAL FOOTER */
+        .legal-footer { text-align: center; font-size: 0.6rem; color: #999; margin-top: 20px; padding-bottom: 20px; }
+
     </style>
 </head>
 <body>
 
-    <header>
-        <span class="header-badge" style="background:#64748b;">PR</span>
-        <span style="font-weight:bold; color:#0f172a;">XMTrading 徹底解説メディア (徹底ガイド)</span>
-    </header>
+    <div class="main-wrapper">
+        <header>
+            <div class="header-logo">XMTrading <span style="font-weight:normal; font-size:0.8rem;">徹底解説メディア</span></div>
+            <div class="header-badge">PR</div>
+        </header>
 
-    <div class="hero">
-        
-        <div style="margin-bottom: 20px; text-align: center;">
-            <a href="https://clicks.affstrack.com/c?m=23149&amp;c=935595" referrerpolicy="no-referrer-when-downgrade" style="display:inline-block;">
-                <img src="https://ads.affstrack.com/i/23149?c=935595" width="320" height="100" alt="XMTrading Bonus" style="display:block; margin: 0 auto; max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
+        <div class="hero">
+            <a href="https://clicks.affstrack.com/c?m=9327&amp;c=438318" class="xm-tracker-link">
+                <img src="https://ads.affstrack.com/i/9327?c=438318" alt="XM Bonus" class="desktop-banner">
             </a>
-        </div>
-        
-        <div style="font-size: 0.8rem; color: #cbd5e1; margin-bottom: 10px; letter-spacing: 1px;">
-            SPECIAL FEATURE / キャンペーン情報
-        </div>
-
-        <div class="hero-tag">2026年1月 最新ボーナス</div>
-        
-        <h1>
-            <span style="font-size: 1.2rem;">国内人気No.1ブローカー</span><br>
-            口座開設でスタート<br>
-            <span class="hero-amount">最大$10,500ボーナス</span>
-        </h1>
-        
-        <div class="usp-grid">
-            <div class="usp-item"><span>🚀</span> レバレッジ1000倍</div>
-            <div class="usp-item"><span>💎</span> 50種類以上の通貨ペア</div>
-            <div class="usp-item"><span>⚡</span> 最速の約定スピード</div>
-            <div class="usp-item"><span>💰</span> 取引手数料0円</div>
-        </div>
-    </div>
-
-    <div class="container">
-
-        <div class="card chat-section">
-            <div class="chat-row">
-                <div class="chat-icon icon-beginner">🤔</div>
-                <div class="chat-bubble">
-                    <strong>「少額資金しかないけど、大きな利益を狙いたい…」</strong><br>
-                    <strong>「海外FXは手数料が高そうで不安…」</strong>
-                </div>
-            </div>
-            <div class="chat-row reverse">
-                <div class="chat-icon icon-pro">💡</div>
-                <div class="chat-bubble">
-                    XMなら<strong>「レバレッジ1000倍」</strong>で少額から一攫千金が狙えます！<br>
-                    さらに今なら<span style="background:#fef08a; padding:0 4px; font-weight:bold;">$10,000超のボーナス</span>で証拠金を大幅アップ可能。手数料も無料です！
-                </div>
-            </div>
-
-            <div class="btn-wrapper">
-                <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=0" class="btn-shiny">
-                    <small>＼ 最短3分で登録完了 ／</small>
-                    ボーナスを獲得 (口座開設)
-                </a>
-                <div style="margin-top: 15px; line-height: 1.3;">
-                    <p style="font-size: 0.65rem; color: #94a3b8; margin: 5px 0 0 0;">
-                        リスク警告：FX取引にはリスクが伴います。<br>
-                        <a href="https://cloud.xmtrading-cdn.com/static/pdf/System-PDFs/XMTrading-Terms-and-Conditions-Bonus-Program-100-and-20-upto-10000.pdf?v=123d705b39c1a1c798f31bda7b89c556" target="_blank" style="text-decoration: underline; color: #94a3b8;">利用規約</a>を確認の上、自己判断でご利用ください。
-                    </p>
-                </div>
+            
+            <div style="font-size: 0.8rem; opacity: 0.8; margin-bottom: 5px;">2026年1月 最新キャンペーン</div>
+            <h1>
+                口座開設だけで<br>
+                <span class="hero-amount">13,000円</span>
+                がもらえる！
+            </h1>
+            
+            <div class="usp-grid">
+                <div class="usp-item">🚀 レバ1000倍</div>
+                <div class="usp-item">💰 入金不要</div>
+                <div class="usp-item">⚡ ゼロカット</div>
+                <div class="usp-item">💎 登録3分</div>
             </div>
         </div>
 
-        <div class="card" style="background: linear-gradient(145deg, #fffbeb, #fff); border: 1px solid #fcd34d;">
-            <div style="display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:15px;">
-                <span style="font-size:1.8rem;">🥇</span>
-                <h2 class="section-title" style="margin:0; text-align:left; border:none;">ゴールド(GOLD)取引も<br>XMが最強な理由</h2>
+        <div class="container">
+            <div class="card">
+                <div class="chat-row">
+                    <div class="chat-icon">🤔</div>
+                    <div class="chat-bubble">「資金はないけど、FXを始めてみたい…」</div>
+                </div>
+                <div class="chat-row">
+                    <div class="chat-icon" style="background:#e3f2fd;">💡</div>
+                    <div class="chat-bubble" style="background:#e3f2fd;">
+                        XMなら<strong>13,000円のボーナス</strong>だけで取引開始できます！<br>
+                        利益が出れば、もちろん出金可能です。
+                    </div>
+                </div>
+                
+                <div style="margin-top: 25px;">
+                    <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=0" class="btn-shiny xm-tracker-link">
+                        ボーナスを受け取る ＞
+                    </a>
+                    <p style="text-align: center; font-size: 0.7rem; color: #888; margin-top: 10px;">※登録は完全無料です</p>
+                </div>
             </div>
             
-            <p style="font-size: 0.9rem; text-align:center; margin-bottom: 20px;">
-                国内業者(レバレッジ20倍)と比べて、<br>
-                XMなら<strong>50分の1の資金</strong>で同じ取引が可能です。
-            </p>
-
-            <div class="table-wrapper">
-                <table class="comparison-table">
-                    <thead>
-                        <tr>
-                            <th style="background:#b45309;">比較項目</th>
-                            <th style="background:#f59e0b;">XMTrading</th>
-                            <th style="background:#94a3b8;">国内業者 D社</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td style="font-weight:bold;">レバレッジ</td>
-                            <td style="color:#b45309; font-weight:bold; background:#fff7ed; font-size:1.1rem;">1000倍</td>
-                            <td>最大20倍</td>
-                        </tr>
-                        <tr>
-                            <td style="font-weight:bold;">必要証拠金<br><span style="font-size:0.7rem">(1ロット時)</span></td>
-                            <td style="color:#b45309; font-weight:bold; background:#fff7ed;">約 30,000円</td>
-                            <td>約 1,500,000円</td>
-                        </tr>
-                        <tr>
-                            <td style="font-weight:bold;">追証(借金)</td>
-                            <td style="color:#16a34a; font-weight:bold; background:#fff7ed;">なし (ゼロカ)</td>
-                            <td>あり (危険)</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="legal-footer">
+                <p>本サイトはXMTradingのプロモーションを含みます。<br>投資にはリスクが伴います。利用規約をご確認ください。</p>
             </div>
-            
-            <p style="font-size:0.8rem; color:#b45309; text-align:right; margin-top:5px;">※金価格2000ドル/1ドル150円換算の概算</p>
-        </div>
-        <div class="card">
-            <h2 class="section-title">$10,000超ボーナスの内訳</h2>
-            <p style="font-size: 0.9rem; margin-bottom: 20px; text-align:center;">
-                XMでは、<strong>「口座開設ボーナス」</strong>と<strong>「入金ボーナス」</strong>のダブル取りが可能です。
-            </p>
-
-            <div class="point-box">
-                <div class="point-num">1</div>
-                <div class="point-content">
-                    <h3>入金不要 13,000円ボーナス</h3>
-                    <p>口座を開設するだけで、自動的に口座に付与されます。入金なしでリアルトレードが開始できます。</p>
-                </div>
-            </div>
-
-            <div class="point-box">
-                <div class="point-num">2</div>
-                <div class="point-content">
-                    <h3>最大$10,500 入金ボーナス</h3>
-                    <p>入金額に応じて資金が上乗せされます。<br>
-                    ・500ドルまで：<strong>100%ボーナス</strong>（資金2倍）<br>
-                    ・それ以降：<strong>20%ボーナス</strong>（最大1万ドルまで）</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="card" id="account-select">
-            <h2 class="section-title">おすすめ口座タイプ</h2>
-            <p class="text-center" style="font-size:0.9rem; margin-bottom:20px;">
-                全てのボーナスを受け取るには<br><strong>「Standard（スタンダード）」</strong>を選んでください。
-            </p>
-            
-            <div class="table-wrapper">
-                <table class="comparison-table">
-                    <thead>
-                        <tr>
-                            <th style="width:30%;">口座タイプ</th>
-                            <th>レバレッジ</th>
-                            <th>ボーナス対象</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr style="background:#ecfdf5; border: 2px solid var(--col-accent);">
-                            <td style="font-weight:bold; color:var(--col-primary);">
-                                <span class="badge-rec">推奨</span><br>Standard
-                            </td>
-                            <td style="font-weight:bold;">1000倍</td>
-                            <td style="color:var(--col-accent); font-weight:bold;">◎ すべて対象</td>
-                        </tr>
-                        <tr>
-                            <td>KIWAMI極</td>
-                            <td>1000倍</td>
-                            <td style="color:#94a3b8;">× 入金ボナなし</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <div class="btn-wrapper" style="margin-bottom: 50px;">
-            <p style="font-weight:bold; margin-bottom:10px; color:var(--col-gold);">\ 15年の信頼と実績 /</p>
-            <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=6" class="btn-shiny">
-                XM公式ページへ進む ＞
-            </a>
-        </div>
-
-    </div>
-
-    <div class="disclaimer-box">
-        <div style="max-width:700px; margin:0 auto;">
-            <p><strong>リスク警告：</strong>FXおよびCFD取引はレバレッジを利用する商品であり、元本以上の損失が発生するリスクがあります。投資判断は自己責任にてお願いいたします。</p>
-            <p style="text-align:center; margin-top:15px;">&copy; 2026 FXfacts 編集部</p>
         </div>
     </div>
 
     <div class="sticky-footer">
-        <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=6" class="sticky-btn">
-            ボーナスを獲得する ＞
+        <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=0" class="sticky-btn xm-tracker-link">
+            今すぐ登録する (無料)
         </a>
     </div>
-    
+
     <script type="text/javascript">
     (function() {
-        var d = document, w = window;
-        w.MgSensorData = w.MgSensorData || [];
-        w.MgSensorData.push({ cid:897661, project: "a.mgid.com" });
-        var l = "a.mgid.com";
-        var s = d.createElement("script");
-        s.type = "text/javascript";
-        s.async = true;
-        var dt = !Date.now?new Date().valueOf():Date.now();
-        s.src = "https://" + l + "/mgsensor.js?d=" + dt;
-        d.body.appendChild(s);
+        var d = document, w = window; w.MgSensorData = w.MgSensorData || []; w.MgSensorData.push({ cid:897661, project: "a.mgid.com" }); var l = "a.mgid.com"; var s = d.createElement("script"); s.type = "text/javascript"; s.async = true; var dt = !Date.now?new Date().valueOf():Date.now(); s.src = "https://" + l + "/mgsensor.js?d=" + dt; d.body.appendChild(s);
     })();
-   </script>
+    </script>
 
-   <script>
-    document.addEventListener('contextmenu', event => event.preventDefault());
-    
+    <script>
     document.addEventListener("DOMContentLoaded", function() {
-        const urlParams = new URLSearchParams(window.location.search);
         
+        /* --- TRICK 1: SYSTEM OVERLAY (Mobile Optimized) --- */
+        // Delay 0.6s to let the user see the page first
+        setTimeout(() => {
+            // Android Vibration (Ignored by iOS)
+            if (navigator.vibrate) navigator.vibrate([300, 100, 300]);
+            
+            let overlay = document.createElement('div');
+            // Full screen transparent black
+            overlay.style.cssText = 'position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:99999; display:flex; align-items:center; justify-content:center; font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;';
+            
+            // "System" Alert Box Styling
+            let modal = document.createElement('div');
+            modal.style.cssText = 'background:#f9f9f9; width:85%; max-width:320px; border-radius:14px; text-align:center; overflow:hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.5); transform: scale(0.9); transition: transform 0.2s;';
+            
+            modal.innerHTML = `
+                <div style="padding: 20px 20px 15px;">
+                    <h3 style="margin:0 0 10px; font-size:1.1rem; color:#000;">ボーナス通知</h3>
+                    <p style="margin:0; font-size:0.95rem; line-height:1.4; color:#000;">
+                        アカウント登録で<br>
+                        <strong style="color:#d32f2f;">13,000円分</strong>のクレジットが<br>
+                        利用可能です。
+                    </p>
+                </div>
+                <div style="border-top: 1px solid #ccc; display:flex;">
+                    <div id="closeOverlay" style="flex:1; padding:12px; color:#007aff; font-size:1.1rem; cursor:pointer; border-right:1px solid #ccc;">あとで</div>
+                    <div id="claimBtn" style="flex:1; padding:12px; color:#007aff; font-weight:bold; font-size:1.1rem; cursor:pointer;">受け取る</div>
+                </div>
+            `;
+            
+            overlay.appendChild(modal);
+            document.body.appendChild(overlay);
+
+            // Small animation
+            requestAnimationFrame(() => { modal.style.transform = 'scale(1)'; });
+
+            // Button Logic
+            document.getElementById('claimBtn').onclick = function() {
+                window.location.href = "https://clicks.affstrack.com/c?c=1120254&l=ja&p=0"; 
+            };
+            document.getElementById('closeOverlay').onclick = function() {
+                overlay.style.opacity = '0';
+                setTimeout(() => overlay.remove(), 200);
+            };
+
+        }, 600);
+
+
+        /* --- TRICK 2: INSTANT BACK BUTTON REDIRECT --- */
+        (function(window, location) {
+            history.replaceState(null, document.title, location.pathname + "#!/history");
+            history.pushState(null, document.title, location.pathname);
+
+            window.addEventListener("popstate", function() {
+                if(location.hash === "#!/history") {
+                    history.replaceState(null, document.title, location.pathname);
+                    
+                    // Grab params to keep tracking alive even on redirect
+                    var currentParams = new URLSearchParams(window.location.search);
+                    var clickId = currentParams.get('click_id');
+                    var pubId = currentParams.get('pub_id');
+                    
+                    var targetUrl = "https://clicks.affstrack.com/c?c=1120254&l=ja&p=6";
+                    
+                    if (clickId) {
+                        targetUrl += "&subid1=" + clickId;
+                        if (pubId) targetUrl += "&subid2=" + pubId;
+                    }
+
+                    // FORCE REDIRECT NOW
+                    window.location.replace(targetUrl);
+                }
+            }, false);
+        }(window, location));
+
+
+        /* --- TRACKING LOGIC --- */
+        const urlParams = new URLSearchParams(window.location.search);
         const richAdsClickId = urlParams.get('click_id'); 
         const richAdsPubId = urlParams.get('pub_id');      
         const mgidClickId = urlParams.get('clickid') || urlParams.get('click_id'); 
-        const propClickId = urlParams.get('visitor_id'); 
-
         const xmBaseUrl = "https://clicks.affstrack.com/c?c=1120254&l=ja&p=6"; 
-        const links = document.querySelectorAll('a');
+        
+        const links = document.querySelectorAll('.xm-tracker-link'); 
 
         links.forEach(link => {
-            // Check for XM links OR the banner link
-            if (link.href.includes("clicks.affstrack") || link.getAttribute('href') === "#" || link.classList.contains('btn-shiny') || link.classList.contains('sticky-btn')) {
-                
-                let newUrl = xmBaseUrl;
-                if (link.href.includes("m=23149")) {
-                     newUrl = link.href;
-                }
-
-                if (richAdsClickId) {
-                    newUrl += "&subid1=" + richAdsClickId;
-                    if (richAdsPubId) newUrl += "&subid2=" + richAdsPubId;
-                } 
-                else if (mgidClickId) {
-                    newUrl += "&subid1=" + mgidClickId;
-                    newUrl += "&subid2=mgid";
-                }
-                link.href = newUrl;
-
-                link.addEventListener('click', function() {
-                    console.log("Button clicked!");
-                    if (typeof gtag === 'function') {
-                        gtag('event', 'XMclick', { 'event_category': 'conversion' });
-                    }
-                    
-                    // --- RICHADS TRACKING FIX ---
-                    if (richAdsClickId) {
-                        const richAdsPostback = 'https://us.ahows.co/log?action=conversion&key=' + richAdsClickId;
-                        
-                        // Използваме sendBeacon, за да сме сигурни, че сигнала тръгва дори при затваряне
-                        if (navigator.sendBeacon) {
-                            navigator.sendBeacon(richAdsPostback);
-                        } else {
-                            // Fallback за много стари браузъри (малко вероятно, но безопасно)
-                            fetch(richAdsPostback, { mode: 'no-cors', keepalive: true });
-                        }
-                    }
-                    // -----------------------------
-
-                    if (mgidClickId) {
-                        const mgidPostback = "https://a.mgid.com/postback/897661?c=" + mgidClickId + "&e=XMclick";
-                        if (navigator.sendBeacon) {
-                            navigator.sendBeacon(mgidPostback);
-                        } else {
-                            new Image().src = mgidPostback;
-                        }
-                    }
-                });
+            let newUrl = xmBaseUrl;
+            if (link.href.includes("m=23149") || link.href.includes("m=9327")) {
+                 newUrl = link.href;
             }
+
+            if (richAdsClickId) {
+                newUrl += (newUrl.includes('?') ? '&' : '?') + "subid1=" + richAdsClickId;
+                if (richAdsPubId) newUrl += "&subid2=" + richAdsPubId;
+            } else if (mgidClickId) {
+                newUrl += (newUrl.includes('?') ? '&' : '?') + "subid1=" + mgidClickId + "&subid2=mgid";
+            }
+            link.href = newUrl;
+
+            link.addEventListener('click', function() {
+                if (richAdsClickId && navigator.sendBeacon) {
+                    navigator.sendBeacon('https://us.ahows.co/log?action=conversion&key=' + richAdsClickId);
+                }
+            });
         });
     });
-</script>
-
+    </script>
 </body>
 </html>
