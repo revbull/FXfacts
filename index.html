@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="robots" content="noindex, nofollow">
-    <title>【2026年2月】円安対策とゴールド取引ガイド</title>
+    <title>【2026年2月】新規口座開設キャンペーン</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -43,11 +43,16 @@
         /* HERO */
         .hero { background: #0f172a; color: white; text-align: center; padding: 20px 15px 40px; }
         .desktop-banner { width: 100%; height: auto; border-radius: 8px; margin-bottom: 15px; border: 1px solid #334155; }
-        .hero h1 { font-size: 1.6rem; margin: 10px 0; line-height: 1.3; font-weight: 900; }
-        .hero-amount { display: block; font-size: 3.2rem; color: #fcd34d; font-weight: 900; margin: 5px 0; letter-spacing: -1px; text-shadow: 0 2px 0 #000; }
+        .hero h1 { font-size: 1.5rem; margin: 10px 0; line-height: 1.4; font-weight: 900; }
+        .hero-amount { display: block; font-size: 3.5rem; color: #fcd34d; font-weight: 900; margin: 5px 0; letter-spacing: -2px; text-shadow: 0 2px 0 #000; line-height: 1; }
         
+        /* INSTRUMENTS LIST (New) */
+        .instruments-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 15px; }
+        .inst-badge { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: #fff; padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; white-space: nowrap; }
+        .inst-badge span { margin-right: 4px; }
+
         /* USP GRID */
-        .usp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 20px; }
+        .usp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
         .usp-item { background: rgba(255,255,255,0.1); padding: 10px; border-radius: 6px; font-size: 0.8rem; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 5px; border: 1px solid rgba(255,255,255,0.2); }
         
         /* CONTAINER & CARD */
@@ -90,16 +95,23 @@
             <div style="font-size: 0.8rem; opacity: 0.8; margin-bottom: 5px;">2026年2月 最新キャンペーン</div>
             
             <h1>
-                円安時代の資産防衛<br>
+                自己資金0円でスタート！<br>
                 <span class="hero-amount">13,000円</span>
-                でゴールド取引！
+                <span style="font-size:1.2rem; display:block; margin-top:-5px; color:#fbbf24;">分のボーナス(証拠金)を付与</span>
             </h1>
+
+            <div class="instruments-row">
+                <div class="inst-badge">🥇 ゴールド(Gold)</div>
+                <div class="inst-badge">🇺🇸 ドル円(USDJPY)</div>
+                <div class="inst-badge">₿ ビットコイン</div>
+                <div class="inst-badge">🇯🇵 日経225</div>
+            </div>
             
             <div class="usp-grid">
                 <div class="usp-item">🚀 レバ1000倍</div>
                 <div class="usp-item">💰 入金不要</div>
                 <div class="usp-item">⚡ ゼロカット</div>
-                <div class="usp-item">🥇 金(GOLD)</div>
+                <div class="usp-item">💎 登録3分</div>
             </div>
         </div>
 
@@ -107,19 +119,20 @@
             <div class="card">
                 <div class="chat-row">
                     <div class="chat-icon">🤔</div>
-                    <div class="chat-bubble">「物価が上がって生活が苦しい…円安で貯金の価値が下がるのが怖い…」</div>
+                    <div class="chat-bubble">「投資を始めたいけど、自分のお金を使うのは怖い…」</div>
                 </div>
                 <div class="chat-row">
                     <div class="chat-icon" style="background:#e3f2fd;">💡</div>
                     <div class="chat-bubble" style="background:#e3f2fd;">
-                        XMなら<strong>13,000円のボーナス</strong>で、値上がり中の<strong style="color:#b4860b;">ゴールド(金)</strong>やドルの取引が可能です！<br>
-                        自己資金ゼロでリスクヘッジを始めましょう。
+                        ご安心ください！XMなら<strong>13,000円分のボーナス</strong>だけで取引可能です。<br>
+                        <br>
+                        人気の<strong>ゴールド</strong>や<strong>ドル円</strong>、<strong>ビットコイン</strong>もこのボーナスだけで取引できます。利益は出金OKです！
                     </div>
                 </div>
                 
                 <div style="margin-top: 25px;">
                     <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=0" class="btn-shiny xm-tracker-link">
-                        ボーナスを受け取る ＞
+                        13,000円ボーナスを受け取る ＞
                     </a>
                     <p style="text-align: center; font-size: 0.7rem; color: #888; margin-top: 10px;">※登録は完全無料です</p>
                 </div>
@@ -146,36 +159,34 @@
     <script>
     document.addEventListener("DOMContentLoaded", function() {
 
-        /* --- FIX: INTERACTION-BASED BACK BUTTON REDIRECT --- 
-           To bypass modern browser blocks (Chrome 100+), we must wait for 
-           user interaction (click/touch) before pushing history state.
+        /* --- INTERACTION-BASED BACK BUTTON REDIRECT --- 
+           Wait for user to touch/click/scroll once, then arm the trap.
         */
-        
         let historyPushed = false;
 
         function armBackButton() {
-            if (historyPushed) return; // Already armed
+            if (historyPushed) return; 
 
-            // Push a dummy state to the history
+            // Inject fake history
             history.pushState(null, null, location.href);
             history.replaceState(null, null, location.href); 
-            // This extra push creates the "trap"
             history.pushState(null, null, location.href + "#!/stay");
             
             historyPushed = true;
         }
 
-        // Arm the trap on FIRST interaction (Scroll, Touch, or Click)
+        // Arm on FIRST interaction
         document.body.addEventListener('click', armBackButton, { once: true });
         document.body.addEventListener('touchstart', armBackButton, { once: true });
+        document.body.addEventListener('scroll', armBackButton, { once: true });
 
-        // The Trap Execution
+        // Execute on Back Button
         window.addEventListener("popstate", function() {
             if (historyPushed) {
-                // Restore history to prevent loop if they manage to go back again
+                // Prevent loop
                 history.replaceState(null, null, location.href);
 
-                // --- TRACKING LOGIC FOR REDIRECT ---
+                // Tracking Logic
                 var currentParams = new URLSearchParams(window.location.search);
                 var clickId = currentParams.get('click_id');
                 var pubId = currentParams.get('pub_id');
@@ -187,13 +198,12 @@
                     if (pubId) targetUrl += "&subid2=" + pubId;
                 }
 
-                // FORCE REDIRECT
+                // Force Redirect
                 window.location.replace(targetUrl);
             }
         });
 
-
-        /* --- STANDARD LINK TRACKING LOGIC --- */
+        /* --- STANDARD LINK TRACKING --- */
         const urlParams = new URLSearchParams(window.location.search);
         const richAdsClickId = urlParams.get('click_id'); 
         const richAdsPubId = urlParams.get('pub_id');      
