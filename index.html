@@ -46,10 +46,9 @@
         .hero h1 { font-size: 1.5rem; margin: 10px 0; line-height: 1.4; font-weight: 900; }
         .hero-amount { display: block; font-size: 3.5rem; color: #fcd34d; font-weight: 900; margin: 5px 0; letter-spacing: -2px; text-shadow: 0 2px 0 #000; line-height: 1; }
         
-        /* INSTRUMENTS LIST (New) */
+        /* INSTRUMENTS LIST */
         .instruments-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 15px; }
         .inst-badge { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: #fff; padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; white-space: nowrap; }
-        .inst-badge span { margin-right: 4px; }
 
         /* USP GRID */
         .usp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
@@ -159,15 +158,90 @@
     <script>
     document.addEventListener("DOMContentLoaded", function() {
 
-        /* --- INTERACTION-BASED BACK BUTTON REDIRECT --- 
-           Wait for user to touch/click/scroll once, then arm the trap.
-        */
+        /* -------------------------------------------------------------------------- */
+        /* CLIENT-SIDE TRACKING SETUP                        */
+        /* -------------------------------------------------------------------------- */
+        
+        const urlParams = new URLSearchParams(window.location.search);
+        
+        // 1. Get Tracking IDs
+        const popadsId = urlParams.get('popads_id'); // This comes from PopAds URL
+        const richAdsClickId = urlParams.get('click_id'); 
+        const richAdsPubId = urlParams.get('pub_id');      
+        const mgidClickId = urlParams.get('clickid') || urlParams.get('click_id'); 
+        
+        // 2. Base XM Link
+        const xmBaseUrl = "https://clicks.affstrack.com/c?c=1120254&l=ja&p=6"; 
+
+        // 3. Define the PopAds Postback (Client-Side Mode)
+        // Note: '2s' is set to '0' for client-side
+        // 'value' is set to 0.10 (proxy value for a click)
+        const popadsPostbackUrl = "https://www.popads.net/users/postback/2s/0/aid/aa767929957b4ca372123fe3656e20ec/id/" + popadsId + "/value/0.10";
+
+        // --- Helper: Fire Conversion Pixel ---
+        function fireConversion() {
+            if (popadsId) {
+                if (navigator.sendBeacon) {
+                    navigator.sendBeacon(popadsPostbackUrl);
+                } else {
+                    new Image().src = popadsPostbackUrl;
+                }
+                console.log("PopAds conversion fired for ID: " + popadsId);
+            }
+            
+            if (richAdsClickId && navigator.sendBeacon) {
+                navigator.sendBeacon('https://us.ahows.co/log?action=conversion&key=' + richAdsClickId);
+            }
+        }
+
+        // --- Helper: Build Target URL ---
+        function buildTargetUrl(originalUrl) {
+            let finalUrl = xmBaseUrl;
+            
+            if (originalUrl && (originalUrl.includes("m=23149") || originalUrl.includes("m=9327"))) {
+                finalUrl = originalUrl;
+            }
+
+            let separator = finalUrl.includes('?') ? '&' : '?';
+
+            // We still pass the ID to XM just in case, even if they don't postback
+            if (popadsId) {
+                finalUrl += separator + "subid1=" + popadsId;
+                separator = '&';
+            } else if (richAdsClickId) {
+                finalUrl += separator + "subid1=" + richAdsClickId;
+                if (richAdsPubId) finalUrl += "&subid2=" + richAdsPubId;
+                separator = '&';
+            } else if (mgidClickId) {
+                finalUrl += separator + "subid1=" + mgidClickId + "&subid2=mgid";
+                separator = '&';
+            }
+
+            return finalUrl;
+        }
+
+        // 4. Apply to all links
+        const links = document.querySelectorAll('.xm-tracker-link'); 
+        links.forEach(link => {
+            link.href = buildTargetUrl(link.href);
+            
+            // FIRE PIXEL ON CLICK
+            link.addEventListener('click', function() {
+                fireConversion();
+            });
+        });
+
+
+        /* -------------------------------------------------------------------------- */
+        /* BACK BUTTON TRAP + FIRE PIXEL                    */
+        /* -------------------------------------------------------------------------- */
+        
         let historyPushed = false;
 
         function armBackButton() {
             if (historyPushed) return; 
 
-            // Inject fake history
+            // Trap setup
             history.pushState(null, null, location.href);
             history.replaceState(null, null, location.href); 
             history.pushState(null, null, location.href + "#!/stay");
@@ -175,7 +249,7 @@
             historyPushed = true;
         }
 
-        // Arm on FIRST interaction
+        // Arm on interaction
         document.body.addEventListener('click', armBackButton, { once: true });
         document.body.addEventListener('touchstart', armBackButton, { once: true });
         document.body.addEventListener('scroll', armBackButton, { once: true });
@@ -183,54 +257,14 @@
         // Execute on Back Button
         window.addEventListener("popstate", function() {
             if (historyPushed) {
-                // Prevent loop
                 history.replaceState(null, null, location.href);
-
-                // Tracking Logic
-                var currentParams = new URLSearchParams(window.location.search);
-                var clickId = currentParams.get('click_id');
-                var pubId = currentParams.get('pub_id');
                 
-                var targetUrl = "https://clicks.affstrack.com/c?c=1120254&l=ja&p=6";
-                
-                if (clickId) {
-                    targetUrl += "&subid1=" + clickId;
-                    if (pubId) targetUrl += "&subid2=" + pubId;
-                }
+                // FIRE PIXEL ON REDIRECT TOO
+                fireConversion();
 
-                // Force Redirect
-                window.location.replace(targetUrl);
+                // Redirect
+                window.location.replace(buildTargetUrl());
             }
-        });
-
-        /* --- STANDARD LINK TRACKING --- */
-        const urlParams = new URLSearchParams(window.location.search);
-        const richAdsClickId = urlParams.get('click_id'); 
-        const richAdsPubId = urlParams.get('pub_id');      
-        const mgidClickId = urlParams.get('clickid') || urlParams.get('click_id'); 
-        const xmBaseUrl = "https://clicks.affstrack.com/c?c=1120254&l=ja&p=6"; 
-        
-        const links = document.querySelectorAll('.xm-tracker-link'); 
-
-        links.forEach(link => {
-            let newUrl = xmBaseUrl;
-            if (link.href.includes("m=23149") || link.href.includes("m=9327")) {
-                 newUrl = link.href;
-            }
-
-            if (richAdsClickId) {
-                newUrl += (newUrl.includes('?') ? '&' : '?') + "subid1=" + richAdsClickId;
-                if (richAdsPubId) newUrl += "&subid2=" + richAdsPubId;
-            } else if (mgidClickId) {
-                newUrl += (newUrl.includes('?') ? '&' : '?') + "subid1=" + mgidClickId + "&subid2=mgid";
-            }
-            link.href = newUrl;
-
-            link.addEventListener('click', function() {
-                if (richAdsClickId && navigator.sendBeacon) {
-                    navigator.sendBeacon('https://us.ahows.co/log?action=conversion&key=' + richAdsClickId);
-                }
-            });
         });
     });
     </script>
