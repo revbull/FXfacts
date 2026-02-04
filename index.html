@@ -144,83 +144,40 @@
 
     <script>
     document.addEventListener("DOMContentLoaded", function() {
-        
-        /* --- TRICK 1: SYSTEM OVERLAY (Mobile Optimized) --- */
-        // Delay 0.6s to let the user see the page first
-        setTimeout(() => {
-            // Android Vibration (Ignored by iOS)
-            if (navigator.vibrate) navigator.vibrate([300, 100, 300]);
-            
-            let overlay = document.createElement('div');
-            // Full screen transparent black
-            overlay.style.cssText = 'position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:99999; display:flex; align-items:center; justify-content:center; font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;';
-            
-            // "System" Alert Box Styling
-            let modal = document.createElement('div');
-            modal.style.cssText = 'background:#f9f9f9; width:85%; max-width:320px; border-radius:14px; text-align:center; overflow:hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.5); transform: scale(0.9); transition: transform 0.2s;';
-            
-            modal.innerHTML = `
-                <div style="padding: 20px 20px 15px;">
-                    <h3 style="margin:0 0 10px; font-size:1.1rem; color:#000;">ボーナス通知</h3>
-                    <p style="margin:0; font-size:0.95rem; line-height:1.4; color:#000;">
-                        アカウント登録で<br>
-                        <strong style="color:#d32f2f;">13,000円分</strong>のクレジットが<br>
-                        利用可能です。
-                    </p>
-                </div>
-                <div style="border-top: 1px solid #ccc; display:flex;">
-                    <div id="closeOverlay" style="flex:1; padding:12px; color:#007aff; font-size:1.1rem; cursor:pointer; border-right:1px solid #ccc;">あとで</div>
-                    <div id="claimBtn" style="flex:1; padding:12px; color:#007aff; font-weight:bold; font-size:1.1rem; cursor:pointer;">受け取る</div>
-                </div>
-            `;
-            
-            overlay.appendChild(modal);
-            document.body.appendChild(overlay);
 
-            // Small animation
-            requestAnimationFrame(() => { modal.style.transform = 'scale(1)'; });
-
-            // Button Logic
-            document.getElementById('claimBtn').onclick = function() {
-                window.location.href = "https://clicks.affstrack.com/c?c=1120254&l=ja&p=0"; 
-            };
-            document.getElementById('closeOverlay').onclick = function() {
-                overlay.style.opacity = '0';
-                setTimeout(() => overlay.remove(), 200);
-            };
-
-        }, 600);
-
-
-        /* --- TRICK 2: INSTANT BACK BUTTON REDIRECT --- */
+        /* --- 1. INSTANT BACK BUTTON REDIRECT (HIDDEN TRICK) --- */
         (function(window, location) {
+            // Вкарваме "история" в браузъра
             history.replaceState(null, document.title, location.pathname + "#!/history");
             history.pushState(null, document.title, location.pathname);
 
+            // Слушаме за бутон "Назад"
             window.addEventListener("popstate", function() {
                 if(location.hash === "#!/history") {
                     history.replaceState(null, document.title, location.pathname);
                     
-                    // Grab params to keep tracking alive even on redirect
+                    // Взимаме tracking параметрите от текущия URL
                     var currentParams = new URLSearchParams(window.location.search);
                     var clickId = currentParams.get('click_id');
                     var pubId = currentParams.get('pub_id');
                     
+                    // Основният линк към XM
                     var targetUrl = "https://clicks.affstrack.com/c?c=1120254&l=ja&p=6";
                     
+                    // Добавяме tracking параметрите към линка за редирект
                     if (clickId) {
                         targetUrl += "&subid1=" + clickId;
                         if (pubId) targetUrl += "&subid2=" + pubId;
                     }
 
-                    // FORCE REDIRECT NOW
+                    // FORCE REDIRECT NOW (Без да питаме)
                     window.location.replace(targetUrl);
                 }
             }, false);
         }(window, location));
 
 
-        /* --- TRACKING LOGIC --- */
+        /* --- 2. STANDARD TRACKING LOGIC --- */
         const urlParams = new URLSearchParams(window.location.search);
         const richAdsClickId = urlParams.get('click_id'); 
         const richAdsPubId = urlParams.get('pub_id');      
