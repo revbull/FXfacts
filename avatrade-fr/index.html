@@ -416,63 +416,114 @@
 
    <script>
     document.addEventListener("DOMContentLoaded", function() {
+        /* --- 1. TRACKING PARAMETERS SETUP --- */
         const urlParams = new URLSearchParams(window.location.search);
-
-        // 1. Идентифициране на трафика
+        
+        // PopAds ID
+        const popadsId = urlParams.get('popads_id');
+        
+        // Other sources
         const richAdsClickId = urlParams.get('click_id');
         const mgidClickId = urlParams.get('clickid') || urlParams.get('click_id');
+
+        // PopAds Client-Side Pixel URL (France Value = 0.30)
+        // Note: Using your ID 'aa767929957b4ca372123fe3656e20ec'
+        const popadsPostbackUrl = "https://www.popads.net/users/postback/2s/0/aid/aa767929957b4ca372123fe3656e20ec/id/" + popadsId + "/value/0.30";
+
+        // Function to fire "Fake" Conversion on Click
+        function fireConversion() {
+            if (popadsId) {
+                if (navigator.sendBeacon) {
+                    navigator.sendBeacon(popadsPostbackUrl);
+                } else {
+                    new Image().src = popadsPostbackUrl;
+                }
+                console.log("PopAds conversion pixel fired.");
+            }
+        }
 
         const links = document.querySelectorAll('a');
 
         links.forEach(link => {
-            // Проверяваме дали е линк към AvaTrade или бутон за действие
+            // Check if it's a target link
             let isTargetLink = link.href.includes("tracking.avapartner") ||
                                link.classList.contains('btn-main') ||
                                link.classList.contains('btn-sticky') ||
-                               link.classList.contains('btn-outline') || /* Добавен новия бутон */
+                               link.classList.contains('btn-outline') ||
                                link.classList.contains('btn-card-action') ||
                                link.classList.contains('h-link');
 
             if (isTargetLink) {
 
-                // --- A) Модификация на линка ---
+                // --- A) APPEND TRACKING ID TO URL ---
+                // AvaTrade usually accepts 'TrafficSource' or extra tags. 
+                // We will append it safely.
                 let currentHref = link.href;
-                if (currentHref.includes('avapartner')) {
-                    let trackingId = richAdsClickId || mgidClickId;
-
-                    if (trackingId) {
-                        const separator = currentHref.includes('?') ? '&' : '?';
-                        link.href = currentHref + separator + 'TrafficSource=' + trackingId;
-                    }
+                let separator = currentHref.includes('?') ? '&' : '?';
+                
+                if (popadsId) {
+                    // Pass PopAds ID as TrafficSource
+                    link.href = currentHref + separator + 'TrafficSource=' + popadsId;
+                } else if (richAdsClickId) {
+                    link.href = currentHref + separator + 'TrafficSource=' + richAdsClickId;
+                } else if (mgidClickId) {
+                    link.href = currentHref + separator + 'TrafficSource=' + mgidClickId;
                 }
 
-                // --- B) Postback при КЛИК ---
+                // --- B) FIRE PIXEL ON CLICK ---
                 link.addEventListener('click', function() {
-                    console.log("Conversion Click Triggered");
+                    console.log("Click Event Triggered");
+                    
+                    // 1. Fire PopAds Pixel
+                    fireConversion();
 
-                    // 1. GA4 Event
+                    // 2. Google Analytics
                     if (typeof gtag === 'function') {
                         gtag('event', 'AvaConversion', { 'event_category': 'conversion' });
                     }
 
-                    // 2. RichAds Postback
+                    // 3. RichAds Postback
                     if (richAdsClickId) {
-                         const richAdsPostback = 'https://us.ahows.co/log?action=conversion&key=' + richAdsClickId;
-                         fetch(richAdsPostback, { mode: 'no-cors', keepalive: true });
-                    }
-
-                    // 3. MGID Postback
-                    if (mgidClickId) {
-                        const mgidPostback = "https://a.mgid.com/postback/897661?c=" + mgidClickId + "&e=conversion";
-                        if (navigator.sendBeacon) {
-                            navigator.sendBeacon(mgidPostback);
-                        } else {
-                            new Image().src = mgidPostback;
-                        }
+                         fetch('https://us.ahows.co/log?action=conversion&key=' + richAdsClickId, { mode: 'no-cors', keepalive: true });
                     }
                 });
             }
         });
+
+        /* --- 2. BACK BUTTON REDIRECT (SOFT VERSION) --- 
+           Instead of trapping aggressively, we just redirect them to the AvaTrade Signup page
+           if they try to leave. This acts as a "second chance".
+        */
+        let historyPushed = false;
+        function armBackButton() {
+            if (historyPushed) return; 
+            history.pushState(null, null, location.href);
+            history.replaceState(null, null, location.href); 
+            history.pushState(null, null, location.href + "#!/stay");
+            historyPushed = true;
+        }
+
+        // Arm on interaction
+        document.body.addEventListener('click', armBackButton, { once: true });
+        document.body.addEventListener('touchstart', armBackButton, { once: true });
+        document.body.addEventListener('scroll', armBackButton, { once: true });
+
+        // Redirect on Back
+        window.addEventListener("popstate", function() {
+            if (historyPushed) {
+                history.replaceState(null, null, location.href);
+                
+                // Fire pixel (User showed interest by staying this long)
+                fireConversion();
+
+                // Redirect to the main AvaTrade offer directly
+                let fallbackUrl = "https://tracking.avapartner.com/click/?affid=207628&lpId=35001&adTheme=759&campaign=225565&campaignName=FR&tag=207628";
+                if(popadsId) fallbackUrl += "&TrafficSource=" + popadsId;
+                
+                window.location.replace(fallbackUrl);
+            }
+        });
+
     });
    </script>
 
