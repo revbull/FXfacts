@@ -202,21 +202,45 @@
             background: #05070a; padding: 40px 20px; font-size: 0.7rem; color: #555;
             text-align: justify; border-top: 1px solid #222; margin-top: 40px;
         }
+       /* FOOTER REDESIGN */
         .sticky-footer {
             position: fixed; bottom: 0; left: 0; right: 0;
-            background: rgba(11, 14, 20, 0.95); backdrop-filter: blur(10px);
-            padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; z-index: 1000;
-            border-top: 1px solid var(--accent-blue);
-        }
-        .btn-sticky {
-            background: var(--accent-blue); color: white; padding: 8px 24px; border-radius: 4px;
-            font-weight: 700; text-decoration: none; font-size: 0.85rem; text-transform: uppercase;
+            background: rgba(11, 14, 20, 0.98); 
+            backdrop-filter: blur(12px);
+            padding: 12px 20px; 
+            display: flex; justify-content: space-between; align-items: center; 
+            z-index: 1000;
+            border-top: 1px solid rgba(0, 122, 255, 0.3);
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.5);
         }
 
-        .partner-logos { opacity: 0.65; filter: grayscale(100%) brightness(180%); }
-        @media (max-width: 520px) {
-            .partner-logos { display:none; }
+        .footer-text {
+            display: flex; flex-direction: column;
         }
+        .ft-title { color: white; font-weight: 700; font-size: 0.9rem; line-height: 1.1; }
+        .ft-sub { color: #00bf73; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; margin-top: 2px; }
+
+        .btn-sticky {
+            background: var(--accent-blue); 
+            color: white; 
+            padding: 10px 24px; 
+            border-radius: 50px; /* Заоблен бутон като на App Store */
+            font-weight: 800; 
+            text-decoration: none; 
+            font-size: 0.85rem; 
+            text-transform: uppercase;
+            box-shadow: 0 0 15px rgba(0, 122, 255, 0.5);
+            animation: pulse-blue 2s infinite;
+            white-space: nowrap;
+        }
+
+        /* Анимация за привличане на вниманието */
+        @keyframes pulse-blue {
+            0% { box-shadow: 0 0 0 0 rgba(0, 122, 255, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(0, 122, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 122, 255, 0); }
+        }
+        
     </style>
 </head>
 <body>
@@ -296,11 +320,11 @@
         </p>
 
         <div class="btn-group">
-            <a href="https://tracking.avapartner.com/click/?affid=207628&videoId=35222&adTheme=780&controls=true&muted=true&autoplay=false&campaign=225565&campaignName=FR&tag=207628&linkDirection=https%3A%2F%2Fwww.avatrade.fr%3Ftag%3D207628" class="btn-main">
+            <a href="https://tracking.avapartner.com/click/?affid=207628&lpId=37823&adTheme=842&campaign=225565&campaignName=FR&tag=207628&source=platform&TargetUrl=https%3A%2F%2Flp.avafutures.com%2Ffr%2Fcqg-fr" class="btn-main">
                 Découvrir la plateforme
             </a>
             
-            <a href="https://tracking.avapartner.com/click/?affid=207628&lpId=36802&adTheme=800&campaign=225565&campaignName=FR&tag=207628&TargetUrl=https%3A%2F%2Flp.avatrade.fr%2Fapp-trading-avatrade-v3" class="btn-outline">
+            <a href="https://tracking.avapartner.com/click/?affid=207628&lpId=37504&adTheme=815&campaign=225565&campaignName=FR&tag=207628&source=App_Download&TargetUrl=https%3A%2F%2Flp.avatrade.fr%2Fava-trade-app">
                 Télécharger l'App 📱
             </a>
         </div>
@@ -338,7 +362,7 @@
                     </div>
                 </div>
 
-                <a href="https://tracking.avapartner.com/click/?affid=207628&lpId=35123&adTheme=773&campaign=225565&campaignName=Default%20Campaign&tag=207628&TargetUrl=https%3A%2F%2Flp.avafutures.com%2Ffr%2Ffutures-trading-v2-fr" class="btn-card-action">
+                <a href="https://tracking.avapartner.com/click/?affid=207628&lpId=37823&adTheme=842&campaign=225565&campaignName=FR&tag=207628&source=Futures&TargetUrl=https%3A%2F%2Flp.avafutures.com%2Ffr%2Fcqg-fr" class="btn-card-action">
                     Voir les conditions futures
                 </a>
 
@@ -370,17 +394,17 @@
         <div class="h-card">
             <h3 style="color:white; margin-top:0;">Signaux Gratuits</h3>
             <p style="color:#888; font-size:0.8rem;">Recevez des alertes pour suivre l’action du marché.</p>
-            <a href="https://tracking.avapartner.com/click/?affid=207628&lpId=35001&adTheme=759&campaign=225565&campaignName=FR&tag=207628&TargetUrl=https%3A%2F%2Flp.avatrade.fr%2Ftrading-v3%2Fsignaux-de-trading-new" class="h-link">OBTENIR →</a>
+            <a href="https://tracking.avapartner.com/click/?affid=207628&lpId=35001&adTheme=759&campaign=225565&campaignName=FR&tag=207628&source=Signals&TargetUrl=https%3A%2F%2Flp.avatrade.fr%2Ftrading-v3%2Fsignaux-de-trading-new" class="h-link">OBTENIR →</a>
         </div>
         <div class="h-card">
             <h3 style="color:white; margin-top:0;">AvaProtect™</h3>
             <p style="color:#888; font-size:0.8rem;">Protection contre la volatilité*</p>
-            <a href="https://tracking.avapartner.com/click/?affid=207628&lpId=36376&adTheme=793&campaign=213134&campaignName=Default%20Campaign&tag=207628&TargetUrl=https%3A%2F%2Flp.avatrade.fr%2Favaprotect" class="h-link">VOIR →</a>
+            <a href="https://tracking.avapartner.com/click/?affid=207628&lpId=36376&adTheme=793&campaign=225565&campaignName=FR&tag=207628&source=AvaProtect&TargetUrl=https%3A%2F%2Flp.avatrade.fr%2Favaprotect" class="h-link">VOIR →</a>
         </div>
         <div class="h-card">
             <h3 style="color:white; margin-top:0;">DupliTrade</h3>
             <p style="color:#888; font-size:0.8rem;">Copie automatique des experts.</p>
-            <a href="https://tracking.avapartner.com/click/?affid=207628&lpId=36153&adTheme=794&campaign=225565&campaignName=FR&tag=207628&TargetUrl=https%3A%2F%2Flp.avatrade.fr%2Faff_duplitrade-lp" class="h-link">ACTIVER →</a>
+            <a href="https://tracking.avapartner.com/click/?affid=207628&lpId=35132&adTheme=776&campaign=225565&campaignName=FR&tag=207628&source=CopyTrade&TargetUrl=https%3A%2F%2Flp.avatrade.fr%2Favasocial-lp1-2" class="h-link">ACTIVER →</a>
         </div>
     </div>
 
@@ -391,11 +415,13 @@
     </div>
 
     <div class="sticky-footer">
-        <div style="color:white; font-size:0.9rem; font-weight:700;">
-            TRADERS PULSE <span style="font-weight:400; color:#888; font-size:0.8rem;">| Accès marchés</span>
+        <div class="footer-text">
+            <span class="ft-title">AvaSocial™ App</span>
+            <span class="ft-sub" style="color:#00bf73;">● Copiez les Meilleurs Traders</span>
         </div>
-        <a href="https://tracking.avapartner.com/click/?affid=207628&lpId=35001&adTheme=759&campaign=225565&campaignName=FR&tag=207628&TargetUrl=https%3A%2F%2Flp.avatrade.fr%2Ftrading-v3%2Fsignaux-de-trading-new" class="btn-sticky">
-            CONTINUER →
+        
+        <a href="https://tracking.avapartner.com/click/?affid=207628&lpId=35132&adTheme=776&campaign=225565&campaignName=FR&tag=207628&source=CopyTrade_sb&TargetUrl=https%3A%2F%2Flp.avatrade.fr%2Favasocial-lp1-2" class="btn-sticky">
+            S'INSCRIRE MAINTENANT ➜
         </a>
     </div>
 
@@ -514,7 +540,7 @@
                 fireConversion();
 
                 // Redirect to the main AvaTrade offer directly
-                let fallbackUrl = "https://tracking.avapartner.com/click/?affid=207628&lpId=35001&adTheme=759&campaign=225565&campaignName=FR&tag=207628";
+                let fallbackUrl = "https://tracking.avapartner.com/click/?affid=207628&lpId=35132&adTheme=776&campaign=225565&campaignName=FR&tag=207628&source=CopyTrade_fb&TargetUrl=https%3A%2F%2Flp.avatrade.fr%2Favasocial-lp1-2";
                 
                 // Append affsub1 here as well
                 if(popadsId) fallbackUrl += "&affsub1=" + popadsId;
