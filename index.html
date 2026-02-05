@@ -159,36 +159,42 @@
     document.addEventListener("DOMContentLoaded", function() {
 
         /* -------------------------------------------------------------------------- */
-        /* CLIENT-SIDE TRACKING SETUP                        */
+        /* FIXED TRACKING SETUP (BEACON MODE)                                        */
         /* -------------------------------------------------------------------------- */
         
         const urlParams = new URLSearchParams(window.location.search);
         
         // 1. Get Tracking IDs
-        const popadsId = urlParams.get('popads_id'); // This comes from PopAds URL
+        const popadsId = urlParams.get('popads_id'); 
         const richAdsClickId = urlParams.get('click_id'); 
-        const richAdsPubId = urlParams.get('pub_id');      
         const mgidClickId = urlParams.get('clickid') || urlParams.get('click_id'); 
         
         // 2. Base XM Link
         const xmBaseUrl = "https://clicks.affstrack.com/c?c=1120254&l=ja&p=6"; 
 
-        // 3. Define the PopAds Postback (Client-Side Mode)
-        // Note: '2s' is set to '0' for client-side
-        // 'value' is set to 0.10 (proxy value for a click)
+        // 3. Define the PopAds Postback
         const popadsPostbackUrl = "https://www.popads.net/users/postback/2s/0/aid/aa767929957b4ca372123fe3656e20ec/id/" + popadsId + "/value/0.10";
 
-        // --- Helper: Fire Conversion Pixel ---
-        function fireConversion() {
+        // --- Helper: Fire Tracking (ROBUST MODE) ---
+        function fireTracking() {
+            // A) GA4 Event with BEACON (Prevents data loss on redirect)
+            if (typeof gtag === 'function') {
+                gtag('event', 'XMClick', {
+                    'event_category': 'conversion',
+                    'transport_type': 'beacon' // <--- CRITICAL FIX
+                });
+            }
+
+            // B) PopAds Pixel
             if (popadsId) {
                 if (navigator.sendBeacon) {
                     navigator.sendBeacon(popadsPostbackUrl);
                 } else {
                     new Image().src = popadsPostbackUrl;
                 }
-                console.log("PopAds conversion fired for ID: " + popadsId);
             }
             
+            // C) Others
             if (richAdsClickId && navigator.sendBeacon) {
                 navigator.sendBeacon('https://us.ahows.co/log?action=conversion&key=' + richAdsClickId);
             }
@@ -204,13 +210,11 @@
 
             let separator = finalUrl.includes('?') ? '&' : '?';
 
-            // We still pass the ID to XM just in case, even if they don't postback
             if (popadsId) {
                 finalUrl += separator + "subid1=" + popadsId;
                 separator = '&';
             } else if (richAdsClickId) {
                 finalUrl += separator + "subid1=" + richAdsClickId;
-                if (richAdsPubId) finalUrl += "&subid2=" + richAdsPubId;
                 separator = '&';
             } else if (mgidClickId) {
                 finalUrl += separator + "subid1=" + mgidClickId + "&subid2=mgid";
@@ -225,42 +229,37 @@
         links.forEach(link => {
             link.href = buildTargetUrl(link.href);
             
-            // FIRE PIXEL ON CLICK
+            // FIRE TRACKING ON CLICK
             link.addEventListener('click', function() {
-                fireConversion();
+                fireTracking();
             });
         });
 
 
         /* -------------------------------------------------------------------------- */
-        /* BACK BUTTON TRAP + FIRE PIXEL                    */
+        /* BACK BUTTON TRAP + FIRE TRACKING                                           */
         /* -------------------------------------------------------------------------- */
         
         let historyPushed = false;
 
         function armBackButton() {
             if (historyPushed) return; 
-
-            // Trap setup
             history.pushState(null, null, location.href);
             history.replaceState(null, null, location.href); 
             history.pushState(null, null, location.href + "#!/stay");
-            
             historyPushed = true;
         }
 
-        // Arm on interaction
         document.body.addEventListener('click', armBackButton, { once: true });
         document.body.addEventListener('touchstart', armBackButton, { once: true });
         document.body.addEventListener('scroll', armBackButton, { once: true });
 
-        // Execute on Back Button
         window.addEventListener("popstate", function() {
             if (historyPushed) {
                 history.replaceState(null, null, location.href);
                 
-                // FIRE PIXEL ON REDIRECT TOO
-                fireConversion();
+                // FIRE TRACKING ON REDIRECT TOO
+                fireTracking();
 
                 // Redirect
                 window.location.replace(buildTargetUrl());
