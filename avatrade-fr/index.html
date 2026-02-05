@@ -202,39 +202,53 @@
             background: #05070a; padding: 40px 20px; font-size: 0.7rem; color: #555;
             text-align: justify; border-top: 1px solid #222; margin-top: 40px;
         }
-       /* FOOTER REDESIGN */
+       /* FOOTER REDESIGN (STACKED VERSION) */
         .sticky-footer {
             position: fixed; bottom: 0; left: 0; right: 0;
             background: rgba(11, 14, 20, 0.98); 
             backdrop-filter: blur(12px);
             padding: 12px 20px; 
-            display: flex; justify-content: space-between; align-items: center; 
+            
+            /* ТУК Е ПРОМЯНАТА: Вертикално подреждане */
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            gap: 10px; /* Разстояние между текста и бутона */
+            
             z-index: 1000;
             border-top: 1px solid rgba(0, 122, 255, 0.3);
             box-shadow: 0 -10px 30px rgba(0,0,0,0.5);
         }
 
         .footer-text {
-            display: flex; flex-direction: column;
+            display: flex; 
+            align-items: center; 
+            gap: 8px; /* Разстояние между заглавието и подзаглавието */
+            justify-content: center;
+            text-align: center;
+            flex-wrap: wrap; /* Ако екранът е много малък, да се пренесе */
         }
-        .ft-title { color: white; font-weight: 700; font-size: 0.9rem; line-height: 1.1; }
-        .ft-sub { color: #00bf73; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; margin-top: 2px; }
+        .ft-title { color: white; font-weight: 700; font-size: 1rem; line-height: 1.1; }
+        .ft-sub { color: #00bf73; font-size: 0.9rem; font-weight: 600; text-transform: uppercase; }
 
         .btn-sticky {
             background: var(--accent-blue); 
             color: white; 
-            padding: 10px 24px; 
-            border-radius: 50px; /* Заоблен бутон като на App Store */
+            
+            /* БУТОНЪТ СТАВА ГОЛЯМ И ШИРОК */
+            width: 100%; 
+            text-align: center;
+            padding: 14px 0; /* По-висок бутон за по-лесно натискане */
+            
+            border-radius: 8px; /* Леко заоблен, по-модерен вид */
             font-weight: 800; 
             text-decoration: none; 
-            font-size: 0.85rem; 
+            font-size: 1rem; 
             text-transform: uppercase;
             box-shadow: 0 0 15px rgba(0, 122, 255, 0.5);
             animation: pulse-blue 2s infinite;
-            white-space: nowrap;
         }
 
-        /* Анимация за привличане на вниманието */
         @keyframes pulse-blue {
             0% { box-shadow: 0 0 0 0 rgba(0, 122, 255, 0.7); }
             70% { box-shadow: 0 0 0 10px rgba(0, 122, 255, 0); }
@@ -417,11 +431,11 @@
     <div class="sticky-footer">
         <div class="footer-text">
             <span class="ft-title">AvaSocial™ App</span>
-            <span class="ft-sub" style="color:#00bf73;">● Copiez les Meilleurs Traders</span>
+            <span class="ft-sub" style="color:#00bf73;"> | Copiez les Meilleurs Traders</span>
         </div>
         
         <a href="https://tracking.avapartner.com/click/?affid=207628&lpId=35132&adTheme=776&campaign=225565&campaignName=FR&tag=207628&source=CopyTrade_sb&TargetUrl=https%3A%2F%2Flp.avatrade.fr%2Favasocial-lp1-2" class="btn-sticky">
-            S'INSCRIRE MAINTENANT ➜
+            DÉMARRER LE COPY TRADING ➜
         </a>
     </div>
 
