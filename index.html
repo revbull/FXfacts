@@ -24,7 +24,7 @@
     </script>
 
     <style>
-        /* --- FXFacts LIGHT SPRING THEME (FINAL MASTER) --- */
+        /* --- FXFacts LIGHT SPRING THEME (FIXED LAYOUT) --- */
         :root {
             --bg-body: #fdfdfd;
             --bg-white: #ffffff;
@@ -46,8 +46,11 @@
             font-family: 'Noto Sans JP', sans-serif;
             background-color: var(--bg-body);
             color: var(--text-main);
-            margin: 0; padding-bottom: 140px; line-height: 1.6;
-            padding-top: 45px;
+            margin: 0; 
+            padding-bottom: 140px; 
+            line-height: 1.6;
+            /* REMOVED padding-top to fix gap issue */
+            padding-top: 0; 
             background-image: radial-gradient(var(--sakura-pink) 0.5px, transparent 0.5px);
             background-size: 30px 30px;
         }
@@ -57,14 +60,14 @@
         strong { color: var(--xm-red); }
         img { display: block; max-width: 100%; height: auto; }
 
-        /* --- 1. PROMO BAR --- */
+        /* --- 1. PROMO BAR (NO OVERLAP FIX) --- */
         .promo-bar {
-            position: fixed; top: 0; left: 0; right: 0;
+            /* Changed from fixed to relative so it pushes content down */
+            position: relative; 
             background: var(--xm-red-dark);
             color: white; text-align: center;
             padding: 8px 10px; z-index: 2000;
             font-size: 0.8rem; font-weight: 700;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             text-decoration: none; display: flex; 
             justify-content: center; align-items: center; gap: 8px; flex-wrap: wrap;
         }
@@ -78,7 +81,8 @@
         .header-wrapper {
             background: var(--bg-white);
             border-bottom: 1px solid #e5e5e5;
-            position: sticky; top: 38px; z-index: 900;
+            /* STICKY HEADER: Sticks to top when scrolling past promo bar */
+            position: sticky; top: 0; z-index: 900;
             box-shadow: 0 2px 10px rgba(0,0,0,0.03);
         }
 
@@ -105,21 +109,21 @@
             border-radius: 3px; width: fit-content; margin-top: 3px; 
         }
 
-        /* BANNER SWITCHING LOGIC */
+        /* --- BANNER SWITCHING LOGIC --- */
         .banner-desktop { display: none; }
         .banner-mobile { display: block; }
         
+        /* Mobile Banner Styling - Fluid width */
         .banner-mobile img {
-            height: 50px; 
+            max-height: 55px; /* Control height */
             width: auto; 
             border: 1px solid #eee; border-radius: 4px;
             display: block;
+            margin-left: auto; /* Push to right */
         }
 
+        /* Desktop Media Query */
         @media (min-width: 900px) {
-            body { padding-top: 50px; }
-            .header-wrapper { top: 40px; }
-            
             .banner-desktop { display: block; }
             .banner-mobile { display: none; }
             
@@ -133,8 +137,13 @@
             }
         }
 
-        /* --- 3. TRADINGVIEW BAR (Added) --- */
-        .tv-bar-container { border-bottom: 1px solid #eee; background: #fff; }
+        /* --- 3. TRADINGVIEW TICKER TAPE (Styling) --- */
+        .tv-bar-container { 
+            border-bottom: 1px solid #eee; 
+            background: #fff; 
+            height: 46px; /* Fixed height to prevent jump */
+            overflow: hidden;
+        }
 
         /* --- 4. HERO SECTION --- */
         .hero {
@@ -269,7 +278,7 @@
 <body>
 
     <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=0" class="promo-bar xm-tracker-link">
-        <span class="promo-badge">NEW</span>
+        <span class="promo-badge">注目</span>
         <span>2026年 早春ボーナス：<span style="color:#ffcc00;">100%入金ボーナス</span> 実施中！</span>
         <span style="font-weight:400; font-size:0.75rem; opacity:0.9;">(期間: 2026/02/01 ~ 2026/04/30)</span>
     </a>
@@ -329,10 +338,10 @@
         </p>
 
         <div class="btn-group">
-            <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=6" class="btn-main xm-tracker-link">
+            <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=0" class="btn-main xm-tracker-link">
                 ボーナスを受け取る
             </a>
-            <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=22" class="btn-sub xm-tracker-link">
+            <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=0" class="btn-sub xm-tracker-link">
                 会員ページへ
             </a>
         </div>
@@ -431,7 +440,7 @@
             入金不要。（利用規約適用)
         </div>
         
-        <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=6" class="btn-sticky xm-tracker-link">
+        <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=0" class="btn-sticky xm-tracker-link">
             ボーナスを受け取る ➜
         </a>
     </div>
