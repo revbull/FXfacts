@@ -49,7 +49,6 @@
             margin: 0; 
             padding-bottom: 140px; 
             line-height: 1.6;
-            /* REMOVED padding-top to fix gap issue */
             padding-top: 0; 
             background-image: radial-gradient(var(--sakura-pink) 0.5px, transparent 0.5px);
             background-size: 30px 30px;
@@ -62,7 +61,6 @@
 
         /* --- 1. PROMO BAR (NO OVERLAP FIX) --- */
         .promo-bar {
-            /* Changed from fixed to relative so it pushes content down */
             position: relative; 
             background: var(--xm-red-dark);
             color: white; text-align: center;
@@ -81,7 +79,6 @@
         .header-wrapper {
             background: var(--bg-white);
             border-bottom: 1px solid #e5e5e5;
-            /* STICKY HEADER: Sticks to top when scrolling past promo bar */
             position: sticky; top: 0; z-index: 900;
             box-shadow: 0 2px 10px rgba(0,0,0,0.03);
         }
@@ -113,16 +110,14 @@
         .banner-desktop { display: none; }
         .banner-mobile { display: block; }
         
-        /* Mobile Banner Styling - Fluid width */
         .banner-mobile img {
-            max-height: 55px; /* Control height */
+            max-height: 55px; 
             width: auto; 
             border: 1px solid #eee; border-radius: 4px;
             display: block;
-            margin-left: auto; /* Push to right */
+            margin-left: auto; 
         }
 
-        /* Desktop Media Query */
         @media (min-width: 900px) {
             .banner-desktop { display: block; }
             .banner-mobile { display: none; }
@@ -137,15 +132,15 @@
             }
         }
 
-        /* --- 3. TRADINGVIEW TICKER TAPE (Styling) --- */
+        /* --- 3. TRADINGVIEW TICKER TAPE --- */
         .tv-bar-container { 
             border-bottom: 1px solid #eee; 
             background: #fff; 
-            height: 46px; /* Fixed height to prevent jump */
+            height: 46px; 
             overflow: hidden;
         }
 
-        /* --- 4. HERO SECTION --- */
+        /* --- 4. HERO SECTION (UPDATED TEXT) --- */
         .hero {
             text-align: center; padding: 40px 15px;
             background: linear-gradient(to bottom, #fff, var(--sakura-light));
@@ -328,13 +323,13 @@
     <div class="hero">
         <span class="hero-sub">🌸 早春100%ボーナスキャンペーン</span>
         <h1>
-            XMTradingで<br>
-            <span class="hero-highlight">最大$500*の取引資金を獲得</span>
+            早春100%ボーナスキャンペーン<br>
+            <span class="hero-highlight">最大$11,000*まで取引資金を増額</span>
         </h1>
         
         <p>
-            最大$500*までの100%追加ボーナス*で取引資金をパワーアップ。<br>
-            期間限定で入金額が<strong>2倍</strong>になるチャンス。
+            この早春、<strong>最大$500*の期間限定100%ボーナス</strong>で有利な条件でスタートを切り、<br>
+            <strong>最大$10,500*のロイヤルティボーナス</strong>によるさらなる特典で充実の取引。
         </p>
 
         <div class="btn-group">
