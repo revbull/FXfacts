@@ -24,7 +24,7 @@
     </script>
 
     <style>
-        /* --- FXFacts LIGHT SPRING THEME (FIXED LAYOUT) --- */
+        /* --- FXFacts LIGHT SPRING THEME (FIXED TV BAR) --- */
         :root {
             --bg-body: #fdfdfd;
             --bg-white: #ffffff;
@@ -59,7 +59,7 @@
         strong { color: var(--xm-red); }
         img { display: block; max-width: 100%; height: auto; }
 
-        /* --- 1. PROMO BAR (NO OVERLAP FIX) --- */
+        /* --- 1. PROMO BAR --- */
         .promo-bar {
             position: relative; 
             background: var(--xm-red-dark);
@@ -132,15 +132,17 @@
             }
         }
 
-        /* --- 3. TRADINGVIEW TICKER TAPE --- */
+        /* --- 3. TRADINGVIEW TICKER TAPE (FIXED) --- */
         .tv-bar-container { 
             border-bottom: 1px solid #eee; 
             background: #fff; 
-            height: 46px; 
-            overflow: hidden;
+            /* Changed from fixed height to auto/min-height to prevent cutting */
+            height: auto; 
+            min-height: 50px;
+            overflow: visible;
         }
 
-        /* --- 4. HERO SECTION (UPDATED TEXT) --- */
+        /* --- 4. HERO SECTION --- */
         .hero {
             text-align: center; padding: 40px 15px;
             background: linear-gradient(to bottom, #fff, var(--sakura-light));
@@ -333,10 +335,10 @@
         </p>
 
         <div class="btn-group">
-            <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=0" class="btn-main xm-tracker-link">
+            <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=6" class="btn-main xm-tracker-link">
                 ボーナスを受け取る
             </a>
-            <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=0" class="btn-sub xm-tracker-link">
+            <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=22" class="btn-sub xm-tracker-link">
                 会員ページへ
             </a>
         </div>
@@ -435,8 +437,8 @@
             入金不要。（利用規約適用)
         </div>
         
-        <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=0" class="btn-sticky xm-tracker-link">
-            ボーナスを受け取る ➜
+        <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=6" class="btn-sticky xm-tracker-link">
+            口座を開設する ➜
         </a>
     </div>
 
