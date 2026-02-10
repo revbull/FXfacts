@@ -11,113 +11,59 @@
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
 
-      // Това е стандартният ред, който Google търси:
       gtag('config', 'G-N0GBKF3MP4');
     </script>
-
     <script>
-      // 2.1. Capture ALL URL Parameters
-      const urlParams = new URLSearchParams(window.location.search);
-      const trackingData = {};
-      
-      urlParams.forEach((value, key) => {
-          trackingData[key] = value;
-      });
+      window.addEventListener('load', function() {
+          // Взимаме параметрите от URL-а
+          var urlParams = new URLSearchParams(window.location.search);
+          
+          // 2.1 Изпращаме данните към Google Analytics като "Event" (безопасно)
+          var paramsObj = {};
+          urlParams.forEach(function(value, key) { paramsObj[key] = value; });
+          
+          if(Object.keys(paramsObj).length > 0) {
+             gtag('event', 'popads_data', paramsObj);
+          }
 
-      // 2.2. Send PopAds Data as an Event (instead of changing config)
-      // Това е по-безопасно за верификацията
-      if (Object.keys(trackingData).length > 0) {
-          gtag('event', 'popads_visit', {
-              'campaign_id': trackingData.campaignId || 'unknown',
-              'source_website_id': trackingData.websiteId || 'unknown',
-              'quality_score': trackingData.quality || '0',
-              'bid_price': trackingData.bid || '0',
-              'user_os': trackingData.os || 'unknown'
-          });
-      }
-
-      /* --- 3. POPADS POSTBACK (Server-to-Server) --- */
-      document.addEventListener("DOMContentLoaded", function() {
-          const impID = urlParams.get('impressionId') || urlParams.get('impressionID') || urlParams.get('imp_id');
-          const convValue = "0.05"; 
-          const advertiserId = "aa767929957b4ca372123fe3656e20ec";
+          // 2.2 PopAds Server-to-Server Postback
+          var impID = urlParams.get('impressionId') || urlParams.get('impressionID') || urlParams.get('imp_id');
+          var advertiserId = "aa767929957b4ca372123fe3656e20ec";
+          var convValue = "0.05"; 
 
           if (impID) {
-             const postbackUrl = `https://www.popads.net/users/postback/2s/0/aid/${advertiserId}/id/${impID}/value/${convValue}`;
+             var postbackUrl = "https://www.popads.net/users/postback/2s/0/aid/" + advertiserId + "/id/" + impID + "/value/" + convValue;
              
-             if (navigator.sendBeacon) {
-                 navigator.sendBeacon(postbackUrl);
-             } else {
-                 new Image().src = postbackUrl;
-             }
-             console.log("PopAds Pixel Fired: " + impID);
+             // Използваме Image Pixel за максимална съвместимост
+             var img = new Image();
+             img.src = postbackUrl;
+             console.log("PopAds Postback Fired: " + impID);
           }
       });
     </script>
 
     <style>
-        /* XM DARK THEME STYLES */
+        /* CSS Styles */
         body { font-family: "Microsoft JhengHei", "Heiti TC", Arial, sans-serif; background: #000; color: #fff; margin: 0; padding: 0; }
         .container { max-width: 480px; margin: 0 auto; background: #1a1a1a; min-height: 100vh; padding-bottom: 40px; position: relative; }
-        
-        /* Header & Hero */
         .promo-header { background: #c00; color: #fff; text-align: center; padding: 10px; font-weight: bold; font-size: 0.95rem; letter-spacing: 1px; }
         .hero { text-align: center; padding: 30px 20px; }
-        
         .xm-logo { max-width: 220px; margin-bottom: 15px; display: block; margin-left: auto; margin-right: auto; }
-        
         h1 { color: #f3d03e; font-size: 1.8rem; margin: 15px 0 5px; text-shadow: 0 0 10px rgba(243, 208, 62, 0.3); }
         .main-bonus { font-size: 3.5rem; font-weight: 900; color: #fff; margin: 0; line-height: 1; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
         .sub-headline { color: #ccc; font-size: 1rem; margin-top: 10px; font-weight: normal; }
-
-        /* Card Design */
-        .new-client-card {
-            background: linear-gradient(145deg, #252525 0%, #111 100%);
-            border: 1px solid #f3d03e;
-            box-shadow: 0 0 15px rgba(243, 208, 62, 0.15);
-            border-radius: 12px;
-            margin: 10px 20px 30px;
-            padding: 25px 20px;
-            position: relative;
-            overflow: hidden;
-        }
-        .new-client-card::before {
-            content: "EXCLUSIVE";
-            position: absolute; top: 12px; right: -30px;
-            background: #f3d03e; color: #000;
-            padding: 4px 35px; transform: rotate(45deg);
-            font-size: 0.7rem; font-weight: 900;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.5);
-        }
-        
+        .new-client-card { background: linear-gradient(145deg, #252525 0%, #111 100%); border: 1px solid #f3d03e; box-shadow: 0 0 15px rgba(243, 208, 62, 0.15); border-radius: 12px; margin: 10px 20px 30px; padding: 25px 20px; position: relative; overflow: hidden; }
+        .new-client-card::before { content: "EXCLUSIVE"; position: absolute; top: 12px; right: -30px; background: #f3d03e; color: #000; padding: 4px 35px; transform: rotate(45deg); font-size: 0.7rem; font-weight: 900; box-shadow: 0 2px 5px rgba(0,0,0,0.5); }
         .card-title { color: #f3d03e; font-size: 1.3rem; font-weight: bold; margin-bottom: 15px; text-align: center; }
         .card-text { font-size: 1rem; line-height: 1.6; color: #ddd; text-align: left; }
         .highlight-red { color: #ff4d4d; font-weight: bold; border-bottom: 1px dashed #ff4d4d; }
-
-        /* Steps */
         .steps { display: flex; justify-content: space-between; padding: 15px 20px; background: #222; margin-bottom: 30px; border-top: 1px solid #333; border-bottom: 1px solid #333; }
         .step { font-size: 0.8rem; text-align: center; flex: 1; }
         .step-num { color: #f3d03e; font-weight: 900; font-size: 1.4rem; display: block; margin-bottom: 5px; }
-
-        /* Button */
         .cta-container { padding: 0 20px; }
-        .cta-btn { 
-            display: block; width: 100%;
-            background: linear-gradient(to bottom, #d00000, #990000); 
-            color: #fff; text-decoration: none; text-align: center; 
-            padding: 22px 0; font-size: 1.5rem; font-weight: 900; 
-            border-radius: 8px; transition: all 0.2s; 
-            box-shadow: 0 5px 20px rgba(200, 0, 0, 0.4);
-            border: 1px solid #ff3333;
-            text-transform: uppercase;
-        }
-        .cta-btn:hover { 
-            background: linear-gradient(to bottom, #ff1a1a, #c00); 
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(200, 0, 0, 0.6);
-        }
+        .cta-btn { display: block; width: 100%; background: linear-gradient(to bottom, #d00000, #990000); color: #fff; text-decoration: none; text-align: center; padding: 22px 0; font-size: 1.5rem; font-weight: 900; border-radius: 8px; transition: all 0.2s; box-shadow: 0 5px 20px rgba(200, 0, 0, 0.4); border: 1px solid #ff3333; text-transform: uppercase; }
+        .cta-btn:hover { background: linear-gradient(to bottom, #ff1a1a, #c00); transform: translateY(-3px); box-shadow: 0 10px 25px rgba(200, 0, 0, 0.6); }
         .cta-btn:active { transform: translateY(1px); box-shadow: 0 2px 5px rgba(0,0,0,0.5); }
-
         .footer-legal { font-size: 0.65rem; color: #555; padding: 30px 20px; text-align: justify; line-height: 1.4; }
     </style>
 </head>
@@ -160,23 +106,18 @@
 </div>
 
 <script>
-    /* --- INTELLIGENT LINK PASS-THROUGH --- */
     document.addEventListener("DOMContentLoaded", function() {
-        const btn = document.getElementById('mainLink');
-        const currentUrlParams = window.location.search; 
+        var btn = document.getElementById('mainLink');
+        var currentUrlParams = window.location.search; 
 
         if (btn && currentUrlParams) {
-            const separator = btn.href.includes('?') ? '&' : '?';
-            btn.href = btn.href + separator + currentUrlParams.substring(1);
-            console.log("Tracking parameters passed to button:", btn.href);
+            var separator = btn.href.indexOf('?') !== -1 ? '&' : '?';
+            // Изчистваме ? от началото на параметрите, за да не стане двоен
+            var cleanParams = currentUrlParams.substring(1);
+            if(cleanParams) {
+                btn.href = btn.href + separator + cleanParams;
+            }
         }
-
-        // Track click event manually
-        btn.addEventListener('click', function() {
-            gtag('event', 'conversion', {
-                'send_to': 'G-N0GBKF3MP4'
-            });
-        });
     });
 </script>
 
