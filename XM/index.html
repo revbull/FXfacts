@@ -110,13 +110,36 @@
         var btn = document.getElementById('mainLink');
         var currentUrlParams = window.location.search; 
 
+        // 1. ЗАЛЕПЯНЕ НА ПАРАМЕТРИТЕ (PopAds -> Affiliate Link)
         if (btn && currentUrlParams) {
+            // Махаме въпросителната от началото, за да не стане двойна
+            var cleanParams = currentUrlParams.substring(1); 
+            
+            // Проверяваме дали линкът вече има '?'
             var separator = btn.href.indexOf('?') !== -1 ? '&' : '?';
-            // Изчистваме ? от началото на параметрите, за да не стане двоен
-            var cleanParams = currentUrlParams.substring(1);
+            
             if(cleanParams) {
                 btn.href = btn.href + separator + cleanParams;
             }
+        }
+
+        // 2. СЪБИТИЕ ПРИ КЛИК (CLICK EVENT)
+        if (btn) {
+            btn.addEventListener('click', function(e) {
+                // Изпращаме събитие към Google Analytics
+                gtag('event', 'conversion', {
+                    'send_to': 'G-N0GBKF3MP4',  // Твоето ID
+                    'event_category': 'CTA',
+                    'event_label': 'Open_Account_Button',
+                    'transport_type': 'beacon' // Гарантира изпращане при напускане на страницата
+                });
+
+                console.log('GA4 Conversion Event Fired!');
+                
+                // ОПЦИОНАЛНО: Ако искаш и PopAds Postback да гърми ПРИ КЛИК (ако плащат за клик),
+                // можеш да преместиш кода за postback тук. 
+                // Но за сега го оставяме на PageView (както е стандартно).
+            });
         }
     });
 </script>
