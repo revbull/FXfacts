@@ -11,40 +11,40 @@
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
 
-      // 1.1. Capture ALL URL Parameters automatically
+      // Това е стандартният ред, който Google търси:
+      gtag('config', 'G-N0GBKF3MP4');
+    </script>
+
+    <script>
+      // 2.1. Capture ALL URL Parameters
       const urlParams = new URLSearchParams(window.location.search);
       const trackingData = {};
       
-      // Convert params to a clean object for GA4
       urlParams.forEach((value, key) => {
           trackingData[key] = value;
       });
 
-      // 1.2. Initialize GA4 with PopAds Data
-      gtag('config', 'G-N0GBKF3MP4', {
-          'campaign_id': trackingData.campaignId || 'popads_unknown',
-          'source_website_id': trackingData.websiteId || 'unknown',
-          'quality_score': trackingData.quality || '0',
-          'bid_price': trackingData.bid || '0',
-          'user_os': trackingData.os || 'unknown',
-          'custom_map': trackingData // Send everything else map
-      });
+      // 2.2. Send PopAds Data as an Event (instead of changing config)
+      // Това е по-безопасно за верификацията
+      if (Object.keys(trackingData).length > 0) {
+          gtag('event', 'popads_visit', {
+              'campaign_id': trackingData.campaignId || 'unknown',
+              'source_website_id': trackingData.websiteId || 'unknown',
+              'quality_score': trackingData.quality || '0',
+              'bid_price': trackingData.bid || '0',
+              'user_os': trackingData.os || 'unknown'
+          });
+      }
 
-      /* --- 2. POPADS POSTBACK (Server-to-Server / Pixel) --- */
+      /* --- 3. POPADS POSTBACK (Server-to-Server) --- */
       document.addEventListener("DOMContentLoaded", function() {
-          // Get Impression ID (Case insensitive check)
           const impID = urlParams.get('impressionId') || urlParams.get('impressionID') || urlParams.get('imp_id');
-          
-          // Set Conversion Value (e.g. $0.05 for a view/lead)
           const convValue = "0.05"; 
-
-          // YOUR SPECIFIC POPADS ADVERTISER ID (from previous chat)
           const advertiserId = "aa767929957b4ca372123fe3656e20ec";
 
           if (impID) {
              const postbackUrl = `https://www.popads.net/users/postback/2s/0/aid/${advertiserId}/id/${impID}/value/${convValue}`;
              
-             // Fire pixel securely
              if (navigator.sendBeacon) {
                  navigator.sendBeacon(postbackUrl);
              } else {
@@ -160,32 +160,21 @@
 </div>
 
 <script>
-    /* --- 3. INTELLIGENT LINK PASS-THROUGH (The Magic) --- */
-    // This script grabs ALL parameters from PopAds (Bid, WebsiteID, etc)
-    // and attaches them to your Affiliate Link automatically.
-    
+    /* --- INTELLIGENT LINK PASS-THROUGH --- */
     document.addEventListener("DOMContentLoaded", function() {
         const btn = document.getElementById('mainLink');
-        const currentUrlParams = window.location.search; // Everything after '?'
+        const currentUrlParams = window.location.search; 
 
         if (btn && currentUrlParams) {
-            // Check if the button link already has a '?'
             const separator = btn.href.includes('?') ? '&' : '?';
-            
-            // Append the PopAds parameters to the affiliate link
-            // Note: We strip the leading '?' from currentUrlParams to avoid double '??'
             btn.href = btn.href + separator + currentUrlParams.substring(1);
-            
             console.log("Tracking parameters passed to button:", btn.href);
         }
 
-        // Optional: Also track click event in GA4
+        // Track click event manually
         btn.addEventListener('click', function() {
             gtag('event', 'conversion', {
-                'send_to': 'G-N0GBKF3MP4',
-                'event_callback': function() {
-                    console.log('GA Conversion Sent');
-                }
+                'send_to': 'G-N0GBKF3MP4'
             });
         });
     });
