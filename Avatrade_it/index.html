@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programma Cashback 2026 | Trading Ufficiale</title>
+    <meta name="description" content="Attiva il tuo Cashback sul trading. Partner ufficiale Red Bull Racing.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://tracking.avapartner.com">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-H72F6JGW3R"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      var trackingParams = {};
+      var urlParams = new URLSearchParams(window.location.search);
+      urlParams.forEach(function(value, key) {
+          trackingParams[key] = value;
+      });
+
+      gtag('config', 'G-H72F6JGW3R', trackingParams);
+    </script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- THEME: ITALY CASHBACK (GOLD/GREEN ACCENTS) --- */
+        :root {
+            --bg-dark: #0b0e14;
+            --bg-card: #151a25;
+            --bg-card-grad: linear-gradient(145deg, #161b28, #0f131c);
+            --accent-green: #00e676; /* Money Green */
+            --accent-blue: #007aff;
+            --accent-gold: #ffd700;
+            --text-white: #ffffff;
+            --text-gray: #a1aab5;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-white);
+            margin: 0;
+            padding-bottom: 120px; /* Space for sticky footer */
+            line-height: 1.5;
+        }
+
+        /* HEADER */
+        header {
+            background: rgba(11, 14, 20, 0.98);
+            padding: 15px 20px;
+            display: flex; justify-content: space-between; align-items: center;
+            position: sticky; top: 0; z-index: 999;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .status-badge {
+            font-size: 0.7rem; color: var(--accent-green); text-transform: uppercase;
+            border: 1px solid var(--accent-green); padding: 4px 8px; border-radius: 4px;
+            font-weight: 700; letter-spacing: 0.5px;
+            animation: pulse-green 2s infinite;
+        }
+
+        @keyframes pulse-green {
+            0% { box-shadow: 0 0 0 0 rgba(0, 230, 118, 0.4); }
+            70% { box-shadow: 0 0 0 6px rgba(0, 230, 118, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 230, 118, 0); }
+        }
+
+        /* HERO */
+        .hero {
+            text-align: center;
+            padding: 40px 20px 30px;
+            background: radial-gradient(circle at center, #1a253a 0%, var(--bg-dark) 90%);
+        }
+        .hero h1 {
+            font-size: 2.4rem; margin: 0 0 15px 0; line-height: 1.1; font-weight: 900;
+        }
+        .highlight-text {
+            color: var(--accent-green);
+            text-shadow: 0 0 20px rgba(0, 230, 118, 0.3);
+        }
+        .hero p { color: var(--text-gray); font-size: 1.1rem; max-width: 650px; margin: 0 auto 28px; }
+
+        /* CASHBACK BOX */
+        .cashback-box {
+            background: linear-gradient(135deg, rgba(0,230,118,0.1), rgba(0,0,0,0));
+            border: 1px solid var(--accent-green);
+            border-radius: 12px;
+            padding: 20px;
+            max-width: 500px;
+            margin: 0 auto 30px;
+            position: relative;
+        }
+        .cb-title { font-size: 1.2rem; font-weight: 800; color: white; margin-bottom: 5px; }
+        .cb-sub { font-size: 0.9rem; color: #ccc; }
+        .cb-check { color: var(--accent-green); margin-right: 5px; }
+
+        /* BUTTONS */
+        .btn-main {
+            background: var(--accent-blue);
+            color: white; padding: 18px 40px; border-radius: 8px;
+            font-weight: 800; text-transform: uppercase; text-decoration: none; font-size: 1.1rem;
+            display: inline-block; box-shadow: 0 0 20px rgba(0, 122, 255, 0.4);
+            transition: transform 0.2s; width: 100%; max-width: 350px;
+        }
+        .btn-main:hover { transform: translateY(-2px); box-shadow: 0 0 30px rgba(0, 122, 255, 0.6); }
+
+        /* STEPS GRID */
+        .steps-section { padding: 40px 20px; max-width: 900px; margin: 0 auto; }
+        .steps-grid {
+            display: grid; grid-template-columns: 1fr; gap: 20px;
+        }
+        @media (min-width: 700px) { .steps-grid { grid-template-columns: repeat(3, 1fr); } }
+
+        .step-card {
+            background: var(--bg-card); padding: 25px; border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.08); text-align: center;
+        }
+        .step-num {
+            background: var(--accent-blue); color: white; width: 35px; height: 35px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-weight: 700; margin: 0 auto 15px;
+        }
+        .step-title { font-weight: 700; color: white; margin-bottom: 10px; }
+        .step-desc { font-size: 0.9rem; color: var(--text-gray); }
+
+        /* RED BULL SECTION */
+        .trust-section {
+            text-align: center; margin-top: 40px; padding: 20px;
+            border-top: 1px solid #222;
+        }
+        .trust-badges { display: flex; justify-content: center; gap: 20px; align-items: center; opacity: 0.8; }
+
+        /* STICKY FOOTER */
+        .sticky-footer {
+            position: fixed; bottom: 0; left: 0; right: 0;
+            background: rgba(11, 14, 20, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 20px;
+            border-top: 1px solid var(--accent-green);
+            display: flex; flex-direction: column; align-items: center; gap: 10px;
+            z-index: 1000;
+        }
+        .btn-sticky {
+            background: var(--accent-green); color: #000;
+            width: 100%; text-align: center; padding: 14px 0;
+            border-radius: 6px; font-weight: 900; text-decoration: none;
+            font-size: 1.1rem; text-transform: uppercase;
+            box-shadow: 0 0 15px rgba(0, 230, 118, 0.4);
+            animation: pulse-sticky 2s infinite;
+        }
+        @keyframes pulse-sticky {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+      /* COUPON BOX STYLE */
+.coupon-container {
+    background: rgba(255,255,255,0.05);
+    border: 1px dashed var(--accent-green);
+    padding: 15px;
+    border-radius: 8px;
+    margin: 20px auto;
+    max-width: 400px;
+    text-align: center;
+    position: relative;
+}
+.coupon-label {
+    font-size: 0.8rem; color: #aaa; margin-bottom: 5px; text-transform: uppercase;
+}
+.coupon-code {
+    font-size: 1.5rem; font-weight: 900; color: white; letter-spacing: 2px;
+    background: #000; padding: 10px 20px; border-radius: 4px; display: inline-block;
+    cursor: pointer; border: 1px solid #333;
+}
+.coupon-code:active { transform: scale(0.98); border-color: var(--accent-green); }
+.copy-msg {
+    color: var(--accent-green); font-size: 0.8rem; margin-top: 5px; opacity: 0; transition: opacity 0.3s;
+}
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div style="font-weight:900; font-size:1.2rem; color:white;">
+            AVATRADE <span style="color:var(--accent-blue);">REWARDS</span>
+        </div>
+        <div class="status-badge">● CASHBACK ATTIVO</div>
+    </header>
+
+    <div class="tradingview-widget-container">
+      <div class="tradingview-widget-container__widget"></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+      {
+      "symbols": [{"proName": "FOREXCOM:SPXUSD","title": "S&P 500"},{"proName": "FX_IDC:EURUSD","title": "EUR/USD"},{"proName": "BITSTAMP:BTCUSD","title": "Bitcoin"}],
+      "showSymbolLogo": true, "colorTheme": "dark", "isTransparent": true, "displayMode": "adaptive", "locale": "it"
+      }
+      </script>
+    </div>
+
+    <div class="hero">
+    <h1>
+        Non lasciare soldi sul tavolo.<br>
+        <span class="highlight-text">Recupera denaro</span> su ogni trade.
+    </h1>
+    
+    <div class="cashback-box">
+        <div class="cb-title">🛡️ Programma Ufficiale 2026</div>
+        <div class="cb-sub">Usa il codice partner per attivare il cashback.</div>
+        
+        <div class="coupon-container">
+            <div class="coupon-label">Codice Partner (Tocca per copiare):</div>
+            <div class="coupon-code" onclick="copyCode(this)">207628</div>
+            <div class="copy-msg" id="copyMsg">✔ CODICE COPIATO!</div>
+        </div>
+
+        <div style="text-align:left; font-size:0.95rem; margin-left:10px; margin-top:15px;">
+            <div><span class="cb-check">✔</span> Inserisci nel campo "Partner Code"</div>
+            <div><span class="cb-check">✔</span> Deposito minimo: <strong>€100</strong></div>
+        </div>
+    </div>
+
+    <a href="https://tracking.avapartner.com/click/?affid=207628&campaign=213134&tag=207628&TargetUrl=https%3A%2F%2Fwww.avatrade.it" class="btn-main">
+        REGISTRATI ORA ➜
+    </a>
+</div>
+
+    <div class="trust-section">
+        <p style="color:#666; font-size:0.8rem; margin-bottom:15px;">PARTNER UFFICIALE</p>
+        <div class="trust-badges">
+             <svg width="100" height="40" viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg">
+                <text x="0" y="15" font-family="Arial" font-weight="bold" font-size="14" fill="white">ORACLE</text>
+                <text x="0" y="42" font-family="Arial" font-weight="900" font-size="24" fill="white" font-style="italic">Red Bull</text>
+                <text x="110" y="42" font-family="Arial" font-weight="bold" font-size="24" fill="white" font-style="italic">Racing</text>
+            </svg>
+             <svg width="100" height="30" viewBox="0 0 160 40" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10,20 L20,5 L30,20 L25,28 L15,28 Z" fill="#007aff" />
+                <path d="M20,35 L10,20 L30,20 Z" fill="#0040e5" />
+                <text x="40" y="28" font-family="Arial" font-weight="bold" font-size="24" fill="white" letter-spacing="-0.5">AVATRADE</text>
+            </svg>
+        </div>
+    </div>
+
+    <div class="sticky-footer">
+        <div style="color:white; font-size:0.9rem;">Offerta limitata ai residenti in <span style="color:var(--accent-green);">Italia 🇮🇹</span></div>
+        <a href="https://tracking.avapartner.com/click/?affid=207628&campaign=213134&tag=207628&TargetUrl=https%3A%2F%2Fwww.avatrade.it" class="btn-sticky">
+            REGISTRATI ORA (€100)
+        </a>
+    </div>
+
+   <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        /* --- TRACKING PARAMETERS SETUP --- */
+        const urlParams = new URLSearchParams(window.location.search);
+        
+        // ID Mapping
+        const popadsId = urlParams.get('popads_id');
+        const richAdsClickId = urlParams.get('click_id');
+        const mgidClickId = urlParams.get('clickid') || urlParams.get('click_id');
+
+        // Pixel Logic (Fake Conversion for Optimization)
+        const popadsPostbackUrl = "https://www.popads.net/users/postback/2s/0/aid/aa767929957b4ca372123fe3656e20ec/id/" + popadsId + "/value/0.30";
+
+        function fireConversion() {
+            if (popadsId) {
+                if (navigator.sendBeacon) { navigator.sendBeacon(popadsPostbackUrl); } 
+                else { new Image().src = popadsPostbackUrl; }
+            }
+        }
+
+        const links = document.querySelectorAll('a');
+
+        links.forEach(link => {
+            // Target all links on page
+            if (true) { 
+                let currentHref = link.href;
+                let separator = currentHref.includes('?') ? '&' : '?';
+                
+                // Append PopAds ID as affsub1
+                if (popadsId) {
+                    link.href = currentHref + separator + 'affsub1=' + popadsId;
+                } else if (richAdsClickId) {
+                    link.href = currentHref + separator + 'affsub1=' + richAdsClickId;
+                } else if (mgidClickId) {
+                    link.href = currentHref + separator + 'affsub1=' + mgidClickId;
+                }
+
+                // Fire Pixel on Click
+                link.addEventListener('click', function() {
+                    fireConversion();
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'AvaItalyClick', { 'event_category': 'conversion' });
+                    }
+                });
+            }
+        });
+
+        /* --- BACK BUTTON REDIRECT --- */
+        let historyPushed = false;
+        function armBackButton() {
+            if (historyPushed) return; 
+            history.pushState(null, null, location.href);
+            history.pushState(null, null, location.href + "#!/bonus");
+            historyPushed = true;
+        }
+
+        document.body.addEventListener('click', armBackButton, { once: true });
+        document.body.addEventListener('touchstart', armBackButton, { once: true });
+        
+        window.addEventListener("popstate", function() {
+            if (historyPushed) {
+                // Redirect to the same Italian Offer
+                let fallbackUrl = "https://tracking.avapartner.com/click/?affid=207628&campaign=213134&tag=207628&TargetUrl=https%3A%2F%2Fwww.avatrade.it";
+                if(popadsId) fallbackUrl += "&affsub1=" + popadsId;
+                
+                window.location.replace(fallbackUrl);
+            }
+        });
+    });
+   </script>
+  <script>
+    function copyCode(element) {
+        // Copy logic
+        navigator.clipboard.writeText("207628").then(function() {
+            // Visual feedback
+            element.style.borderColor = "#00e676";
+            document.getElementById("copyMsg").style.opacity = "1";
+            setTimeout(function(){
+                document.getElementById("copyMsg").style.opacity = "0";
+            }, 2000);
+        }, function(err) {
+            console.error('Could not copy text: ', err);
+        });
+    }
+</script>
+
+</body>
+</html>
