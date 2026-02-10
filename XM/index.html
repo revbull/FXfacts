@@ -4,54 +4,121 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>XM x Smart-FX | 新春集利活動 $45,000</title>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N0GBKF3MP4"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      // 1.1. Capture ALL URL Parameters automatically
+      const urlParams = new URLSearchParams(window.location.search);
+      const trackingData = {};
+      
+      // Convert params to a clean object for GA4
+      urlParams.forEach((value, key) => {
+          trackingData[key] = value;
+      });
+
+      // 1.2. Initialize GA4 with PopAds Data
+      gtag('config', 'G-N0GBKF3MP4', {
+          'campaign_id': trackingData.campaignId || 'popads_unknown',
+          'source_website_id': trackingData.websiteId || 'unknown',
+          'quality_score': trackingData.quality || '0',
+          'bid_price': trackingData.bid || '0',
+          'user_os': trackingData.os || 'unknown',
+          'custom_map': trackingData // Send everything else map
+      });
+
+      /* --- 2. POPADS POSTBACK (Server-to-Server / Pixel) --- */
+      document.addEventListener("DOMContentLoaded", function() {
+          // Get Impression ID (Case insensitive check)
+          const impID = urlParams.get('impressionId') || urlParams.get('impressionID') || urlParams.get('imp_id');
+          
+          // Set Conversion Value (e.g. $0.05 for a view/lead)
+          const convValue = "0.05"; 
+
+          // YOUR SPECIFIC POPADS ADVERTISER ID (from previous chat)
+          const advertiserId = "aa767929957b4ca372123fe3656e20ec";
+
+          if (impID) {
+             const postbackUrl = `https://www.popads.net/users/postback/2s/0/aid/${advertiserId}/id/${impID}/value/${convValue}`;
+             
+             // Fire pixel securely
+             if (navigator.sendBeacon) {
+                 navigator.sendBeacon(postbackUrl);
+             } else {
+                 new Image().src = postbackUrl;
+             }
+             console.log("PopAds Pixel Fired: " + impID);
+          }
+      });
+    </script>
+
     <style>
-        body { font-family: "Microsoft JhengHei", Arial, sans-serif; background: #000; color: #fff; margin: 0; padding: 0; }
-        .container { max-width: 480px; margin: 0 auto; background: #1a1a1a; min-height: 100vh; padding-bottom: 40px; }
+        /* XM DARK THEME STYLES */
+        body { font-family: "Microsoft JhengHei", "Heiti TC", Arial, sans-serif; background: #000; color: #fff; margin: 0; padding: 0; }
+        .container { max-width: 480px; margin: 0 auto; background: #1a1a1a; min-height: 100vh; padding-bottom: 40px; position: relative; }
         
         /* Header & Hero */
-        .promo-header { background: #c00; color: #fff; text-align: center; padding: 8px; font-weight: bold; font-size: 0.9rem; }
-        .hero { text-align: center; padding: 25px 20px; }
-        .xm-logo { max-width: 250px; margin-bottom: 10px; }
-        h1 { color: #f3d03e; font-size: 1.6rem; margin: 10px 0; }
-        .main-bonus { font-size: 3rem; font-weight: 900; color: #fff; margin: 5px 0; }
-        .sub-headline { color: #f3d03e; font-size: 1.1rem; font-weight: bold; margin-bottom: 20px; }
+        .promo-header { background: #c00; color: #fff; text-align: center; padding: 10px; font-weight: bold; font-size: 0.95rem; letter-spacing: 1px; }
+        .hero { text-align: center; padding: 30px 20px; }
+        
+        .xm-logo { max-width: 220px; margin-bottom: 15px; display: block; margin-left: auto; margin-right: auto; }
+        
+        h1 { color: #f3d03e; font-size: 1.8rem; margin: 15px 0 5px; text-shadow: 0 0 10px rgba(243, 208, 62, 0.3); }
+        .main-bonus { font-size: 3.5rem; font-weight: 900; color: #fff; margin: 0; line-height: 1; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+        .sub-headline { color: #ccc; font-size: 1rem; margin-top: 10px; font-weight: normal; }
 
-        /* Нова карта за Нови Клиенти (Welcome Bonus Card) */
+        /* Card Design */
         .new-client-card {
-            background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
+            background: linear-gradient(145deg, #252525 0%, #111 100%);
             border: 1px solid #f3d03e;
+            box-shadow: 0 0 15px rgba(243, 208, 62, 0.15);
             border-radius: 12px;
-            margin: 0 20px 25px;
-            padding: 20px;
+            margin: 10px 20px 30px;
+            padding: 25px 20px;
             position: relative;
             overflow: hidden;
         }
-        .new-client-card::after {
-            content: "NEW";
-            position: absolute;
-            top: 10px;
-            right: -25px;
-            background: #f3d03e;
-            color: #000;
-            padding: 2px 30px;
-            transform: rotate(45deg);
-            font-size: 0.7rem;
-            font-weight: bold;
+        .new-client-card::before {
+            content: "EXCLUSIVE";
+            position: absolute; top: 12px; right: -30px;
+            background: #f3d03e; color: #000;
+            padding: 4px 35px; transform: rotate(45deg);
+            font-size: 0.7rem; font-weight: 900;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.5);
         }
-        .card-title { color: #f3d03e; font-size: 1.2rem; font-weight: bold; margin-bottom: 10px; display: flex; align-items: center; }
-        .card-title img { width: 20px; margin-right: 8px; }
-        .card-text { font-size: 0.95rem; line-height: 1.5; color: #eee; }
-        .highlight-red { color: #ff4d4d; font-weight: bold; }
+        
+        .card-title { color: #f3d03e; font-size: 1.3rem; font-weight: bold; margin-bottom: 15px; text-align: center; }
+        .card-text { font-size: 1rem; line-height: 1.6; color: #ddd; text-align: left; }
+        .highlight-red { color: #ff4d4d; font-weight: bold; border-bottom: 1px dashed #ff4d4d; }
 
         /* Steps */
-        .steps { display: flex; justify-content: space-around; padding: 15px; background: #222; margin-bottom: 25px; }
-        .step { font-size: 0.75rem; text-align: center; }
-        .step-num { color: #f3d03e; font-weight: bold; font-size: 1.1rem; display: block; }
+        .steps { display: flex; justify-content: space-between; padding: 15px 20px; background: #222; margin-bottom: 30px; border-top: 1px solid #333; border-bottom: 1px solid #333; }
+        .step { font-size: 0.8rem; text-align: center; flex: 1; }
+        .step-num { color: #f3d03e; font-weight: 900; font-size: 1.4rem; display: block; margin-bottom: 5px; }
 
-        .cta-btn { display: block; background: #c00; color: #fff; text-decoration: none; text-align: center; padding: 20px; font-size: 1.4rem; font-weight: bold; border-radius: 8px; margin: 0 20px; transition: 0.3s; box-shadow: 0 4px 15px rgba(192, 0, 0, 0.4); }
-        .cta-btn:hover { background: #e00; transform: translateY(-2px); }
+        /* Button */
+        .cta-container { padding: 0 20px; }
+        .cta-btn { 
+            display: block; width: 100%;
+            background: linear-gradient(to bottom, #d00000, #990000); 
+            color: #fff; text-decoration: none; text-align: center; 
+            padding: 22px 0; font-size: 1.5rem; font-weight: 900; 
+            border-radius: 8px; transition: all 0.2s; 
+            box-shadow: 0 5px 20px rgba(200, 0, 0, 0.4);
+            border: 1px solid #ff3333;
+            text-transform: uppercase;
+        }
+        .cta-btn:hover { 
+            background: linear-gradient(to bottom, #ff1a1a, #c00); 
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(200, 0, 0, 0.6);
+        }
+        .cta-btn:active { transform: translateY(1px); box-shadow: 0 2px 5px rgba(0,0,0,0.5); }
 
-        .footer-legal { font-size: 0.65rem; color: #666; padding: 20px; text-align: justify; }
+        .footer-legal { font-size: 0.65rem; color: #555; padding: 30px 20px; text-align: justify; line-height: 1.4; }
     </style>
 </head>
 <body>
@@ -61,17 +128,17 @@
     
     <div class="hero">
         <img src="https://ads.pipaffiliates.com/i/149452?c=438318" class="xm-logo" alt="XM 15 Years">
-        <p>XM 攜手同行 15 年 | 誠摯邀您參與</p>
+        <p style="color:#888; letter-spacing:1px; font-size:0.9rem;">XM 攜手同行 15 年</p>
         <h1>新春集利活動登場</h1>
         <div class="main-bonus">$45,000</div>
         <p class="sub-headline">每週穩定交易，領取優渥贈金</p>
     </div>
 
     <div class="new-client-card">
-        <div class="card-title">XM 新戶尊享福利</div>
+        <div class="card-title">🎁 新戶尊享福利</div>
         <div class="card-text">
-            新客戶首次入金即享 <span class="highlight-red">20% 歡迎贈金高達 $2,000</span>。<br>
-            立即登記本次活動，完成指定交易規定，更可獲得額外高達 $45,000 的入金贈金！
+            新客戶首次入金即享 <span class="highlight-red">20% 歡迎贈金高達 $2,000</span>。<br><br>
+            立即登記本次活動，完成指定交易規定，更可獲得額外高達 <strong style="color:#fff;">$45,000</strong> 的入金贈金！
         </div>
     </div>
 
@@ -81,12 +148,48 @@
         <div class="step"><span class="step-num">03</span> 領取贈金</div>
     </div>
 
-    <a href="https://clicks.pipaffiliates.com/c?c=1168956&l=zh-hant&p=5781" class="cta-btn">立即開啟交易帳戶</a>
+    <div class="cta-container">
+        <a href="https://clicks.pipaffiliates.com/c?c=1168956&l=zh-hant&p=5781" class="cta-btn" id="mainLink">
+            立即開啟交易帳戶 ➜
+        </a>
+    </div>
 
     <div class="footer-legal">
-        風險提示：贈金僅限交易使用，且無法出金，但其交易獲利之所得則不受限制。XM (SC) Limited 受塞席爾 FSA 監管 (SD190)。請詳閱相關條款與條例。公司無法為美國、加拿大、伊朗等地區提供服務。
+        風險提示：贈金僅限交易使用，且無法出金，但其交易獲利之所得則不受限制。XM (SC) Limited 受塞席爾 FSA 監管 (SD190)。外匯和差價合約交易涉及高風險。請詳閱相關條款與條例。公司無法為美國、加拿大、伊朗等地區提供服務。
     </div>
 </div>
+
+<script>
+    /* --- 3. INTELLIGENT LINK PASS-THROUGH (The Magic) --- */
+    // This script grabs ALL parameters from PopAds (Bid, WebsiteID, etc)
+    // and attaches them to your Affiliate Link automatically.
+    
+    document.addEventListener("DOMContentLoaded", function() {
+        const btn = document.getElementById('mainLink');
+        const currentUrlParams = window.location.search; // Everything after '?'
+
+        if (btn && currentUrlParams) {
+            // Check if the button link already has a '?'
+            const separator = btn.href.includes('?') ? '&' : '?';
+            
+            // Append the PopAds parameters to the affiliate link
+            // Note: We strip the leading '?' from currentUrlParams to avoid double '??'
+            btn.href = btn.href + separator + currentUrlParams.substring(1);
+            
+            console.log("Tracking parameters passed to button:", btn.href);
+        }
+
+        // Optional: Also track click event in GA4
+        btn.addEventListener('click', function() {
+            gtag('event', 'conversion', {
+                'send_to': 'G-N0GBKF3MP4',
+                'event_callback': function() {
+                    console.log('GA Conversion Sent');
+                }
+            });
+        });
+    });
+</script>
 
 </body>
 </html>
