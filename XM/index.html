@@ -3,139 +3,235 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
     <title>XM x Smart-FX | 新春集利活動 $45,000</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700;900&display=swap" rel="stylesheet">
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-N0GBKF3MP4"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-N0GBKF3MP4');
     </script>
     
-    <script>
-      window.addEventListener('load', function() {
-          // 2.1. Взимаме параметрите от URL-а
-          var urlParams = new URLSearchParams(window.location.search);
-          
-          // 2.2. Изпращаме данните към Google Analytics като "Event" (безопасно)
-          var paramsObj = {};
-          urlParams.forEach(function(value, key) { paramsObj[key] = value; });
-          
-          if(Object.keys(paramsObj).length > 0) {
-             gtag('event', 'popads_data', paramsObj);
-          }
-
-          // 2.3. PopAds Server-to-Server Postback
-          var impID = urlParams.get('impressionId') || urlParams.get('impressionID') || urlParams.get('imp_id');
-          var advertiserId = "aa767929957b4ca372123fe3656e20ec";
-          var convValue = "0.05"; 
-
-          if (impID) {
-             var postbackUrl = "https://www.popads.net/users/postback/2s/0/aid/" + advertiserId + "/id/" + impID + "/value/" + convValue;
-             
-             // Използваме Image Pixel за максимална съвместимост
-             var img = new Image();
-             img.src = postbackUrl;
-             console.log("PopAds Postback Fired: " + impID);
-          }
-      });
-    </script>
-
     <style>
-        /* CSS Styles */
-        body { font-family: "Microsoft JhengHei", "Heiti TC", Arial, sans-serif; background: #000; color: #fff; margin: 0; padding: 0; }
-        .container { max-width: 480px; margin: 0 auto; background: #1a1a1a; min-height: 100vh; padding-bottom: 40px; position: relative; }
-        .promo-header { background: #c00; color: #fff; text-align: center; padding: 10px; font-weight: bold; font-size: 0.95rem; letter-spacing: 1px; }
-        .hero { text-align: center; padding: 30px 20px; }
-        .xm-logo { max-width: 220px; margin-bottom: 15px; display: block; margin-left: auto; margin-right: auto; }
-        h1 { color: #f3d03e; font-size: 1.8rem; margin: 15px 0 5px; text-shadow: 0 0 10px rgba(243, 208, 62, 0.3); }
-        .main-bonus { font-size: 3.5rem; font-weight: 900; color: #fff; margin: 0; line-height: 1; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
-        .sub-headline { color: #ccc; font-size: 1rem; margin-top: 10px; font-weight: normal; }
-        .new-client-card { background: linear-gradient(145deg, #252525 0%, #111 100%); border: 1px solid #f3d03e; box-shadow: 0 0 15px rgba(243, 208, 62, 0.15); border-radius: 12px; margin: 10px 20px 30px; padding: 25px 20px; position: relative; overflow: hidden; }
-        .new-client-card::before { content: "EXCLUSIVE"; position: absolute; top: 12px; right: -30px; background: #f3d03e; color: #000; padding: 4px 35px; transform: rotate(45deg); font-size: 0.7rem; font-weight: 900; box-shadow: 0 2px 5px rgba(0,0,0,0.5); }
-        .card-title { color: #f3d03e; font-size: 1.3rem; font-weight: bold; margin-bottom: 15px; text-align: center; }
-        .card-text { font-size: 1rem; line-height: 1.6; color: #ddd; text-align: left; }
-        .highlight-red { color: #ff4d4d; font-weight: bold; border-bottom: 1px dashed #ff4d4d; }
-        .steps { display: flex; justify-content: space-between; padding: 15px 20px; background: #222; margin-bottom: 30px; border-top: 1px solid #333; border-bottom: 1px solid #333; }
-        .step { font-size: 0.8rem; text-align: center; flex: 1; }
-        .step-num { color: #f3d03e; font-weight: 900; font-size: 1.4rem; display: block; margin-bottom: 5px; }
-        .cta-container { padding: 0 20px; }
-        .cta-btn { display: block; width: 100%; background: linear-gradient(to bottom, #d00000, #990000); color: #fff; text-decoration: none; text-align: center; padding: 22px 0; font-size: 1.5rem; font-weight: 900; border-radius: 8px; transition: all 0.2s; box-shadow: 0 5px 20px rgba(200, 0, 0, 0.4); border: 1px solid #ff3333; text-transform: uppercase; }
-        .cta-btn:hover { background: linear-gradient(to bottom, #ff1a1a, #c00); transform: translateY(-3px); box-shadow: 0 10px 25px rgba(200, 0, 0, 0.6); }
-        .cta-btn:active { transform: translateY(1px); box-shadow: 0 2px 5px rgba(0,0,0,0.5); }
-        .footer-legal { font-size: 0.65rem; color: #555; padding: 30px 20px; text-align: justify; line-height: 1.4; }
+        :root {
+            --gold: #f3d03e;
+            --gold-gradient: linear-gradient(135deg, #f3d03e 0%, #b8961d 100%);
+            --xm-red: #d00000;
+            --bg-dark: #0a0a0a;
+        }
+
+        body { 
+            font-family: 'Noto Sans TC', sans-serif; 
+            background: var(--bg-dark); 
+            color: #fff; margin: 0; padding: 0;
+            overflow-x: hidden;
+        }
+
+        /* ANIMATED COINS */
+        .coin {
+            position: absolute; width: 40px; height: 40px;
+            background: var(--gold-gradient);
+            border-radius: 50%; border: 2px solid #fff3a0;
+            box-shadow: 0 0 15px rgba(243, 208, 62, 0.5);
+            display: flex; align-items: center; justify-content: center;
+            color: #7d6500; font-weight: 900; font-size: 1.2rem;
+            z-index: 1; pointer-events: none; opacity: 0.5;
+            animation: float 6s infinite ease-in-out;
+        }
+        .coin::after { content: '$'; }
+        .coin-1 { top: 12%; left: 8%; animation-delay: 0s; }
+        .coin-2 { top: 35%; right: 5%; animation-delay: 2s; width: 30px; height: 30px; }
+        .coin-3 { bottom: 25%; left: 15%; animation-delay: 4s; width: 35px; height: 35px; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(15deg); }
+        }
+
+        .container { 
+            max-width: 500px; margin: 0 auto; 
+            background: linear-gradient(180deg, #1a1a1a 0%, #0a0a0a 100%); 
+            min-height: 100vh; padding-bottom: 120px; position: relative;
+            box-shadow: 0 0 60px rgba(0,0,0,1);
+        }
+
+        .promo-header { 
+            background: linear-gradient(90deg, #900, #f00, #900);
+            color: #fff; text-align: center; padding: 12px; 
+            font-weight: 700; font-size: 0.85rem; letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .hero { text-align: center; padding: 45px 20px; position: relative; z-index: 2; }
+        .xm-logo { max-width: 190px; margin-bottom: 20px; filter: drop-shadow(0 0 10px rgba(255,255,255,0.1)); }
+        
+        h1 { color: var(--gold); font-size: 1.8rem; margin: 10px 0; font-weight: 900; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+        
+        .main-bonus { 
+            font-size: 4.8rem; font-weight: 900; margin: 5px 0; 
+            background: linear-gradient(to bottom, #fff 40%, #bbb 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 5px 20px rgba(243, 208, 62, 0.25));
+            line-height: 1;
+        }
+
+        .new-client-card { 
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(243, 208, 62, 0.3);
+            border-radius: 24px; margin: 20px; padding: 35px 25px; 
+            backdrop-filter: blur(12px); position: relative; z-index: 2;
+            box-shadow: inset 0 0 20px rgba(243, 208, 62, 0.05);
+        }
+
+        .card-title { color: var(--gold); font-size: 1.3rem; font-weight: 700; margin-bottom: 15px; text-align: center; }
+        .highlight-red { color: #ff4d4d; font-weight: 700; background: rgba(255, 77, 77, 0.1); padding: 2px 6px; border-radius: 4px; }
+
+        .steps { 
+            display: flex; justify-content: space-between; 
+            padding: 25px; background: rgba(0,0,0,0.4); margin-top: 25px;
+            border-top: 1px solid #222;
+        }
+        .step { text-align: center; flex: 1; font-size: 0.8rem; color: #777; }
+        .step-num { color: var(--gold); font-weight: 900; font-size: 1.4rem; display: block; margin-bottom: 5px; }
+
+        .cta-btn { 
+            display: block; width: 100%; 
+            background: linear-gradient(145deg, #d00000 0%, #800000 100%);
+            color: #fff; text-decoration: none; text-align: center; 
+            padding: 22px 0; font-size: 1.5rem; font-weight: 900; 
+            border-radius: 14px; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 12px 35px rgba(200, 0, 0, 0.4);
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+        .cta-btn:active { transform: scale(0.96); box-shadow: 0 5px 15px rgba(200, 0, 0, 0.5); }
+
+        /* STICKY FOOTER */
+        .sticky-footer {
+            position: fixed; bottom: 0; left: 0; right: 0;
+            background: rgba(10, 10, 10, 0.98);
+            backdrop-filter: blur(20px);
+            padding: 18px 25px; border-top: 1px solid #333;
+            z-index: 9999; display: flex; justify-content: center;
+        }
+        .sticky-footer .cta-btn { padding: 16px 0; font-size: 1.3rem; }
+
+        .footer-legal { 
+            font-size: 0.65rem; color: #555; padding: 25px; 
+            text-align: justify; line-height: 1.6; border-top: 1px solid #1a1a1a;
+        }
+
+        @media (min-width: 501px) { .sticky-footer { display: none; } }
     </style>
 </head>
 <body>
 
 <div class="container">
+    <div class="coin coin-1"></div>
+    <div class="coin coin-2"></div>
+    <div class="coin coin-3"></div>
+
     <div class="promo-header">活動期間：2026年2月10日 - 3月23日</div>
     
     <div class="hero">
-        <img src="https://ads.pipaffiliates.com/i/149452?c=438318" class="xm-logo" alt="XM 15 Years">
-        <p style="color:#888; letter-spacing:1px; font-size:0.9rem;">XM 攜手同行 15 年</p>
+        <img src="https://ads.pipaffiliates.com/i/149452?c=438318" class="xm-logo" alt="XM">
+        <p style="color:rgba(255,255,255,0.4); letter-spacing:4px; font-size:0.7rem; font-weight: 700;">XM 授權推廣媒體 | SMART-FX</p>
         <h1>新春集利活動登場</h1>
         <div class="main-bonus">$45,000</div>
-        <p class="sub-headline">每週穩定交易，領取優渥贈金</p>
+        <p style="color:#777; font-size:0.95rem; margin-top: 0;">Smart-FX 用戶專屬交易贈金方案</p>
     </div>
 
     <div class="new-client-card">
-        <div class="card-title">🎁 新戶尊享福利</div>
-        <div class="card-text">
-            新客戶首次入金即享 <span class="highlight-red">20% 歡迎贈金高達 $2,000</span>。<br><br>
-            立即登記本次活動，完成指定交易規定，更可獲得額外高達 <strong style="color:#fff;">$45,000</strong> 的入金贈金！
+        <div class="card-title">🧧 新戶限時尊享福利</div>
+        <div style="font-size: 1.05rem; line-height: 1.8; color: #ccc; text-align: center;">
+            新客戶首次入金即享 <span class="highlight-red">20% 歡迎贈金</span><br>
+            額外再拿高達 <strong style="color:var(--gold); font-size:1.3rem;">$45,000</strong> 活動獎金
+        </div>
+        <div style="margin-top:30px;">
+            <a href="https://clicks.pipaffiliates.com/c?c=1168956&l=zh-hant&p=5781" class="cta-btn xm-tracker-link">
+                免費註冊領取 $45,000 ➜
+            </a>
         </div>
     </div>
 
     <div class="steps">
-        <div class="step"><span class="step-num">01</span> 登記參加</div>
-        <div class="step"><span class="step-num">02</span> 進行交易</div>
-        <div class="step"><span class="step-num">03</span> 領取贈金</div>
-    </div>
-
-    <div class="cta-container">
-        <a href="https://clicks.pipaffiliates.com/c?c=1168956&l=zh-hant&p=5781" class="cta-btn" id="mainLink">
-            立即開啟交易帳戶 ➜
-        </a>
+        <div class="step"><span class="step-num">01</span> 線上登記</div>
+        <div class="step"><span class="step-num">02</span> 穩定交易</div>
+        <div class="step"><span class="step-num">03</span> 領取紅包</div>
     </div>
 
     <div class="footer-legal">
-        風險提示：贈金僅限交易使用，且無法出金，但其交易獲利之所得則不受限制。XM (SC) Limited 受塞席爾 FSA 監管 (SD190)。外匯和差價合約交易涉及高風險。請詳閱相關條款與條例。公司無法為美國、加拿大、伊朗等地區提供服務。
+        <strong>法律免責聲明：</strong><br>
+        本網站由 XM 授權合作夥伴 (Affiliate) Smart-FX 獨立營運。外匯和差價合約 (CFD) 交易涉及高風險，可能導致您的資本損失。XM (SC) Limited 由塞席爾金融服務管理局 (FSA) 授權並受其監管，執照編號為 SD190。活動贈金僅供交易使用，不可直接提現，但交易產生的利潤可隨時申請提取。請在交易前詳閱 XM 官方網站之《服務條款》與《風險披露聲明》。本活動不適用於美國、加拿大、伊朗等受限地區。
     </div>
 </div>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        var btn = document.getElementById('mainLink');
-        var currentUrlParams = window.location.search; 
+<div class="sticky-footer">
+    <a href="https://clicks.pipaffiliates.com/c?c=1168956&l=zh-hant&p=5781" class="cta-btn xm-tracker-link">
+        立即領取新春紅包 ➜
+    </a>
+</div>
 
-        // 3.1. ЗАЛЕПЯНЕ НА ПАРАМЕТРИТЕ (PopAds -> Affiliate Link)
-        if (btn && currentUrlParams) {
-            var separator = btn.href.indexOf('?') !== -1 ? '&' : '?';
-            // Махаме въпросителната от началото, за да не стане двойна
-            var cleanParams = currentUrlParams.substring(1); 
-            
-            if(cleanParams) {
-                btn.href = btn.href + separator + cleanParams;
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    
+    // 1. Прихващане на тракинг параметри от PopAds
+    const p = {
+        imp: urlParams.get('imp_id') || urlParams.get('impressionId'),
+        src: urlParams.get('src_id') || urlParams.get('website_id'),
+        camp: urlParams.get('camp_id'),
+        q: urlParams.get('q')
+    };
+
+    // 2. Google Analytics Tracking
+    if (typeof gtag === 'function') {
+        gtag('event', 'page_view_premium', { 'website_id': p.src, 'traffic_quality': p.q });
+    }
+
+    // 3. PopAds Postback Logic (Fired ONLY on CTA Click)
+    function firePopAds() {
+        if (p.imp) {
+            const pb = `https://www.popads.net/users/postback/2s/0/aid/aa767929957b4ca372123fe3656e20ec/id/${p.imp}/value/0.05`;
+            if (navigator.sendBeacon) {
+                navigator.sendBeacon(pb);
+            } else {
+                new Image().src = pb;
             }
         }
+    }
 
-        // 3.2. СЪБИТИЕ ПРИ КЛИК (CLICK EVENT)
-        if (btn) {
-            btn.addEventListener('click', function(e) {
-                // Изпращаме събитие към Google Analytics
-                gtag('event', 'conversion', {
-                    'send_to': 'G-N0GBKF3MP4',  // Твоето ID
-                    'event_category': 'CTA',
-                    'event_label': 'Open_Account_Button',
-                    'transport_type': 'beacon' // Гарантира изпращане при напускане на страницата
+    // 4. Affiliate Link Optimization
+    const links = document.querySelectorAll('.xm-tracker-link');
+    links.forEach(link => {
+        let url = new URL(link.href);
+        
+        // XM Sub-ID Mapping
+        if (p.imp) url.searchParams.set('subid1', p.imp);
+        if (p.src) url.searchParams.set('subid2', p.src);
+        if (p.q)   url.searchParams.set('subid3', `q${p.q}_c${p.camp}`);
+
+        link.href = url.toString();
+
+        link.addEventListener('click', function() {
+            firePopAds(); // Postback to PopAds
+            if (typeof gtag === 'function') {
+                gtag('event', 'conversion', { 
+                    'event_category': 'Affiliate_Click', 
+                    'event_label': p.src || 'direct' 
                 });
-                console.log('GA4 Conversion Event Fired!');
-            });
-        }
+            }
+        });
     });
+
+    // Изчистване на URL параметрите за потребителя
+    if (window.history.replaceState && urlParams.toString() !== "") {
+        window.history.replaceState({}, document.title, window.location.pathname);
+    }
+});
 </script>
 
 </body>
