@@ -13,12 +13,13 @@
 
       gtag('config', 'G-N0GBKF3MP4');
     </script>
+    
     <script>
       window.addEventListener('load', function() {
-          // Взимаме параметрите от URL-а
+          // 2.1. Взимаме параметрите от URL-а
           var urlParams = new URLSearchParams(window.location.search);
           
-          // 2.1 Изпращаме данните към Google Analytics като "Event" (безопасно)
+          // 2.2. Изпращаме данните към Google Analytics като "Event" (безопасно)
           var paramsObj = {};
           urlParams.forEach(function(value, key) { paramsObj[key] = value; });
           
@@ -26,7 +27,7 @@
              gtag('event', 'popads_data', paramsObj);
           }
 
-          // 2.2 PopAds Server-to-Server Postback
+          // 2.3. PopAds Server-to-Server Postback
           var impID = urlParams.get('impressionId') || urlParams.get('impressionID') || urlParams.get('imp_id');
           var advertiserId = "aa767929957b4ca372123fe3656e20ec";
           var convValue = "0.05"; 
@@ -110,20 +111,18 @@
         var btn = document.getElementById('mainLink');
         var currentUrlParams = window.location.search; 
 
-        // 1. ЗАЛЕПЯНЕ НА ПАРАМЕТРИТЕ (PopAds -> Affiliate Link)
+        // 3.1. ЗАЛЕПЯНЕ НА ПАРАМЕТРИТЕ (PopAds -> Affiliate Link)
         if (btn && currentUrlParams) {
+            var separator = btn.href.indexOf('?') !== -1 ? '&' : '?';
             // Махаме въпросителната от началото, за да не стане двойна
             var cleanParams = currentUrlParams.substring(1); 
-            
-            // Проверяваме дали линкът вече има '?'
-            var separator = btn.href.indexOf('?') !== -1 ? '&' : '?';
             
             if(cleanParams) {
                 btn.href = btn.href + separator + cleanParams;
             }
         }
 
-        // 2. СЪБИТИЕ ПРИ КЛИК (CLICK EVENT)
+        // 3.2. СЪБИТИЕ ПРИ КЛИК (CLICK EVENT)
         if (btn) {
             btn.addEventListener('click', function(e) {
                 // Изпращаме събитие към Google Analytics
@@ -133,12 +132,7 @@
                     'event_label': 'Open_Account_Button',
                     'transport_type': 'beacon' // Гарантира изпращане при напускане на страницата
                 });
-
                 console.log('GA4 Conversion Event Fired!');
-                
-                // ОПЦИОНАЛНО: Ако искаш и PopAds Postback да гърми ПРИ КЛИК (ако плащат за клик),
-                // можеш да преместиш кода за postback тук. 
-                // Но за сега го оставяме на PageView (както е стандартно).
             });
         }
     });
