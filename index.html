@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
     <title>FXFacts | XMTrading 2026早春キャンペーン</title>
     
@@ -15,269 +15,90 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      
-      var trackingParams = {};
-      var urlParams = new URLSearchParams(window.location.search);
-      urlParams.forEach(function(value, key) { trackingParams[key] = value; });
-
-      gtag('config', 'G-DTMQSP8BPQ', trackingParams);
+      gtag('config', 'G-DTMQSP8BPQ');
     </script>
 
     <style>
-        /* --- FXFacts LIGHT SPRING THEME (FIXED TV BAR) --- */
         :root {
-            --bg-body: #fdfdfd;
-            --bg-white: #ffffff;
-            
-            --xm-red: #d62828;
-            --xm-red-dark: #b91c1c;
-            --sakura-pink: #ff99aa;
-            --sakura-light: #fff0f3;
-            --gold: #ffcc00;
-            
-            --text-main: #333333;
-            --text-sub: #666666;
-            --border-color: #eeeeee;
+            --bg-body: #fdfdfd; --bg-white: #ffffff;
+            --xm-red: #d62828; --xm-red-dark: #b91c1c;
+            --sakura-pink: #ff99aa; --sakura-light: #fff0f3;
+            --gold: #ffcc00; --text-main: #333333;
+            --text-sub: #666666; --border-color: #eeeeee;
         }
 
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-
         body {
-            font-family: 'Noto Sans JP', sans-serif;
-            background-color: var(--bg-body);
-            color: var(--text-main);
-            margin: 0; 
-            padding-bottom: 140px; 
-            line-height: 1.6;
-            padding-top: 0; 
+            font-family: 'Noto Sans JP', sans-serif; background-color: var(--bg-body);
+            color: var(--text-main); margin: 0; padding-bottom: 140px; line-height: 1.6;
             background-image: radial-gradient(var(--sakura-pink) 0.5px, transparent 0.5px);
             background-size: 30px 30px;
         }
 
         h1, h2, h3 { font-weight: 900; letter-spacing: 0.05em; margin: 0; }
         a { text-decoration: none; color: inherit; }
-        strong { color: var(--xm-red); }
         img { display: block; max-width: 100%; height: auto; }
 
-        /* --- 1. PROMO BAR --- */
+        /* 1. PROMO BAR */
         .promo-bar {
-            position: relative; 
-            background: var(--xm-red-dark);
-            color: white; text-align: center;
-            padding: 8px 10px; z-index: 2000;
-            font-size: 0.8rem; font-weight: 700;
-            text-decoration: none; display: flex; 
-            justify-content: center; align-items: center; gap: 8px; flex-wrap: wrap;
+            background: var(--xm-red-dark); color: white; text-align: center;
+            padding: 8px 10px; z-index: 2000; font-size: 0.8rem; font-weight: 700;
+            display: flex; justify-content: center; align-items: center; gap: 8px; flex-wrap: wrap;
         }
-        .promo-badge {
-            background: var(--gold); color: black;
-            padding: 1px 6px; border-radius: 4px;
-            font-size: 0.7rem; font-weight: 900;
-        }
+        .promo-badge { background: var(--gold); color: black; padding: 1px 6px; border-radius: 4px; font-size: 0.7rem; font-weight: 900; }
 
-        /* --- 2. HEADER --- */
+        /* 2. HEADER */
         .header-wrapper {
-            background: var(--bg-white);
-            border-bottom: 1px solid #e5e5e5;
-            position: sticky; top: 0; z-index: 900;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+            background: var(--bg-white); border-bottom: 1px solid #e5e5e5;
+            position: sticky; top: 0; z-index: 900; box-shadow: 0 2px 10px rgba(0,0,0,0.03);
         }
-
-        header {
-            max-width: 1200px; 
-            margin: 0 auto; 
-            padding: 10px 15px;
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .logo-box { display: flex; flex-direction: column; justify-content: center; }
-        .logo { 
-            font-size: 1.5rem; font-weight: 900; color: #000; 
-            line-height: 1; letter-spacing: -1px;
-        }
+        header { max-width: 1200px; margin: 0 auto; padding: 10px 15px; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.5rem; font-weight: 900; color: #000; line-height: 1; letter-spacing: -1px; }
         .logo span { font-size: 0.75rem; font-weight: 500; color: #777; margin-left: 5px; }
-        
-        .pr-badge { 
-            font-size: 0.6rem; color: #aaa; 
-            border: 1px solid #eee; padding: 1px 4px; 
-            border-radius: 3px; width: fit-content; margin-top: 3px; 
-        }
+        .pr-badge { font-size: 0.6rem; color: #aaa; border: 1px solid #eee; padding: 1px 4px; border-radius: 3px; width: fit-content; margin-top: 3px; }
 
-        /* --- BANNER SWITCHING LOGIC --- */
         .banner-desktop { display: none; }
-        .banner-mobile { display: block; }
-        
-        .banner-mobile img {
-            max-height: 55px; 
-            width: auto; 
-            border: 1px solid #eee; border-radius: 4px;
-            display: block;
-            margin-left: auto; 
-        }
-
         @media (min-width: 900px) {
-            .banner-desktop { display: block; }
-            .banner-mobile { display: none; }
-            
-            .logo { font-size: 1.8rem; }
-            .logo span { font-size: 0.9rem; }
-            
-            .banner-desktop img { 
-                width: 728px; height: 90px; 
-                display: block;
-                border: 1px solid #eee; border-radius: 4px;
-            }
+            .banner-desktop { display: block; } .banner-mobile { display: none; }
+            .logo { font-size: 1.8rem; } .banner-desktop img { width: 728px; height: 90px; border: 1px solid #eee; border-radius: 4px; }
         }
 
-        /* --- 3. TRADINGVIEW TICKER TAPE (FIXED) --- */
-        .tv-bar-container { 
-            border-bottom: 1px solid #eee; 
-            background: #fff; 
-            /* Changed from fixed height to auto/min-height to prevent cutting */
-            height: auto; 
-            min-height: 50px;
-            overflow: visible;
-        }
-
-        /* --- 4. HERO SECTION --- */
+        /* 3. HERO */
         .hero {
             text-align: center; padding: 40px 15px;
             background: linear-gradient(to bottom, #fff, var(--sakura-light));
             border-bottom: 1px solid var(--sakura-pink);
         }
-        
-        .hero-sub { color: var(--xm-red); font-weight: bold; font-size: 0.9rem; letter-spacing: 1px; }
-        
-        .hero h1 { 
-            font-size: 1.8rem; line-height: 1.3; margin: 15px 0;
-            color: #111;
-        }
+        .hero h1 { font-size: 1.8rem; line-height: 1.3; margin: 15px 0; color: #111; }
         @media (min-width: 768px) { .hero h1 { font-size: 2.8rem; } }
-
-        .hero-highlight {
-            font-size: 1.6rem; color: var(--xm-red); display: block; margin-top: 5px;
-            text-shadow: 0 2px 10px rgba(214, 40, 40, 0.1);
-        }
+        .hero-highlight { font-size: 1.6rem; color: var(--xm-red); display: block; }
         
-        .hero p { font-size: 0.95rem; color: #555; max-width: 600px; margin: 0 auto 25px; }
+        .btn-group { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin: 25px 0; }
+        .btn-main { background: var(--xm-red); color: white; font-size: 1.1rem; font-weight: 800; padding: 16px 40px; border-radius: 50px; width: 100%; max-width: 300px; box-shadow: 0 4px 15px rgba(214, 40, 40, 0.3); }
+        .btn-sub { background: white; border: 2px solid var(--xm-red); color: var(--xm-red); font-size: 1rem; font-weight: 700; padding: 14px 40px; border-radius: 50px; width: 100%; max-width: 300px; }
 
-        /* BUTTONS */
-        .btn-group { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-bottom: 25px; }
-        
-        .btn-main {
-            background: var(--xm-red); color: white; 
-            font-size: 1.1rem; font-weight: 800;
-            padding: 16px 40px; border-radius: 50px;
-            box-shadow: 0 4px 15px rgba(214, 40, 40, 0.3);
-            display: inline-block; width: 100%; max-width: 300px;
-            transition: transform 0.2s;
-        }
-        .btn-main:active { transform: scale(0.98); }
-
-        .btn-sub {
-            background: white; border: 2px solid var(--xm-red); color: var(--xm-red);
-            font-size: 1rem; font-weight: 700;
-            padding: 14px 40px; border-radius: 50px;
-            display: inline-block; width: 100%; max-width: 300px;
-        }
-
-        .risk-micro { font-size: 0.65rem; color: #888; margin-top: 15px; line-height: 1.4; }
-
-        /* --- 5. CONTENT CARDS --- */
+        /* 4. CONTENT */
         .content-section { padding: 30px 15px; max-width: 900px; margin: 0 auto; }
-        
-        .info-card {
-            background: var(--bg-white); 
-            border: 1px solid var(--border-color);
-            padding: 25px 20px; border-radius: 12px; margin-bottom: 25px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.03);
-            position: relative; overflow: hidden;
-        }
-        
-        .card-header { font-size: 1.2rem; color: var(--xm-red); margin-bottom: 15px; border-bottom: 2px solid var(--sakura-light); padding-bottom: 10px; }
+        .info-card { background: var(--bg-white); border: 1px solid var(--border-color); padding: 25px 20px; border-radius: 12px; margin-bottom: 25px; }
+        .check-list { list-style: none; padding: 0; }
+        .check-list li { margin-bottom: 12px; display: flex; gap: 10px; }
+        .check-list li::before { content: '✔'; color: var(--xm-red); font-weight: bold; }
 
-        .check-list { list-style: none; padding: 0; margin: 0; }
-        .check-list li { 
-            margin-bottom: 12px; font-size: 0.95rem; 
-            display: flex; gap: 10px; align-items: flex-start;
-        }
-        .check-list li::before { content: '✔'; color: var(--xm-red); font-weight: bold; flex-shrink: 0; }
-
-        .double-bonus-box {
-            border: 2px solid var(--sakura-light);
-            background: #fffafb;
-        }
-
-        /* --- 6. FEATURES GRID --- */
-        .section-title { text-align: center; margin: 40px 0 20px; }
-        .section-title h2 { font-size: 1.5rem; color: #222; }
-        .section-title span { color: var(--xm-red); }
-
-        .features-grid { display: grid; grid-template-columns: 1fr; gap: 15px; }
-        @media (min-width: 600px) { .features-grid { grid-template-columns: 1fr 1fr; } }
-
-        .f-card {
-            background: white; padding: 20px; border-radius: 12px;
-            border: 1px solid #eee;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
-            display: flex; flex-direction: column; align-items: flex-start;
-            transition: transform 0.2s;
-        }
-        .f-card:hover { transform: translateY(-3px); border-color: var(--sakura-pink); }
-        
-        .f-icon-box {
-            width: 45px; height: 45px; margin-bottom: 15px;
-            background: var(--sakura-light); border-radius: 10px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.4rem; color: var(--xm-red);
-        }
-        .f-title { font-size: 1rem; font-weight: 700; margin-bottom: 5px; color: #222; }
-        .f-desc { font-size: 0.85rem; color: #666; line-height: 1.5; }
-
-        /* --- 7. TRADINGVIEW SPEEDOMETER --- */
-        .tv-wrapper { margin: 20px auto; max-width: 450px; height: 400px; }
-
-        /* --- COMPLIANCE --- */
-        .compliance-note {
-            font-size: 0.7rem; color: #888; background: #fff; 
-            padding: 15px; border-radius: 8px; margin-top: 30px; 
-            text-align: justify; border: 1px solid #eee;
-        }
-
-        /* --- STICKY FOOTER --- */
+        /* 5. STICKY FOOTER */
         .sticky-footer {
-            position: fixed; bottom: 0; left: 0; right: 0;
-            background: white;
-            border-top: 1px solid #eee;
-            padding: 12px 20px; z-index: 1000;
-            display: flex; flex-direction: column; gap: 8px;
-            box-shadow: 0 -5px 20px rgba(0,0,0,0.05);
-            text-align: center;
+            position: fixed; bottom: 0; left: 0; right: 0; background: white;
+            border-top: 1px solid #eee; padding: 12px 20px; z-index: 1000;
+            display: flex; flex-direction: column; gap: 8px; box-shadow: 0 -5px 20px rgba(0,0,0,0.05); text-align: center;
         }
-        .footer-text { font-size: 0.9rem; font-weight: 700; color: #333; line-height: 1.4; }
-        .btn-sticky {
-            background: var(--xm-red); color: white;
-            width: 100%; text-align: center; padding: 14px 0;
-            border-radius: 8px; font-weight: 900; font-size: 1.1rem;
-            box-shadow: 0 4px 10px rgba(214, 40, 40, 0.3);
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(214, 40, 40, 0.7); }
-            70% { transform: scale(1.02); box-shadow: 0 0 0 10px rgba(214, 40, 40, 0); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(214, 40, 40, 0); }
-        }
+        .btn-sticky { background: var(--xm-red); color: white; width: 100%; padding: 14px 0; border-radius: 8px; font-weight: 900; font-size: 1.1rem; animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { transform: scale(1); } 70% { transform: scale(1.02); } 100% { transform: scale(1); } }
     </style>
 </head>
 <body>
 
-    <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=0" class="promo-bar xm-tracker-link">
+    <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=0" class="promo-bar xm-tracker-link" rel="noopener noreferrer">
         <span class="promo-badge">注目</span>
-        <span>2026年 早春ボーナス：<span style="color:#ffcc00;">100%入金ボーナス</span> 実施中！</span>
-        <span style="font-weight:400; font-size:0.75rem; opacity:0.9;">(期間: 2026/02/01 ~ 2026/04/30)</span>
+        <span>2026年 早春キャンペーン：<span style="color:#ffcc00;">100%入金ボーナス</span> 実施中！</span>
     </a>
 
     <div class="header-wrapper">
@@ -286,234 +107,81 @@
                 <div class="logo">FXFacts<span>徹底解説メディア</span></div>
                 <div class="pr-badge">PR / Ad</div>
             </div>
-            
             <div class="banner-desktop">
-                <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=0" class="xm-tracker-link">
-                    <img src="banner-desktop.webp" alt="XMTrading 100% Bonus">
-                </a>
-            </div>
-
-            <div class="banner-mobile">
-                <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=0" class="xm-tracker-link">
-                    <img src="banner-mobile.webp" alt="XMTrading 100% Bonus">
+                <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=0" class="xm-tracker-link" rel="noopener noreferrer">
+                    <img src="banner-desktop.webp" alt="XMTrading">
                 </a>
             </div>
         </header>
     </div>
 
-    <div class="tv-bar-container">
-        <div class="tradingview-widget-container">
-          <div class="tradingview-widget-container__widget"></div>
-          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
-          {
-          "symbols": [
-            { "proName": "FX:USDJPY", "title": "USD/JPY" },
-            { "proName": "TVC:GOLD", "title": "Gold" },
-            { "proName": "TVC:NI225", "title": "Nikkei 225" },
-            { "proName": "BITSTAMP:BTCUSD", "title": "Bitcoin" }
-          ],
-          "showSymbolLogo": true,
-          "colorTheme": "light",
-          "isTransparent": true,
-          "displayMode": "adaptive",
-          "locale": "ja"
-          }
-          </script>
-        </div>
-    </div>
-
     <div class="hero">
-        <span class="hero-sub">🌸 早春100%ボーナスキャンペーン</span>
-        <h1>
-            早春100%ボーナスキャンペーン<br>
-            <span class="hero-highlight">最大$11,000*まで取引資金を増額</span>
-        </h1>
-        
-        <p>
-            この早春、<strong>最大$500*の期間限定100%ボーナス</strong>で有利な条件でスタートを切り、<br>
-            <strong>最大$10,500*のロイヤルティボーナス</strong>によるさらなる特典で充実の取引。
-        </p>
-
+        <span style="color:var(--xm-red); font-weight:bold;">🌸 2026早春限定</span>
+        <h1>早春100%ボーナスキャンペーン<br><span class="hero-highlight">最大$11,000*まで取引資金を増額</span></h1>
         <div class="btn-group">
-            <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=6" class="btn-main xm-tracker-link">
-                ボーナスを受け取る
-            </a>
-            <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=22" class="btn-sub xm-tracker-link">
-                会員ページへ
-            </a>
-        </div>
-
-        <div class="risk-micro">
-            リスク警告：FXとデリバティブ取引には高い損失リスクが伴います。<br>
-            利用規約適用。利用規約の全文を読むには、こちらをクリックしてください。
+            <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=6" class="btn-main xm-tracker-link" rel="noopener noreferrer">ボーナスを受け取る</a>
+            <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=22" class="btn-sub xm-tracker-link" rel="noopener noreferrer">会員ページへ</a>
         </div>
     </div>
 
     <div class="content-section">
-        
         <div class="info-card">
-            <h3 class="card-header">🚀 資金増額へのステップ</h3>
-            <p style="font-size:0.95rem; margin-bottom:15px; color:#555;">
-                最大$500*の期間限定・早春100％ボーナスで取引資金を倍増。資金に余裕のあるトレードが可能に。
-            </p>
+            <h3 style="color:var(--xm-red); margin-bottom:15px;">🚀 特典内容</h3>
             <ul class="check-list">
-                <li>既存の100%入金ボーナスに加えて適用</li>
-                <li>新規と既存のお客様が対象</li>
-                <li>ボーナスは対象となる入金の反映時に付与</li>
-                <li>利益はいつでも出金可能</li>
-                <li><strong style="color:#d62828; background:#fff0f3; padding:0 5px;">2026年2月2日～27日の期間限定</strong></li>
+                <li>最大$500までの100%入金ボーナス</li>
+                <li>最大$10,500のロイヤルティボーナス</li>
+                <li>追証なしのゼロカットシステム採用</li>
+                <li>日本人スタッフによる24時間サポート</li>
             </ul>
         </div>
-
-        <div class="info-card double-bonus-box">
-            <h3 class="card-header">💰 ダブルボーナスについて</h3>
-            <p style="font-size:0.9rem; color:#666;">
-                早春キャンペーンにより、最大$500*のボーナスを受け取ることができます。最大$500*のロイヤルティ100%入金ボーナスをまだ受け取っていない場合、2つの100%ボーナスキャンペーンを合わせて、合計最大$1,000*のボーナスを獲得いただけます。
-            </p>
-        </div>
-
-        <div class="section-title">
-            <h2>市場センチメント <span>(USD/JPY)</span></h2>
-        </div>
-        <div class="tv-wrapper">
-            <div class="tradingview-widget-container">
-              <div class="tradingview-widget-container__widget"></div>
-              <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js" async>
-              {
-              "interval": "1m",
-              "width": "100%",
-              "isTransparent": true,
-              "height": "100%",
-              "symbol": "FX:USDJPY",
-              "showIntervalTabs": true,
-              "displayMode": "single",
-              "locale": "ja",
-              "colorTheme": "light"
-              }
-              </script>
-            </div>
-        </div>
-
-        <div class="section-title">
-            <h2>プロが選ぶ<span>XMの理由</span></h2>
-        </div>
-        
-        <div class="features-grid">
-            <div class="f-card">
-                <div class="f-icon-box">⚡</div>
-                <div class="f-title">圧倒的な約定力</div>
-                <div class="f-desc">全注文の99.35%が1秒以内に約定。リクオートなし。</div>
-            </div>
-            <div class="f-card">
-                <div class="f-icon-box">⚖️</div>
-                <div class="f-title">レバレッジ 1:1000</div>
-                <div class="f-desc">少ない資金でも大きな取引が可能。</div>
-            </div>
-            <div class="f-card">
-                <div class="f-icon-box">🛡️</div>
-                <div class="f-title">ゼロカットシステム</div>
-                <div class="f-desc">入金額以上の損失は発生しません。追証なしで安心。</div>
-            </div>
-            <div class="f-card">
-                <div class="f-icon-box">🇯🇵</div>
-                <div class="f-title">日本語サポート</div>
-                <div class="f-desc">日本人スタッフによる24時間ライブチャット対応。</div>
-            </div>
-        </div>
-
-        <div class="compliance-note">
-            <p style="margin:0;">
-                XMTrading Zero口座、KIWAMI極口座、投資家口座、キャッシュバックを行うアフィリエイトを経由して開設された口座は、本キャンペーンの対象外になります。<br>
-                リアル口座を開設するには、こちらをクリックしてください。<br>
-                *利用規約が適用されます。
-            </p>
-        </div>
-
     </div>
 
     <div class="sticky-footer">
-        <div class="footer-text">
-            ¥13,000の取引ボーナスでFX、仮想通貨CFDなどを取引しよう。<br>
-            入金不要。（利用規約適用)
-        </div>
-        
-        <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=6" class="btn-sticky xm-tracker-link">
-            口座を開設する ➜
-        </a>
+        <div style="font-weight:bold; font-size:0.9rem;">¥13,000の入金不要ボーナスを今すぐ受け取る</div>
+        <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=6" class="btn-sticky xm-tracker-link" rel="noopener noreferrer">口座を開設する ➜</a>
     </div>
-
-    <script type="text/javascript">
-    (function() {
-        var d = document, w = window; w.MgSensorData = w.MgSensorData || []; w.MgSensorData.push({ cid:897661, project: "a.mgid.com" }); var l = "a.mgid.com"; var s = d.createElement("script"); s.type = "text/javascript"; s.async = true; var dt = !Date.now?new Date().valueOf():Date.now(); s.src = "https://" + l + "/mgsensor.js?d=" + dt; d.body.appendChild(s);
-    })();
-    </script>
 
     <script>
     document.addEventListener("DOMContentLoaded", function() {
-        /* --- TRACKING LOGIC --- */
         const urlParams = new URLSearchParams(window.location.search);
         
-        const popadsId = urlParams.get('popads_id');
-        const websiteId = urlParams.get('website_id'); 
-        const richAdsClickId = urlParams.get('click_id');
+        // Всички параметри от PopAds
+        const p = {
+            imp: urlParams.get('imp_id'), src: urlParams.get('src_id'), camp: urlParams.get('camp_id'),
+            q: urlParams.get('q'), os: urlParams.get('os'), br: urlParams.get('br'),
+            dev: urlParams.get('dev'), form: urlParams.get('form'), res: urlParams.get('res'),
+            cty: urlParams.get('cty'), adb: urlParams.get('adb'), bid: urlParams.get('bid')
+        };
 
-        // PopAds Postback
-        const popadsPostbackUrl = "https://www.popads.net/users/postback/2s/0/aid/aa767929957b4ca372123fe3656e20ec/id/" + popadsId + "/value/0.10";
-
-        function fireConversion() {
-            if (popadsId) {
-                if (navigator.sendBeacon) navigator.sendBeacon(popadsPostbackUrl);
-                else new Image().src = popadsPostbackUrl;
-            }
-            if (richAdsClickId && navigator.sendBeacon) {
-                navigator.sendBeacon('https://us.ahows.co/log?action=conversion&key=' + richAdsClickId);
-            }
+        // 1. Google Analytics Deep Dive
+        if (typeof gtag === 'function') {
+            gtag('event', 'PopAds_Traffic_In', {
+                'website_id': p.src, 'traffic_quality': p.q, 'os': p.os, 'browser': p.br,
+                'device': p.dev, 'country': p.cty, 'adblock': p.adb, 'bid': p.bid
+            });
         }
 
+        // 2. Почистване на URL (за по-добър вид)
+        if (window.history.replaceState && urlParams.toString() !== "") {
+            window.history.replaceState({}, document.title, window.location.pathname);
+        }
+
+        // 3. XM Link Injection & PopAds Postback
         const links = document.querySelectorAll('.xm-tracker-link');
         links.forEach(link => {
-            let currentHref = link.href;
-            let separator = currentHref.includes('?') ? '&' : '?';
-
-            if (popadsId) {
-                link.href = currentHref + separator + 'subid1=' + popadsId;
-                if (websiteId) {
-                    link.href += '&subid2=' + websiteId;
-                }
-            } else if (richAdsClickId) {
-                link.href = currentHref + separator + 'subid1=' + richAdsClickId;
-            }
+            let url = new URL(link.href);
+            if (p.imp) url.searchParams.set('subid1', p.imp);
+            if (p.src) url.searchParams.set('subid2', p.src);
+            if (p.q)   url.searchParams.set('subid3', `q${p.q}_c${p.camp}`);
+            link.href = url.toString();
 
             link.addEventListener('click', function() {
-                fireConversion();
-                if (typeof gtag === 'function') {
-                    gtag('event', 'XM_Promo_Click', { 'event_category': 'conversion' });
+                if (p.imp) {
+                    const pb = `https://www.popads.net/users/postback/2s/0/aid/aa767929957b4ca372123fe3656e20ec/id/${p.imp}/value/0.10`;
+                    navigator.sendBeacon ? navigator.sendBeacon(pb) : new Image().src = pb;
                 }
+                if (typeof gtag === 'function') gtag('event', 'conversion', {'event_label': p.src});
             });
-        });
-
-        /* --- BACK BUTTON TRAP --- */
-        let historyPushed = false;
-        function armBackButton() {
-            if (historyPushed) return; 
-            history.pushState(null, null, location.href);
-            history.replaceState(null, null, location.href); 
-            history.pushState(null, null, location.href + "#!/stay");
-            historyPushed = true;
-        }
-
-        document.body.addEventListener('click', armBackButton, { once: true });
-        document.body.addEventListener('touchstart', armBackButton, { once: true });
-        document.body.addEventListener('scroll', armBackButton, { once: true });
-
-        window.addEventListener("popstate", function() {
-            if (historyPushed) {
-                history.replaceState(null, null, location.href);
-                fireConversion(); 
-                let fallbackUrl = "https://clicks.affstrack.com/c?c=1120254&l=ja&p=0";
-                if(popadsId) fallbackUrl += "&subid1=" + popadsId;
-                window.location.replace(fallbackUrl);
-            }
         });
     });
     </script>
