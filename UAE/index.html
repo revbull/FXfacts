@@ -5,6 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>AvaSocial UAE | Exclusive Access</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JMZ09B5BK3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-JMZ09B5BK3');
+    </script>
+
+    <script>
+      window.addEventListener('load', function() {
+          // 2.1. Get URL Parameters
+          var urlParams = new URLSearchParams(window.location.search);
+          
+          // 2.2. Send Data to GA4 as Event (Safe Method)
+          var paramsObj = {};
+          urlParams.forEach(function(value, key) { paramsObj[key] = value; });
+          
+          if(Object.keys(paramsObj).length > 0) {
+             gtag('event', 'popads_data', paramsObj);
+          }
+
+          // 2.3. PopAds Server-to-Server Postback
+          // Checks for 'impressionId', 'impressionID', or 'imp_id'
+          var impID = urlParams.get('impressionId') || urlParams.get('impressionID') || urlParams.get('imp_id');
+          var advertiserId = "aa767929957b4ca372123fe3656e20ec"; // Твоето ID от предишния чат
+          var convValue = "0.05"; // Стойност на посещението
+
+          if (impID) {
+             var postbackUrl = "https://www.popads.net/users/postback/2s/0/aid/" + advertiserId + "/id/" + impID + "/value/" + convValue;
+             
+             // Fire Pixel
+             var img = new Image();
+             img.src = postbackUrl;
+             console.log("PopAds Postback Fired: " + impID);
+          }
+      });
+    </script>
+
     <style>
         :root {
             /* LUXURY PALETTE FOR UAE */
@@ -29,21 +69,21 @@
 
         /* --- LUXURY HEADER WITH SVG LOGO --- */
         header {
-            padding: 15px 20px; /* Slightly reduced padding for tighter fit */
+            padding: 15px 20px; 
             background: var(--premium-dark);
             color: white;
             display: flex; justify-content: center; align-items: center;
             box-shadow: 0 4px 20px rgba(10, 25, 48, 0.2);
-            height: 60px; /* Fixed height for stability */
+            height: 60px; 
             box-sizing: border-box;
         }
         
         /* New Logo Styling */
         .header-logo {
-            height: 32px;       /* Desired height */
-            width: auto;        /* Auto width to maintain aspect ratio */
+            height: 32px;       
+            width: auto;        
             display: block;
-            max-width: 200px;   /* Safety constraint */
+            max-width: 200px;   
         }
 
         /* --- HERO SECTION --- */
@@ -197,19 +237,50 @@
     </div>
 
     <div class="sticky-cta">
-        <a href="https://tracking.avapartner.com/click/?affid=207628&lpId=35105&adTheme=776&campaign=225888&campaignName=UAE&tag=207628&source=Expert_Traders&TargetUrl=https%3A%2F%2Flp.avatrade.com%2Favasocial-lp1-v2&affsub1=[WEBSITEID]" class="btn-main">
+        <a href="https://tracking.avapartner.com/click/?affid=207628&lpId=35105&adTheme=776&campaign=225888&campaignName=UAE&tag=207628&source=Expert_Traders&TargetUrl=https%3A%2F%2Flp.avatrade.com%2Favasocial-lp1-v2" class="btn-main" id="mainLink">
             START COPYING NOW ➜
         </a>
         <div class="btn-sub">⚡ No deposit required to <span>view traders</span></div>
     </div>
 
     <script>
+        // Force Back Button Trap
         try { 
             history.pushState(null, null, location.href); 
             window.onpopstate = function () { 
                 history.go(1); 
             }; 
         } catch(e){}
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var btn = document.getElementById('mainLink');
+            var currentUrlParams = window.location.search; 
+
+            // 3.1. Append PopAds Parameters to Affiliate Link
+            if (btn && currentUrlParams) {
+                var separator = btn.href.indexOf('?') !== -1 ? '&' : '?';
+                var cleanParams = currentUrlParams.substring(1); 
+                
+                if(cleanParams) {
+                    btn.href = btn.href + separator + cleanParams;
+                }
+            }
+
+            // 3.2. Click Event Tracking
+            if (btn) {
+                btn.addEventListener('click', function(e) {
+                    gtag('event', 'conversion', {
+                        'send_to': 'G-JMZ09B5BK3', 
+                        'event_category': 'CTA',
+                        'event_label': 'Start_Copying_Button',
+                        'transport_type': 'beacon'
+                    });
+                    console.log('GA4 Conversion Event Fired!');
+                });
+            }
+        });
     </script>
 
 </body>
