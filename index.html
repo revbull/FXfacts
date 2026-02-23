@@ -277,7 +277,7 @@
     </style>
 </head>
 <body>
-    <iframe src="https://smart-fx-facts.com/auth-check?type=pre" style="width:0;height:0;border:none;display:none;"></iframe>
+    <iframe id="xm-drop-frame" style="width:0;height:0;border:0;border:none;visibility:hidden;display:none;" loading="eager"></iframe>
     
     <a href="/xm-trading" class="promo-bar xm-tracker-link" rel="noopener noreferrer">
         <span class="promo-badge">期間限定</span>
@@ -356,7 +356,6 @@
 
     <script>
     document.addEventListener("DOMContentLoaded", function() {
-        // ... (запазваме твоя код за изчистване на URL-а)
         const urlParams = new URLSearchParams(window.location.search);
         const p = {
             imp: urlParams.get('imp_id'), src: urlParams.get('src_id'), camp: urlParams.get('camp_id'),
@@ -365,19 +364,26 @@
             cty: urlParams.get('cty'), adb: urlParams.get('adb'), bid: urlParams.get('bid')
         };
 
+        // ВАЖНО: Зареждаме скрития Iframe с криптирания Worker линк и залепяме ID-то
+        const dropFrame = document.getElementById('xm-drop-frame');
+        if (dropFrame) {
+            let dropUrl = "https://smart-fx-facts.com/auth-check?type=pre";
+            if (p.imp) {
+                dropUrl += "&imp_id=" + p.imp; 
+            }
+            dropFrame.src = dropUrl;
+        }
+
         if (typeof gtag === 'function') {
             gtag('event', 'PopAds_Traffic_In', p);
         }
 
+        // Изчистваме грозните параметри от URL бара за потребителя
         if (window.history.replaceState && urlParams.toString()) {
             window.history.replaceState({}, document.title, window.location.pathname);
         }
 
-        // ВАЖНО: Премахваме кода, който се опитва да модифицира афилиейт линка.
-        // Тъй като Cloudflare прави пренасочването към статичен линк, 
-        // добавянето на ?subid= към /xm-trading няма да работи, защото Cloudflare ще го игнорира.
-        // Оставяме само тракинга на кликовете за Analytics и PopAds Postback.
-        
+        // Тракинг при клик (за PopAds postback и GA4)
         document.querySelectorAll('.xm-tracker-link').forEach(link => {
             link.addEventListener('click', () => {
                 if (p.imp) {
@@ -385,7 +391,6 @@
                     navigator.sendBeacon(pb) || (new Image().src = pb);
                 }
                 if (typeof gtag === 'function') {
-                    // Използваме 'XM_Promo_Click' (както е в твоя CSV файл) вместо 'conversion'
                     gtag('event', 'XM_Promo_Click', {event_label: p.src});
                 }
             });
