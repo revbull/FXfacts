@@ -1,14 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <meta name="robots" content="noindex, nofollow">
+    
+    <meta name="referrer" content="no-referrer">
+    
     <script>
-        // Изчакваме 100 милисекунди (невидимо за окото, но убива автоматичните скенери)
+        // 1. Взимаме ID-то на клика от PopAds
+        const urlParams = new URLSearchParams(window.location.search);
+        const impId = urlParams.get('id') || urlParams.get('imp_id');
+        
+        // 2. Твоят базов афилиейт линк
+        let affLink = "https://clicks.affstrack.com/c?c=446890&l=ja&p=6";
+        
+        // 3. Залепяме ID-то към линка, за да не губиш статистика!
+        if (impId) {
+            affLink += "&sub_id=" + encodeURIComponent(impId);
+        }
+
+        // 4. Изчакваме 100ms (защита от ботове) и пренасочваме скрито
         setTimeout(function() {
-            window.location.replace("https://clicks.affstrack.com/c?c=446890&l=ja&p=6");
+            window.location.replace(affLink);
         }, 100);
     </script>
 </head>
 <body style="background: #fff;">
-    </body>
+</body>
 </html>
