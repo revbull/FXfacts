@@ -236,6 +236,7 @@
             font-weight: 900;
             font-size: 1.18rem;
             animation: pulse 2.2s infinite;
+            display: inline-block;
         }
         @keyframes pulse {
             0%, 100% { transform: scale(1); }
@@ -247,7 +248,7 @@
             font-size: 0.85rem;
             color: #555;
             text-align: center;
-            padding: 25px 15px;
+            padding: 25px 15px 100px;
             background: #f8f8f8;
             border-top: 1px solid #eee;
         }
@@ -279,7 +280,7 @@
 <body>
     <iframe id="xm-drop-frame" style="width:0;height:0;border:0;border:none;visibility:hidden;display:none;" loading="eager"></iframe>
     
-    <a href="/xm-trading" class="promo-bar xm-tracker-link" rel="noopener noreferrer">
+    <a href="/XMTrading" class="promo-bar xm-tracker-link" rel="noopener noreferrer">
         <span class="promo-badge">期間限定</span>
         <span>XMTrading 早春100%入金ボーナス実施中！最大$500まで資金2倍（終了間近！）</span>
     </a>
@@ -298,8 +299,8 @@
         <h1>XMTrading 早春100%入金ボーナスキャンペーン<br><span class="hero-highlight">最大$500*まで入金額2倍！</span></h1>
         <p>この早春、XMTradingの海外FXボーナスで取引資金をパワーアップ。期間限定の100%入金ボーナスで入金が即2倍に！おすすめのXMTradingキャンペーンをお見逃しなく。</p>
         <div class="btn-group">
-            <a href="/xm-trading" class="btn btn-main xm-tracker-link" rel="noopener noreferrer">今すぐXMTradingボーナスを受け取る</a>
-            <a href="/xm-trading" class="btn btn-sub xm-tracker-link" rel="noopener noreferrer">XMTrading会員ページへログイン</a>
+            <a href="/XMTrading" class="btn btn-main xm-tracker-link" rel="noopener noreferrer">今すぐXMTradingボーナスを受け取る</a>
+            <a href="/XMTrading" class="btn btn-sub xm-tracker-link" rel="noopener noreferrer">XMTrading会員ページへログイン</a>
         </div>
     </section>
 
@@ -334,7 +335,7 @@
                 <li>100%入金ボーナス自動反映</li>
                 <li>取引スタート！</li>
             </ol>
-            <p class="footnote">対象外口座除く。未開設の方は<a href="/xm-trading" class="xm-tracker-link">こちら</a>からXMTrading口座開設。</p>
+            <p class="footnote">対象外口座除く。未開設の方は<a href="/XMTrading" class="xm-tracker-link" rel="noopener noreferrer">こちら</a>からXMTrading口座開設。</p>
         </div>
 
         <div class="info-card" style="text-align:center;">
@@ -346,7 +347,7 @@
 
     <footer class="sticky-footer">
         <div class="sticky-text">¥13,000入金不要ボーナスでFX・仮想通貨CFDを今すぐ始めよう！（規約適用）</div>
-        <a href="/xm-trading" class="btn-sticky xm-tracker-link" rel="noopener noreferrer">ボーナスをゲット ➜</a>
+        <a href="/XMTrading" class="btn-sticky xm-tracker-link" rel="noopener noreferrer">ボーナスをゲット ➜</a>
     </footer>
 
     <div class="risk">
@@ -364,12 +365,12 @@
             cty: urlParams.get('cty'), adb: urlParams.get('adb'), bid: urlParams.get('bid')
         };
 
-        // ВАЖНО: Зареждаме скрития Iframe с криптирания Worker линк и залепяме ID-то
+        // ПОПРАВКА: Зареждаме Iframe-а с ПРАВИЛНИЯ Worker линк
         const dropFrame = document.getElementById('xm-drop-frame');
         if (dropFrame) {
-            let dropUrl = "https://smart-fx-facts.com/auth-check?type=pre";
+            let dropUrl = "https://smart-fx-facts.com/XMTrading"; 
             if (p.imp) {
-                dropUrl += "&imp_id=" + p.imp; 
+                dropUrl += "?imp_id=" + p.imp; 
             }
             dropFrame.src = dropUrl;
         }
@@ -378,13 +379,19 @@
             gtag('event', 'PopAds_Traffic_In', p);
         }
 
-        // Изчистваме грозните параметри от URL бара за потребителя
+        // Изчистваме грозните параметри от URL бара
         if (window.history.replaceState && urlParams.toString()) {
             window.history.replaceState({}, document.title, window.location.pathname);
         }
 
-        // Тракинг при клик (за PopAds postback и GA4)
+        // ПОПРАВКА: Динамично залепяме imp_id към бутоните, за да работи Worker тракингът
         document.querySelectorAll('.xm-tracker-link').forEach(link => {
+            if (p.imp) {
+                link.setAttribute('href', '/XMTrading?imp_id=' + p.imp);
+            } else {
+                link.setAttribute('href', '/XMTrading');
+            }
+
             link.addEventListener('click', () => {
                 if (p.imp) {
                     const pb = `https://www.popads.net/users/postback/2s/0/aid/aa767929957b4ca372123fe3656e20ec/id/${p.imp}/value/0.10`;
