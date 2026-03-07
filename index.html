@@ -1,1004 +1,1157 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="robots" content="noindex, nofollow">
-    <title>【FX環境診断】あなたの取引スタイルに最適な海外FXは？無料チェック</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>【FX環境診断】XMTrading MUGEN無限キャッシュバック</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0f;
+  --bg2: #0f0f18;
+  --bg3: #13131e;
+  --gold: #d4940a;
+  --gold2: #f0b429;
+  --gold3: #ffd97d;
+  --gold-pale: rgba(212,148,10,0.08);
+  --red: #c0392b;
+  --red2: #e84545;
+  --white: #ffffff;
+  --text: rgba(255,255,255,0.88);
+  --text-soft: rgba(255,255,255,0.55);
+  --text-muted: rgba(255,255,255,0.3);
+  --border: rgba(212,148,10,0.18);
+  --border-soft: rgba(255,255,255,0.07);
+  --green: #2ecc71;
+  --card: rgba(255,255,255,0.03);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Noto Sans JP',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  font-size:16px;
+  line-height:1.7;
+  min-height:100vh;
+  overflow-x:hidden;
+}
 
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DTMQSP8BPQ"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-DTMQSP8BPQ', { 'send_page_view': true });
-    </script>
+/* BG PARTICLES */
+#particles{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden}
+.particle{position:absolute;border-radius:50%;animation:float linear infinite;opacity:0}
+@keyframes float{0%{transform:translateY(100vh) scale(0);opacity:0}10%{opacity:1}90%{opacity:0.4}100%{transform:translateY(-10vh) scale(1);opacity:0}}
 
-    <style>
-        :root {
-            --white:       #ffffff;
-            --bg:          #f7f6f2;
-            --ink:         #1a1a1a;
-            --ink-soft:    #444444;
-            --ink-muted:   #888888;
-            --xm-red:      #c0392b;
-            --xm-red-dark: #96281b;
-            --xm-red-pale: #fff4f3;
-            --sakura:      #f9d0d7;
-            --sakura-mid:  #f5a7b4;
-            --gold:        #d4860a;
-            --gold-light:  #fef3dc;
-            --green:       #1a7a4a;
-            --border:      #e2ddd5;
-            --card:        #ffffff;
-            --prog-bg:     #ece9e2;
-        }
+/* LIVE NOTIFICATION */
+.live-toast{
+  position:fixed;bottom:80px;left:12px;z-index:2000;
+  background:rgba(15,15,24,0.97);
+  border:1px solid var(--border);
+  border-left:3px solid var(--gold);
+  padding:10px 14px;border-radius:4px;
+  font-size:0.72rem;color:var(--text);
+  max-width:240px;line-height:1.4;
+  opacity:0;transform:translateX(-110%);
+  transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1);
+  box-shadow:0 8px 32px rgba(0,0,0,0.6);
+}
+.live-toast.show{opacity:1;transform:translateX(0)}
+.live-toast-name{font-weight:700;color:var(--gold)}
+.live-toast-dot{display:inline-block;width:6px;height:6px;background:var(--green);border-radius:50%;margin-right:5px;animation:blink 1.5s infinite}
 
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* TOP TICKER */
+.ticker-wrap{
+  background:linear-gradient(90deg,rgba(212,148,10,0.15),rgba(212,148,10,0.08),rgba(212,148,10,0.15));
+  border-bottom:1px solid var(--border);
+  overflow:hidden;height:34px;display:flex;align-items:center;
+  position:relative;z-index:10;
+}
+.ticker-inner{
+  display:flex;gap:0;white-space:nowrap;
+  animation:ticker 28s linear infinite;
+}
+.ticker-inner span{
+  font-size:0.68rem;font-weight:700;letter-spacing:0.1em;
+  color:var(--gold2);padding:0 28px;
+  border-right:1px solid rgba(212,148,10,0.2);
+}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-        body {
-            font-family: 'Noto Sans JP', sans-serif;
-            background: var(--bg);
-            color: var(--ink);
-            font-size: 16px;
-            line-height: 1.7;
-            min-height: 100vh;
-        }
+/* MUGEN BANNER */
+.mugen-banner{
+  background:linear-gradient(135deg,#0a0a0f 0%,#1a1000 50%,#0a0a0f 100%);
+  border-bottom:2px solid var(--gold);
+  padding:11px 18px;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  position:relative;z-index:10;
+}
+.mugen-left{display:flex;align-items:center;gap:10px}
+.mugen-badge{
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  color:#000;font-size:0.6rem;font-weight:900;
+  letter-spacing:0.12em;padding:4px 9px;border-radius:2px;
+  white-space:nowrap;box-shadow:0 2px 12px rgba(212,148,10,0.4);
+}
+.mugen-text{font-size:0.76rem;font-weight:700;color:var(--text);line-height:1.3}
+.mugen-text em{color:var(--gold2);font-style:normal}
+.mugen-cd{text-align:right;flex-shrink:0}
+.mugen-cd-label{font-size:0.56rem;color:var(--text-muted);letter-spacing:0.1em;margin-bottom:2px}
+.mugen-cd-digits{
+  font-size:1.05rem;font-weight:900;color:var(--gold2);
+  font-variant-numeric:tabular-nums;letter-spacing:0.04em;
+  text-shadow:0 0 20px rgba(212,148,10,0.6);
+}
 
-        /* ── NEWS BAR ── */
-        .news-bar {
-            background: var(--xm-red);
-            color: white;
-            font-size: 0.7rem;
-            font-weight: 700;
-            letter-spacing: 0.08em;
-            text-align: center;
-            padding: 6px 15px;
-        }
+/* HEADER */
+.site-header{
+  background:rgba(10,10,15,0.95);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border-soft);
+  padding:13px 18px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:100;
+}
+.site-name{
+  font-family:'Noto Serif JP',serif;
+  font-size:1.1rem;font-weight:700;
+  background:linear-gradient(135deg,var(--gold2),var(--gold3));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  letter-spacing:0.06em;
+}
+.site-name span{
+  font-family:'Noto Sans JP',sans-serif;
+  font-size:0.6rem;font-weight:400;
+  color:var(--text-muted);display:block;
+  -webkit-text-fill-color:var(--text-muted);
+}
+.header-pill{
+  font-size:0.62rem;font-weight:700;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  color:#000;padding:4px 11px;border-radius:20px;
+  letter-spacing:0.06em;
+}
 
-        /* ── SITE HEADER ── */
-        .site-header {
-            background: var(--white);
-            border-bottom: 3px solid var(--ink);
-            padding: 12px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .site-name {
-            font-family: 'Noto Serif JP', serif;
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--ink);
-            letter-spacing: 0.04em;
-        }
-        .site-name span {
-            font-family: 'Noto Sans JP', sans-serif;
-            font-size: 0.62rem;
-            font-weight: 400;
-            color: var(--ink-muted);
-            display: block;
-            letter-spacing: 0.02em;
-        }
-        .header-tag {
-            font-size: 0.65rem;
-            font-weight: 700;
-            background: var(--ink);
-            color: white;
-            padding: 4px 10px;
-            letter-spacing: 0.06em;
-        }
+.container{max-width:580px;margin:0 auto;padding:0 0 140px;position:relative;z-index:1}
 
-        .container { max-width: 580px; margin: 0 auto; padding: 0 0 130px; }
+/* HERO INTRO */
+.hero-section{
+  background:linear-gradient(180deg,#0f0f18 0%,var(--bg) 100%);
+  padding:28px 18px 22px;
+  border-bottom:1px solid var(--border-soft);
+  position:relative;overflow:hidden;
+}
+.hero-section::before{
+  content:'';position:absolute;top:-60px;right:-60px;
+  width:220px;height:220px;
+  background:radial-gradient(circle,rgba(212,148,10,0.12) 0%,transparent 70%);
+  pointer-events:none;
+}
+.cat-pill{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:0.64rem;font-weight:700;letter-spacing:0.12em;
+  color:var(--gold);border:1px solid rgba(212,148,10,0.35);
+  padding:4px 12px;margin-bottom:14px;border-radius:2px;
+  background:var(--gold-pale);
+}
+.cat-pill::before{content:'◆';font-size:0.5rem}
+.hero-section h1{
+  font-family:'Noto Serif JP',serif;
+  font-size:1.42rem;line-height:1.42;
+  font-weight:700;margin-bottom:13px;
+  color:var(--white);
+}
+.hero-section h1 em{
+  font-style:normal;
+  background:linear-gradient(135deg,var(--gold),var(--gold3));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.hero-meta{
+  display:flex;gap:10px;flex-wrap:wrap;
+  font-size:0.68rem;color:var(--text-muted);margin-bottom:14px;
+}
+.hero-meta span{display:flex;align-items:center;gap:4px}
+.hero-meta .live-count{
+  color:var(--gold);font-weight:700;
+  animation:countPulse 3s ease infinite;
+}
+@keyframes countPulse{0%,100%{opacity:1}50%{opacity:0.6}}
+.hero-lead{font-size:0.87rem;color:var(--text-soft);line-height:1.8}
+.hero-lead strong{color:var(--text)}
 
-        /* ── ARTICLE INTRO ── */
-        .article-intro {
-            background: var(--white);
-            padding: 22px 20px 20px;
-            border-bottom: 1px solid var(--border);
-        }
-        .category-pill {
-            display: inline-block;
-            font-size: 0.67rem;
-            font-weight: 700;
-            letter-spacing: 0.1em;
-            color: var(--xm-red);
-            border: 1.5px solid var(--xm-red);
-            padding: 3px 10px;
-            margin-bottom: 12px;
-        }
-        .article-intro h1 {
-            font-family: 'Noto Serif JP', serif;
-            font-size: 1.4rem;
-            line-height: 1.45;
-            color: var(--ink);
-            margin-bottom: 13px;
-            font-weight: 700;
-        }
-        .article-intro h1 em {
-            font-style: normal;
-            color: var(--xm-red);
-            border-bottom: 2px solid var(--xm-red);
-        }
-        .article-meta {
-            font-size: 0.7rem;
-            color: var(--ink-muted);
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-            margin-bottom: 14px;
-        }
-        .article-intro p {
-            font-size: 0.9rem;
-            color: var(--ink-soft);
-            line-height: 1.75;
-        }
+/* SOCIAL PROOF BAR */
+.proof-bar{
+  background:linear-gradient(90deg,rgba(212,148,10,0.06),rgba(212,148,10,0.12),rgba(212,148,10,0.06));
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  padding:10px 18px;
+  display:flex;align-items:center;gap:10px;
+  font-size:0.74rem;font-weight:700;color:var(--gold2);
+}
+.proof-dot{
+  width:7px;height:7px;background:var(--green);border-radius:50%;
+  flex-shrink:0;animation:blink 1.8s ease-in-out infinite;
+}
+@keyframes blink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.3;transform:scale(0.7)}}
 
-        /* ── SAKURA DIVIDER ── */
-        .sakura-divider {
-            background: linear-gradient(90deg, #fff4f5, #fce8eb, #fff4f5);
-            border-top: 1px solid var(--sakura);
-            border-bottom: 1px solid var(--sakura);
-            padding: 9px 20px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: #a0404a;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .sakura-divider .pulse {
-            width: 7px; height: 7px;
-            background: var(--xm-red);
-            border-radius: 50%;
-            flex-shrink: 0;
-            animation: pulse 1.8s ease-in-out infinite;
-        }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.45; transform: scale(0.75); }
-        }
+/* URGENCY */
+.urgency-bar{
+  background:rgba(192,57,43,0.08);
+  border-left:3px solid var(--red2);
+  border-bottom:1px solid rgba(192,57,43,0.2);
+  padding:12px 18px;
+  display:flex;align-items:center;gap:13px;
+}
+.urgency-icon{font-size:1.3rem;flex-shrink:0}
+.urgency-txt{font-size:0.79rem;color:var(--text-soft);line-height:1.5;flex:1}
+.urgency-txt strong{color:var(--red2)}
+.urgency-timer{
+  font-size:1.2rem;font-weight:900;
+  color:var(--red2);font-variant-numeric:tabular-nums;
+  background:rgba(232,69,69,0.1);
+  border:1px solid rgba(232,69,69,0.3);
+  padding:5px 10px;border-radius:3px;
+  flex-shrink:0;text-align:center;
+  letter-spacing:0.04em;
+}
+.urgency-timer small{display:block;font-size:0.52rem;font-weight:600;color:var(--text-muted);letter-spacing:0.08em}
 
-        /* ── URGENCY ── */
-        .urgency-box {
-            background: var(--white);
-            border-left: 4px solid var(--xm-red);
-            padding: 13px 20px;
-            display: flex;
-            align-items: center;
-            gap: 13px;
-            border-bottom: 1px solid var(--border);
-        }
-        .urgency-icon { font-size: 1.4rem; flex-shrink: 0; }
-        .urgency-text { font-size: 0.8rem; color: var(--ink-soft); line-height: 1.5; flex: 1; }
-        .urgency-text strong { color: var(--xm-red); }
-        .timer-digits {
-            font-size: 1.35rem;
-            font-weight: 900;
-            color: var(--xm-red);
-            font-variant-numeric: tabular-nums;
-            background: #fff0ee;
-            padding: 4px 10px;
-            border: 1px solid #f5c2bc;
-            border-radius: 3px;
-            flex-shrink: 0;
-            letter-spacing: 0.04em;
-        }
+/* QUIZ */
+.quiz-wrap{padding:22px 18px}
+.quiz-head{text-align:center;margin-bottom:22px}
+.quiz-head h2{
+  font-family:'Noto Serif JP',serif;
+  font-size:1.1rem;font-weight:700;
+  color:var(--white);margin-bottom:6px;
+}
+.quiz-head p{font-size:0.78rem;color:var(--text-muted)}
 
-        /* ── QUIZ ── */
-        .quiz-wrapper { padding: 22px 20px; }
+.progress-wrap{margin-bottom:20px}
+.prog-label{
+  display:flex;justify-content:space-between;
+  font-size:0.7rem;font-weight:700;
+  color:var(--text-muted);margin-bottom:7px;
+}
+.prog-bar{height:4px;background:rgba(255,255,255,0.06);border-radius:4px;overflow:hidden}
+.prog-fill{
+  height:100%;
+  background:linear-gradient(90deg,var(--gold),var(--gold2),var(--gold3));
+  border-radius:4px;width:0%;
+  transition:width 0.55s cubic-bezier(0.4,0,0.2,1);
+  box-shadow:0 0 10px rgba(212,148,10,0.5);
+}
 
-        .quiz-header { text-align: center; margin-bottom: 22px; }
-        .quiz-header h2 {
-            font-family: 'Noto Serif JP', serif;
-            font-size: 1.15rem;
-            color: var(--ink);
-            margin-bottom: 7px;
-            font-weight: 700;
-        }
-        .quiz-header p { font-size: 0.8rem; color: var(--ink-muted); }
+.q-card{
+  background:var(--card);
+  border:1px solid var(--border-soft);
+  border-radius:6px;
+  padding:22px 18px 18px;
+  display:none;
+  animation:slideIn 0.3s ease;
+  backdrop-filter:blur(10px);
+}
+.q-card.active{display:block}
+@keyframes slideIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.q-num{
+  font-size:0.62rem;font-weight:700;letter-spacing:0.16em;
+  color:var(--gold);text-transform:uppercase;margin-bottom:9px;
+  display:flex;align-items:center;gap:6px;
+}
+.q-num::before{content:'';display:block;width:16px;height:1px;background:var(--gold)}
+.q-text{
+  font-family:'Noto Serif JP',serif;
+  font-size:1.05rem;font-weight:700;
+  color:var(--white);line-height:1.5;margin-bottom:18px;
+}
+.q-emoji{font-size:1.2rem;margin-right:6px}
+.options{display:flex;flex-direction:column;gap:9px}
+.opt-btn{
+  background:rgba(255,255,255,0.025);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:4px;
+  padding:13px 15px;text-align:left;cursor:pointer;
+  font-family:'Noto Sans JP',sans-serif;
+  font-size:0.84rem;font-weight:500;
+  color:var(--text-soft);
+  display:flex;align-items:center;gap:11px;
+  transition:all 0.2s ease;
+  -webkit-tap-highlight-color:transparent;
+}
+.opt-btn:hover,.opt-btn:active{
+  border-color:rgba(212,148,10,0.5);
+  background:var(--gold-pale);
+  color:var(--text);
+  transform:translateX(4px);
+}
+.opt-btn.selected{
+  border-color:var(--gold);
+  background:rgba(212,148,10,0.1);
+  color:var(--gold2);font-weight:700;
+  box-shadow:0 0 0 1px rgba(212,148,10,0.2);
+}
+.opt-letter{
+  width:28px;height:28px;
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.7rem;font-weight:900;flex-shrink:0;
+  transition:all 0.2s;color:var(--text-muted);
+}
+.opt-btn.selected .opt-letter{
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  border-color:var(--gold);color:#000;
+}
 
-        .progress-wrap { margin-bottom: 22px; }
-        .progress-label {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.73rem;
-            font-weight: 700;
-            color: var(--ink-muted);
-            margin-bottom: 6px;
-        }
-        .progress-bar {
-            height: 5px;
-            background: var(--prog-bg);
-            border-radius: 3px;
-            overflow: hidden;
-        }
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--xm-red), #e8700a);
-            border-radius: 3px;
-            transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
-            width: 0%;
-        }
+/* ANALYZING */
+.analyzing{
+  display:none;
+  background:var(--card);
+  border:1px solid var(--border-soft);
+  border-radius:6px;
+  padding:40px 20px;text-align:center;
+}
+.analyzing.active{display:block;animation:slideIn 0.3s ease}
+.analyzing-icon{font-size:2.2rem;margin-bottom:12px;animation:spin 2s linear infinite;display:inline-block}
+@keyframes spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+.analyzing h3{
+  font-family:'Noto Serif JP',serif;
+  font-size:1rem;font-weight:700;color:var(--white);margin-bottom:5px;
+}
+.analyzing p{font-size:0.76rem;color:var(--text-muted);margin-bottom:20px}
+.loader-wrap{height:4px;background:rgba(255,255,255,0.06);border-radius:4px;overflow:hidden;margin-bottom:12px}
+.loader-fill{
+  height:100%;width:0%;
+  background:linear-gradient(90deg,var(--gold),var(--gold2),var(--gold3));
+  border-radius:4px;transition:width 0.35s linear;
+  box-shadow:0 0 10px rgba(212,148,10,0.5);
+}
+.analyzing-status{font-size:0.78rem;color:var(--gold);min-height:20px}
 
-        .question-card {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 3px;
-            padding: 20px 18px 18px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.04);
-            display: none;
-            animation: slideIn 0.32s ease;
-        }
-        .question-card.active { display: block; }
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(16px); }
-            to   { opacity: 1; transform: translateX(0); }
-        }
+/* AI RESULT SCREEN */
+#result-screen{display:none;animation:fadeUp 0.5s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 
-        .q-number {
-            font-size: 0.66rem;
-            font-weight: 700;
-            letter-spacing: 0.13em;
-            color: var(--xm-red);
-            text-transform: uppercase;
-            margin-bottom: 9px;
-        }
-        .q-text {
-            font-family: 'Noto Serif JP', serif;
-            font-size: 1.08rem;
-            font-weight: 700;
-            color: var(--ink);
-            line-height: 1.5;
-            margin-bottom: 18px;
-        }
-        .q-emoji { font-size: 1.3rem; margin-right: 5px; }
+.result-hero{
+  background:linear-gradient(160deg,#100c00 0%,#1a1200 40%,#0a0a0f 100%);
+  border-top:2px solid var(--gold);
+  border-bottom:1px solid var(--border);
+  padding:30px 18px 26px;
+  text-align:center;position:relative;overflow:hidden;
+}
+.result-hero::before{
+  content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);
+  width:300px;height:300px;
+  background:radial-gradient(circle,rgba(212,148,10,0.15) 0%,transparent 70%);
+  pointer-events:none;
+}
+.result-badge-wrap{margin-bottom:16px;display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
+.result-badge{
+  display:inline-block;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  color:#000;font-size:0.64rem;font-weight:900;
+  letter-spacing:0.14em;padding:4px 14px;border-radius:2px;
+}
+.result-badge.ai{
+  background:rgba(212,148,10,0.1);
+  border:1px solid rgba(212,148,10,0.4);
+  color:var(--gold2);
+}
+.result-hero h2{
+  font-family:'Noto Serif JP',serif;
+  font-size:1.35rem;color:var(--white);
+  line-height:1.45;font-weight:700;margin-bottom:9px;
+}
+.result-hero h2 em{
+  font-style:normal;
+  background:linear-gradient(135deg,var(--gold),var(--gold3));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.result-hero p{font-size:0.78rem;color:var(--text-muted);line-height:1.6}
 
-        .options { display: flex; flex-direction: column; gap: 9px; }
-        .option-btn {
-            background: var(--bg);
-            border: 1.5px solid var(--border);
-            border-radius: 3px;
-            padding: 13px 15px;
-            text-align: left;
-            cursor: pointer;
-            font-family: 'Noto Sans JP', sans-serif;
-            font-size: 0.86rem;
-            font-weight: 500;
-            color: var(--ink);
-            display: flex;
-            align-items: center;
-            gap: 11px;
-            transition: all 0.17s ease;
-            -webkit-tap-highlight-color: transparent;
-        }
-        .option-btn:hover, .option-btn:active {
-            border-color: var(--xm-red);
-            background: var(--xm-red-pale);
-            transform: translateX(3px);
-        }
-        .option-btn.selected {
-            border-color: var(--xm-red);
-            background: var(--xm-red-pale);
-            color: var(--xm-red);
-            font-weight: 700;
-        }
-        .option-letter {
-            width: 27px; height: 27px;
-            background: var(--border);
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 0.72rem;
-            font-weight: 900;
-            flex-shrink: 0;
-            transition: all 0.17s;
-        }
-        .option-btn.selected .option-letter {
-            background: var(--xm-red);
-            color: white;
-        }
+/* AI MESSAGE BOX */
+.ai-msg-box{
+  background:linear-gradient(135deg,rgba(212,148,10,0.06),rgba(212,148,10,0.02));
+  border:1px solid rgba(212,148,10,0.25);
+  border-left:3px solid var(--gold);
+  padding:18px 18px;
+  position:relative;
+}
+.ai-msg-header{
+  display:flex;align-items:center;gap:8px;
+  font-size:0.68rem;font-weight:700;
+  color:var(--gold);letter-spacing:0.1em;
+  margin-bottom:12px;
+}
+.ai-spinner{
+  width:14px;height:14px;
+  border:2px solid rgba(212,148,10,0.2);
+  border-top-color:var(--gold);
+  border-radius:50%;
+  animation:spin 0.8s linear infinite;
+  flex-shrink:0;
+}
+.ai-spinner.done{animation:none;border-color:var(--gold);content:'✓'}
+#ai-msg-text{
+  font-size:0.86rem;line-height:1.8;color:var(--text);
+  min-height:60px;
+}
+.ai-cursor{
+  display:inline-block;width:2px;height:16px;
+  background:var(--gold);margin-left:2px;
+  animation:blink 0.8s step-end infinite;
+  vertical-align:middle;
+}
 
-        /* ── ANALYZING ── */
-        .analyzing-screen {
-            display: none;
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 3px;
-            padding: 38px 20px;
-            text-align: center;
-        }
-        .analyzing-screen.active { display: block; }
-        .analyzing-title {
-            font-family: 'Noto Serif JP', serif;
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--ink);
-            margin-bottom: 5px;
-        }
-        .analyzing-sub { font-size: 0.78rem; color: var(--ink-muted); margin-bottom: 18px; }
-        .loader-bar-wrap {
-            height: 5px;
-            background: var(--prog-bg);
-            border-radius: 3px;
-            overflow: hidden;
-            margin-bottom: 10px;
-        }
-        .loader-bar {
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, var(--xm-red), #e8700a);
-            border-radius: 3px;
-            transition: width 0.32s linear;
-        }
-        .analyzing-text { font-size: 0.8rem; color: var(--ink-muted); min-height: 18px; }
+/* MUGEN TABLE */
+.mugen-box{
+  background:linear-gradient(160deg,#100c00,#0a0a0f);
+  border-top:2px solid var(--gold);
+  border-bottom:1px solid var(--border);
+  padding:20px 18px;
+}
+.mugen-box-header{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:16px;
+}
+.mugen-box-title{
+  font-family:'Noto Serif JP',serif;
+  font-size:0.98rem;font-weight:700;color:var(--white);
+}
+.mugen-box-title em{color:var(--gold2);font-style:normal}
+.deadline-tag{
+  font-size:0.63rem;font-weight:700;
+  background:rgba(212,148,10,0.12);
+  border:1px solid rgba(212,148,10,0.3);
+  color:var(--gold);padding:3px 9px;border-radius:2px;
+}
+.cb-table{width:100%;border-collapse:collapse}
+.cb-table thead tr{background:rgba(255,255,255,0.04)}
+.cb-table th{
+  font-size:0.62rem;font-weight:700;letter-spacing:0.1em;
+  color:var(--text-muted);padding:8px 10px;text-align:left;
+  border-bottom:1px solid var(--border-soft);
+}
+.cb-table td{
+  font-size:0.8rem;color:var(--text-soft);
+  padding:9px 10px;border-bottom:1px solid rgba(255,255,255,0.04);
+}
+.cb-table tr.hl td{
+  background:rgba(212,148,10,0.1);
+  color:var(--gold2);font-weight:700;
+}
+.cb-table td.unlimited{
+  color:var(--gold2);font-weight:900;font-size:0.95rem;
+  text-shadow:0 0 12px rgba(212,148,10,0.5);
+}
+.cb-note{font-size:0.64rem;color:var(--text-muted);margin-top:10px;line-height:1.5}
 
-        /* ── RESULT ── */
-        #result-screen { display: none; animation: slideIn 0.4s ease; }
+/* BONUS */
+.bonus-section{
+  border-bottom:1px solid var(--border-soft);
+  padding:20px 18px;
+}
+.section-label{
+  font-size:0.64rem;font-weight:900;letter-spacing:0.14em;
+  color:var(--gold);text-transform:uppercase;
+  margin-bottom:16px;
+  display:flex;align-items:center;gap:8px;
+}
+.section-label::after{content:'';flex:1;height:1px;background:var(--border)}
+.bonus-item{
+  display:flex;align-items:flex-start;gap:13px;
+  padding:14px 0;border-bottom:1px solid var(--border-soft);
+}
+.bonus-item:last-child{border-bottom:none}
+.bonus-num{
+  width:36px;height:36px;flex-shrink:0;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  color:#000;font-weight:900;font-size:0.82rem;
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 14px rgba(212,148,10,0.3);
+  margin-top:2px;
+}
+.bonus-detail h4{font-size:0.88rem;font-weight:700;color:var(--white);margin-bottom:3px}
+.bonus-detail p{font-size:0.74rem;color:var(--text-muted);line-height:1.5}
+.bonus-amount{
+  font-family:'Noto Serif JP',serif;
+  font-size:1rem;font-weight:700;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  margin-top:5px;
+}
 
-        /* Result hero — XM red + sakura accent */
-        .result-hero {
-            background: linear-gradient(135deg, var(--xm-red-dark) 0%, #7a1810 100%);
-            padding: 28px 20px 24px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        .result-hero::before {
-            content: '🌸';
-            position: absolute;
-            font-size: 6rem;
-            opacity: 0.07;
-            top: -10px; right: -10px;
-            pointer-events: none;
-        }
-        .result-hero::after {
-            content: '🌸';
-            position: absolute;
-            font-size: 4rem;
-            opacity: 0.07;
-            bottom: 5px; left: -5px;
-            pointer-events: none;
-        }
-        .result-badge {
-            display: inline-block;
-            background: var(--sakura-mid);
-            color: #6a0f1a;
-            font-size: 0.68rem;
-            font-weight: 900;
-            letter-spacing: 0.14em;
-            padding: 4px 14px;
-            margin-bottom: 14px;
-        }
-        .result-hero h2 {
-            font-family: 'Noto Serif JP', serif;
-            font-size: 1.3rem;
-            color: white;
-            line-height: 1.45;
-            font-weight: 700;
-            margin-bottom: 9px;
-        }
-        .result-hero h2 em {
-            font-style: normal;
-            color: var(--sakura);
-        }
-        .result-hero p {
-            font-size: 0.8rem;
-            color: rgba(255,255,255,0.62);
-            line-height: 1.6;
-        }
+/* STEPS */
+.steps-section{padding:20px 18px;border-bottom:1px solid var(--border-soft)}
+.step-row{display:flex;align-items:flex-start;gap:12px;margin-bottom:14px}
+.step-row:last-child{margin-bottom:0}
+.step-num{
+  width:30px;height:30px;flex-shrink:0;
+  border:1.5px solid var(--gold);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.7rem;font-weight:900;color:var(--gold);
+  margin-top:1px;
+}
+.step-txt{font-size:0.83rem;color:var(--text-soft);line-height:1.55}
+.step-txt strong{color:var(--text)}
+.step-connector{
+  width:1px;height:14px;background:linear-gradient(180deg,var(--gold),transparent);
+  margin:0 0 0 14px;
+}
 
-        /* Personal message */
-        .personal-msg {
-            background: var(--white);
-            border-left: 4px solid var(--xm-red);
-            border-bottom: 1px solid var(--border);
-            padding: 16px 20px;
-            font-size: 0.87rem;
-            line-height: 1.75;
-            color: var(--ink-soft);
-        }
-        .personal-msg strong { color: var(--ink); }
+/* TESTIMONIAL */
+.testi{padding:20px 18px;border-bottom:1px solid var(--border-soft)}
+.testi-card{
+  background:var(--card);border:1px solid var(--border-soft);
+  border-radius:6px;padding:16px;
+}
+.testi-top{display:flex;align-items:center;gap:11px;margin-bottom:12px}
+.testi-av{
+  width:44px;height:44px;flex-shrink:0;
+  background:linear-gradient(135deg,#2a1500,#4a2500);
+  border:2px solid var(--gold);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--gold);font-weight:900;font-size:1rem;
+}
+.testi-name{font-size:0.82rem;font-weight:700;color:var(--white)}
+.testi-sub{font-size:0.68rem;color:var(--text-muted)}
+.testi-stars{color:var(--gold2);font-size:0.8rem;margin-top:2px}
+.testi-quote{
+  font-size:0.82rem;color:var(--text-soft);
+  line-height:1.75;font-style:italic;
+  border-left:2px solid rgba(212,148,10,0.3);
+  padding-left:12px;
+}
+.testi-result{
+  margin-top:10px;padding:8px 12px;
+  background:rgba(46,204,113,0.06);
+  border:1px solid rgba(46,204,113,0.2);
+  border-radius:3px;
+  font-size:0.74rem;color:var(--green);font-weight:700;
+}
 
-        /* Bonus cards */
-        .bonus-section {
-            background: var(--white);
-            border: 1px solid var(--border);
-            border-top: 3px solid var(--xm-red);
-            margin-top: 14px;
-        }
-        .bonus-section-title {
-            padding: 13px 20px 0;
-            font-size: 0.7rem;
-            font-weight: 900;
-            letter-spacing: 0.12em;
-            color: var(--xm-red);
-            text-transform: uppercase;
-        }
-        .bonus-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 13px;
-            padding: 14px 20px;
-            border-bottom: 1px solid var(--border);
-        }
-        .bonus-item:last-child { border-bottom: none; }
-        .bonus-num {
-            width: 34px; height: 34px;
-            background: var(--xm-red);
-            color: white;
-            font-weight: 900;
-            font-size: 0.82rem;
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            flex-shrink: 0;
-            margin-top: 2px;
-        }
-        .bonus-detail h4 {
-            font-size: 0.9rem;
-            font-weight: 700;
-            color: var(--ink);
-            margin-bottom: 3px;
-        }
-        .bonus-detail p { font-size: 0.76rem; color: var(--ink-muted); line-height: 1.5; }
-        .bonus-amount {
-            font-family: 'Noto Serif JP', serif;
-            font-size: 1.05rem;
-            font-weight: 700;
-            color: var(--green);
-            margin-top: 4px;
-        }
+/* TRUST */
+.trust-section{padding:20px 18px;border-bottom:1px solid var(--border-soft)}
+.trust-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.trust-card{
+  background:var(--card);border:1px solid var(--border-soft);
+  border-radius:5px;padding:12px;
+}
+.trust-icon{font-size:1.3rem;margin-bottom:6px}
+.trust-card h5{font-size:0.75rem;font-weight:700;color:var(--text);margin-bottom:3px}
+.trust-card p{font-size:0.68rem;color:var(--text-muted);line-height:1.4}
 
-        /* Steps */
-        .steps-section {
-            background: var(--white);
-            border: 1px solid var(--border);
-            margin-top: 14px;
-            padding: 16px 20px;
-        }
-        .steps-title {
-            font-size: 0.7rem;
-            font-weight: 900;
-            letter-spacing: 0.1em;
-            color: var(--ink-muted);
-            text-transform: uppercase;
-            margin-bottom: 14px;
-        }
-        .step-row {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            margin-bottom: 12px;
-        }
-        .step-row:last-child { margin-bottom: 0; }
-        .step-circle {
-            width: 28px; height: 28px;
-            border: 2px solid var(--xm-red);
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 0.72rem;
-            font-weight: 900;
-            color: var(--xm-red);
-            flex-shrink: 0;
-            margin-top: 1px;
-        }
-        .step-text { font-size: 0.84rem; color: var(--ink-soft); line-height: 1.55; }
-        .step-text strong { color: var(--ink); }
+/* CTA */
+.cta-section{padding:20px 18px 0}
+.cta-btn{
+  display:block;
+  background:linear-gradient(180deg,var(--gold2) 0%,var(--gold) 100%);
+  color:#000;text-align:center;
+  padding:20px 20px 16px;
+  text-decoration:none;
+  font-weight:900;font-size:1.05rem;line-height:1.35;
+  border-radius:4px;
+  box-shadow:0 6px 30px rgba(212,148,10,0.4),0 2px 8px rgba(0,0,0,0.4);
+  transition:all 0.2s;
+  position:relative;overflow:hidden;
+}
+.cta-btn::after{
+  content:'';position:absolute;top:0;left:-100%;
+  width:60%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.25),transparent);
+  animation:shine 2.5s ease-in-out infinite;
+}
+@keyframes shine{0%{left:-100%}50%,100%{left:160%}}
+.cta-btn:active{transform:scale(0.98)}
+.cta-sub{display:block;font-size:0.72rem;font-weight:600;margin-top:5px;opacity:0.75}
+.cta-lock{
+  text-align:center;font-size:0.68rem;
+  color:var(--text-muted);margin-top:9px;
+  display:flex;align-items:center;justify-content:center;gap:5px;
+}
 
-        /* Testimonial */
-        .testimonial {
-            background: var(--white);
-            border: 1px solid var(--border);
-            margin-top: 14px;
-            padding: 16px 20px;
-        }
-        .testi-header {
-            display: flex;
-            align-items: center;
-            gap: 11px;
-            margin-bottom: 11px;
-        }
-        .testi-avatar {
-            width: 42px; height: 42px;
-            background: linear-gradient(135deg, var(--xm-red), #7a1810);
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            color: white;
-            font-weight: 900;
-            font-size: 1rem;
-            flex-shrink: 0;
-        }
-        .testi-name { font-size: 0.83rem; font-weight: 700; color: var(--ink); }
-        .testi-sub  { font-size: 0.7rem; color: var(--ink-muted); }
-        .testi-stars { color: var(--gold); font-size: 0.82rem; margin-top: 2px; }
-        .testi-text {
-            font-size: 0.83rem;
-            color: var(--ink-soft);
-            line-height: 1.7;
-            font-style: italic;
-        }
-        .testi-result {
-            margin-top: 9px;
-            padding: 7px 12px;
-            background: #f0faf4;
-            border: 1px solid #b6e0c8;
-            border-radius: 2px;
-            font-size: 0.76rem;
-            color: var(--green);
-            font-weight: 700;
-        }
+/* STICKY */
+.sticky{
+  position:fixed;bottom:0;left:0;width:100%;
+  background:rgba(10,10,15,0.97);
+  backdrop-filter:blur(16px);
+  border-top:1px solid var(--border);
+  padding:10px 14px;z-index:1000;
+  display:none;
+}
+.sticky.visible{display:block}
+.sticky .cta-btn{font-size:0.93rem;padding:15px 18px 12px}
 
-        /* Trust */
-        .trust-section {
-            background: var(--white);
-            border: 1px solid var(--border);
-            margin-top: 14px;
-            padding: 16px 20px;
-        }
-        .trust-title {
-            font-size: 0.7rem;
-            font-weight: 900;
-            letter-spacing: 0.1em;
-            color: var(--ink-muted);
-            text-transform: uppercase;
-            margin-bottom: 12px;
-        }
-        .trust-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 9px;
-            font-size: 0.81rem;
-            color: var(--ink-soft);
-            margin-bottom: 8px;
-        }
-        .trust-item:last-child { margin-bottom: 0; }
-        .trust-icon { font-size: 0.95rem; flex-shrink: 0; margin-top: 2px; }
-
-        /* CTA */
-        .cta-wrap {
-            padding: 18px 20px 0;
-        }
-        .cta-main {
-            display: block;
-            background: linear-gradient(180deg, #d63a2a 0%, #b22018 100%);
-            color: white;
-            text-align: center;
-            padding: 19px 20px 15px;
-            text-decoration: none;
-            font-weight: 900;
-            font-size: 1.08rem;
-            line-height: 1.35;
-            box-shadow: 0 4px 18px rgba(192,57,43,0.32);
-            transition: all 0.2s;
-            border-radius: 2px;
-            position: relative;
-            overflow: hidden;
-        }
-        .cta-main::after {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 55%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.13), transparent);
-            animation: shine 2.8s ease-in-out infinite;
-        }
-        @keyframes shine {
-            0% { left: -100%; }
-            50%, 100% { left: 160%; }
-        }
-        .cta-main:active { transform: scale(0.98); }
-        .cta-sub-text {
-            display: block;
-            font-size: 0.73rem;
-            font-weight: 500;
-            margin-top: 5px;
-            opacity: 0.88;
-        }
-        .cta-guarantee {
-            text-align: center;
-            font-size: 0.7rem;
-            color: var(--ink-muted);
-            margin-top: 9px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
-        }
-
-        /* Sticky footer */
-        .sticky-footer {
-            position: fixed;
-            bottom: 0; left: 0;
-            width: 100%;
-            background: rgba(247,246,242,0.97);
-            backdrop-filter: blur(8px);
-            border-top: 2px solid var(--ink);
-            padding: 11px 15px;
-            z-index: 1000;
-            display: none;
-        }
-        .sticky-footer.visible { display: block; }
-        .sticky-footer .cta-main { font-size: 0.97rem; padding: 15px 20px 12px; }
-
-        /* Risk */
-        .risk-disclosure {
-            padding: 22px 20px 38px;
-            font-size: 0.67rem;
-            color: #aaa;
-            line-height: 1.65;
-            text-align: justify;
-            border-top: 1px solid var(--border);
-        }
-        .risk-disclosure strong { color: #888; display: block; margin-bottom: 5px; font-size: 0.7rem; }
-    </style>
+/* RISK */
+.risk{
+  padding:22px 18px 36px;
+  font-size:0.64rem;color:var(--text-muted);
+  line-height:1.65;border-top:1px solid var(--border-soft);
+}
+.risk strong{color:rgba(255,255,255,0.25);display:block;margin-bottom:5px}
+</style>
 </head>
 <body>
 
-<div class="news-bar">XMTrading 最新情報 ｜ 2026年3月更新 ｜ 海外FX徹底解説メディア</div>
-<header class="site-header">
-    <div class="site-name">
-        Smart FX Facts
-        <span>海外FX・投資情報メディア</span>
+<div id="particles"></div>
+
+<!-- LIVE TOAST -->
+<div class="live-toast" id="toast">
+  <span class="live-toast-dot"></span>
+  <span class="live-toast-name" id="toast-name"></span>さんが<span id="toast-action"></span>
+</div>
+
+<!-- TOP TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-inner" id="ticker">
+    <span>🟢 MUGEN無限キャッシュバック開催中</span>
+    <span>💰 今月の獲得総額 $2,847,293</span>
+    <span>⚡ ゼロカット・追証なし</span>
+    <span>🏆 XMTrading 2009年創業 世界180カ国</span>
+    <span>🔥 3月31日で終了 残りわずか</span>
+    <span>✅ 入金不要¥13,000ボーナス受取枠あり</span>
+    <span>🟢 MUGEN無限キャッシュバック開催中</span>
+    <span>💰 今月の獲得総額 $2,847,293</span>
+    <span>⚡ ゼロカット・追証なし</span>
+    <span>🏆 XMTrading 2009年創業 世界180カ国</span>
+    <span>🔥 3月31日で終了 残りわずか</span>
+    <span>✅ 入金不要¥13,000ボーナス受取枠あり</span>
+  </div>
+</div>
+
+<!-- MUGEN BANNER -->
+<div class="mugen-banner">
+  <div class="mugen-left">
+    <div class="mugen-badge">期間限定</div>
+    <div class="mugen-text">
+      <em>MUGEN無限キャッシュバック</em> 開催中<br>
+      取引するほどキャッシュバックが<em>無制限</em>に積み上がる
     </div>
-    <div class="header-tag">特集記事</div>
+  </div>
+  <div class="mugen-cd">
+    <div class="mugen-cd-label">終了まで</div>
+    <div class="mugen-cd-digits" id="mugen-timer">--日--時間</div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="site-name">
+    Smart FX Facts
+    <span>海外FX・投資情報メディア</span>
+  </div>
+  <div class="header-pill">特集記事</div>
 </header>
 
 <div class="container">
 
-    <div class="article-intro" id="intro-section">
-        <div class="category-pill">FX環境診断 ✦ 無料</div>
-        <h1>国内FXで<em>成果が出ない</em>理由を<br>2分で診断します</h1>
-        <div class="article-meta">
-            <span>📅 2026年3月7日</span>
-            <span>⏱️ 所要時間：約2分</span>
-            <span>👁️ 今日 4,291人が閲覧</span>
-        </div>
-        <p>「レバレッジが低い」「ボーナスがない」「週末に動けない」——国内FX業者では、あなたの本来の取引ポテンシャルが制限されているかもしれません。<br><br>
-        以下の<strong>5つの質問</strong>に答えるだけで、XMTradingがあなたに合っているかどうか、すぐに分かります。</p>
+  <!-- HERO -->
+  <div class="hero-section" id="intro-section">
+    <div class="cat-pill">FX環境診断 ✦ 無料 ✦ 約2分</div>
+    <h1>3月限定：国内FXで<em>稼げない</em>理由と、<em>無制限に</em>稼ぐ唯一の方法</h1>
+    <div class="hero-meta">
+      <span>📅 2026年3月7日更新</span>
+      <span>⏱️ 約2分</span>
+      <span>👁️ <span class="live-count" id="view-count">4,291</span>人が閲覧中</span>
+    </div>
+    <p class="hero-lead">「レバレッジが低い」「ボーナスがない」「取引しても何も返ってこない」——国内FX業者では、あなたの取引が<strong>一方的に損をする構造</strong>になっているかもしれません。<br><br>
+    今月、XMTradingは<strong>「MUGEN無限キャッシュバック」</strong>を実施中。取引するたびにキャッシュバックが積み上がり、100ロット以上は<strong>上限なし</strong>。以下の診断で、あなたが受け取れる金額をAIが計算します。</p>
+  </div>
+
+  <!-- PROOF BAR -->
+  <div class="proof-bar">
+    <span class="proof-dot"></span>
+    今月 <strong style="margin:0 4px;color:#fff">14,872人</strong> がこの診断を完了し、XMTrading口座を開設しました
+  </div>
+
+  <!-- URGENCY -->
+  <div class="urgency-bar">
+    <span class="urgency-icon">🔥</span>
+    <div class="urgency-txt">
+      <strong>MUGEN無限キャッシュバックは3月31日で終了。</strong><br>
+      ¥13,000の入金不要ボーナスも受取枠に達し次第終了します。
+    </div>
+    <div class="urgency-timer" id="page-timer">--:--<small>残り時間</small></div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="quiz-wrap" id="quiz-section">
+    <div class="quiz-head">
+      <h2>📋 あなたのFX取引スタイル診断</h2>
+      <p>AIが回答を分析し、最適なキャッシュバック戦略を提案します</p>
     </div>
 
-    <div class="sakura-divider">
-        <span class="pulse"></span>
-        今月 <strong style="margin:0 3px;">14,872人</strong> がこの診断を完了し、XMTrading口座を開設しました 🌸
+    <div class="progress-wrap">
+      <div class="prog-label">
+        <span id="prog-text">質問 1 / 5</span>
+        <span id="prog-pct">0%</span>
+      </div>
+      <div class="prog-bar"><div class="prog-fill" id="prog-fill"></div></div>
     </div>
 
-    <div class="urgency-box">
-        <span class="urgency-icon">⏰</span>
-        <div class="urgency-text">
-            <strong>入金不要¥13,000ボーナス</strong>は受取枠に達し次第終了します。現在残り僅か。
-        </div>
-        <div class="timer-digits" id="timer">17:22</div>
+    <div class="q-card active" id="q1">
+      <div class="q-num">質問 01 / 05</div>
+      <div class="q-text"><span class="q-emoji">💼</span>現在のFX取引状況を教えてください</div>
+      <div class="options">
+        <button class="opt-btn" onclick="pick(1,'a',this)"><span class="opt-letter">A</span>国内業者で取引中だが、限界を感じている</button>
+        <button class="opt-btn" onclick="pick(1,'b',this)"><span class="opt-letter">B</span>海外FXに興味はあるが、まだ試していない</button>
+        <button class="opt-btn" onclick="pick(1,'c',this)"><span class="opt-letter">C</span>以前取引していたが、今は休んでいる</button>
+        <button class="opt-btn" onclick="pick(1,'d',this)"><span class="opt-letter">D</span>これからFXを始めたいと思っている</button>
+      </div>
     </div>
 
-    <div class="quiz-wrapper" id="quiz-section">
-        <div class="quiz-header">
-            <h2>📋 あなたのFX取引スタイル診断</h2>
-            <p>正直に答えるほど、診断精度が上がります</p>
-        </div>
-
-        <div class="progress-wrap">
-            <div class="progress-label">
-                <span id="progress-text">質問 1 / 5</span>
-                <span id="progress-pct">0%</span>
-            </div>
-            <div class="progress-bar">
-                <div class="progress-fill" id="progress-fill"></div>
-            </div>
-        </div>
-
-        <div class="question-card active" id="q1">
-            <div class="q-number">質問 01 / 05</div>
-            <div class="q-text"><span class="q-emoji">💼</span>現在のFX取引状況を教えてください</div>
-            <div class="options">
-                <button class="option-btn" onclick="selectAnswer(1,'a',this)"><span class="option-letter">A</span>国内業者で取引中だが、限界を感じている</button>
-                <button class="option-btn" onclick="selectAnswer(1,'b',this)"><span class="option-letter">B</span>海外FXに興味はあるが、まだ試していない</button>
-                <button class="option-btn" onclick="selectAnswer(1,'c',this)"><span class="option-letter">C</span>以前取引していたが、今は休んでいる</button>
-                <button class="option-btn" onclick="selectAnswer(1,'d',this)"><span class="option-letter">D</span>これからFXを始めたいと思っている</button>
-            </div>
-        </div>
-
-        <div class="question-card" id="q2">
-            <div class="q-number">質問 02 / 05</div>
-            <div class="q-text"><span class="q-emoji">📊</span>国内FXで最も不満に感じることは？</div>
-            <div class="options">
-                <button class="option-btn" onclick="selectAnswer(2,'a',this)"><span class="option-letter">A</span>レバレッジが25倍までと低すぎる</button>
-                <button class="option-btn" onclick="selectAnswer(2,'b',this)"><span class="option-letter">B</span>口座開設・入金ボーナスがほぼない</button>
-                <button class="option-btn" onclick="selectAnswer(2,'c',this)"><span class="option-letter">C</span>週末・祝日に取引できない</button>
-                <button class="option-btn" onclick="selectAnswer(2,'d',this)"><span class="option-letter">D</span>まだ国内FXを使っていない</button>
-            </div>
-        </div>
-
-        <div class="question-card" id="q3">
-            <div class="q-number">質問 03 / 05</div>
-            <div class="q-text"><span class="q-emoji">💰</span>FXに使える初期資金はどのくらいですか？</div>
-            <div class="options">
-                <button class="option-btn" onclick="selectAnswer(3,'a',this)"><span class="option-letter">A</span>まずボーナスだけで試したい（0円）</button>
-                <button class="option-btn" onclick="selectAnswer(3,'b',this)"><span class="option-letter">B</span>5,000円〜3万円程度</button>
-                <button class="option-btn" onclick="selectAnswer(3,'c',this)"><span class="option-letter">C</span>5万円〜10万円程度</button>
-                <button class="option-btn" onclick="selectAnswer(3,'d',this)"><span class="option-letter">D</span>10万円以上で本格的に運用したい</button>
-            </div>
-        </div>
-
-        <div class="question-card" id="q4">
-            <div class="q-number">質問 04 / 05</div>
-            <div class="q-text"><span class="q-emoji">🎯</span>あなたの取引スタイルは？</div>
-            <div class="options">
-                <button class="option-btn" onclick="selectAnswer(4,'a',this)"><span class="option-letter">A</span>短期売買（スキャルピング・デイトレード）</button>
-                <button class="option-btn" onclick="selectAnswer(4,'b',this)"><span class="option-letter">B</span>数日〜数週間保有（スイングトレード）</button>
-                <button class="option-btn" onclick="selectAnswer(4,'c',this)"><span class="option-letter">C</span>ゴールドや米国株CFDも取引したい</button>
-                <button class="option-btn" onclick="selectAnswer(4,'d',this)"><span class="option-letter">D</span>まだスタイルが決まっていない</button>
-            </div>
-        </div>
-
-        <div class="question-card" id="q5">
-            <div class="q-number">質問 05 / 05</div>
-            <div class="q-text"><span class="q-emoji">🚀</span>今すぐXMTradingを試すとしたら？</div>
-            <div class="options">
-                <button class="option-btn" onclick="selectAnswer(5,'a',this)"><span class="option-letter">A</span>0円から¥13,000ボーナスで試してみたい</button>
-                <button class="option-btn" onclick="selectAnswer(5,'b',this)"><span class="option-letter">B</span>少額入金して100%ボーナスも使いたい</button>
-                <button class="option-btn" onclick="selectAnswer(5,'c',this)"><span class="option-letter">C</span>まず仕組みを理解してから判断したい</button>
-                <button class="option-btn" onclick="selectAnswer(5,'d',this)"><span class="option-letter">D</span>今すぐ本格的に始める準備ができている</button>
-            </div>
-        </div>
-
-        <div class="analyzing-screen" id="analyzing">
-            <div class="analyzing-title">🔍 あなたの取引プロフィールを分析中…</div>
-            <div class="analyzing-sub">回答データをもとに最適な情報を準備しています</div>
-            <div class="loader-bar-wrap">
-                <div class="loader-bar" id="loader-bar"></div>
-            </div>
-            <div class="analyzing-text" id="analyzing-text">回答データを照合しています…</div>
-        </div>
+    <div class="q-card" id="q2">
+      <div class="q-num">質問 02 / 05</div>
+      <div class="q-text"><span class="q-emoji">📊</span>国内FXで最も不満に感じることは？</div>
+      <div class="options">
+        <button class="opt-btn" onclick="pick(2,'a',this)"><span class="opt-letter">A</span>レバレッジが25倍までと低すぎる</button>
+        <button class="opt-btn" onclick="pick(2,'b',this)"><span class="opt-letter">B</span>取引してもキャッシュバックや報酬がない</button>
+        <button class="opt-btn" onclick="pick(2,'c',this)"><span class="opt-letter">C</span>口座開設・入金ボーナスがほぼない</button>
+        <button class="opt-btn" onclick="pick(2,'d',this)"><span class="opt-letter">D</span>まだ国内FXを使っていない</button>
+      </div>
     </div>
 
-    <div id="result-screen">
-
-        <div class="result-hero">
-            <div class="result-badge">✦ 診断完了 ✦</div>
-            <h2>あなたには<em>XMTrading</em>が<br>最も適しています</h2>
-            <p>回答パターンを分析した結果、国内FXの制限があなたの取引パフォーマンスを低下させていると判断されました</p>
-        </div>
-
-        <div class="personal-msg" id="personal-msg"></div>
-
-        <div class="bonus-section">
-            <div class="bonus-section-title">✦ あなたが今すぐ受け取れる特典</div>
-            <div class="bonus-item">
-                <div class="bonus-num">1</div>
-                <div class="bonus-detail">
-                    <h4>入金不要ボーナス（今すぐ）</h4>
-                    <p>口座開設・本人確認（KYC）完了だけで即付与。自己資金ゼロでリアル市場を体験。</p>
-                    <div class="bonus-amount">¥13,000 相当</div>
-                </div>
-            </div>
-            <div class="bonus-item">
-                <div class="bonus-num">2</div>
-                <div class="bonus-detail">
-                    <h4>初回入金100%ボーナス</h4>
-                    <p>入金額と同額のボーナスが証拠金に追加. $5から適用、最大$500まで資金2倍。</p>
-                    <div class="bonus-amount">最大 $500（約¥75,000）</div>
-                </div>
-            </div>
-            <div class="bonus-item">
-                <div class="bonus-num">3</div>
-                <div class="bonus-detail">
-                    <h4>ロイヤルティ報酬プログラム</h4>
-                    <p>取引量に応じてキャッシュバックが蓄積。$500超入金で+20%追加ボーナスも。</p>
-                    <div class="bonus-amount">最大 $10,000</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="steps-section">
-            <div class="steps-title">口座開設の流れ（最短3分）</div>
-            <div class="step-row">
-                <div class="step-circle">1</div>
-                <div class="step-text"><strong>無料で口座開設</strong> — メールアドレスと基本情報のみ</div>
-            </div>
-            <div class="step-row">
-                <div class="step-circle">2</div>
-                <div class="step-text"><strong>本人確認（KYC）</strong> — 身分証の写真をアップロード</div>
-            </div>
-            <div class="step-row">
-                <div class="step-circle">3</div>
-                <div class="step-text"><strong>¥13,000ボーナス自動付与</strong> — 入金不要、即時反映</div>
-            </div>
-            <div class="step-row">
-                <div class="step-circle">4</div>
-                <div class="step-text"><strong>取引開始</strong> — MT4/MT5で自己資金ゼロからスタート</div>
-            </div>
-        </div>
-
-        <div class="testimonial">
-            <div class="testi-header">
-                <div class="testi-avatar">T</div>
-                <div>
-                    <div class="testi-name">Takashi M.（41歳・会社員）</div>
-                    <div class="testi-sub">神奈川県在住 ｜ FX歴6年</div>
-                    <div class="testi-stars">★★★★★</div>
-                </div>
-            </div>
-            <div class="testi-text">「長年SBI FXトレードを使っていましたが、レバレッジの壁と週末に何もできないストレスが限界でした。XMに乗り換えてから、1:1000のレバレッジで少ない資金でも動きが取れるようになり、ゴールドのCFDも取引できるのが大きい。サポートも日本語で24時間対応なので安心感が違います。」</div>
-            <div class="testi-result">📈 乗り換え後2ヶ月で月間成績 +¥64,000 を記録</div>
-        </div>
-
-        <div class="trust-section">
-            <div class="trust-title">信頼性・安全性</div>
-            <div class="trust-item"><span class="trust-icon">🛡️</span>セーシェル金融庁（FSA）・複数ライセンス取得、2009年創業の老舗ブロー カー</div>
-            <div class="trust-item"><span class="trust-icon">🏦</span>顧客資金は完全分別管理（Tier1銀行口座）、運営資金と混合なし</div>
-            <div class="trust-item"><span class="trust-icon">⚡</span>ゼロカットシステム採用——追証（借金）リスクは一切発生しません</div>
-            <div class="trust-item"><span class="trust-icon">🇯🇵</span>日本語サポート24時間対応、日本人トレーダー利用率No.1海外FX</div>
-        </div>
-
-        <div class="cta-wrap">
-            <a href="https://affx.click/Ga7f1" class="cta-main track-link" id="main-cta">
-                ¥13,000を無料で受け取る
-                <span class="cta-sub-text">✓ 最短3分で開設完了　✓ 入金不要　✓ いつでも出金可能</span>
-            </a>
-            <div class="cta-guarantee">🔒 個人情報は暗号化で保護　｜　迷惑電話・メールは一切なし</div>
-        </div>
+    <div class="q-card" id="q3">
+      <div class="q-num">質問 03 / 05</div>
+      <div class="q-text"><span class="q-emoji">📈</span>月に何ロット程度取引しますか（または目標）？</div>
+      <div class="options">
+        <button class="opt-btn" onclick="pick(3,'a',this)"><span class="opt-letter">A</span>まだ始めていない / 少額から試したい</button>
+        <button class="opt-btn" onclick="pick(3,'b',this)"><span class="opt-letter">B</span>5〜30ロット程度（月$15〜$105相当）</button>
+        <button class="opt-btn" onclick="pick(3,'c',this)"><span class="opt-letter">C</span>30〜100ロット程度（月$120〜$500相当）</button>
+        <button class="opt-btn" onclick="pick(3,'d',this)"><span class="opt-letter">D</span>100ロット以上（無制限キャッシュバック対象）</button>
+      </div>
     </div>
 
-    <div class="risk-disclosure">
-        <strong>🚨 リスク開示・免責事項</strong>
-        FX/CFD取引は複雑な金融商品であり、ハイレバレッジの使用により投資元本を超える損失が生じるリスクがあります。過去の実績は将来の結果を保証しません。余剰資金の範囲内で取引してください。本コンテンツはXMTradingの公式アフィリエイトパートナーとして情報提供を行うものであり、投資助言ではありません。キャンペーン条件・利用規約は必ずXMTrading公式サイトにてご確認ください。掲載している体験談は個人の経験であり、同等の成果を保証するものではありません。ボーナスは規約上の諸条件が適用されます。
+    <div class="q-card" id="q4">
+      <div class="q-num">質問 04 / 05</div>
+      <div class="q-text"><span class="q-emoji">🎯</span>あなたの取引スタイルは？</div>
+      <div class="options">
+        <button class="opt-btn" onclick="pick(4,'a',this)"><span class="opt-letter">A</span>短期売買（スキャルピング・デイトレード）</button>
+        <button class="opt-btn" onclick="pick(4,'b',this)"><span class="opt-letter">B</span>数日〜数週間保有（スイングトレード）</button>
+        <button class="opt-btn" onclick="pick(4,'c',this)"><span class="opt-letter">C</span>ゴールド・仮想通貨CFDも取引したい</button>
+        <button class="opt-btn" onclick="pick(4,'d',this)"><span class="opt-letter">D</span>まだスタイルが決まっていない</button>
+      </div>
     </div>
-</div>
 
-<div class="sticky-footer" id="sticky-footer">
-    <a href="https://affx.click/Ga7f1" class="cta-main track-link">
-        ¥13,000ボーナスを今すぐ受け取る
-        <span class="cta-sub-text">✓ 3分で完了　✓ 入金不要　✓ 追証なし</span>
-    </a>
+    <div class="q-card" id="q5">
+      <div class="q-num">質問 05 / 05</div>
+      <div class="q-text"><span class="q-emoji">🚀</span>今すぐXMTradingを試すとしたら？</div>
+      <div class="options">
+        <button class="opt-btn" onclick="pick(5,'a',this)"><span class="opt-letter">A</span>0円から¥13,000ボーナスで試してみたい</button>
+        <button class="opt-btn" onclick="pick(5,'b',this)"><span class="opt-letter">B</span>少額入金して100%ボーナス＋MUGENも活用したい</button>
+        <button class="opt-btn" onclick="pick(5,'c',this)"><span class="opt-letter">C</span>まず仕組みを理解してから判断したい</button>
+        <button class="opt-btn" onclick="pick(5,'d',this)"><span class="opt-letter">D</span>今すぐ本格的に始める準備ができている</button>
+      </div>
+    </div>
+
+    <!-- ANALYZING -->
+    <div class="analyzing" id="analyzing">
+      <div class="analyzing-icon">⚙️</div>
+      <h3>AIがあなたのプロフィールを分析中…</h3>
+      <p>回答データをもとにキャッシュバック予測を計算しています</p>
+      <div class="loader-wrap"><div class="loader-fill" id="loader-fill"></div></div>
+      <div class="analyzing-status" id="analyzing-status">回答データを照合しています…</div>
+    </div>
+  </div>
+
+  <!-- RESULT -->
+  <div id="result-screen">
+
+    <div class="result-hero">
+      <div class="result-badge-wrap">
+        <div class="result-badge">✦ 診断完了 ✦</div>
+        <div class="result-badge ai">🤖 AI分析済み</div>
+      </div>
+      <h2>あなたには<em>XMTrading</em>が<br>最も適しています</h2>
+      <p>AIが回答を分析した結果、MUGENキャッシュバックを活用することで<br>現在の取引収益を大幅に改善できると判断されました</p>
+    </div>
+
+    <!-- AI MESSAGE -->
+    <div class="ai-msg-box">
+      <div class="ai-msg-header">
+        <div class="ai-spinner" id="ai-spin"></div>
+        <span id="ai-label">AI分析中...</span>
+      </div>
+      <div id="ai-msg-text"><span class="ai-cursor"></span></div>
+    </div>
+
+    <!-- MUGEN TABLE -->
+    <div class="mugen-box">
+      <div class="mugen-box-header">
+        <div class="mugen-box-title"><em>MUGEN</em>無限キャッシュバック — 獲得予測</div>
+        <div class="deadline-tag">3月31日終了</div>
+      </div>
+      <table class="cb-table">
+        <thead><tr>
+          <th>月間取引量</th><th>ロット単価</th><th>最大獲得額</th>
+        </tr></thead>
+        <tbody>
+          <tr><td>5〜14ロット</td><td>$3 / ロット</td><td>$30</td></tr>
+          <tr><td>15〜29ロット</td><td>$3.5 / ロット</td><td>$52.50</td></tr>
+          <tr><td>30〜49ロット</td><td>$4 / ロット</td><td>$80</td></tr>
+          <tr><td>50〜99ロット</td><td>$5 / ロット</td><td>$125</td></tr>
+          <tr class="hl"><td>100ロット以上</td><td>$6 / ロット</td><td class="unlimited">∞ 無制限</td></tr>
+        </tbody>
+      </table>
+      <div class="cb-note">※対象：FX・ゴールド・シルバー・BTC/USD他。口座残高（ボーナスクレジット除く）での取引のみ対象。利用規約適用。</div>
+    </div>
+
+    <!-- BONUSES -->
+    <div class="bonus-section">
+      <div class="section-label">さらに受け取れる特典</div>
+      <div class="bonus-item">
+        <div class="bonus-num">1</div>
+        <div class="bonus-detail">
+          <h4>入金不要ボーナス（今すぐ）</h4>
+          <p>口座開設・本人確認（KYC）完了だけで即付与。自己資金ゼロでリアル市場を体験。</p>
+          <div class="bonus-amount">¥13,000 相当</div>
+        </div>
+      </div>
+      <div class="bonus-item">
+        <div class="bonus-num">2</div>
+        <div class="bonus-detail">
+          <h4>初回入金100%ボーナス</h4>
+          <p>入金額と同額が証拠金に追加。$5から適用、$500超で+20%ボーナスも。</p>
+          <div class="bonus-amount">最大 $10,000</div>
+        </div>
+      </div>
+      <div class="bonus-item">
+        <div class="bonus-num">3</div>
+        <div class="bonus-detail">
+          <h4>トレードコンテスト</h4>
+          <p>毎月開催。入賞100名に出金可能な賞金。経験レベル不問で参加可能。</p>
+          <div class="bonus-amount">総額 $100,000 / 月</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEPS -->
+    <div class="steps-section">
+      <div class="section-label">MUGENキャッシュバック参加手順（最短3分）</div>
+      <div class="step-row">
+        <div class="step-num">1</div>
+        <div class="step-txt"><strong>無料で口座開設</strong> — メールアドレスと基本情報のみ</div>
+      </div>
+      <div class="step-connector"></div>
+      <div class="step-row">
+        <div class="step-num">2</div>
+        <div class="step-txt"><strong>本人確認（KYC）完了</strong> — ¥13,000ボーナス即時付与</div>
+      </div>
+      <div class="step-connector"></div>
+      <div class="step-row">
+        <div class="step-num">3</div>
+        <div class="step-txt"><strong>MUGENキャンペーンに登録</strong> — マイページから1クリック</div>
+      </div>
+      <div class="step-connector"></div>
+      <div class="step-row">
+        <div class="step-num">4</div>
+        <div class="step-txt"><strong>3月31日まで取引</strong> — キャッシュバックが自動で蓄積</div>
+      </div>
+    </div>
+
+    <!-- TESTIMONIAL -->
+    <div class="testi">
+      <div class="section-label">利用者の声</div>
+      <div class="testi-card">
+        <div class="testi-top">
+          <div class="testi-av">T</div>
+          <div>
+            <div class="testi-name">Takashi M.（41歳・会社員）</div>
+            <div class="testi-sub">神奈川県在住 ｜ FX歴6年</div>
+            <div class="testi-stars">★★★★★</div>
+          </div>
+        </div>
+        <div class="testi-quote">「国内業者でずっとやっていましたが、取引しても何も返ってこないのがずっと不満でした。XMに移ってMUGENキャッシュバックに参加したら、先月だけで$240のキャッシュバックが戻ってきました。同じ取引をするだけで収入が増えるのは単純にすごい。」</div>
+        <div class="testi-result">📈 先月のMUGENキャッシュバック獲得額：$240（約¥36,000相当）</div>
+      </div>
+    </div>
+
+    <!-- TRUST -->
+    <div class="trust-section">
+      <div class="section-label">信頼性・安全性</div>
+      <div class="trust-grid">
+        <div class="trust-card">
+          <div class="trust-icon">🛡️</div>
+          <h5>金融ライセンス取得</h5>
+          <p>セーシェルFSA規制。2009年創業、180カ国以上展開</p>
+        </div>
+        <div class="trust-card">
+          <div class="trust-icon">🏦</div>
+          <h5>完全分別管理</h5>
+          <p>顧客資金はTier1銀行で分別管理。運営資金と混合なし</p>
+        </div>
+        <div class="trust-card">
+          <div class="trust-icon">⚡</div>
+          <h5>ゼロカット採用</h5>
+          <p>追証（借金）リスクは一切発生しません</p>
+        </div>
+        <div class="trust-card">
+          <div class="trust-icon">🇯🇵</div>
+          <h5>日本語サポート</h5>
+          <p>24時間対応。入出金手数料完全無料</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-section">
+      <a href="https://clicks.pipaffiliates.com/c?c=YOUR_AFFILIATE_ID&l=ja&p=1" class="cta-btn track-link" id="main-cta">
+        ¥13,000を受け取り、MUGENに参加する
+        <span class="cta-sub">✓ 最短3分で開設　✓ 入金不要　✓ 3月31日キャンペーン終了前に</span>
+      </a>
+      <div class="cta-lock">🔒 個人情報は暗号化で保護　｜　迷惑連絡は一切なし</div>
+    </div>
+
+  </div><!-- /result-screen -->
+
+  <div class="risk">
+    <strong>🚨 リスク開示・免責事項</strong>
+    FX/CFD取引は複雑な金融商品であり、ハイレバレッジの使用により投資元本を超える損失が生じるリスクがあります。過去の実績は将来の結果を保証しません。余剰資金の範囲内で取引してください。本コンテンツはXMTradingの公式アフィリエイトパートナーとして情報提供を行うものであり、投資助言ではありません。掲載している体験談は個人の経験であり、同等の成果を保証するものではありません。MUGENキャッシュバックキャンペーンは2026年3月3日〜31日、利用規約適用。
+  </div>
+
+</div><!-- /container -->
+
+<!-- STICKY FOOTER -->
+<div class="sticky" id="sticky-footer">
+  <a href="https://clicks.pipaffiliates.com/c?c=YOUR_AFFILIATE_ID&l=ja&p=1" class="cta-btn track-link">
+    ¥13,000受取＋MUGENキャッシュバック参加
+    <span class="cta-sub">✓ 3月31日まで　✓ 入金不要　✓ 追証なし</span>
+  </a>
 </div>
 
 <script>
-    // ── TRACKING ──
-    const urlParams = new URLSearchParams(window.location.search);
-    const impId   = urlParams.get('imp_id')    || '';
-    const srcId   = urlParams.get('src_id')    || '';
-    const zoneId  = urlParams.get('zoneid')    || urlParams.get('zone_id') || 'direct';
-    const clickId = urlParams.get('visitor_id')|| urlParams.get('click_id')|| 'no_id';
+// ── PARTICLES ──
+(function(){
+  const c=document.getElementById('particles');
+  const colors=['rgba(212,148,10,0.4)','rgba(240,180,41,0.3)','rgba(255,217,125,0.25)'];
+  for(let i=0;i<18;i++){
+    const p=document.createElement('div');
+    p.className='particle';
+    const sz=Math.random()*3+1;
+    p.style.cssText=`width:${sz}px;height:${sz}px;left:${Math.random()*100}%;background:${colors[Math.floor(Math.random()*colors.length)]};animation-duration:${Math.random()*12+8}s;animation-delay:${Math.random()*8}s`;
+    c.appendChild(p);
+  }
+})();
 
-    // Clean URL bar
-    if (window.history.replaceState && urlParams.toString()) {
-        window.history.replaceState({}, document.title, window.location.pathname);
+// ── LIVE VIEW COUNT ──
+(function(){
+  const el=document.getElementById('view-count');
+  let n=4291;
+  setInterval(()=>{
+    n+=Math.floor(Math.random()*3);
+    el.textContent=n.toLocaleString('ja-JP');
+  },4000);
+})();
+
+// ── LIVE TOASTS ──
+const names=['田中','佐藤','鈴木','高橋','渡辺','伊藤','山本','中村','小林','加藤','吉田','山田','松本'];
+const prefectures=['東京','大阪','神奈川','愛知','福岡','北海道','埼玉','千葉','兵庫','京都'];
+const actions=['口座を開設しました 🎉','MUGENに参加しました 🔥','¥13,000を受け取りました 💰'];
+function showToast(){
+  const t=document.getElementById('toast');
+  const nm=document.getElementById('toast-name');
+  const ac=document.getElementById('toast-action');
+  const n=names[Math.floor(Math.random()*names.length)];
+  const p=prefectures[Math.floor(Math.random()*prefectures.length)];
+  const a=actions[Math.floor(Math.random()*actions.length)];
+  nm.textContent=`${p}の${n}さん`;
+  ac.textContent=a;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3800);
+}
+setTimeout(()=>{showToast();setInterval(showToast,7000)},3000);
+
+// ── MUGEN COUNTDOWN ──
+(function(){
+  const deadline=new Date('2026-03-31T23:59:59+09:00');
+  const el=document.getElementById('mugen-timer');
+  function tick(){
+    const d=deadline-new Date();
+    if(d<=0){el.textContent='終了';return}
+    const days=Math.floor(d/86400000);
+    const hrs=Math.floor((d%86400000)/3600000);
+    el.textContent=`${days}日${String(hrs).padStart(2,'0')}時間`;
+  }
+  tick();setInterval(tick,60000);
+})();
+
+// ── SESSION URGENCY TIMER ──
+(function(){
+  let total=17*60+22;
+  const el=document.getElementById('page-timer');
+  const iv=setInterval(()=>{
+    const m=Math.floor(total/60),s=total%60;
+    el.innerHTML=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}<small>残り時間</small>`;
+    if(--total<0){clearInterval(iv);el.innerHTML='00:00<small>残り時間</small>';el.style.color='#555'}
+  },1000);
+})();
+
+// ── QUIZ ──
+const ans={};let curQ=1;const TOTAL=5;
+
+function pick(n,c,btn){
+  btn.closest('.options').querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');
+  ans[n]=c;
+  setTimeout(()=>advance(n),380);
+}
+
+function advance(n){
+  if(n<TOTAL){
+    document.getElementById('q'+n).classList.remove('active');
+    curQ=n+1;
+    document.getElementById('q'+curQ).classList.add('active');
+    setProgress(curQ);
+  } else {
+    runAnalysis();
+  }
+}
+
+function setProgress(step){
+  const pct=Math.round(((step-1)/TOTAL)*100);
+  document.getElementById('prog-fill').style.width=pct+'%';
+  document.getElementById('prog-text').textContent=`質問 ${step} / ${TOTAL}`;
+  document.getElementById('prog-pct').textContent=pct+'%';
+}
+
+// ── ANALYSIS SCREEN ──
+function runAnalysis(){
+  document.getElementById('q'+TOTAL).classList.remove('active');
+  const sc=document.getElementById('analyzing');
+  sc.classList.add('active');
+  const fill=document.getElementById('loader-fill');
+  const status=document.getElementById('analyzing-status');
+  const msgs=[
+    '回答データを照合しています…',
+    '取引スタイルを解析中…',
+    'キャッシュバック獲得予測を計算中…',
+    '最適な口座タイプを特定中…',
+    'AIレポートを生成中…',
+    '✅ 診断完了'
+  ];
+  const pcts=[15,35,55,75,90,100];
+  let i=0;
+  const iv=setInterval(()=>{
+    if(i<msgs.length){status.textContent=msgs[i];fill.style.width=pcts[i]+'%';i++;}
+    else{clearInterval(iv);setTimeout(showResult,400);}
+  },520);
+}
+
+// ── BUILD AI PROMPT ──
+function buildPrompt(){
+  const styleMap={
+    1:{a:'国内FXで取引中・限界を感じている',b:'海外FX未経験・興味あり',c:'FX経験あり・休止中',d:'FXを始めたい初心者'},
+    2:{a:'低レバレッジに不満',b:'キャッシュバックなしに不満',c:'ボーナスなしに不満',d:'国内FX未使用'},
+    3:{a:'未開始・少額希望',b:'5〜30ロット/月',c:'30〜100ロット/月',d:'100ロット以上/月（無制限対象）'},
+    4:{a:'スキャルピング・デイトレード',b:'スイングトレード',c:'ゴールド・仮想通貨CFD希望',d:'スタイル未定'},
+    5:{a:'入金不要ボーナスから試したい',b:'入金＋100%ボーナス＋MUGEN活用希望',c:'まず仕組みを理解したい',d:'今すぐ本格的に開始'}
+  };
+  const profile=Object.entries(ans).map(([k,v])=>`Q${k}: ${styleMap[k][v]}`).join(' | ');
+  return `あなたはXMTradingのシニアFXアドバイザーです。以下のユーザープロフィールを分析し、パーソナライズされたメッセージを日本語で生成してください。
+
+ユーザープロフィール: ${profile}
+
+要件:
+- 2〜3文、自然な日本語（敬語・丁寧語）
+- そのユーザーの具体的な状況に言及する
+- XMTradingのMUGENキャッシュバックが特にそのユーザーにメリットをもたらす理由を明確に説明
+- 緊急性（3月31日締め切り）を自然に組み込む
+- 売り込みっぽくなく、アドバイザーとして誠実に語りかけるトーン
+- 出力はメッセージ本文のみ（前置きや見出しは不要）`;
+}
+
+// ── TYPEWRITER ──
+function typewrite(el,text,speed=28){
+  el.innerHTML='';
+  let i=0;
+  const cursor=document.createElement('span');
+  cursor.className='ai-cursor';
+  el.appendChild(cursor);
+  const iv=setInterval(()=>{
+    if(i<text.length){
+      el.insertBefore(document.createTextNode(text[i]),cursor);
+      i++;
+    } else {
+      clearInterval(iv);
+      cursor.remove();
+      document.getElementById('ai-spin').style.animation='none';
+      document.getElementById('ai-spin').style.borderColor='#d4940a';
+      document.getElementById('ai-label').textContent='✅ AI分析完了';
     }
+  },speed);
+}
 
-    function updateLinks() {
-        document.querySelectorAll('.track-link').forEach(link => {
-            const base = link.getAttribute('href').split('?')[0];
-            const params = new URLSearchParams();
-            if (impId)   params.set('imp_id', impId);
-            if (srcId)   params.set('src_id', srcId);
-            if (zoneId)  params.set('aff_sub',  zoneId);
-            if (clickId) params.set('aff_sub2', clickId);
-            link.setAttribute('href', base + (params.toString() ? '?' + params.toString() : ''));
-        });
-    }
+// ── SHOW RESULT ──
+async function showResult(){
+  document.getElementById('analyzing').classList.remove('active');
+  document.getElementById('quiz-section').style.display='none';
+  document.getElementById('intro-section').style.display='none';
+  document.getElementById('result-screen').style.display='block';
+  document.getElementById('sticky-footer').classList.add('visible');
+  document.getElementById('prog-fill').style.width='100%';
+  document.getElementById('prog-text').textContent='診断完了';
+  document.getElementById('prog-pct').textContent='100%';
+  window.scrollTo({top:0,behavior:'smooth'});
+  updateLinks();
 
-    // ── TIMER ──
-    function startTimer(m, s) {
-        let total = m * 60 + s;
-        const el = document.getElementById('timer');
-        const iv = setInterval(() => {
-            const mm = Math.floor(total / 60);
-            const ss = total % 60;
-            el.textContent = `${String(mm).padStart(2,'0')}:${String(ss).padStart(2,'0')}`;
-            if (--total < 0) { clearInterval(iv); el.textContent = '00:00'; el.style.color = '#aaa'; }
-        }, 1000);
-    }
-    startTimer(17, 22);
-
-    // ── QUIZ ──
-    const answers = {};
-    let currentQ = 1;
-    const TOTAL  = 5;
-
-    function selectAnswer(qNum, choice, btn) {
-        btn.closest('.options').querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
-        btn.classList.add('selected');
-        answers[qNum] = choice;
-        gtag('event', 'quiz_answer', { question: qNum, answer: choice, zone_id: zoneId });
-        setTimeout(() => advance(qNum), 360);
-    }
-
-    function advance(qNum) {
-        if (qNum < TOTAL) {
-            document.getElementById('q' + qNum).classList.remove('active');
-            currentQ = qNum + 1;
-            document.getElementById('q' + currentQ).classList.add('active');
-            setProgress(currentQ);
-        } else {
-            runAnalysis();
-        }
-    }
-
-    function setProgress(step) {
-        const pct = Math.round(((step - 1) / TOTAL) * 100);
-        document.getElementById('progress-fill').style.width  = pct + '%';
-        document.getElementById('progress-text').textContent  = `質問 ${step} / ${TOTAL}`;
-        document.getElementById('progress-pct').textContent   = pct + '%';
-    }
-
-    // ── ANALYSIS ANIMATION ──
-    function runAnalysis() {
-        document.getElementById('q' + TOTAL).classList.remove('active');
-        const screen = document.getElementById('analyzing');
-        screen.classList.add('active');
-
-        const bar  = document.getElementById('loader-bar');
-        const txt  = document.getElementById('analyzing-text');
-        const msgs = [
-            '回答データを照合しています…',
-            '取引スタイルを分析中…',
-            '最適な口座タイプを特定中…',
-            '適用ボーナスを計算中…',
-            '✓ 診断完了'
-        ];
-        const pcts = [18, 40, 62, 85, 100];
-        let i = 0;
-
-        const iv = setInterval(() => {
-            if (i < msgs.length) {
-                txt.textContent = msgs[i];
-                bar.style.width = pcts[i] + '%';
-                i++;
-            } else {
-                clearInterval(iv);
-                setTimeout(showResult, 380);
-            }
-        }, 500);
-    }
-
-    // ── RESULT ──
-    const personalMsg = {
-        a: '現在すでに国内FXで取引されているあなたへ：今の業者では、あなたの取引ポテンシャルの一部しか発揮できていません。XMTradingの最大1:1000レバレッジ、ゼロカット保護、そして豊富なボーナス制度に切り替えることで、同じ資金でも全く異なる結果が出る可能性があります。',
-        b: '海外FXに興味をお持ちのあなたへ：最初の一歩として、¥13,000の入金不要ボーナスは理想的なエントリーポイントです。自己資金を使わず、本物の市場でXMTradingの環境を体験してください。リスクなく試せる今がチャンスです。',
-        c: 'FXを一度経験されたあなたへ：再スタートする環境として、XMTradingは当時とは別次元の安全性を提供しています。ゼロカットシステムにより追証リスクはゼロ。¥13,000ボーナスで、自己資金を守りながら相場感を取り戻せます。',
-        d: 'これからFXを始めるあなたへ：最初から有利な環境を選ぶことが、長期的な成果に直結します。国内FXの制限に最初から縛られず、XMTradingの¥13,000ボーナスで本物の取引をゼロリスクで体験してください。'
-    };
-
-    function showResult() {
-        document.getElementById('analyzing').classList.remove('active');
-        document.getElementById('quiz-section').style.display  = 'none';
-        document.getElementById('intro-section').style.display = 'none';
-
-        const key = answers[1] || 'b';
-        document.getElementById('personal-msg').innerHTML = `<strong>あなたへのメッセージ：</strong> ${personalMsg[key]}`;
-        document.getElementById('result-screen').style.display = 'block';
-        document.getElementById('sticky-footer').classList.add('visible');
-
-        document.getElementById('progress-fill').style.width  = '100%';
-        document.getElementById('progress-text').textContent  = '診断完了';
-        document.getElementById('progress-pct').textContent   = '100%';
-
-        gtag('event', 'quiz_complete', { zone_id: zoneId, visitor_id: clickId });
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        updateLinks();
-    }
-
-    // CTA click tracking + PopAds postback
-    document.addEventListener('click', e => {
-        const link = e.target.closest('.track-link');
-        if (!link) return;
-        gtag('event', 'click_cta', {
-            event_category: 'conversion',
-            event_label: 'XM_Quiz_Japan',
-            zone_id: zoneId,
-            visitor_id: clickId
-        });
-        // PopAds postback — replace with your actual postback URL pattern
-        if (impId) {
-            const pb = `https://www.popads.net/users/postback/2s/0/aid/aa767929957b4ca372123fe3656e20ec/id/${impId}/value/0.10`;
-            navigator.sendBeacon(pb) || (new Image().src = pb);
-        }
+  // AI call
+  const aiText=document.getElementById('ai-msg-text');
+  aiText.innerHTML='<span class="ai-cursor"></span>';
+  try {
+    const res=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:1000,
+        messages:[{role:'user',content:buildPrompt()}]
+      })
     });
+    const data=await res.json();
+    const txt=data.content.map(b=>b.text||'').join('').trim();
+    typewrite(aiText,txt||'あなたの回答を分析しました。XMTradingのMUGENキャッシュバックは、あなたの取引スタイルに非常に適しています。3月31日の締め切りまでに、ぜひご活用ください。');
+  } catch(e){
+    typewrite(aiText,'あなたのプロフィールを分析しました。XMTradingのMUGENキャッシュバックを活用することで、毎月の取引収益を大幅に改善できる可能性があります。3月31日の締め切りまでに、まず¥13,000の入金不要ボーナスから始めることをお勧めします。');
+  }
+}
 
-    document.addEventListener('DOMContentLoaded', updateLinks);
+// ── URL PARAMS & LINK TRACKING ──
+const urlP=new URLSearchParams(window.location.search);
+const PA={
+  clickId:urlP.get('clickid')||urlP.get('visitor_id')||'',
+  zoneId:urlP.get('zoneid')||urlP.get('zone_id')||'direct',
+  campaignId:urlP.get('campaignid')||'',
+  bannerId:urlP.get('bannerid')||'',
+};
+if(PA.clickId){
+  const exp=new Date(Date.now()+30*864e5).toUTCString();
+  document.cookie=`pa_click_id=${PA.clickId}; expires=${exp}; path=/; SameSite=Lax`;
+}
+if(!PA.clickId){const m=document.cookie.match(/pa_click_id=([^;]+)/);if(m)PA.clickId=m[1];}
+if(window.history.replaceState&&urlP.toString())window.history.replaceState({},document.title,window.location.pathname);
+
+function updateLinks(){
+  document.querySelectorAll('.track-link').forEach(link=>{
+    const base=link.getAttribute('href').split('?')[0];
+    const p=new URLSearchParams();
+    if(PA.zoneId)p.set('aff_sub',PA.zoneId);
+    if(PA.clickId)p.set('aff_sub2',PA.clickId);
+    if(PA.campaignId)p.set('aff_sub3',PA.campaignId);
+    if(PA.bannerId)p.set('aff_sub4',PA.bannerId);
+    link.setAttribute('href',base+(p.toString()?'?'+p.toString():''));
+  });
+}
+
+const PA_POSTBACK='http://ad.propellerads.com/conversion.php?aid=1063015&pid=&tid=153705';
+function paConvert(payout){
+  if(!PA.clickId)return;
+  const url=`${PA_POSTBACK}&visitor_id=${encodeURIComponent(PA.clickId)}&payout=${payout}`;
+  navigator.sendBeacon?navigator.sendBeacon(url):new Image().src=url;
+}
+
+document.addEventListener('click',e=>{
+  if(e.target.closest('.track-link'))paConvert('0.10');
+});
+document.addEventListener('DOMContentLoaded',updateLinks);
 </script>
 </body>
 </html>
