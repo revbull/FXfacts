@@ -1,30 +1,220 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="robots" content="noindex, nofollow">
-    
-    <meta name="referrer" content="no-referrer">
-    
-    <script>
-        // 1. Взимаме ID-то на клика от PopAds
-        const urlParams = new URLSearchParams(window.location.search);
-        const impId = urlParams.get('id') || urlParams.get('imp_id');
-        
-        // 2. Твоят базов афилиейт линк
-        let affLink = "https://clicks.affstrack.com/c?c=446890&l=ja&p=6";
-        
-        // 3. Залепяме ID-то към линка, за да не губиш статистика!
-        if (impId) {
-            affLink += "&sub_id=" + encodeURIComponent(impId);
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>投資初心者でもできた方法</title>
 
-        // 4. Изчакваме 100ms (защита от ботове) и пренасочваме скрито
-        setTimeout(function() {
-            window.location.replace(affLink);
-        }, 100);
-    </script>
+<style>
+
+body{
+font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+margin:0;
+background:#f5f6f7;
+color:#222;
+line-height:1.6;
+}
+
+.container{
+max-width:640px;
+margin:auto;
+background:white;
+padding:20px;
+}
+
+h1{
+font-size:24px;
+line-height:1.4;
+}
+
+.badge{
+background:#e60023;
+color:white;
+padding:6px 10px;
+font-size:12px;
+display:inline-block;
+border-radius:6px;
+margin-bottom:10px;
+}
+
+.hero-img{
+width:100%;
+border-radius:10px;
+margin:15px 0;
+}
+
+.cta{
+display:block;
+background:#00c853;
+color:white;
+text-align:center;
+font-size:20px;
+font-weight:bold;
+padding:18px;
+border-radius:12px;
+text-decoration:none;
+margin:25px 0;
+box-shadow:0 6px 14px rgba(0,0,0,0.2);
+}
+
+.cta:hover{
+opacity:0.9;
+}
+
+.comment-box{
+background:#f1f2f3;
+padding:15px;
+border-radius:10px;
+margin-top:20px;
+}
+
+.comment{
+border-bottom:1px solid #ddd;
+padding:10px 0;
+font-size:14px;
+}
+
+.name{
+font-weight:bold;
+color:#333;
+}
+
+.time{
+color:#999;
+font-size:12px;
+}
+
+.highlight{
+background:#fff3cd;
+padding:10px;
+border-radius:8px;
+margin:15px 0;
+}
+
+.steps{
+background:#f9fafb;
+padding:15px;
+border-radius:10px;
+}
+
+.step{
+margin-bottom:10px;
+}
+
+.footer{
+font-size:12px;
+color:#777;
+margin-top:20px;
+text-align:center;
+}
+
+</style>
 </head>
-<body style="background: #fff;">
+
+<body>
+
+<div class="container">
+
+<div class="badge">話題</div>
+
+<h1>
+普通の会社員が<br>
+<b>副収入で月30万円</b>を達成した方法とは？
+</h1>
+
+<img class="hero-img" src="https://i.imgur.com/8Km9tLL.jpg">
+
+<p>
+東京在住の32歳の会社員が、  
+わずか数ヶ月で副収入を作った方法が  
+SNSで話題になっています。
+</p>
+
+<p>
+彼は特別なスキルもなく、  
+最初は<strong>投資初心者</strong>でした。
+</p>
+
+<div class="highlight">
+しかしある海外の取引サービスを知ってから  
+状況が変わりました。
+</div>
+
+<a class="cta" href="YOUR_AFF_LINK">
+↓↓公式サイトはこちら↓↓
+</a>
+
+<h2>実際に試してみた</h2>
+
+<p>
+最初は半信半疑でしたが、  
+無料で口座を作れるとのことで  
+実際に登録してみました。
+</p>
+
+<p>
+手続きは数分で完了。
+</p>
+
+<div class="steps">
+
+<div class="step">
+① 無料アカウントを作成
+</div>
+
+<div class="step">
+② スマホで取引を開始
+</div>
+
+<div class="step">
+③ 数日後に最初の利益
+</div>
+
+</div>
+
+<p>
+もちろん利益を保証するものではありませんが、  
+多くの人が試している理由は理解できました。
+</p>
+
+<a class="cta" href="YOUR_AFF_LINK">
+無料口座開設はこちら
+</a>
+
+<h2>ユーザーの口コミ</h2>
+
+<div class="comment-box">
+
+<div class="comment">
+<div class="name">佐藤</div>
+数週間で最初の利益が出ました。  
+<div class="time">2時間前</div>
+</div>
+
+<div class="comment">
+<div class="name">山田</div>
+スマホだけでできるので簡単でした。  
+<div class="time">5時間前</div>
+</div>
+
+<div class="comment">
+<div class="name">中村</div>
+初心者でも始められました。  
+<div class="time">昨日</div>
+</div>
+
+</div>
+
+<a class="cta" href="YOUR_AFF_LINK">
+今すぐ始める
+</a>
+
+<div class="footer">
+※投資にはリスクがあります。  
+詳細は公式サイトをご確認ください。
+</div>
+
+</div>
+
 </body>
 </html>
