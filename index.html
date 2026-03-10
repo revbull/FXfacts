@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>2026年版 FXレビュー</title>
+
+<title>トレード診断</title>
 
 <style>
 
@@ -11,103 +12,74 @@ body{
 margin:0;
 font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN",Meiryo,sans-serif;
 background:#f5f6f7;
-color:#222;
 }
 
 .container{
 max-width:680px;
 margin:auto;
-background:#fff;
-padding:18px;
+background:white;
+padding:20px;
 }
 
 h1{
-font-size:26px;
-line-height:1.4;
+font-size:24px;
 }
 
-.badge{
-display:inline-block;
-background:#e53935;
-color:#fff;
-padding:5px 10px;
-border-radius:6px;
-font-size:12px;
-margin-bottom:10px;
-}
-
-.hero{
-background:#fff8e1;
-border:2px solid #ffd54f;
-padding:15px;
+.progress{
+height:8px;
+background:#eee;
 border-radius:10px;
+overflow:hidden;
 margin-bottom:20px;
+}
+
+.bar{
+height:100%;
+width:0%;
+background:#00c853;
+transition:0.3s;
+}
+
+.question{
+font-size:20px;
+margin-bottom:20px;
+}
+
+.option{
+display:block;
+background:#f1f1f1;
+padding:14px;
+margin:10px 0;
+border-radius:8px;
+cursor:pointer;
+text-align:center;
+}
+
+.option:hover{
+background:#e0e0e0;
 }
 
 .cta{
 display:block;
-text-align:center;
 background:#00c853;
 color:white;
+text-align:center;
 padding:18px;
 font-size:22px;
 font-weight:bold;
 border-radius:12px;
 text-decoration:none;
-margin:20px 0;
-box-shadow:0 6px 16px rgba(0,0,0,0.2);
+margin-top:20px;
 }
 
-.cta-sub{
-display:block;
-font-size:14px;
-margin-top:4px;
-}
-
-.section{
-margin:30px 0;
-}
-
-.proof{
-background:#fafafa;
-padding:12px;
-border-radius:10px;
-margin-top:10px;
-}
-
-.comment{
-border-top:1px solid #eee;
-padding:10px 0;
-font-size:14px;
-}
-
-.username{
-font-weight:bold;
-color:#1976d2;
-}
-
-.trust{
-display:flex;
-gap:6px;
-margin-top:12px;
-}
-
-.trust div{
-background:#f1f1f1;
-padding:6px;
-border-radius:6px;
-font-size:12px;
-flex:1;
+.result{
+display:none;
 text-align:center;
 }
 
-.urgency{
-background:#ffebee;
-padding:15px;
-border-radius:10px;
+.loading{
+font-size:20px;
 text-align:center;
-font-weight:bold;
-color:#d32f2f;
 }
 
 .sticky{
@@ -115,11 +87,11 @@ position:fixed;
 bottom:0;
 left:0;
 width:100%;
-background:#fff;
+background:white;
 border-top:1px solid #ddd;
 padding:10px;
-display:flex;
-justify-content:center;
+text-align:center;
+display:none;
 }
 
 .sticky a{
@@ -127,114 +99,107 @@ background:#00c853;
 color:white;
 padding:14px 20px;
 border-radius:10px;
-font-weight:bold;
 text-decoration:none;
-}
-
-.footer{
-font-size:12px;
-color:#777;
-margin-top:30px;
-text-align:center;
+font-weight:bold;
 }
 
 </style>
+
 </head>
 
 <body>
 
 <div class="container">
 
-<div class="badge">レビュー</div>
-
 <h1>
-2026年：日本人トレーダーが<br>
-<span style="color:#d32f2f;">海外FXを選ぶ理由</span>
+30秒で分かる  
+トレード診断
 </h1>
 
-<div class="hero">
+<div class="progress">
+<div class="bar" id="bar"></div>
+</div>
+
+<div id="quiz">
+
+<div class="question" id="question">
+投資経験はありますか？
+</div>
+
+<div class="option" onclick="next()">初心者</div>
+<div class="option" onclick="next()">少しある</div>
+<div class="option" onclick="next()">経験者</div>
+
+</div>
+
+<div class="loading" id="loading" style="display:none;">
+AI分析中...
+</div>
+
+<div class="result" id="result">
+
+<h2>
+あなたに最適なトレード方法
+</h2>
 
 <p>
-編集部が<strong>3ヶ月テスト</strong>した結果、  
-初心者でも使いやすいFXサービスが見つかりました。
+診断結果によると、  
+初心者でも始めやすい海外FXが最適です。
 </p>
-
-<div class="trust">
-<div>信頼度 ★★★★★</div>
-<div>スマホ対応</div>
-<div>初心者OK</div>
-</div>
 
 <a href="YOUR_AFF_LINK" class="cta">
 ↓↓公式サイトはこちら↓↓
-<span class="cta-sub">無料口座開設</span>
 </a>
 
 </div>
 
-<div class="section">
-
-<h2>実際に試してみた</h2>
-
-<p>
-最初は半信半疑でしたが、  
-登録は<strong>3分</strong>で完了しました。
-</p>
-
-<div class="proof">
-
-<p>取引画面の例</p>
-
-<img src="https://dummyimage.com/600x300/cccccc/000000&text=Trading+Screenshot" width="100%">
-
 </div>
 
-<a href="YOUR_AFF_LINK" class="cta">
-今すぐ始める
-</a>
-
-</div>
-
-<div class="section">
-
-<h2>ユーザーの口コミ</h2>
-
-<div class="comment">
-<div class="username">Kenji</div>
-スマホだけで簡単に取引できました。
-</div>
-
-<div class="comment">
-<div class="username">Yumi</div>
-初心者でも分かりやすいです。
-</div>
-
-<div class="comment">
-<div class="username">Taro</div>
-他のFXより使いやすいと思います。
-</div>
-
-</div>
-
-<div class="urgency">
-現在アクセスが集中しています  
-本日中に登録してください
-</div>
-
-<a href="YOUR_AFF_LINK" class="cta">
-無料で口座を開設する
-</a>
-
-<div class="footer">
-※投資にはリスクがあります。  
-詳細は公式サイトをご確認ください。
-</div>
-
-</div>
-
-<div class="sticky">
+<div class="sticky" id="sticky">
 <a href="YOUR_AFF_LINK">公式サイトへ</a>
 </div>
 
+<script>
+
+let step=0;
+
+function next(){
+
+step++;
+
+document.getElementById("bar").style.width=(step*33)+"%";
+
+if(step==1){
+
+document.getElementById("question").innerHTML="1日にどれくらいスマホを使いますか？";
+
+}
+
+else if(step==2){
+
+document.getElementById("question").innerHTML="副収入に興味がありますか？";
+
+}
+
+else{
+
+document.getElementById("quiz").style.display="none";
+document.getElementById("loading").style.display="block";
+
+setTimeout(function(){
+
+document.getElementById("loading").style.display="none";
+document.getElementById("result").style.display="block";
+document.getElementById("sticky").style.display="block";
+
+},2000);
+
+}
+
+}
+
+</script>
+
 </body>
+
 </html>
