@@ -2,219 +2,936 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>投資初心者でもできた方法</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>【完全無料】0円で始めるFX：13,000円ボーナス | XMTrading</title>
+
+<!-- Facebook Pixel -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', 'YOUR_PIXEL_ID');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"/></noscript>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+window.dataLayer=window.dataLayer||[];
+function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());
+gtag('config','G-XXXXXXXXXX',{send_page_view:true});
+</script>
 
 <style>
-
-body{
-font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
-margin:0;
-background:#f5f6f7;
-color:#222;
-line-height:1.6;
+:root{
+  --bg:#f3f4f6;
+  --white:#ffffff;
+  --black:#111111;
+  --red:#d32f2f;
+  --red2:#e53935;
+  --red-pale:#fff5f5;
+  --green:#00c853;
+  --green2:#00e676;
+  --green-pale:#e8f5e9;
+  --blue:#1a73e8;
+  --text:#202124;
+  --text-soft:#5f6368;
+  --text-muted:#9aa0a6;
+  --border:#e1e4e8;
+  --shadow:0 2px 10px rgba(0,0,0,0.07);
+  --shadow-md:0 4px 20px rgba(0,0,0,0.1);
 }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Noto Sans JP",Meiryo,sans-serif;background:var(--bg);color:var(--text);font-size:16px;line-height:1.7;min-height:100vh}
 
-.container{
-max-width:640px;
-margin:auto;
-background:white;
-padding:20px;
-}
+/* TOAST */
+.toast{position:fixed;bottom:90px;left:12px;z-index:2000;background:var(--white);border:1px solid var(--border);border-left:3px solid var(--green);padding:10px 14px;border-radius:6px;font-size:0.72rem;color:var(--text);max-width:240px;line-height:1.45;opacity:0;transform:translateX(-110%);transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1);box-shadow:var(--shadow-md)}
+.toast.show{opacity:1;transform:translateX(0)}
+.toast-name{font-weight:700;color:var(--green)}
+.live-dot{display:inline-block;width:6px;height:6px;background:var(--green);border-radius:50%;margin-right:5px;animation:blink 1.5s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
 
-h1{
-font-size:24px;
-line-height:1.4;
-}
+/* SCROLL POPUP */
+.scroll-popup{position:fixed;top:0;left:0;width:100%;z-index:3000;background:var(--black);border-bottom:2px solid var(--green);padding:11px 16px;display:flex;align-items:center;gap:12px;transform:translateY(-110%);transition:transform 0.4s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 4px 20px rgba(0,0,0,0.3)}
+.scroll-popup.show{transform:translateY(0)}
+.scroll-popup-txt{flex:1;font-size:0.74rem;font-weight:700;color:#fff;line-height:1.3}
+.scroll-popup-txt em{color:var(--green2);font-style:normal}
+.scroll-popup-btn{background:var(--green);color:#000;font-weight:900;font-size:0.72rem;padding:9px 14px;border-radius:4px;text-decoration:none;white-space:nowrap;flex-shrink:0}
+.scroll-popup-close{color:rgba(255,255,255,0.5);font-size:1.2rem;cursor:pointer;flex-shrink:0;padding:4px}
 
-.badge{
-background:#e60023;
-color:white;
-padding:6px 10px;
-font-size:12px;
-display:inline-block;
-border-radius:6px;
-margin-bottom:10px;
-}
+/* TICKER */
+.ticker-wrap{background:var(--black);overflow:hidden;height:32px;display:flex;align-items:center}
+.ticker-inner{display:flex;white-space:nowrap;animation:ticker 32s linear infinite}
+.ticker-inner span{font-size:0.65rem;font-weight:700;letter-spacing:0.08em;color:rgba(255,255,255,0.7);padding:0 24px;border-right:1px solid rgba(255,255,255,0.12)}
+.ticker-inner span em{color:var(--green2);font-style:normal}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-.hero-img{
-width:100%;
-border-radius:10px;
-margin:15px 0;
-}
+/* TOP BAR */
+.top-bar{background:var(--red);padding:8px 18px;display:flex;align-items:center;justify-content:center;gap:10px}
+.top-bar-txt{font-size:0.72rem;font-weight:700;color:#fff;letter-spacing:0.04em;text-align:center}
+.top-bar-txt em{font-style:normal;background:rgba(255,255,255,0.2);padding:1px 6px;border-radius:2px;margin:0 3px}
 
-.cta{
-display:block;
-background:#00c853;
-color:white;
-text-align:center;
-font-size:20px;
-font-weight:bold;
-padding:18px;
-border-radius:12px;
-text-decoration:none;
-margin:25px 0;
-box-shadow:0 6px 14px rgba(0,0,0,0.2);
-}
+/* HEADER */
+.site-header{background:var(--black);padding:13px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,0.3)}
+.site-logo{font-size:1.1rem;font-weight:900;color:#fff;letter-spacing:0.04em}
+.site-logo em{color:var(--green2);font-style:normal}
+.site-logo span{font-size:0.58rem;font-weight:400;color:rgba(255,255,255,0.4);display:block}
+.header-badge{font-size:0.62rem;font-weight:700;background:var(--red);color:#fff;padding:4px 11px;border-radius:20px;letter-spacing:0.04em}
 
-.cta:hover{
-opacity:0.9;
-}
+.container{max-width:650px;margin:0 auto;padding:0 0 140px}
 
-.comment-box{
-background:#f1f2f3;
-padding:15px;
-border-radius:10px;
-margin-top:20px;
-}
+/* HERO */
+.hero{background:var(--white);padding:28px 20px 24px;border-top:4px solid var(--red);box-shadow:var(--shadow);margin-bottom:0;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;background:radial-gradient(circle,rgba(211,47,47,0.05) 0%,transparent 70%);pointer-events:none}
+.hero-promo-badge{display:inline-block;background:var(--red);color:#fff;font-size:0.62rem;font-weight:900;letter-spacing:0.12em;padding:4px 12px;border-radius:2px;margin-bottom:14px}
+.hero h1{font-size:1.42rem;line-height:1.42;font-weight:900;margin-bottom:14px;color:var(--text)}
+.hero h1 em{font-style:normal;color:var(--red)}
+.hero h1 strong{color:var(--green)}
+.hero-bullets{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.hero-bullet{background:var(--green-pale);color:var(--green);font-size:0.72rem;font-weight:700;padding:5px 12px;border-radius:20px;border:1px solid rgba(0,200,83,0.3)}
+.hero-sub{font-size:0.82rem;color:var(--text-soft);margin-bottom:20px;font-weight:600}
+.hero-meta{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;font-size:0.68rem;color:var(--text-muted);margin-bottom:20px}
+.live-count{color:var(--green);font-weight:700}
 
-.comment{
-border-bottom:1px solid #ddd;
-padding:10px 0;
-font-size:14px;
-}
+/* SPOTS BAR */
+.spots-bar{display:inline-flex;align-items:center;gap:8px;background:var(--red-pale);border:1px solid rgba(211,47,47,0.2);border-radius:4px;padding:8px 14px;margin-bottom:18px;font-size:0.78rem;font-weight:700;color:var(--red)}
+.spots-dot{width:7px;height:7px;background:var(--red);border-radius:50%;animation:blink 1.2s infinite}
 
-.name{
-font-weight:bold;
-color:#333;
-}
+/* ARROW */
+.arrow-label{font-weight:900;font-size:0.88rem;color:var(--green);margin:0 0 8px;letter-spacing:0.06em;animation:bounce 1.6s ease-in-out infinite}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(4px)}}
 
-.time{
-color:#999;
-font-size:12px;
-}
+/* CTA BUTTON */
+.cta-btn{display:block;background:linear-gradient(180deg,var(--green2) 0%,var(--green) 100%);color:#000;text-align:center;padding:19px 20px 15px;text-decoration:none;font-weight:900;font-size:1.05rem;line-height:1.35;border-radius:6px;box-shadow:0 6px 24px rgba(0,200,83,0.35);transition:all 0.2s;position:relative;overflow:hidden}
+.cta-btn::after{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.25),transparent);animation:shine 2.5s ease-in-out infinite}
+@keyframes shine{0%{left:-100%}50%,100%{left:160%}}
+.cta-btn:active{transform:scale(0.98)}
+.cta-sub{display:block;font-size:0.72rem;font-weight:600;margin-top:5px;opacity:0.75}
+.cta-note{text-align:center;font-size:0.66rem;color:var(--text-muted);margin-top:7px}
+.cta-lock{text-align:center;font-size:0.67rem;color:var(--text-muted);margin-top:8px;display:flex;align-items:center;justify-content:center;gap:5px}
+.cta-section{padding:20px 20px 0}
 
-.highlight{
-background:#fff3cd;
-padding:10px;
-border-radius:8px;
-margin:15px 0;
-}
+/* TRUST BADGES */
+.trust-badges{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:13px}
+.trust-badge{display:flex;align-items:center;gap:4px;font-size:0.67rem;font-weight:700;color:var(--text-soft);background:var(--bg);border:1px solid var(--border);padding:5px 10px;border-radius:20px}
 
-.steps{
-background:#f9fafb;
-padding:15px;
-border-radius:10px;
-}
+/* PROOF BAR */
+.proof-bar{background:var(--green-pale);border-top:1px solid rgba(0,200,83,0.25);border-bottom:1px solid rgba(0,200,83,0.25);padding:10px 20px;display:flex;align-items:center;gap:9px;font-size:0.74rem;font-weight:700;color:#2e7d32}
+.proof-dot{width:7px;height:7px;background:var(--green);border-radius:50%;flex-shrink:0;animation:blink 1.8s infinite}
 
-.step{
-margin-bottom:10px;
-}
+/* WHY SECTION */
+.why-section{background:var(--white);padding:24px 20px;box-shadow:var(--shadow)}
+.section-title{font-size:1.05rem;font-weight:900;color:var(--text);border-bottom:2px solid var(--red);padding-bottom:10px;margin-bottom:18px;line-height:1.4}
+.why-card{background:var(--bg);border-left:4px solid var(--green);border-radius:4px;padding:14px 16px;margin-bottom:12px}
+.why-card:last-child{margin-bottom:0}
+.why-card h4{font-size:0.9rem;font-weight:700;color:var(--text);margin-bottom:5px;display:flex;align-items:center;gap:7px}
+.why-card p{font-size:0.76rem;color:var(--text-soft);line-height:1.65}
 
-.footer{
-font-size:12px;
-color:#777;
-margin-top:20px;
-text-align:center;
-}
+/* DIVIDER */
+.divider{height:10px;background:var(--bg)}
 
+/* QUIZ */
+.quiz-section{background:var(--white);padding:24px 20px;box-shadow:var(--shadow)}
+.quiz-head{text-align:center;margin-bottom:22px}
+.quiz-head h2{font-size:1.08rem;font-weight:900;color:var(--text);margin-bottom:6px}
+.quiz-head p{font-size:0.76rem;color:var(--text-muted)}
+.quiz-badge{display:inline-block;background:#fff8e1;color:#b08d00;border:1px solid #ffe082;font-size:0.68rem;font-weight:700;padding:4px 12px;border-radius:20px;margin-bottom:14px}
+
+.prog-wrap{margin-bottom:20px}
+.prog-label{display:flex;justify-content:space-between;font-size:0.7rem;font-weight:700;color:var(--text-muted);margin-bottom:7px}
+.prog-bar{height:5px;background:var(--border);border-radius:4px;overflow:hidden}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--green),var(--green2));border-radius:4px;width:0%;transition:width 0.55s cubic-bezier(0.4,0,0.2,1)}
+
+.q-card{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:22px 18px 18px;display:none;animation:slideIn 0.3s ease}
+.q-card.active{display:block}
+@keyframes slideIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.q-num{font-size:0.62rem;font-weight:700;letter-spacing:0.14em;color:var(--red);text-transform:uppercase;margin-bottom:9px;display:flex;align-items:center;gap:6px}
+.q-num::before{content:'';display:block;width:16px;height:2px;background:var(--red)}
+.q-text{font-size:1.02rem;font-weight:700;color:var(--text);line-height:1.5;margin-bottom:18px}
+.q-emoji{font-size:1.2rem;margin-right:6px}
+.options{display:flex;flex-direction:column;gap:9px}
+.opt-btn{background:var(--white);border:2px solid var(--border);border-radius:6px;padding:13px 15px;text-align:left;cursor:pointer;font-family:inherit;font-size:0.84rem;font-weight:500;color:var(--text-soft);display:flex;align-items:center;gap:11px;transition:all 0.18s ease}
+.opt-btn:hover,.opt-btn:active{border-color:var(--green);background:var(--green-pale);color:var(--text);transform:translateX(4px)}
+.opt-btn.selected{border-color:var(--green);background:var(--green-pale);color:#1b5e20;font-weight:700}
+.opt-letter{width:28px;height:28px;background:var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:900;flex-shrink:0;transition:all 0.18s;color:var(--text-soft)}
+.opt-btn.selected .opt-letter{background:var(--green);color:#000}
+
+/* ANALYZING */
+.analyzing{display:none;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:38px 20px;text-align:center}
+.analyzing.active{display:block;animation:slideIn 0.3s ease}
+.analyzing-icon{font-size:2rem;margin-bottom:12px;animation:spin 2s linear infinite;display:inline-block}
+@keyframes spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+.analyzing h3{font-size:1rem;font-weight:700;color:var(--text);margin-bottom:5px}
+.analyzing p{font-size:0.76rem;color:var(--text-muted);margin-bottom:18px}
+.loader-wrap{height:5px;background:var(--border);border-radius:4px;overflow:hidden;margin-bottom:11px}
+.loader-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--green),var(--green2));border-radius:4px;transition:width 0.35s linear}
+.analyzing-status{font-size:0.78rem;color:var(--green);min-height:20px;font-weight:600}
+
+/* RESULT */
+#result-screen{display:none;animation:fadeUp 0.5s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+.result-hero{background:var(--white);border-top:4px solid var(--green);padding:28px 20px 22px;text-align:center;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.result-hero::before{content:'';position:absolute;top:-60px;left:50%;transform:translateX(-50%);width:280px;height:280px;background:radial-gradient(circle,rgba(0,200,83,0.07) 0%,transparent 70%);pointer-events:none}
+.result-badge-wrap{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.result-badge{display:inline-block;background:var(--green);color:#000;font-size:0.64rem;font-weight:900;letter-spacing:0.12em;padding:4px 13px;border-radius:2px}
+.result-badge.sub{background:var(--green-pale);color:#1b5e20;border:1px solid rgba(0,200,83,0.3)}
+.result-hero h2{font-size:1.28rem;font-weight:900;color:var(--text);line-height:1.45;margin-bottom:8px}
+.result-hero h2 em{font-style:normal;color:var(--green)}
+.result-hero p{font-size:0.78rem;color:var(--text-soft);line-height:1.6}
+
+/* AI MSG */
+.ai-msg-box{background:var(--green-pale);border:1px solid rgba(0,200,83,0.3);border-left:3px solid var(--green);padding:16px 18px}
+.ai-msg-header{display:flex;align-items:center;gap:8px;font-size:0.67rem;font-weight:700;color:#2e7d32;letter-spacing:0.08em;margin-bottom:10px}
+.ai-spinner{width:13px;height:13px;border:2px solid rgba(0,200,83,0.2);border-top-color:var(--green);border-radius:50%;animation:spin 0.8s linear infinite;flex-shrink:0}
+#ai-msg-text{font-size:0.85rem;line-height:1.8;color:var(--text);min-height:56px}
+.ai-cursor{display:inline-block;width:2px;height:15px;background:var(--green);margin-left:2px;animation:blink 0.8s step-end infinite;vertical-align:middle}
+
+/* MUGEN TABLE */
+.mugen-box{background:var(--white);border-top:3px solid var(--black);padding:20px 20px;box-shadow:var(--shadow)}
+.mugen-box-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:15px}
+.mugen-box-title{font-size:0.96rem;font-weight:900;color:var(--text)}
+.mugen-box-title em{color:var(--red);font-style:normal}
+.deadline-tag{font-size:0.62rem;font-weight:700;background:var(--red-pale);border:1px solid rgba(211,47,47,0.3);color:var(--red);padding:3px 9px;border-radius:2px}
+.cb-table{width:100%;border-collapse:collapse}
+.cb-table thead tr{background:var(--bg)}
+.cb-table th{font-size:0.62rem;font-weight:700;letter-spacing:0.08em;color:var(--text-muted);padding:8px 10px;text-align:left;border-bottom:2px solid var(--border)}
+.cb-table td{font-size:0.8rem;color:var(--text-soft);padding:9px 10px;border-bottom:1px solid var(--border)}
+.cb-table tr.hl td{background:var(--green-pale);color:#1b5e20;font-weight:700}
+.cb-table td.unlimited{color:var(--green);font-weight:900;font-size:0.95rem}
+.cb-note{font-size:0.63rem;color:var(--text-muted);margin-top:10px;line-height:1.5}
+
+/* BONUS */
+.bonus-section{background:var(--white);padding:22px 20px;box-shadow:var(--shadow)}
+.section-label{font-size:0.64rem;font-weight:900;letter-spacing:0.12em;color:var(--red);text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.section-label::after{content:'';flex:1;height:2px;background:var(--border)}
+.bonus-item{display:flex;align-items:flex-start;gap:13px;padding:14px 0;border-bottom:1px solid var(--border)}
+.bonus-item:last-child{border-bottom:none}
+.bonus-num{width:36px;height:36px;flex-shrink:0;background:var(--green);color:#000;font-weight:900;font-size:0.82rem;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 10px rgba(0,200,83,0.3);margin-top:2px}
+.bonus-detail h4{font-size:0.88rem;font-weight:700;color:var(--text);margin-bottom:3px}
+.bonus-detail p{font-size:0.74rem;color:var(--text-muted);line-height:1.5}
+.bonus-amount{font-size:1rem;font-weight:900;color:var(--green);margin-top:5px}
+
+/* 3 STEPS */
+.steps-section{background:var(--white);padding:22px 20px;box-shadow:var(--shadow)}
+.step-card{display:flex;align-items:flex-start;gap:14px;padding:14px 0;border-bottom:1px solid var(--border);position:relative}
+.step-card:last-child{border-bottom:none}
+.step-card::before{content:'';position:absolute;left:18px;top:50px;width:2px;height:calc(100% - 36px);background:linear-gradient(180deg,var(--green),transparent)}
+.step-card:last-child::before{display:none}
+.step-num{width:36px;height:36px;flex-shrink:0;background:var(--green);color:#000;font-weight:900;font-size:1rem;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 10px rgba(0,200,83,0.3);margin-top:1px}
+.step-body h4{font-size:0.9rem;font-weight:700;color:var(--text);margin-bottom:3px}
+.step-body p{font-size:0.76rem;color:var(--text-soft);line-height:1.55}
+.step-time{display:inline-block;font-size:0.62rem;font-weight:700;color:var(--green);background:var(--green-pale);border:1px solid rgba(0,200,83,0.3);padding:2px 8px;border-radius:10px;margin-top:5px}
+
+/* TESTIMONIALS */
+.testi-section{background:var(--white);padding:22px 20px;box-shadow:var(--shadow)}
+.testi-grid{display:flex;flex-direction:column;gap:12px}
+.r-card{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:16px}
+.r-top{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.r-av{width:42px;height:42px;flex-shrink:0;background:linear-gradient(135deg,#e8f5e9,#c8e6c9);border:2px solid var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#2e7d32;font-weight:900;font-size:0.95rem}
+.r-name{font-size:0.82rem;font-weight:700;color:var(--text)}
+.r-sub{font-size:0.67rem;color:var(--text-muted)}
+.r-stars{color:#f9a825;font-size:0.8rem;margin-top:2px}
+.r-text{font-size:0.82rem;color:var(--text-soft);line-height:1.75;font-style:italic;border-left:2px solid rgba(0,200,83,0.3);padding-left:11px}
+.r-result{margin-top:9px;padding:7px 11px;background:var(--green-pale);border:1px solid rgba(0,200,83,0.25);border-radius:3px;font-size:0.73rem;color:#2e7d32;font-weight:700}
+
+/* TRUST GRID */
+.trust-section{background:var(--white);padding:22px 20px;box-shadow:var(--shadow)}
+.trust-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.trust-card{background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:13px}
+.trust-icon{font-size:1.3rem;margin-bottom:6px}
+.trust-card h5{font-size:0.75rem;font-weight:700;color:var(--text);margin-bottom:3px}
+.trust-card p{font-size:0.67rem;color:var(--text-muted);line-height:1.4}
+
+/* FINAL WARNING */
+.final-warning{background:var(--red);padding:26px 20px;text-align:center;position:relative;overflow:hidden}
+.final-warning::before{content:'';position:absolute;top:-50px;left:50%;transform:translateX(-50%);width:260px;height:260px;background:radial-gradient(circle,rgba(255,255,255,0.08) 0%,transparent 70%);pointer-events:none}
+.fw-label{display:inline-block;background:rgba(255,255,255,0.15);color:#fff;font-size:0.72rem;font-weight:900;letter-spacing:0.14em;padding:4px 14px;border-radius:2px;margin-bottom:14px}
+.final-warning h2{font-size:1.2rem;font-weight:900;color:#fff;line-height:1.45;margin-bottom:8px}
+.final-warning h2 em{font-style:normal;color:#ffeb3b}
+.final-warning p{font-size:0.78rem;color:rgba(255,255,255,0.82);margin-bottom:20px;line-height:1.6}
+.final-warning .cta-btn{box-shadow:0 6px 24px rgba(0,0,0,0.25)}
+.fw-badges{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:14px}
+.fw-badge{font-size:0.65rem;font-weight:700;color:rgba(255,255,255,0.8);background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);padding:4px 10px;border-radius:20px;display:flex;align-items:center;gap:4px}
+
+/* FOOTER */
+.site-footer{background:var(--black);padding:22px 20px 16px;text-align:center}
+.footer-logo{font-size:1rem;font-weight:900;color:#fff;margin-bottom:10px}
+.footer-logo em{color:var(--green2);font-style:normal}
+.footer-links{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;margin-bottom:14px}
+.footer-links a{font-size:0.67rem;color:rgba(255,255,255,0.4);text-decoration:none}
+.footer-links a:hover{color:var(--green2)}
+.footer-copy{font-size:0.62rem;color:rgba(255,255,255,0.25)}
+
+/* RISK */
+.risk{background:var(--black);padding:16px 20px 8px;font-size:0.63rem;color:rgba(255,255,255,0.25);line-height:1.65;border-top:1px solid rgba(255,255,255,0.07)}
+.risk strong{color:rgba(255,255,255,0.4);display:block;margin-bottom:4px}
+
+/* STICKY */
+.sticky{position:fixed;bottom:0;left:0;width:100%;background:rgba(17,17,17,0.97);backdrop-filter:blur(12px);border-top:2px solid var(--green);padding:10px 15px;z-index:1000;display:none}
+.sticky.visible{display:block}
+.sticky .cta-btn{font-size:0.93rem;padding:14px 18px 11px}
+
+.divider{height:8px;background:var(--bg)}
 </style>
 </head>
-
 <body>
+
+<!-- SCROLL POPUP -->
+<div class="scroll-popup" id="scroll-popup">
+  <div class="scroll-popup-txt"><em>MUGEN無限キャッシュバック</em>は3月31日で終了<br>残り参加枠わずか — 今すぐ確認</div>
+  <a href="https://affx.click/Ga7f1" class="scroll-popup-btn track-link" id="sp-cta">参加する →</a>
+  <div class="scroll-popup-close" id="popup-close">✕</div>
+</div>
+
+<div class="toast" id="toast">
+  <span class="live-dot"></span>
+  <span class="toast-name" id="toast-name"></span>さんが<span id="toast-action"></span>
+</div>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-inner">
+    <span>🟢 MUGEN無限キャッシュバック開催中</span>
+    <span>💰 今月の獲得総額 <em>$2,847,293</em></span>
+    <span>⚡ ゼロカット・追証なし</span>
+    <span>🏆 XMTrading 2009年創業 世界180カ国</span>
+    <span>✅ 入金不要¥13,000ボーナス受取中</span>
+    <span>🟢 MUGEN無限キャッシュバック開催中</span>
+    <span>💰 今月の獲得総額 <em>$2,847,293</em></span>
+    <span>⚡ ゼロカット・追証なし</span>
+    <span>🏆 XMTrading 2009年創業 世界180カ国</span>
+    <span>✅ 入金不要¥13,000ボーナス受取中</span>
+  </div>
+</div>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <div class="top-bar-txt">🔥 3月限定：MUGEN無限キャッシュバック<em>開催中</em>— 3月31日終了</div>
+</div>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="site-logo">FX Bonus<em>Navigator</em><span>海外FX・投資情報メディア</span></div>
+  <div class="header-badge">2026年 特別プロモーション</div>
+</header>
 
 <div class="container">
 
-<div class="badge">話題</div>
+  <!-- ═══ HERO ═══ -->
+  <div class="hero" id="intro-section">
+    <div class="hero-promo-badge">【警告】3月限定</div>
+    <h1>国内FXを使い続ける人は<br>この<em>「無限キャッシュバック」</em>を<br><strong>知らないまま損しています</strong></h1>
+    <div class="hero-bullets">
+      <span class="hero-bullet">✓ ゼロカットシステム</span>
+      <span class="hero-bullet">✓ 借金リスクなし</span>
+      <span class="hero-bullet">✓ 完全無料口座</span>
+    </div>
+    <p class="hero-sub">XMTrading公式・安心の日本語サポート対応</p>
+    <div class="hero-meta">
+      <span>📅 2026年3月7日更新</span>
+      <span>⏱️ 約2分</span>
+      <span>👁️ <span class="live-count" id="view-count">4,291</span>人が閲覧中</span>
+    </div>
 
-<h1>
-普通の会社員が<br>
-<b>副収入で月30万円</b>を達成した方法とは？
-</h1>
+    <div class="spots-bar">
+      <span class="spots-dot"></span>
+      残り参加枠：<span id="spots-num">47</span>名
+    </div>
 
-<img class="hero-img" src="https://i.imgur.com/8Km9tLL.jpg">
+    <div class="arrow-label">↓↓公式サイトはこちら↓↓</div>
+    <a href="https://affx.click/Ga7f1" class="cta-btn track-link">
+      今すぐ¥13,000ボーナスを受け取る
+      <span class="cta-sub">✓ 口座開設無料　✓ 入金不要　✓ 最短2分で完了</span>
+    </a>
+    <div class="cta-note">※クレジットカード登録不要</div>
+    <div class="trust-badges">
+      <div class="trust-badge"><span>⚡</span>ゼロカットシステム</div>
+      <div class="trust-badge"><span>🛡️</span>借金リスクなし</div>
+      <div class="trust-badge"><span>✅</span>完全無料口座</div>
+    </div>
+  </div>
 
-<p>
-東京在住の32歳の会社員が、  
-わずか数ヶ月で副収入を作った方法が  
-SNSで話題になっています。
-</p>
+  <!-- PROOF BAR -->
+  <div class="proof-bar">
+    <span class="proof-dot"></span>
+    今月 <strong style="margin:0 4px">15,000人以上</strong> の日本人がXMTradingを選びました
+  </div>
 
-<p>
-彼は特別なスキルもなく、  
-最初は<strong>投資初心者</strong>でした。
-</p>
+  <div class="divider"></div>
 
-<div class="highlight">
-しかしある海外の取引サービスを知ってから  
-状況が変わりました。
+  <!-- ═══ WHY SECTION ═══ -->
+  <div class="why-section">
+    <div class="section-title">なぜ今月15,000人以上の日本人が<br>XMTradingを選んだのか</div>
+    <div class="why-card">
+      <h4><span>🛡️</span>圧倒的な信頼性と安全性（追証なし）</h4>
+      <p>ゼロカットシステムを採用しているため、入金額以上の損失が発生するリスク（借金）が一切ありません。厳格な金融ライセンスを保有し、日本のトレーダーにとって最も安全な環境を提供しています。</p>
+    </div>
+    <div class="why-card">
+      <h4><span>⚡</span>業界トップクラスの出金スピード</h4>
+      <p>利益が出た際の出金拒否の事例がなく、迅速かつ確実な出金処理が高く評価されています。長年にわたる日本市場での実績が、その信頼を裏付けています。</p>
+    </div>
+    <div class="why-card">
+      <h4><span>💰</span>リスクゼロで始められる「¥13,000ボーナス」</h4>
+      <p>口座開設するだけで、自己資金0円からリアルトレードを開始できる¥13,000のボーナスが付与されます。完全ノーリスクでFXの世界を体験できる、今だけの特別な機会です。</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ═══ QUIZ ═══ -->
+  <div class="quiz-section" id="quiz-section">
+    <div class="quiz-head">
+      <div class="quiz-badge">🎁 ボーナス受取資格チェック（約2分）</div>
+      <h2>📋 あなたのFX取引スタイル診断</h2>
+      <p>回答を分析し、最適なキャッシュバック戦略を提案します</p>
+    </div>
+
+    <div class="prog-wrap">
+      <div class="prog-label"><span id="prog-text">質問 1 / 5</span><span id="prog-pct">0%</span></div>
+      <div class="prog-bar"><div class="prog-fill" id="prog-fill"></div></div>
+    </div>
+
+    <div class="q-card active" id="q1">
+      <div class="q-num">質問 01 / 05</div>
+      <div class="q-text"><span class="q-emoji">💼</span>現在のFX取引状況を教えてください</div>
+      <div class="options">
+        <button class="opt-btn" onclick="pick(1,'a',this)"><span class="opt-letter">A</span>国内業者で取引中だが、限界を感じている</button>
+        <button class="opt-btn" onclick="pick(1,'b',this)"><span class="opt-letter">B</span>海外FXに興味はあるが、まだ試していない</button>
+        <button class="opt-btn" onclick="pick(1,'c',this)"><span class="opt-letter">C</span>以前取引していたが、今は休んでいる</button>
+        <button class="opt-btn" onclick="pick(1,'d',this)"><span class="opt-letter">D</span>これからFXを始めたいと思っている</button>
+      </div>
+    </div>
+
+    <div class="q-card" id="q2">
+      <div class="q-num">質問 02 / 05</div>
+      <div class="q-text"><span class="q-emoji">📊</span>国内FXで最も不満に感じることは？</div>
+      <div class="options">
+        <button class="opt-btn" onclick="pick(2,'a',this)"><span class="opt-letter">A</span>レバレッジが25倍までと低すぎる</button>
+        <button class="opt-btn" onclick="pick(2,'b',this)"><span class="opt-letter">B</span>取引してもキャッシュバックや報酬がない</button>
+        <button class="opt-btn" onclick="pick(2,'c',this)"><span class="opt-letter">C</span>口座開設・入金ボーナスがほぼない</button>
+        <button class="opt-btn" onclick="pick(2,'d',this)"><span class="opt-letter">D</span>まだ国内FXを使っていない</button>
+      </div>
+    </div>
+
+    <div class="q-card" id="q3">
+      <div class="q-num">質問 03 / 05</div>
+      <div class="q-text"><span class="q-emoji">📈</span>月に何ロット程度取引しますか（または目標）？</div>
+      <div class="options">
+        <button class="opt-btn" onclick="pick(3,'a',this)"><span class="opt-letter">A</span>まだ始めていない / 少額から試したい</button>
+        <button class="opt-btn" onclick="pick(3,'b',this)"><span class="opt-letter">B</span>5〜30ロット程度（月$15〜$105相当）</button>
+        <button class="opt-btn" onclick="pick(3,'c',this)"><span class="opt-letter">C</span>30〜100ロット程度（月$120〜$500相当）</button>
+        <button class="opt-btn" onclick="pick(3,'d',this)"><span class="opt-letter">D</span>100ロット以上（無制限キャッシュバック対象）</button>
+      </div>
+    </div>
+
+    <div class="q-card" id="q4">
+      <div class="q-num">質問 04 / 05</div>
+      <div class="q-text"><span class="q-emoji">🎯</span>あなたの取引スタイルは？</div>
+      <div class="options">
+        <button class="opt-btn" onclick="pick(4,'a',this)"><span class="opt-letter">A</span>短期売買（スキャルピング・デイトレード）</button>
+        <button class="opt-btn" onclick="pick(4,'b',this)"><span class="opt-letter">B</span>数日〜数週間保有（スイングトレード）</button>
+        <button class="opt-btn" onclick="pick(4,'c',this)"><span class="opt-letter">C</span>ゴールド・仮想通貨CFDも取引したい</button>
+        <button class="opt-btn" onclick="pick(4,'d',this)"><span class="opt-letter">D</span>まだスタイルが決まっていない</button>
+      </div>
+    </div>
+
+    <div class="q-card" id="q5">
+      <div class="q-num">質問 05 / 05</div>
+      <div class="q-text"><span class="q-emoji">🚀</span>今すぐXMTradingを試すとしたら？</div>
+      <div class="options">
+        <button class="opt-btn" onclick="pick(5,'a',this)"><span class="opt-letter">A</span>0円から¥13,000ボーナスで試してみたい</button>
+        <button class="opt-btn" onclick="pick(5,'b',this)"><span class="opt-letter">B</span>少額入金して100%ボーナス＋MUGENも活用したい</button>
+        <button class="opt-btn" onclick="pick(5,'c',this)"><span class="opt-letter">C</span>まず仕組みを理解してから判断したい</button>
+        <button class="opt-btn" onclick="pick(5,'d',this)"><span class="opt-letter">D</span>今すぐ本格的に始める準備ができている</button>
+      </div>
+    </div>
+
+    <div class="analyzing" id="analyzing">
+      <div class="analyzing-icon">⚙️</div>
+      <h3>あなたのプロフィールを審査中…</h3>
+      <p>回答データをもとにボーナス受取資格を確認しています</p>
+      <div class="loader-wrap"><div class="loader-fill" id="loader-fill"></div></div>
+      <div class="analyzing-status" id="analyzing-status">回答データを照合しています…</div>
+    </div>
+  </div><!-- /quiz-section -->
+
+  <div class="divider"></div>
+
+  <!-- ═══ RESULT ═══ -->
+  <div id="result-screen">
+
+    <!-- RESULT HERO -->
+    <div class="result-hero">
+      <div class="result-badge-wrap">
+        <div class="result-badge">✓ 審査完了</div>
+        <div class="result-badge sub">✅ ボーナス対象確認済み</div>
+      </div>
+      <h2>おめでとうございます！<br>あなたは<em>XMTrading</em>のボーナス対象です</h2>
+      <p>回答を分析した結果、MUGENキャッシュバックを活用することで<br>現在の取引収益を大幅に改善できると確認されました</p>
+    </div>
+
+    <!-- CTA #2 -->
+    <div style="padding:20px 20px 0;background:var(--white);box-shadow:var(--shadow)">
+      <div class="arrow-label">↓↓公式サイトはこちら↓↓</div>
+      <a href="https://affx.click/Ga7f1" class="cta-btn track-link">
+        今すぐ¥13,000を受け取りMUGENに参加する
+        <span class="cta-sub">✓ 登録は2分で完了　✓ クレジットカード不要　✓ 入金不要</span>
+      </a>
+      <div class="cta-note">※クレジットカード登録不要</div>
+      <div class="trust-badges" style="padding-bottom:18px">
+        <div class="trust-badge"><span>⚡</span>ゼロカットシステム</div>
+        <div class="trust-badge"><span>🛡️</span>借金リスクなし</div>
+        <div class="trust-badge"><span>✅</span>完全無料口座</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- AI MSG -->
+    <div class="ai-msg-box">
+      <div class="ai-msg-header">
+        <div class="ai-spinner" id="ai-spin"></div>
+        <span id="ai-label">あなたへのメッセージを生成中...</span>
+      </div>
+      <div id="ai-msg-text"><span class="ai-cursor"></span></div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- MUGEN TABLE -->
+    <div class="mugen-box">
+      <div class="mugen-box-header">
+        <div class="mugen-box-title"><em>MUGEN</em>無限キャッシュバック — あなたの獲得予測</div>
+        <div class="deadline-tag">3月31日終了</div>
+      </div>
+      <table class="cb-table">
+        <thead><tr><th>月間取引量</th><th>ロット単価</th><th>最大獲得額</th></tr></thead>
+        <tbody>
+          <tr><td>5〜14ロット</td><td>$3 / ロット</td><td>$30</td></tr>
+          <tr><td>15〜29ロット</td><td>$3.5 / ロット</td><td>$52.50</td></tr>
+          <tr><td>30〜49ロット</td><td>$4 / ロット</td><td>$80</td></tr>
+          <tr><td>50〜99ロット</td><td>$5 / ロット</td><td>$125</td></tr>
+          <tr class="hl"><td>100ロット以上</td><td>$6 / ロット</td><td class="unlimited">∞ 無制限</td></tr>
+        </tbody>
+      </table>
+      <div class="cb-note">※対象：FX・ゴールド・シルバー・BTC/USD他。口座残高（ボーナスクレジット除く）での取引のみ対象。利用規約適用。</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- BONUS -->
+    <div class="bonus-section">
+      <div class="section-label">さらに受け取れる特典</div>
+      <div class="bonus-item">
+        <div class="bonus-num">1</div>
+        <div class="bonus-detail">
+          <h4>入金不要ボーナス</h4>
+          <p>口座開設・本人確認（KYC）完了だけで即付与。自己資金ゼロでリアル市場を体験。</p>
+          <div class="bonus-amount">¥13,000 相当</div>
+        </div>
+      </div>
+      <div class="bonus-item">
+        <div class="bonus-num">2</div>
+        <div class="bonus-detail">
+          <h4>初回入金100%ボーナス</h4>
+          <p>入金額と同額が証拠金に追加。$5から適用、$500超で+20%ボーナスも。</p>
+          <div class="bonus-amount">最大 $10,000</div>
+        </div>
+      </div>
+      <div class="bonus-item">
+        <div class="bonus-num">3</div>
+        <div class="bonus-detail">
+          <h4>トレードコンテスト</h4>
+          <p>毎月開催。入賞100名に出金可能な賞金。経験レベル不問で参加可能。</p>
+          <div class="bonus-amount">総額 $100,000 / 月</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- 3 STEPS -->
+    <div class="steps-section">
+      <div class="section-label">口座開設〜キャッシュバック参加（最短3分）</div>
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h4>無料で口座開設</h4>
+          <p>メールアドレスと基本情報のみ。クレジットカード登録不要。</p>
+          <span class="step-time">⏱ 約30秒</span>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h4>本人確認（KYC）完了</h4>
+          <p>身分証をアップロードするだけ。完了後すぐに¥13,000ボーナスが付与されます。</p>
+          <span class="step-time">⏱ 約1〜2分</span>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h4>MUGENに登録して取引開始</h4>
+          <p>マイページから1クリックでMUGEN参加。取引するたびにキャッシュバックが自動で蓄積されます。</p>
+          <span class="step-time">✅ 完了</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- TESTIMONIALS -->
+    <div class="testi-section">
+      <div class="section-label">利用者の声と実績</div>
+      <div class="testi-grid">
+        <div class="r-card">
+          <div class="r-top">
+            <div class="r-av">T</div>
+            <div>
+              <div class="r-name">Takashi M.（41歳・会社員）</div>
+              <div class="r-sub">神奈川県在住 ｜ FX歴6年</div>
+              <div class="r-stars">★★★★★</div>
+            </div>
+          </div>
+          <div class="r-text">「国内業者でずっとやっていましたが、取引しても何も返ってこないのがずっと不満でした。XMに移ってMUGENキャッシュバックに参加したら、先月だけで$240のキャッシュバックが戻ってきました。同じ取引をするだけで収入が増えるのは単純にすごい。」</div>
+          <div class="r-result">📈 先月の獲得額：$240（約¥36,000相当）</div>
+        </div>
+        <div class="r-card">
+          <div class="r-top">
+            <div class="r-av">Y</div>
+            <div>
+              <div class="r-name">Yuki S.（28歳・フリーランス）</div>
+              <div class="r-sub">東京都在住 ｜ FX初心者</div>
+              <div class="r-stars">★★★★★</div>
+            </div>
+          </div>
+          <div class="r-text">「初期費用ゼロでFXを始められました。もらったボーナスだけで取引し、1ヶ月以内に初めての利益を出すことができました！」</div>
+          <div class="r-result">📈 初月成果：ボーナスのみで取引開始・プラス収支達成</div>
+        </div>
+        <div class="r-card">
+          <div class="r-top">
+            <div class="r-av">K</div>
+            <div>
+              <div class="r-name">Kenji T.（35歳・会社員）</div>
+              <div class="r-sub">大阪府在住 ｜ FX歴2年</div>
+              <div class="r-stars">★★★★★</div>
+            </div>
+          </div>
+          <div class="r-text">「追証なし（借金リスクゼロ）という点が決め手でした。スマホだけで簡単に登録できたのも良かったです。MUGENキャッシュバックは本当に毎月振り込まれるので驚きです。」</div>
+          <div class="r-result">📈 副収入：毎月安定したキャッシュバック受取中</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- TRUST GRID -->
+    <div class="trust-section">
+      <div class="section-label">信頼性・安全性</div>
+      <div class="trust-grid">
+        <div class="trust-card"><div class="trust-icon">🛡️</div><h5>金融ライセンス取得</h5><p>セーシェルFSA規制。2009年創業、180カ国以上展開</p></div>
+        <div class="trust-card"><div class="trust-icon">🏦</div><h5>完全分別管理</h5><p>顧客資金はTier1銀行で分別管理。運営資金と混合なし</p></div>
+        <div class="trust-card"><div class="trust-icon">⚡</div><h5>ゼロカット採用</h5><p>追証（借金）リスクは一切発生しません</p></div>
+        <div class="trust-card"><div class="trust-icon">🇯🇵</div><h5>日本語サポート</h5><p>24時間対応。入出金手数料完全無料</p></div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- FINAL WARNING -->
+    <div class="final-warning">
+      <div class="fw-label">⚠️ 最終警告</div>
+      <h2>このプロモーションを<br><em>見逃すと損します</em></h2>
+      <p>2026年3月限定：MUGEN無限キャッシュバックは3月31日に終了します。同じ取引をするだけで毎月キャッシュバックが得られるこの機会を、今月逃す理由はありません。</p>
+      <div class="arrow-label" style="color:#ffeb3b">↓↓公式サイトはこちら↓↓</div>
+      <a href="https://affx.click/Ga7f1" class="cta-btn track-link">
+        今すぐ¥13,000を受け取りMUGENに参加する
+        <span class="cta-sub">✓ 最短3分で開設　✓ 入金不要　✓ クレジットカード不要</span>
+      </a>
+      <div class="fw-badges">
+        <div class="fw-badge"><span>⚡</span>ゼロカットシステム</div>
+        <div class="fw-badge"><span>🚫</span>借金リスクなし</div>
+        <div class="fw-badge"><span>🆓</span>完全無料口座</div>
+      </div>
+    </div>
+
+  </div><!-- /result-screen -->
+
+  <!-- RISK -->
+  <div class="risk">
+    <strong>🚨 リスク開示・免責事項</strong>
+    FX/CFD取引は複雑な金融商品であり、ハイレバレッジの使用により投資元本を超える損失が生じるリスクがあります。過去の実績は将来の結果を保証しません。余剰資金の範囲内で取引してください。本コンテンツはXMTradingの公式アフィリエイトパートナーとして情報提供を行うものであり、投資助言ではありません。掲載している体験談は個人の経験であり、同等の成果を保証するものではありません。MUGENキャッシュバックキャンペーンは2026年3月3日〜31日、利用規約適用。FX Bonus Navigatorは独立した情報ポータル兼アフィリエイトサイトです。
+  </div>
+
+</div><!-- /container -->
+
+<!-- FOOTER -->
+<div class="site-footer">
+  <div class="footer-logo">FX Bonus<em>Navigator</em></div>
+  <div class="footer-links">
+    <a href="#">プライバシーポリシー</a>
+    <a href="#">利用規約</a>
+    <a href="#">お問い合わせ</a>
+  </div>
+  <div class="footer-copy">© 2026 FX Bonus Navigator. All rights reserved.</div>
 </div>
 
-<a class="cta" href="YOUR_AFF_LINK">
-↓↓公式サイトはこちら↓↓
-</a>
-
-<h2>実際に試してみた</h2>
-
-<p>
-最初は半信半疑でしたが、  
-無料で口座を作れるとのことで  
-実際に登録してみました。
-</p>
-
-<p>
-手続きは数分で完了。
-</p>
-
-<div class="steps">
-
-<div class="step">
-① 無料アカウントを作成
+<!-- STICKY CTA -->
+<div class="sticky" id="sticky-footer">
+  <a href="https://affx.click/Ga7f1" class="cta-btn track-link">
+    ¥13,000受取＋MUGENキャッシュバック参加
+    <span class="cta-sub">✓ 入金不要　✓ 追証なし　✓ 最短3分</span>
+  </a>
 </div>
 
-<div class="step">
-② スマホで取引を開始
-</div>
+<script>
+// ══════════════════════════════════════════
+// PROPELLERADS S2S POSTBACK MODULE
+// ══════════════════════════════════════════
+const urlP = new URLSearchParams(window.location.search);
+const PA = {
+  clickId    : urlP.get('clickid')    || urlP.get('visitor_id') || '',
+  zoneId     : urlP.get('zoneid')     || urlP.get('zone_id')    || 'direct',
+  campaignId : urlP.get('campaignid') || '',
+  bannerId   : urlP.get('bannerid')   || '',
+  subzoneId  : urlP.get('subzone_id') || '',
+  cost       : urlP.get('cost')       || '',
+  country    : urlP.get('country')    || '',
+  device     : urlP.get('device')     || '',
+  os         : urlP.get('os')         || '',
+};
 
-<div class="step">
-③ 数日後に最初の利益
-</div>
+// Save clickId in cookie (30 days)
+if (PA.clickId) {
+  const exp = new Date(Date.now() + 30 * 864e5).toUTCString();
+  document.cookie = `pa_click_id=${PA.clickId}; expires=${exp}; path=/; SameSite=Lax`;
+}
+if (!PA.clickId) {
+  const m = document.cookie.match(/pa_click_id=([^;]+)/);
+  if (m) PA.clickId = m[1];
+}
+// Clean URL
+if (window.history.replaceState && urlP.toString()) {
+  window.history.replaceState({}, document.title, window.location.pathname);
+}
 
-</div>
+const PA_POSTBACK_BASE = 'http://ad.propellerads.com/conversion.php?aid=1063015&pid=&tid=153705';
+const PA_GOALS = {
+  page_view    : { payout: '0.00' },
+  quiz_start   : { payout: '0.00' },
+  quiz_complete: { payout: '0.00' },
+  cta_click    : { payout: '0.10' },
+};
 
-<p>
-もちろん利益を保証するものではありませんが、  
-多くの人が試している理由は理解できました。
-</p>
+function paSend(goalObj) {
+  if (!PA.clickId) return;
+  let url = `${PA_POSTBACK_BASE}&visitor_id=${encodeURIComponent(PA.clickId)}&payout=${goalObj.payout || '0.00'}`;
+  navigator.sendBeacon ? navigator.sendBeacon(url) : (new Image().src = url);
+}
 
-<a class="cta" href="YOUR_AFF_LINK">
-無料口座開設はこちら
-</a>
+// ══════════════════════════════════════════
+// FACEBOOK PIXEL + GOOGLE RETARGETING EVENTS
+// ══════════════════════════════════════════
+function firePageView() {
+  if (typeof fbq !== 'undefined') fbq('track', 'PageView');
+  if (typeof gtag !== 'undefined') gtag('event', 'page_view');
+  paSend(PA_GOALS.page_view);
+}
 
-<h2>ユーザーの口コミ</h2>
+function fireQuizStart() {
+  if (typeof fbq !== 'undefined') fbq('trackCustom', 'QuizStarted', { zone: PA.zoneId });
+  if (typeof gtag !== 'undefined') gtag('event', 'quiz_started', { zone_id: PA.zoneId });
+  paSend(PA_GOALS.quiz_start);
+}
 
-<div class="comment-box">
+function fireQuizComplete() {
+  if (typeof fbq !== 'undefined') {
+    fbq('trackCustom', 'QuizCompleted', { zone: PA.zoneId, campaign: PA.campaignId });
+    fbq('track', 'Lead');                    // Standard FB Lead event for retargeting
+  }
+  if (typeof gtag !== 'undefined') {
+    gtag('event', 'quiz_completed', { zone_id: PA.zoneId, campaign_id: PA.campaignId });
+    gtag('event', 'generate_lead');          // Google standard conversion
+  }
+  paSend(PA_GOALS.quiz_complete);
+  // Phone vibration feedback
+  if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
+}
 
-<div class="comment">
-<div class="name">佐藤</div>
-数週間で最初の利益が出ました。  
-<div class="time">2時間前</div>
-</div>
+function fireCtaClick(label) {
+  if (typeof fbq !== 'undefined') {
+    fbq('trackCustom', 'CTAClick', { label: label, zone: PA.zoneId });
+    fbq('track', 'InitiateCheckout');        // Retargeting: user showed high intent
+  }
+  if (typeof gtag !== 'undefined') {
+    gtag('event', 'click_cta', { event_category: 'conversion', event_label: label, zone_id: PA.zoneId });
+    gtag('event', 'begin_checkout');
+  }
+  paSend(PA_GOALS.cta_click);
+}
 
-<div class="comment">
-<div class="name">山田</div>
-スマホだけでできるので簡単でした。  
-<div class="time">5時間前</div>
-</div>
+// Fire on page load
+window.addEventListener('load', firePageView);
 
-<div class="comment">
-<div class="name">中村</div>
-初心者でも始められました。  
-<div class="time">昨日</div>
-</div>
+// CTA click listener
+document.addEventListener('click', e => {
+  const link = e.target.closest('.track-link');
+  if (!link) return;
+  const label = link.id || link.textContent.trim().substring(0, 30);
+  fireCtaClick(label);
+});
 
-</div>
+// Update affiliate links with PA params
+function updateLinks() {
+  document.querySelectorAll('.track-link').forEach(link => {
+    try {
+      const url = new URL(link.getAttribute('href'), window.location.href);
+      if (PA.zoneId)     url.searchParams.set('aff_sub',  PA.zoneId);
+      if (PA.clickId)    url.searchParams.set('aff_sub2', PA.clickId);
+      if (PA.campaignId) url.searchParams.set('aff_sub3', PA.campaignId);
+      if (PA.bannerId)   url.searchParams.set('aff_sub4', PA.bannerId);
+      link.setAttribute('href', url.toString());
+    } catch(e) {}
+  });
+}
+document.addEventListener('DOMContentLoaded', updateLinks);
 
-<a class="cta" href="YOUR_AFF_LINK">
-今すぐ始める
-</a>
+// ══════════════════════════════════════════
+// LIVE ELEMENTS
+// ══════════════════════════════════════════
+(function(){
+  const el = document.getElementById('view-count');
+  let n = 4291;
+  setInterval(() => { n += Math.floor(Math.random() * 3); el.textContent = n.toLocaleString('ja-JP'); }, 4500);
+})();
 
-<div class="footer">
-※投資にはリスクがあります。  
-詳細は公式サイトをご確認ください。
-</div>
+// TOASTS
+const names = ['田中','佐藤','鈴木','高橋','渡辺','伊藤','山本','中村','小林','加藤','吉田','山田'];
+const prefs  = ['東京','大阪','神奈川','愛知','福岡','北海道','埼玉','千葉'];
+const acts   = ['口座を開設しました 🎉','MUGENに参加しました 🔥','¥13,000を受け取りました 💰'];
+function showToast() {
+  const t = document.getElementById('toast');
+  document.getElementById('toast-name').textContent = `${prefs[Math.floor(Math.random()*prefs.length)]}の${names[Math.floor(Math.random()*names.length)]}さん`;
+  document.getElementById('toast-action').textContent = acts[Math.floor(Math.random()*acts.length)];
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3800);
+}
+setTimeout(() => { showToast(); setInterval(showToast, 7500); }, 3000);
 
-</div>
+// SPOTS
+let spots = 47;
+setInterval(() => {
+  if (spots > 12) { spots--; const el = document.getElementById('spots-num'); if (el) el.textContent = spots; }
+}, 8000);
 
+// SCROLL POPUP
+(function(){
+  const popup = document.getElementById('scroll-popup');
+  const close = document.getElementById('popup-close');
+  let shown = false;
+  close.addEventListener('click', () => { popup.classList.remove('show'); shown = true; });
+  window.addEventListener('scroll', () => {
+    if (shown) return;
+    if (window.scrollY / (document.body.scrollHeight - window.innerHeight) > 0.35) {
+      popup.classList.add('show'); shown = true;
+      setTimeout(() => popup.classList.remove('show'), 7000);
+    }
+  }, { passive: true });
+})();
+
+// ══════════════════════════════════════════
+// QUIZ
+// ══════════════════════════════════════════
+const ans = {}; let curQ = 1; const TOTAL = 5;
+let quizStarted = false;
+
+function pick(n, c, btn) {
+  if (!quizStarted) { quizStarted = true; fireQuizStart(); }
+  btn.closest('.options').querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  ans[n] = c;
+  setTimeout(() => advance(n), 380);
+}
+
+function advance(n) {
+  if (n < TOTAL) {
+    document.getElementById('q' + n).classList.remove('active');
+    curQ = n + 1;
+    document.getElementById('q' + curQ).classList.add('active');
+    setProgress(curQ);
+  } else {
+    runAnalysis();
+  }
+}
+
+function setProgress(s) {
+  const p = Math.round(((s - 1) / TOTAL) * 100);
+  document.getElementById('prog-fill').style.width = p + '%';
+  document.getElementById('prog-text').textContent = `質問 ${s} / ${TOTAL}`;
+  document.getElementById('prog-pct').textContent  = p + '%';
+}
+
+function runAnalysis() {
+  document.getElementById('q' + TOTAL).classList.remove('active');
+  const sc    = document.getElementById('analyzing'); sc.classList.add('active');
+  const fill  = document.getElementById('loader-fill');
+  const status = document.getElementById('analyzing-status');
+  const ms = ['回答データを照合しています…','取引スタイルを解析中…','ボーナス受取資格を確認中…','キャッシュバック獲得予測を計算中…','レポートを生成中…','✅ 審査完了'];
+  const ps = [15,35,55,75,90,100]; let i = 0;
+  const iv = setInterval(() => {
+    if (i < ms.length) { status.textContent = ms[i]; fill.style.width = ps[i] + '%'; i++; }
+    else { clearInterval(iv); setTimeout(showResult, 400); }
+  }, 520);
+}
+
+// ══════════════════════════════════════════
+// PERSONALIZED MESSAGES
+// ══════════════════════════════════════════
+const msgs = {
+  a:{a:'すでに国内FXで取引されているあなたへ：同じ取引量でも、XMTradingのMUGENキャッシュバックに切り替えるだけで、今まで国内業者に「消えていた」コストが毎月キャッシュバックとして戻ってきます。3月31日の締め切りまでに移行されることを強くお勧めします。',b:'国内FXで取引中のあなたには、XMTradingへの移行が特に効果的です。月5〜30ロットの取引量でも、MUGENキャッシュバックで最大$105相当が毎月自動で積み上がります。3月31日の締め切りを逃さないよう、今すぐ口座開設だけでも済ませておくことをお勧めします。',c:'現在の取引量（30〜100ロット）であれば、MUGENキャッシュバックで毎月$120〜$500相当を獲得できる計算になります。国内業者を使い続けることは、毎月数万円を手放していることと同じです。3月31日までにぜひ移行をご検討ください。',d:'100ロット以上の取引をされているあなたには、MUGENの「無制限」プランが最大の恩恵をもたらします。国内業者ではゼロのキャッシュバックが、XMでは取引するほど青天井で積み上がります。3月31日の締め切り前に、今すぐ手続きを開始されることをお勧めします。'},
+  b:{a:'海外FXにご興味をお持ちのあなたへ：最初の一歩として、¥13,000の入金不要ボーナスは理想的なエントリーポイントです。自己資金ゼロでリアル取引を体験しながら、MUGENキャッシュバックの仕組みを実際に確認してみてください。3月31日のキャンペーン終了前にお試しください。',b:'海外FX未経験のあなたでも、月5〜30ロットの少量取引から始めれば、MUGENで毎月$15〜$105のキャッシュバックを得られます。まずは¥13,000の入金不要ボーナスでリスクなく始められるので、3月31日の締め切り前に一度試してみることをお勧めします。',c:'月30〜100ロットを目標とされているなら、MUGENキャッシュバックの恩恵は非常に大きくなります。海外FX未経験でも、XMTradingは日本語サポートが充実しており安心です。3月31日の期間限定キャンペーン中に口座開設を完了されることをお勧めします。',d:'100ロット以上を目指すトレーダーとして、最初から有利な環境を選ぶことが重要です。XMTradingのMUGENは取引量が増えるほど単価も上がる仕組みで、規模が大きくなるほどメリットも拡大します。3月31日の締め切りまでに今すぐ始めましょう。'},
+  c:{a:'FXを一度経験されたあなたへ：再スタートするなら今月が最適のタイミングです。¥13,000ボーナスで自己資金ゼロからスタートし、MUGENキャッシュバックで取引するたびに報酬を獲得できます。ゼロカットシステムで追証リスクもなく、安心して再挑戦できます。',b:'休止中のあなたが再スタートするなら、月5〜30ロット程度の取引でも$15〜$105のキャッシュバックが得られるMUGENプログラムはとても心強い仕組みです。¥13,000の入金不要ボーナスで元手ゼロから再開できるので、3月31日の締め切り前にぜひお試しください。',c:'30〜100ロットの取引経験をお持ちのあなたにとって、MUGENの$120〜$500/月のキャッシュバックは大きな追い風になります。再スタートのタイミングとして、3月31日の期間限定キャンペーンを最大限に活用されることをお勧めします。',d:'経験豊富なあなたが本格的に再開するなら、100ロット以上で無制限キャッシュバックが受けられるXMTradingは理想的な環境です。3月31日の締め切りまでに口座開設を完了し、キャンペーンの恩恵を最大限に受けてください。'},
+  d:{a:'FXを始めるなら、最初から有利な環境を選ぶことが最重要です。¥13,000ボーナスで本物の取引を体験しながら、MUGENキャッシュバックで取引コストを実質的に回収できます。少額から安全に学べる環境が整っており、3月31日のキャンペーン中に始めることを強くお勧めします。',b:'FXを始めたいあなたへ：月5〜30ロットという現実的な目標でも、MUGENキャッシュバックで取引コストの大半を回収できます。¥13,000の入金不要ボーナスで元手ゼロからスタートできるので、まずリスクなく試してみてください。3月31日が締め切りです。',c:'初めからしっかりとした目標をお持ちのあなたへ：30〜100ロットを視野に入れているなら、MUGENキャッシュバックは非常に相性の良い仕組みです。始めるなら今月が最高のタイミング——¥13,000ボーナスと3月31日限定キャンペーンを同時に活用できます。',d:'本格的に始める覚悟があるあなたには、XMTradingのMUGEN無制限プランが最大限のメリットをもたらします。100ロット以上で上限なしのキャッシュバックは、規模が大きくなるほど差が開きます。3月31日の締め切り前に、今すぐ口座開設を完了してください。'}
+};
+
+function typewrite(el, text, speed=26) {
+  el.innerHTML = ''; let i = 0;
+  const cur = document.createElement('span'); cur.className = 'ai-cursor'; el.appendChild(cur);
+  const iv = setInterval(() => {
+    if (i < text.length) { el.insertBefore(document.createTextNode(text[i]), cur); i++; }
+    else {
+      clearInterval(iv); cur.remove();
+      document.getElementById('ai-spin').style.animation = 'none';
+      document.getElementById('ai-spin').style.borderColor = 'var(--green)';
+      document.getElementById('ai-label').textContent = '✅ 分析完了';
+    }
+  }, speed);
+}
+
+function showResult() {
+  document.getElementById('analyzing').classList.remove('active');
+  document.getElementById('quiz-section').style.display  = 'none';
+  document.getElementById('intro-section').style.display = 'none';
+  document.getElementById('result-screen').style.display = 'block';
+  document.getElementById('sticky-footer').classList.add('visible');
+  document.getElementById('prog-fill').style.width = '100%';
+  document.getElementById('prog-text').textContent = '診断完了';
+  document.getElementById('prog-pct').textContent  = '100%';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  updateLinks();
+
+  // Fire retargeting events
+  fireQuizComplete();
+
+  const q1  = ans[1] || 'b';
+  const q3  = ans[3] || 'a';
+  const msg = (msgs[q1] && msgs[q1][q3]) || msgs.b.a;
+  const el  = document.getElementById('ai-msg-text');
+  el.innerHTML = '<span class="ai-cursor"></span>';
+  typewrite(el, msg);
+}
+</script>
 </body>
 </html>
