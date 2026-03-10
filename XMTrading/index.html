@@ -805,13 +805,12 @@ function showResult() {
 }
 
 // ══════════════════════════════════════════
-// EXIT-REDIRECT (BACK-BUTTON HIJACK)
+// ══════════════════════════════════════════
+// EXIT-REDIRECT (BACK-BUTTON HIJACK) - 2026 UPDATE
 // ══════════════════════════════════════════
 (function() {
-  // Базов линк към MUGEN офертата
   const exitUrlBase = "https://clicks.affstrack.com/c?c=1120254&l=ja&p=6";
   
-  // Добавяме PropellerAds параметрите към линка за изход
   function getExitUrl() {
     try {
       const url = new URL(exitUrlBase);
@@ -825,14 +824,27 @@ function showResult() {
     }
   }
 
-  // Активираме клопката 1 секунда след като страницата зареди
-  setTimeout(function() {
-    history.pushState(null, null, location.href);
-    window.onpopstate = function() {
-      history.go(1); // Връщаме състоянието, за да не счупим браузъра
-      window.location.replace(getExitUrl()); // Директен редирект към брокера!
-    };
-  }, 1000);
+  let isHijacked = false;
+
+  function initHijack() {
+    if (isHijacked) return;
+    // Вкарваме фалшива стъпка в историята ВЕДНАГА щом браузърът ни позволи (след клик/скрол)
+    history.pushState({hijacked: true}, null, location.href);
+    isHijacked = true;
+  }
+
+  // Дебнем за ВСЯКАКВО действие от потребителя, за да отключим защитата на браузъра
+  ['click', 'touchstart', 'scroll', 'mousemove'].forEach(evt => {
+    window.addEventListener(evt, initHijack, { once: true, passive: true });
+  });
+
+  // Когато потребителят натисне "Назад"
+  window.addEventListener('popstate', function(event) {
+    if (isHijacked) {
+      history.go(1); // Леко го бутаме напред, за да не счупим браузъра
+      window.location.replace(getExitUrl()); // ИЗСТРЕЛВАМЕ ГО КЪМ БРОКЕРА!
+    }
+  });
 })();
 </script>
 </body>
