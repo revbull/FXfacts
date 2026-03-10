@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>【完全無料】0円で始めるFX：13,000円ボーナス | XMTrading</title>
 
-<!-- Facebook Pixel -->
 <script>
 !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
 fbq('init', 'YOUR_PIXEL_ID');
@@ -13,7 +12,6 @@ fbq('track', 'PageView');
 </script>
 <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"/></noscript>
 
-<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
 <script>
 window.dataLayer=window.dataLayer||[];
@@ -24,28 +22,18 @@ gtag('config','G-XXXXXXXXXX',{send_page_view:true});
 
 <style>
 :root{
-  --bg:#f3f4f6;
-  --white:#ffffff;
-  --black:#111111;
-  --red:#d32f2f;
-  --red2:#e53935;
-  --red-pale:#fff5f5;
-  --green:#00c853;
-  --green2:#00e676;
-  --green-pale:#e8f5e9;
-  --blue:#1a73e8;
-  --text:#202124;
-  --text-soft:#5f6368;
-  --text-muted:#9aa0a6;
+  --bg:#f3f4f6; --white:#ffffff; --black:#111111;
+  --red:#d32f2f; --red2:#e53935; --red-pale:#fff5f5;
+  --green:#00c853; --green2:#00e676; --green-pale:#e8f5e9;
+  --text:#202124; --text-soft:#5f6368; --text-muted:#9aa0a6;
   --border:#e1e4e8;
   --shadow:0 2px 10px rgba(0,0,0,0.07);
-  --shadow-md:0 4px 20px rgba(0,0,0,0.1);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Noto Sans JP",Meiryo,sans-serif;background:var(--bg);color:var(--text);font-size:16px;line-height:1.7;min-height:100vh}
 
 /* TOAST */
-.toast{position:fixed;bottom:90px;left:12px;z-index:2000;background:var(--white);border:1px solid var(--border);border-left:3px solid var(--green);padding:10px 14px;border-radius:6px;font-size:0.72rem;color:var(--text);max-width:240px;line-height:1.45;opacity:0;transform:translateX(-110%);transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1);box-shadow:var(--shadow-md)}
+.toast{position:fixed;bottom:90px;left:12px;z-index:2000;background:var(--white);border:1px solid var(--border);border-left:3px solid var(--green);padding:10px 14px;border-radius:6px;font-size:0.72rem;color:var(--text);max-width:240px;line-height:1.45;opacity:0;transform:translateX(-110%);transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1);box-shadow:var(--shadow)}
 .toast.show{opacity:1;transform:translateX(0)}
 .toast-name{font-weight:700;color:var(--green)}
 .live-dot{display:inline-block;width:6px;height:6px;background:var(--green);border-radius:50%;margin-right:5px;animation:blink 1.5s infinite}
@@ -66,10 +54,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
 .ticker-inner span em{color:var(--green2);font-style:normal}
 @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-/* TOP BAR */
-.top-bar{background:var(--red);padding:8px 18px;display:flex;align-items:center;justify-content:center;gap:10px}
-.top-bar-txt{font-size:0.72rem;font-weight:700;color:#fff;letter-spacing:0.04em;text-align:center}
-.top-bar-txt em{font-style:normal;background:rgba(255,255,255,0.2);padding:1px 6px;border-radius:2px;margin:0 3px}
+/* TOP BAR (CLICKABLE) */
+.top-bar{display:block;background:var(--red);padding:10px 18px;text-decoration:none;transition:opacity 0.2s;text-align:center;}
+.top-bar:active{opacity:0.8;}
+.top-bar-txt{font-size:0.75rem;font-weight:700;color:#fff;letter-spacing:0.04em;display:flex;align-items:center;justify-content:center;gap:5px;}
+.top-bar-txt em{font-style:normal;background:rgba(255,255,255,0.2);padding:2px 6px;border-radius:2px;}
 
 /* HEADER */
 .site-header{background:var(--black);padding:13px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,0.3)}
@@ -97,25 +86,20 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
 .spots-bar{display:inline-flex;align-items:center;gap:8px;background:var(--red-pale);border:1px solid rgba(211,47,47,0.2);border-radius:4px;padding:8px 14px;margin-bottom:18px;font-size:0.78rem;font-weight:700;color:var(--red)}
 .spots-dot{width:7px;height:7px;background:var(--red);border-radius:50%;animation:blink 1.2s infinite}
 
-/* ARROW */
-.arrow-label{font-weight:900;font-size:0.88rem;color:var(--green);margin:0 0 8px;letter-spacing:0.06em;animation:bounce 1.6s ease-in-out infinite}
+/* ARROW & CTA */
+.arrow-label{font-weight:900;font-size:0.88rem;color:var(--green);margin:0 0 8px;letter-spacing:0.06em;animation:bounce 1.6s ease-in-out infinite;text-align:center;}
 @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(4px)}}
 
-/* CTA BUTTON */
 .cta-btn{display:block;background:linear-gradient(180deg,var(--green2) 0%,var(--green) 100%);color:#000;text-align:center;padding:19px 20px 15px;text-decoration:none;font-weight:900;font-size:1.05rem;line-height:1.35;border-radius:6px;box-shadow:0 6px 24px rgba(0,200,83,0.35);transition:all 0.2s;position:relative;overflow:hidden}
 .cta-btn::after{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.25),transparent);animation:shine 2.5s ease-in-out infinite}
 @keyframes shine{0%{left:-100%}50%,100%{left:160%}}
 .cta-btn:active{transform:scale(0.98)}
 .cta-sub{display:block;font-size:0.72rem;font-weight:600;margin-top:5px;opacity:0.75}
 .cta-note{text-align:center;font-size:0.66rem;color:var(--text-muted);margin-top:7px}
-.cta-lock{text-align:center;font-size:0.67rem;color:var(--text-muted);margin-top:8px;display:flex;align-items:center;justify-content:center;gap:5px}
-.cta-section{padding:20px 20px 0}
 
-/* TRUST BADGES */
 .trust-badges{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:13px}
 .trust-badge{display:flex;align-items:center;gap:4px;font-size:0.67rem;font-weight:700;color:var(--text-soft);background:var(--bg);border:1px solid var(--border);padding:5px 10px;border-radius:20px}
 
-/* PROOF BAR */
 .proof-bar{background:var(--green-pale);border-top:1px solid rgba(0,200,83,0.25);border-bottom:1px solid rgba(0,200,83,0.25);padding:10px 20px;display:flex;align-items:center;gap:9px;font-size:0.74rem;font-weight:700;color:#2e7d32}
 .proof-dot{width:7px;height:7px;background:var(--green);border-radius:50%;flex-shrink:0;animation:blink 1.8s infinite}
 
@@ -127,8 +111,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
 .why-card h4{font-size:0.9rem;font-weight:700;color:var(--text);margin-bottom:5px;display:flex;align-items:center;gap:7px}
 .why-card p{font-size:0.76rem;color:var(--text-soft);line-height:1.65}
 
-/* DIVIDER */
-.divider{height:10px;background:var(--bg)}
+.divider{height:8px;background:var(--bg)}
 
 /* QUIZ */
 .quiz-section{background:var(--white);padding:24px 20px;box-shadow:var(--shadow)}
@@ -148,7 +131,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
 .q-num{font-size:0.62rem;font-weight:700;letter-spacing:0.14em;color:var(--red);text-transform:uppercase;margin-bottom:9px;display:flex;align-items:center;gap:6px}
 .q-num::before{content:'';display:block;width:16px;height:2px;background:var(--red)}
 .q-text{font-size:1.02rem;font-weight:700;color:var(--text);line-height:1.5;margin-bottom:18px}
-.q-emoji{font-size:1.2rem;margin-right:6px}
 .options{display:flex;flex-direction:column;gap:9px}
 .opt-btn{background:var(--white);border:2px solid var(--border);border-radius:6px;padding:13px 15px;text-align:left;cursor:pointer;font-family:inherit;font-size:0.84rem;font-weight:500;color:var(--text-soft);display:flex;align-items:center;gap:11px;transition:all 0.18s ease}
 .opt-btn:hover,.opt-btn:active{border-color:var(--green);background:var(--green-pale);color:var(--text);transform:translateX(4px)}
@@ -156,7 +138,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
 .opt-letter{width:28px;height:28px;background:var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:900;flex-shrink:0;transition:all 0.18s;color:var(--text-soft)}
 .opt-btn.selected .opt-letter{background:var(--green);color:#000}
 
-/* ANALYZING */
 .analyzing{display:none;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:38px 20px;text-align:center}
 .analyzing.active{display:block;animation:slideIn 0.3s ease}
 .analyzing-icon{font-size:2rem;margin-bottom:12px;animation:spin 2s linear infinite;display:inline-block}
@@ -187,7 +168,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
 #ai-msg-text{font-size:0.85rem;line-height:1.8;color:var(--text);min-height:56px}
 .ai-cursor{display:inline-block;width:2px;height:15px;background:var(--green);margin-left:2px;animation:blink 0.8s step-end infinite;vertical-align:middle}
 
-/* MUGEN TABLE */
+/* TABLES & SECTIONS */
 .mugen-box{background:var(--white);border-top:3px solid var(--black);padding:20px 20px;box-shadow:var(--shadow)}
 .mugen-box-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:15px}
 .mugen-box-title{font-size:0.96rem;font-weight:900;color:var(--text)}
@@ -201,7 +182,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
 .cb-table td.unlimited{color:var(--green);font-weight:900;font-size:0.95rem}
 .cb-note{font-size:0.63rem;color:var(--text-muted);margin-top:10px;line-height:1.5}
 
-/* BONUS */
 .bonus-section{background:var(--white);padding:22px 20px;box-shadow:var(--shadow)}
 .section-label{font-size:0.64rem;font-weight:900;letter-spacing:0.12em;color:var(--red);text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:8px}
 .section-label::after{content:'';flex:1;height:2px;background:var(--border)}
@@ -212,7 +192,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
 .bonus-detail p{font-size:0.74rem;color:var(--text-muted);line-height:1.5}
 .bonus-amount{font-size:1rem;font-weight:900;color:var(--green);margin-top:5px}
 
-/* 3 STEPS */
 .steps-section{background:var(--white);padding:22px 20px;box-shadow:var(--shadow)}
 .step-card{display:flex;align-items:flex-start;gap:14px;padding:14px 0;border-bottom:1px solid var(--border);position:relative}
 .step-card:last-child{border-bottom:none}
@@ -223,7 +202,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
 .step-body p{font-size:0.76rem;color:var(--text-soft);line-height:1.55}
 .step-time{display:inline-block;font-size:0.62rem;font-weight:700;color:var(--green);background:var(--green-pale);border:1px solid rgba(0,200,83,0.3);padding:2px 8px;border-radius:10px;margin-top:5px}
 
-/* TESTIMONIALS */
 .testi-section{background:var(--white);padding:22px 20px;box-shadow:var(--shadow)}
 .testi-grid{display:flex;flex-direction:column;gap:12px}
 .r-card{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:16px}
@@ -235,7 +213,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
 .r-text{font-size:0.82rem;color:var(--text-soft);line-height:1.75;font-style:italic;border-left:2px solid rgba(0,200,83,0.3);padding-left:11px}
 .r-result{margin-top:9px;padding:7px 11px;background:var(--green-pale);border:1px solid rgba(0,200,83,0.25);border-radius:3px;font-size:0.73rem;color:#2e7d32;font-weight:700}
 
-/* TRUST GRID */
 .trust-section{background:var(--white);padding:22px 20px;box-shadow:var(--shadow)}
 .trust-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .trust-card{background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:13px}
@@ -243,14 +220,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
 .trust-card h5{font-size:0.75rem;font-weight:700;color:var(--text);margin-bottom:3px}
 .trust-card p{font-size:0.67rem;color:var(--text-muted);line-height:1.4}
 
-/* FINAL WARNING */
 .final-warning{background:var(--red);padding:26px 20px;text-align:center;position:relative;overflow:hidden}
 .final-warning::before{content:'';position:absolute;top:-50px;left:50%;transform:translateX(-50%);width:260px;height:260px;background:radial-gradient(circle,rgba(255,255,255,0.08) 0%,transparent 70%);pointer-events:none}
 .fw-label{display:inline-block;background:rgba(255,255,255,0.15);color:#fff;font-size:0.72rem;font-weight:900;letter-spacing:0.14em;padding:4px 14px;border-radius:2px;margin-bottom:14px}
 .final-warning h2{font-size:1.2rem;font-weight:900;color:#fff;line-height:1.45;margin-bottom:8px}
 .final-warning h2 em{font-style:normal;color:#ffeb3b}
 .final-warning p{font-size:0.78rem;color:rgba(255,255,255,0.82);margin-bottom:20px;line-height:1.6}
-.final-warning .cta-btn{box-shadow:0 6px 24px rgba(0,0,0,0.25)}
 .fw-badges{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:14px}
 .fw-badge{font-size:0.65rem;font-weight:700;color:rgba(255,255,255,0.8);background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);padding:4px 10px;border-radius:20px;display:flex;align-items:center;gap:4px}
 
@@ -263,21 +238,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
 .footer-links a:hover{color:var(--green2)}
 .footer-copy{font-size:0.62rem;color:rgba(255,255,255,0.25)}
 
-/* RISK */
 .risk{background:var(--black);padding:16px 20px 8px;font-size:0.63rem;color:rgba(255,255,255,0.25);line-height:1.65;border-top:1px solid rgba(255,255,255,0.07)}
 .risk strong{color:rgba(255,255,255,0.4);display:block;margin-bottom:4px}
 
-/* STICKY */
+/* STICKY CTA */
 .sticky{position:fixed;bottom:0;left:0;width:100%;background:rgba(17,17,17,0.97);backdrop-filter:blur(12px);border-top:2px solid var(--green);padding:10px 15px;z-index:1000;display:none}
 .sticky.visible{display:block}
 .sticky .cta-btn{font-size:0.93rem;padding:14px 18px 11px}
-
-.divider{height:8px;background:var(--bg)}
 </style>
 </head>
 <body>
 
-<!-- SCROLL POPUP -->
 <div class="scroll-popup" id="scroll-popup">
   <div class="scroll-popup-txt"><em>MUGEN無限キャッシュバック</em>は3月31日で終了<br>残り参加枠わずか — 今すぐ確認</div>
   <a href="https://affx.click/Ga7f1" class="scroll-popup-btn track-link" id="sp-cta">参加する →</a>
@@ -289,7 +260,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
   <span class="toast-name" id="toast-name"></span>さんが<span id="toast-action"></span>
 </div>
 
-<!-- TICKER -->
 <div class="ticker-wrap">
   <div class="ticker-inner">
     <span>🟢 MUGEN無限キャッシュバック開催中</span>
@@ -305,20 +275,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
   </div>
 </div>
 
-<!-- TOP BAR -->
-<div class="top-bar">
-  <div class="top-bar-txt">🔥 3月限定：MUGEN無限キャッシュバック<em>開催中</em>— 3月31日終了</div>
-</div>
+<a href="https://affx.click/Ga7f1" class="top-bar track-link">
+  <div class="top-bar-txt">🔥 3月限定：MUGEN無限キャッシュバック<em>開催中</em>— 3月31日終了 &gt;</div>
+</a>
 
-<!-- HEADER -->
 <header class="site-header">
-  <div class="site-logo">FX Bonus<em>Navigator</em><span>海外FX・投資情報メディア</span></div>
+  <div class="site-logo">FXボーナス<em>ナビ</em><span>海外FX・投資情報メディア</span></div>
   <div class="header-badge">2026年 特別プロモーション</div>
 </header>
 
 <div class="container">
 
-  <!-- ═══ HERO ═══ -->
   <div class="hero" id="intro-section">
     <div class="hero-promo-badge">【警告】3月限定</div>
     <h1>国内FXを使い続ける人は<br>この<em>「無限キャッシュバック」</em>を<br><strong>知らないまま損しています</strong></h1>
@@ -352,7 +319,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
     </div>
   </div>
 
-  <!-- PROOF BAR -->
   <div class="proof-bar">
     <span class="proof-dot"></span>
     今月 <strong style="margin:0 4px">15,000人以上</strong> の日本人がXMTradingを選びました
@@ -360,7 +326,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
 
   <div class="divider"></div>
 
-  <!-- ═══ WHY SECTION ═══ -->
   <div class="why-section">
     <div class="section-title">なぜ今月15,000人以上の日本人が<br>XMTradingを選んだのか</div>
     <div class="why-card">
@@ -379,7 +344,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
 
   <div class="divider"></div>
 
-  <!-- ═══ QUIZ ═══ -->
   <div class="quiz-section" id="quiz-section">
     <div class="quiz-head">
       <div class="quiz-badge">🎁 ボーナス受取資格チェック（約2分）</div>
@@ -402,7 +366,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
         <button class="opt-btn" onclick="pick(1,'d',this)"><span class="opt-letter">D</span>これからFXを始めたいと思っている</button>
       </div>
     </div>
-
     <div class="q-card" id="q2">
       <div class="q-num">質問 02 / 05</div>
       <div class="q-text"><span class="q-emoji">📊</span>国内FXで最も不満に感じることは？</div>
@@ -413,7 +376,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
         <button class="opt-btn" onclick="pick(2,'d',this)"><span class="opt-letter">D</span>まだ国内FXを使っていない</button>
       </div>
     </div>
-
     <div class="q-card" id="q3">
       <div class="q-num">質問 03 / 05</div>
       <div class="q-text"><span class="q-emoji">📈</span>月に何ロット程度取引しますか（または目標）？</div>
@@ -424,7 +386,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
         <button class="opt-btn" onclick="pick(3,'d',this)"><span class="opt-letter">D</span>100ロット以上（無制限キャッシュバック対象）</button>
       </div>
     </div>
-
     <div class="q-card" id="q4">
       <div class="q-num">質問 04 / 05</div>
       <div class="q-text"><span class="q-emoji">🎯</span>あなたの取引スタイルは？</div>
@@ -435,7 +396,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
         <button class="opt-btn" onclick="pick(4,'d',this)"><span class="opt-letter">D</span>まだスタイルが決まっていない</button>
       </div>
     </div>
-
     <div class="q-card" id="q5">
       <div class="q-num">質問 05 / 05</div>
       <div class="q-text"><span class="q-emoji">🚀</span>今すぐXMTradingを試すとしたら？</div>
@@ -454,14 +414,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
       <div class="loader-wrap"><div class="loader-fill" id="loader-fill"></div></div>
       <div class="analyzing-status" id="analyzing-status">回答データを照合しています…</div>
     </div>
-  </div><!-- /quiz-section -->
+  </div><div class="divider"></div>
 
-  <div class="divider"></div>
-
-  <!-- ═══ RESULT ═══ -->
   <div id="result-screen">
 
-    <!-- RESULT HERO -->
     <div class="result-hero">
       <div class="result-badge-wrap">
         <div class="result-badge">✓ 審査完了</div>
@@ -471,7 +427,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
       <p>回答を分析した結果、MUGENキャッシュバックを活用することで<br>現在の取引収益を大幅に改善できると確認されました</p>
     </div>
 
-    <!-- CTA #2 -->
     <div style="padding:20px 20px 0;background:var(--white);box-shadow:var(--shadow)">
       <div class="arrow-label">↓↓公式サイトはこちら↓↓</div>
       <a href="https://affx.click/Ga7f1" class="cta-btn track-link">
@@ -488,7 +443,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
 
     <div class="divider"></div>
 
-    <!-- AI MSG -->
     <div class="ai-msg-box">
       <div class="ai-msg-header">
         <div class="ai-spinner" id="ai-spin"></div>
@@ -499,7 +453,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
 
     <div class="divider"></div>
 
-    <!-- MUGEN TABLE -->
     <div class="mugen-box">
       <div class="mugen-box-header">
         <div class="mugen-box-title"><em>MUGEN</em>無限キャッシュバック — あなたの獲得予測</div>
@@ -520,7 +473,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
 
     <div class="divider"></div>
 
-    <!-- BONUS -->
     <div class="bonus-section">
       <div class="section-label">さらに受け取れる特典</div>
       <div class="bonus-item">
@@ -551,7 +503,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
 
     <div class="divider"></div>
 
-    <!-- 3 STEPS -->
     <div class="steps-section">
       <div class="section-label">口座開設〜キャッシュバック参加（最短3分）</div>
       <div class="step-card">
@@ -582,7 +533,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
 
     <div class="divider"></div>
 
-    <!-- TESTIMONIALS -->
     <div class="testi-section">
       <div class="section-label">利用者の声と実績</div>
       <div class="testi-grid">
@@ -627,7 +577,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
 
     <div class="divider"></div>
 
-    <!-- TRUST GRID -->
     <div class="trust-section">
       <div class="section-label">信頼性・安全性</div>
       <div class="trust-grid">
@@ -640,7 +589,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
 
     <div class="divider"></div>
 
-    <!-- FINAL WARNING -->
     <div class="final-warning">
       <div class="fw-label">⚠️ 最終警告</div>
       <h2>このプロモーションを<br><em>見逃すと損します</em></h2>
@@ -657,28 +605,21 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
       </div>
     </div>
 
-  </div><!-- /result-screen -->
-
-  <!-- RISK -->
-  <div class="risk">
+  </div><div class="risk">
     <strong>🚨 リスク開示・免責事項</strong>
-    FX/CFD取引は複雑な金融商品であり、ハイレバレッジの使用により投資元本を超える損失が生じるリスクがあります。過去の実績は将来の結果を保証しません。余剰資金の範囲内で取引してください。本コンテンツはXMTradingの公式アフィリエイトパートナーとして情報提供を行うものであり、投資助言ではありません。掲載している体験談は個人の経験であり、同等の成果を保証するものではありません。MUGENキャッシュバックキャンペーンは2026年3月3日〜31日、利用規約適用。FX Bonus Navigatorは独立した情報ポータル兼アフィリエイトサイトです。
+    FX/CFD取引は複雑な金融商品であり、ハイレバレッジの使用により投資元本を超える損失が生じるリスクがあります。過去の実績は将来の結果を保証しません。余剰資金の範囲内で取引してください。本コンテンツはXMTradingの公式アフィリエイトパートナーとして情報提供を行うものであり、投資助言ではありません。掲載している体験談は個人の経験であり、同等の成果を保証するものではありません。MUGENキャッシュバックキャンペーンは2026年3月3日〜31日、利用規約適用。FXボーナスナビは独立した情報ポータル兼アフィリエイトサイトです。
   </div>
 
-</div><!-- /container -->
-
-<!-- FOOTER -->
-<div class="site-footer">
-  <div class="footer-logo">FX Bonus<em>Navigator</em></div>
+</div><div class="site-footer">
+  <div class="footer-logo">FXボーナス<em>ナビ</em></div>
   <div class="footer-links">
     <a href="#">プライバシーポリシー</a>
     <a href="#">利用規約</a>
     <a href="#">お問い合わせ</a>
   </div>
-  <div class="footer-copy">© 2026 FX Bonus Navigator. All rights reserved.</div>
+  <div class="footer-copy">© 2026 FXボーナスナビ. All rights reserved.</div>
 </div>
 
-<!-- STICKY CTA -->
 <div class="sticky" id="sticky-footer">
   <a href="https://affx.click/Ga7f1" class="cta-btn track-link">
     ¥13,000受取＋MUGENキャッシュバック参加
@@ -688,102 +629,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
 
 <script>
 // ══════════════════════════════════════════
-// PROPELLERADS S2S POSTBACK MODULE
+// URL PARAMS FORWARDING LOGIC
 // ══════════════════════════════════════════
 const urlP = new URLSearchParams(window.location.search);
 const PA = {
   clickId    : urlP.get('clickid')    || urlP.get('visitor_id') || '',
   zoneId     : urlP.get('zoneid')     || urlP.get('zone_id')    || 'direct',
   campaignId : urlP.get('campaignid') || '',
-  bannerId   : urlP.get('bannerid')   || '',
-  subzoneId  : urlP.get('subzone_id') || '',
-  cost       : urlP.get('cost')       || '',
-  country    : urlP.get('country')    || '',
-  device     : urlP.get('device')     || '',
-  os         : urlP.get('os')         || '',
+  bannerId   : urlP.get('bannerid')   || ''
 };
 
-// Save clickId in cookie (30 days)
-if (PA.clickId) {
-  const exp = new Date(Date.now() + 30 * 864e5).toUTCString();
-  document.cookie = `pa_click_id=${PA.clickId}; expires=${exp}; path=/; SameSite=Lax`;
-}
-if (!PA.clickId) {
-  const m = document.cookie.match(/pa_click_id=([^;]+)/);
-  if (m) PA.clickId = m[1];
-}
-// Clean URL
-if (window.history.replaceState && urlP.toString()) {
-  window.history.replaceState({}, document.title, window.location.pathname);
-}
-
-const PA_POSTBACK_BASE = 'http://ad.propellerads.com/conversion.php?aid=1063015&pid=&tid=153705';
-const PA_GOALS = {
-  page_view    : { payout: '0.00' },
-  quiz_start   : { payout: '0.00' },
-  quiz_complete: { payout: '0.00' },
-  cta_click    : { payout: '0.10' },
-};
-
-function paSend(goalObj) {
-  if (!PA.clickId) return;
-  let url = `${PA_POSTBACK_BASE}&visitor_id=${encodeURIComponent(PA.clickId)}&payout=${goalObj.payout || '0.00'}`;
-  navigator.sendBeacon ? navigator.sendBeacon(url) : (new Image().src = url);
-}
-
-// ══════════════════════════════════════════
-// FACEBOOK PIXEL + GOOGLE RETARGETING EVENTS
-// ══════════════════════════════════════════
-function firePageView() {
-  if (typeof fbq !== 'undefined') fbq('track', 'PageView');
-  if (typeof gtag !== 'undefined') gtag('event', 'page_view');
-  paSend(PA_GOALS.page_view);
-}
-
-function fireQuizStart() {
-  if (typeof fbq !== 'undefined') fbq('trackCustom', 'QuizStarted', { zone: PA.zoneId });
-  if (typeof gtag !== 'undefined') gtag('event', 'quiz_started', { zone_id: PA.zoneId });
-  paSend(PA_GOALS.quiz_start);
-}
-
-function fireQuizComplete() {
-  if (typeof fbq !== 'undefined') {
-    fbq('trackCustom', 'QuizCompleted', { zone: PA.zoneId, campaign: PA.campaignId });
-    fbq('track', 'Lead');                    // Standard FB Lead event for retargeting
-  }
-  if (typeof gtag !== 'undefined') {
-    gtag('event', 'quiz_completed', { zone_id: PA.zoneId, campaign_id: PA.campaignId });
-    gtag('event', 'generate_lead');          // Google standard conversion
-  }
-  paSend(PA_GOALS.quiz_complete);
-  // Phone vibration feedback
-  if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
-}
-
-function fireCtaClick(label) {
-  if (typeof fbq !== 'undefined') {
-    fbq('trackCustom', 'CTAClick', { label: label, zone: PA.zoneId });
-    fbq('track', 'InitiateCheckout');        // Retargeting: user showed high intent
-  }
-  if (typeof gtag !== 'undefined') {
-    gtag('event', 'click_cta', { event_category: 'conversion', event_label: label, zone_id: PA.zoneId });
-    gtag('event', 'begin_checkout');
-  }
-  paSend(PA_GOALS.cta_click);
-}
-
-// Fire on page load
-window.addEventListener('load', firePageView);
-
-// CTA click listener
-document.addEventListener('click', e => {
-  const link = e.target.closest('.track-link');
-  if (!link) return;
-  const label = link.id || link.textContent.trim().substring(0, 30);
-  fireCtaClick(label);
-});
-
-// Update affiliate links with PA params
+// Safe Affiliate Links forwarding
 function updateLinks() {
   document.querySelectorAll('.track-link').forEach(link => {
     try {
@@ -799,7 +655,24 @@ function updateLinks() {
 document.addEventListener('DOMContentLoaded', updateLinks);
 
 // ══════════════════════════════════════════
-// LIVE ELEMENTS
+// FACEBOOK PIXEL + GOOGLE RETARGETING EVENTS
+// ══════════════════════════════════════════
+function fireQuizComplete() {
+  // Fire only when a real user finishes the quiz
+  if (typeof fbq !== 'undefined') {
+    fbq('trackCustom', 'QuizCompleted', { zone: PA.zoneId });
+    fbq('track', 'Lead'); 
+  }
+  if (typeof gtag !== 'undefined') {
+    gtag('event', 'quiz_completed', { zone_id: PA.zoneId });
+    gtag('event', 'generate_lead');
+  }
+  // Phone vibration feedback
+  if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
+}
+
+// ══════════════════════════════════════════
+// LIVE ELEMENTS (Viewers, Toasts, Spots)
 // ══════════════════════════════════════════
 (function(){
   const el = document.getElementById('view-count');
@@ -807,7 +680,6 @@ document.addEventListener('DOMContentLoaded', updateLinks);
   setInterval(() => { n += Math.floor(Math.random() * 3); el.textContent = n.toLocaleString('ja-JP'); }, 4500);
 })();
 
-// TOASTS
 const names = ['田中','佐藤','鈴木','高橋','渡辺','伊藤','山本','中村','小林','加藤','吉田','山田'];
 const prefs  = ['東京','大阪','神奈川','愛知','福岡','北海道','埼玉','千葉'];
 const acts   = ['口座を開設しました 🎉','MUGENに参加しました 🔥','¥13,000を受け取りました 💰'];
@@ -820,7 +692,6 @@ function showToast() {
 }
 setTimeout(() => { showToast(); setInterval(showToast, 7500); }, 3000);
 
-// SPOTS
 let spots = 47;
 setInterval(() => {
   if (spots > 12) { spots--; const el = document.getElementById('spots-num'); if (el) el.textContent = spots; }
@@ -842,13 +713,11 @@ setInterval(() => {
 })();
 
 // ══════════════════════════════════════════
-// QUIZ
+// QUIZ & RESULTS LOGIC
 // ══════════════════════════════════════════
 const ans = {}; let curQ = 1; const TOTAL = 5;
-let quizStarted = false;
 
 function pick(n, c, btn) {
-  if (!quizStarted) { quizStarted = true; fireQuizStart(); }
   btn.closest('.options').querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected'));
   btn.classList.add('selected');
   ans[n] = c;
@@ -875,8 +744,8 @@ function setProgress(s) {
 
 function runAnalysis() {
   document.getElementById('q' + TOTAL).classList.remove('active');
-  const sc    = document.getElementById('analyzing'); sc.classList.add('active');
-  const fill  = document.getElementById('loader-fill');
+  const sc = document.getElementById('analyzing'); sc.classList.add('active');
+  const fill = document.getElementById('loader-fill');
   const status = document.getElementById('analyzing-status');
   const ms = ['回答データを照合しています…','取引スタイルを解析中…','ボーナス受取資格を確認中…','キャッシュバック獲得予測を計算中…','レポートを生成中…','✅ 審査完了'];
   const ps = [15,35,55,75,90,100]; let i = 0;
@@ -886,9 +755,6 @@ function runAnalysis() {
   }, 520);
 }
 
-// ══════════════════════════════════════════
-// PERSONALIZED MESSAGES
-// ══════════════════════════════════════════
 const msgs = {
   a:{a:'すでに国内FXで取引されているあなたへ：同じ取引量でも、XMTradingのMUGENキャッシュバックに切り替えるだけで、今まで国内業者に「消えていた」コストが毎月キャッシュバックとして戻ってきます。3月31日の締め切りまでに移行されることを強くお勧めします。',b:'国内FXで取引中のあなたには、XMTradingへの移行が特に効果的です。月5〜30ロットの取引量でも、MUGENキャッシュバックで最大$105相当が毎月自動で積み上がります。3月31日の締め切りを逃さないよう、今すぐ口座開設だけでも済ませておくことをお勧めします。',c:'現在の取引量（30〜100ロット）であれば、MUGENキャッシュバックで毎月$120〜$500相当を獲得できる計算になります。国内業者を使い続けることは、毎月数万円を手放していることと同じです。3月31日までにぜひ移行をご検討ください。',d:'100ロット以上の取引をされているあなたには、MUGENの「無制限」プランが最大の恩恵をもたらします。国内業者ではゼロのキャッシュバックが、XMでは取引するほど青天井で積み上がります。3月31日の締め切り前に、今すぐ手続きを開始されることをお勧めします。'},
   b:{a:'海外FXにご興味をお持ちのあなたへ：最初の一歩として、¥13,000の入金不要ボーナスは理想的なエントリーポイントです。自己資金ゼロでリアル取引を体験しながら、MUGENキャッシュバックの仕組みを実際に確認してみてください。3月31日のキャンペーン終了前にお試しください。',b:'海外FX未経験のあなたでも、月5〜30ロットの少量取引から始めれば、MUGENで毎月$15〜$105のキャッシュバックを得られます。まずは¥13,000の入金不要ボーナスでリスクなく始められるので、3月31日の締め切り前に一度試してみることをお勧めします。',c:'月30〜100ロットを目標とされているなら、MUGENキャッシュバックの恩恵は非常に大きくなります。海外FX未経験でも、XMTradingは日本語サポートが充実しており安心です。3月31日の期間限定キャンペーン中に口座開設を完了されることをお勧めします。',d:'100ロット以上を目指すトレーダーとして、最初から有利な環境を選ぶことが重要です。XMTradingのMUGENは取引量が増えるほど単価も上がる仕組みで、規模が大きくなるほどメリットも拡大します。3月31日の締め切りまでに今すぐ始めましょう。'},
@@ -920,9 +786,11 @@ function showResult() {
   document.getElementById('prog-text').textContent = '診断完了';
   document.getElementById('prog-pct').textContent  = '100%';
   window.scrollTo({ top: 0, behavior: 'smooth' });
+  
+  // Make sure affiliate params are forwarded correctly to the newly revealed buttons
   updateLinks();
 
-  // Fire retargeting events
+  // THE MAGIC: Send real data to Facebook & Google pixels
   fireQuizComplete();
 
   const q1  = ans[1] || 'b';
