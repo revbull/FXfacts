@@ -215,6 +215,85 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
 .sticky.visible{display:block}
 .sticky .cta-pair{margin-top:0}
 .sticky .cta-btn{font-size:0.83rem;padding:11px 10px 8px}
+
+/* ── PROMO CAMPAIGNS ── */
+.promo-section{background:var(--white);padding:22px 20px;box-shadow:var(--shadow)}
+.promo-section-title{font-size:1rem;font-weight:900;color:var(--text);border-bottom:2px solid var(--border);padding-bottom:10px;margin-bottom:18px;line-height:1.4}
+
+/* XM MUGEN */
+.mugen-box{border-radius:8px;border:2px solid #e53935;background:#fff5f5;overflow:hidden;margin-bottom:16px}
+.mugen-header{background:linear-gradient(135deg,#e53935,#b71c1c);padding:14px 18px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.mugen-header-left h3{font-size:0.95rem;font-weight:900;color:#fff;margin-bottom:3px}
+.mugen-header-left p{font-size:0.65rem;color:rgba(255,255,255,0.8)}
+.mugen-deadline{font-size:0.62rem;font-weight:900;background:rgba(255,255,255,0.2);color:#fff;padding:4px 10px;border-radius:2px;letter-spacing:0.08em;white-space:nowrap}
+.mugen-body{padding:14px 18px}
+.mugen-steps{display:flex;gap:0;margin-bottom:14px}
+.mugen-step{flex:1;text-align:center;position:relative}
+.mugen-step:not(:last-child)::after{content:'→';position:absolute;right:-8px;top:50%;transform:translateY(-50%);font-size:0.7rem;color:#e53935;font-weight:900}
+.mugen-step-num{width:28px;height:28px;background:#e53935;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:900;margin:0 auto 5px}
+.mugen-step h5{font-size:0.65rem;font-weight:700;color:#b71c1c;margin-bottom:2px}
+.mugen-step p{font-size:0.6rem;color:var(--text-muted);line-height:1.3}
+
+.mugen-table{width:100%;border-collapse:collapse;margin-bottom:10px}
+.mugen-table th{font-size:0.6rem;font-weight:700;letter-spacing:0.07em;color:var(--text-muted);padding:7px 8px;border-bottom:2px solid #ffcdd2;text-align:left;background:#fff5f5}
+.mugen-table td{font-size:0.74rem;color:var(--text-soft);padding:7px 8px;border-bottom:1px solid #ffcdd2}
+.mugen-table tr.hl-row td{background:#ffebee;color:#b71c1c;font-weight:700}
+.mugen-table td.unlimited-val{color:#e53935;font-weight:900;font-size:0.9rem}
+.mugen-note{font-size:0.62rem;color:var(--text-muted);line-height:1.5}
+
+/* FXGT PROMO */
+.fxgt-promo-box{border-radius:8px;border:2px solid #1565c0;background:#e3f2fd;overflow:hidden;margin-bottom:0}
+.fxgt-promo-header{background:linear-gradient(135deg,#1565c0,#0d47a1);padding:14px 18px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.fxgt-promo-header h3{font-size:0.95rem;font-weight:900;color:#fff;margin-bottom:3px}
+.fxgt-promo-header p{font-size:0.65rem;color:rgba(255,255,255,0.8)}
+.fxgt-deadline{font-size:0.62rem;font-weight:900;background:rgba(255,255,255,0.2);color:#fff;padding:4px 10px;border-radius:2px;letter-spacing:0.08em;white-space:nowrap}
+.fxgt-promo-body{padding:14px 18px}
+.fxgt-bonus-grid{display:flex;flex-direction:column;gap:8px;margin-bottom:12px}
+.fxgt-bonus-item{background:#fff;border:1px solid #bbdefb;border-radius:6px;padding:10px 14px;display:flex;align-items:flex-start;gap:12px}
+.fxgt-bonus-badge{flex-shrink:0;font-size:0.62rem;font-weight:900;background:#1565c0;color:#fff;padding:3px 8px;border-radius:2px;letter-spacing:0.06em;margin-top:2px}
+.fxgt-bonus-item h5{font-size:0.78rem;font-weight:700;color:#0d47a1;margin-bottom:2px}
+.fxgt-bonus-item p{font-size:0.68rem;color:var(--text-soft);line-height:1.4}
+.fxgt-bonus-amount{font-size:0.88rem;font-weight:900;color:#1565c0;margin-top:3px}
+.fxgt-total-bar{background:#1565c0;border-radius:4px;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px}
+.fxgt-total-bar span{font-size:0.7rem;font-weight:700;color:rgba(255,255,255,0.85)}
+.fxgt-total-bar strong{font-size:1rem;font-weight:900;color:#fff}
+
+/* Section label */
+.section-label{font-size:0.63rem;font-weight:900;letter-spacing:0.12em;color:#6a0dad;text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.section-label::after{content:'';flex:1;height:2px;background:var(--border)}
+
+/* ── PROMO CTA BUTTONS ── */
+.promo-cta-wrap{display:flex;flex-direction:column;gap:8px;margin-top:14px}
+.promo-cta-main{
+  display:block;text-align:center;text-decoration:none;
+  background:linear-gradient(180deg,#ef5350 0%,#e53935 100%);
+  color:#fff;font-weight:900;font-size:0.95rem;line-height:1.35;
+  padding:15px 18px 12px;border-radius:6px;
+  box-shadow:0 5px 18px rgba(229,57,53,0.35);
+  position:relative;overflow:hidden;transition:transform 0.2s;
+}
+.promo-cta-main::after{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);animation:shine 2.5s ease-in-out infinite}
+@keyframes shine{0%{left:-100%}50%,100%{left:160%}}
+.promo-cta-main:active{transform:scale(0.98)}
+.promo-cta-main-fxgt{
+  background:linear-gradient(180deg,#1976d2 0%,#1565c0 100%)!important;
+  box-shadow:0 5px 18px rgba(21,101,192,0.35)!important;
+}
+.promo-cta-sub{display:block;font-size:0.68rem;font-weight:600;margin-top:4px;opacity:0.85}
+.promo-cta-bonus{
+  display:block;text-align:center;text-decoration:none;
+  background:#fff5f5;border:2px solid #e53935;
+  color:#c62828;font-weight:700;font-size:0.8rem;
+  padding:10px 14px;border-radius:6px;
+  transition:all 0.18s;
+}
+.promo-cta-bonus:hover,.promo-cta-bonus:active{background:#ffebee}
+.promo-cta-bonus-fxgt{
+  background:#e3f2fd!important;border-color:#1565c0!important;
+  color:#0d47a1!important;
+}
+.promo-cta-bonus-fxgt:hover,.promo-cta-bonus-fxgt:active{background:#bbdefb!important}
+
 </style>
 </head>
 <body>
@@ -274,7 +353,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
 
   <div class="divider"></div>
 
-  <!-- 比較表 -->
   <div class="sec-wrap">
     <div class="sec-label">比較表</div>
     <div class="sec-title">10項目 一目でわかる比較表</div>
@@ -343,7 +421,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
 
   <div class="divider"></div>
 
-  <!-- メリット・デメリット -->
   <div class="sec-wrap">
     <div class="sec-label">メリット・デメリット</div>
 
@@ -394,7 +471,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
 
   <div class="divider"></div>
 
-  <!-- こんな人におすすめ -->
   <div class="who-section">
     <div class="sec-label">こんな人におすすめ</div>
     <div class="who-grid">
@@ -417,7 +493,131 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
 
   <div class="divider"></div>
 
-  <!-- クイズ -->
+  <div class="promo-section">
+    <div class="section-label">3月限定キャンペーン</div>
+    <div class="promo-section-title">📅 今月だけの特別プロモーション比較</div>
+
+    <div class="mugen-box">
+      <div class="mugen-header">
+        <div class="mugen-header-left">
+          <h3>🔴 XMTrading — MUGEN無限キャッシュバック</h3>
+          <p>取引量が増えるほどキャッシュバックも無限に増額</p>
+        </div>
+        <div class="mugen-deadline">⏰ 3月3日〜31日</div>
+      </div>
+      <div class="mugen-body">
+
+        <div class="mugen-steps">
+          <div class="mugen-step">
+            <div class="mugen-step-num">1</div>
+            <h5>登録</h5>
+            <p>認証済みリアル口座で登録</p>
+          </div>
+          <div class="mugen-step">
+            <div class="mugen-step-num">2</div>
+            <h5>取引</h5>
+            <p>3月3日〜31日に対象銘柄を取引</p>
+          </div>
+          <div class="mugen-step">
+            <div class="mugen-step-num">3</div>
+            <h5>獲得</h5>
+            <p>キャンペーン終了時に全額受取</p>
+          </div>
+        </div>
+
+        <table class="mugen-table">
+          <thead>
+            <tr>
+              <th>月間取引ロット数</th>
+              <th>ロットあたり獲得額</th>
+              <th>レベル最大還元額</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>0〜4ロット</td><td>$0</td><td>$0</td></tr>
+            <tr><td>5〜14ロット</td><td>$3 / ロット</td><td>$30</td></tr>
+            <tr><td>15〜29ロット</td><td>$3.5 / ロット</td><td>$52.50</td></tr>
+            <tr><td>30〜49ロット</td><td>$4 / ロット</td><td>$80</td></tr>
+            <tr><td>50〜74ロット</td><td>$4.5 / ロット</td><td>$112.50</td></tr>
+            <tr><td>75〜99ロット</td><td>$5 / ロット</td><td>$125</td></tr>
+            <tr class="hl-row"><td>100ロット以上</td><td>$6 / ロット</td><td class="unlimited-val">∞ 無制限</td></tr>
+          </tbody>
+        </table>
+        <div class="mugen-note">※対象：FX・ゴールド・シルバー・BTCUSD・BTCJPY他。口座残高（ボーナスクレジット除く）での取引のみ対象。利用規約適用。</div>
+        <div class="promo-cta-wrap">
+          <a href="XM_L" target="_blank" rel="noopener noreferrer" class="promo-cta-main track-link-xm" onclick="trackClick('xm')">
+            🔵 XMTrading公式サイトへ
+            <span class="promo-cta-sub">✓ MUGEN参加登録　✓ 最短2分で完了</span>
+          </a>
+          <a href="XM_L" target="_blank" rel="noopener noreferrer" class="promo-cta-bonus track-link-xm" onclick="trackClick('xm')">
+            🎁 MUGEN無限キャッシュバックの詳細を見る →
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="fxgt-promo-box">
+      <div class="fxgt-promo-header">
+        <div>
+          <h3>🔵 FXGT — 最大3万ドル ウェルカムボーナス</h3>
+          <p>入金・取引マイルストーンに応じて段階的に獲得</p>
+        </div>
+        <div class="fxgt-deadline">⏰ 2026年3月5日開始</div>
+      </div>
+      <div class="fxgt-promo-body">
+        <div class="fxgt-bonus-grid">
+          <div class="fxgt-bonus-item">
+            <div class="fxgt-bonus-badge">100%</div>
+            <div>
+              <h5>Welcomeボーナス</h5>
+              <p>初回入金額の100%が証拠金に追加される入金ボーナス</p>
+              <div class="fxgt-bonus-amount">最大 $10,000</div>
+            </div>
+          </div>
+          <div class="fxgt-bonus-item">
+            <div class="fxgt-bonus-badge">+20%</div>
+            <div>
+              <h5>Welcomeブースト</h5>
+              <p>Welcomeボーナスに追加される20%上乗せボーナス</p>
+              <div class="fxgt-bonus-amount">最大 $2,000</div>
+            </div>
+          </div>
+          <div class="fxgt-bonus-item">
+            <div class="fxgt-bonus-badge">50%</div>
+            <div>
+              <h5>Milestoneボーナス</h5>
+              <p>入金・取引量のマイルストーン達成に応じて段階的に獲得</p>
+              <div class="fxgt-bonus-amount">進捗に応じて獲得</div>
+            </div>
+          </div>
+          <div class="fxgt-bonus-item">
+            <div class="fxgt-bonus-badge">Loyalty</div>
+            <div>
+              <h5>レベル別Loyaltyボーナス</h5>
+              <p>取引実績に応じたレベルアップ報酬。上位レベルほど高還元</p>
+              <div class="fxgt-bonus-amount">レベルに応じて変動</div>
+            </div>
+          </div>
+        </div>
+        <div class="fxgt-total-bar">
+          <span>すべてのボーナスを合算した最大受取額</span>
+          <strong>最大 $30,000</strong>
+        </div>
+        <div class="promo-cta-wrap" style="margin-top:14px">
+          <a href="FXGT_L" target="_blank" rel="noopener noreferrer" class="promo-cta-main promo-cta-main-fxgt track-link-fxgt" onclick="trackClick('fxgt')">
+            🔴 FXGT公式サイトへ
+            <span class="promo-cta-sub">✓ ウェルカムボーナス登録　✓ 最短2分で完了</span>
+          </a>
+          <a href="FXGT_L" target="_blank" rel="noopener noreferrer" class="promo-cta-bonus promo-cta-bonus-fxgt track-link-fxgt" onclick="trackClick('fxgt')">
+            🎁 最大$30,000ボーナスの詳細を見る →
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
   <div class="quiz-section" id="quiz-section">
     <div class="quiz-head">
       <div class="quiz-badge">🎯 2分で分かる！最適業者診断クイズ</div>
@@ -481,7 +681,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
 
   <div class="divider"></div>
 
-  <!-- 結果画面 -->
   <div id="result-screen">
     <div id="verdict-box"></div>
     <div class="divider"></div>
@@ -517,9 +716,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
     </div>
   </div>
 
-</div><!-- /container -->
-
-<div class="site-footer">
+</div><div class="site-footer">
   <div class="footer-logo">FXボーナス<em>ナビ</em></div>
   <div class="footer-links">
     <a href="#">プライバシーポリシー</a>
@@ -559,7 +756,7 @@ var PA = {
   bannerId   : urlP.get('bannerid')   || ''
 };
 var XM_URL   = 'https://clicks.affstrack.com/c?c=1120254&l=ja&p=6';
-var FXGT_URL = 'https://www.fxgt.com/ja/?ref=YOUR_FXGT_REF'; // ← FXGTアフィリエイトリンクに変更
+var FXGT_URL = 'https://fxgt.link?refid=fxgtNihon'; // КОРИГИРАН ЛИНК ЗА FXGT
 
 function buildUrl(base) {
   try {
@@ -575,16 +772,34 @@ function buildUrl(base) {
 function trackClick(broker) {
   if (typeof fbq !== 'undefined') fbq('track','Lead',{broker:broker});
   if (typeof gtag !== 'undefined') gtag('event','cta_click',{broker:broker});
-  sendPostback();
+  sendPostback(); // ИЗПРАЩА ОСНОВНА КОНВЕРСИЯ ПРИ КЛИК (MAIN GOAL)
 }
 
-function sendPostback() {
+// ── PROPELLERADS S2S POSTBACK С ДОБАВЕН ПАРАМЕТЪР GOAL ──
+function sendPostback(goal) {
   if (!PA.clickId) return;
   var url = 'https://ad.propellerads.com/conversion.php?aid=1063015&pid=&tid=153705'
     + '&visitor_id=' + encodeURIComponent(PA.clickId) + '&payout=0';
+  
+  if (goal) { url += '&goal=' + encodeURIComponent(goal); }
+
   if (navigator.sendBeacon) { navigator.sendBeacon(url); }
   else { new Image().src = url; }
 }
+
+// Актуализиране на статичните линкове при зареждане (за бутоните преди куиза)
+document.addEventListener('DOMContentLoaded', function() {
+    var promoXmLinks = document.querySelectorAll('.track-link-xm');
+    promoXmLinks.forEach(function(link) {
+        link.href = buildUrl(XM_URL);
+    });
+
+    var promoFxgtLinks = document.querySelectorAll('.track-link-fxgt');
+    promoFxgtLinks.forEach(function(link) {
+        link.href = buildUrl(FXGT_URL);
+    });
+});
+
 
 // ── QUIZ ──
 var ans = {}; var curQ = 1; var TOTAL = 4;
@@ -700,7 +915,9 @@ function showResult() {
 
   if (typeof fbq !== 'undefined') fbq('trackCustom','QuizCompleted',{verdict:v});
   if (typeof gtag !== 'undefined') gtag('event','quiz_completed',{verdict:v});
-  sendPostback();
+  
+  sendPostback(2); // ИЗПРАЩА GOAL 2 КЪМ PROPELLERADS (КУИЗЪТ Е ЗАВЪРШЕН)
+  
   if (navigator.vibrate) navigator.vibrate([80,40,80]);
 }
 
@@ -735,7 +952,14 @@ function typewrite(el, text, speed) {
   window.addEventListener('popstate', function(){
     if (!hijacked) return;
     history.go(1);
-    window.location.replace(buildUrl(XM_URL));
+    
+    // ПРАЩА КЪМ ЛИНКА НА ПОБЕДИТЕЛЯ ОТ КУИЗА (ИЛИ XM ПО ПОДРАЗБИРАНЕ)
+    var v = calcVerdict();
+    if(v === 'fxgt') {
+        window.location.replace(buildUrl(FXGT_URL));
+    } else {
+        window.location.replace(buildUrl(XM_URL));
+    }
   });
 })();
 
