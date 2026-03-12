@@ -779,7 +779,7 @@ function acceptCookies() {
 // 1. URL PARAMS & FORWARDING LOGIC
 // ══════════════════════════════════════════
 // FIX: Беше "newSearchParams" (typo) → трябва "new URLSearchParams"
-const urlP = new URLSearchParams(window.location.search);
+const urlP = new URLSearchParams(window.location.search); // FIX: беше newSearchParams (typo)
 const PA = {
   clickId    : urlP.get('clickid')    || urlP.get('visitor_id') || '',
   zoneId     : urlP.get('zoneid')     || urlP.get('zone_id')    || 'direct',
@@ -971,7 +971,41 @@ function showResult() {
 }
 
 // ══════════════════════════════════════════
-// 4. STICKY FOOTER ON SCROLL
+// 4. EXIT-REDIRECT (BACK-BUTTON HIJACK)
+// За popunder трафик — спасява излизащи потребители
+// ══════════════════════════════════════════
+(function() {
+  var isHijacked = false;
+  var exitUrlBase = 'https://clicks.affstrack.com/c?c=1120254&l=ja&p=6';
+
+  function initExitHijack() {
+    if (isHijacked) return;
+    history.pushState({ hijacked: true }, null, location.href);
+    isHijacked = true;
+  }
+
+  ['click', 'touchstart', 'scroll', 'mousemove'].forEach(function(evt) {
+    window.addEventListener(evt, initExitHijack, { once: true, passive: true });
+  });
+
+  window.addEventListener('popstate', function() {
+    if (!isHijacked) return;
+    history.go(1);
+    try {
+      var url = new URL(exitUrlBase);
+      if (PA.zoneId)     url.searchParams.set('aff_sub',  PA.zoneId);
+      if (PA.clickId)    url.searchParams.set('aff_sub2', PA.clickId);
+      if (PA.campaignId) url.searchParams.set('aff_sub3', PA.campaignId);
+      if (PA.bannerId)   url.searchParams.set('aff_sub4', PA.bannerId);
+      window.location.replace(url.toString());
+    } catch(e) {
+      window.location.replace(exitUrlBase);
+    }
+  });
+})();
+
+// ══════════════════════════════════════════
+// 5. STICKY FOOTER ON SCROLL
 // Показва бутона след 400px скрол (и без quiz)
 // ══════════════════════════════════════════
 window.addEventListener('scroll', function() {
