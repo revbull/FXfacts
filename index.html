@@ -2,204 +2,436 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>徹底比較！XMTrading vs FXGT | あなたに最適な海外FX業者はどっち？</title>
 
-<title>トレード診断</title>
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', 'YOUR_PIXEL_ID'); // Замени с твоя Pixel ID
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"/></noscript>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DTMQSP8BPQ"></script>
+<script>
+window.dataLayer=window.dataLayer||[];
+function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());
+gtag('config','G-DTMQSP8BPQ',{send_page_view:true});
+</script>
 
 <style>
-
-body{
-margin:0;
-font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN",Meiryo,sans-serif;
-background:#f5f6f7;
+:root {
+  --bg: #f4f6f9; --white: #ffffff; --black: #1a1a2e;
+  --xm-red: #d32f2f; --xm-dark: #b71c1c; 
+  --fxgt-blue: #00bcd4; --fxgt-dark: #0097a7;
+  --green: #00c853; --text: #2c3e50; --text-soft: #546e7a; --border: #cfd8dc;
+  --shadow: 0 4px 15px rgba(0,0,0,0.05);
 }
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent; }
+body { font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif; background:var(--bg); color:var(--text); font-size:16px; line-height:1.6; padding-bottom:70px; }
 
-.container{
-max-width:680px;
-margin:auto;
-background:white;
-padding:20px;
-}
+/* HEADER & HERO */
+.site-header { background:var(--black); padding:15px 20px; text-align:center; position:sticky; top:0; z-index:100; box-shadow:0 2px 10px rgba(0,0,0,0.2); }
+.site-logo { font-size:1.15rem; font-weight:900; color:#fff; letter-spacing:0.05em; }
+.site-logo span { color:#ffb300; }
 
-h1{
-font-size:24px;
-}
+.container { max-width:650px; margin:0 auto; padding:0 0 40px; }
 
-.progress{
-height:8px;
-background:#eee;
-border-radius:10px;
-overflow:hidden;
-margin-bottom:20px;
-}
+.hero { background:var(--white); padding:30px 20px; box-shadow:var(--shadow); text-align:center; border-bottom:4px solid var(--border); }
+.hero-badge { display:inline-block; background:#ffe082; color:#b08d00; font-size:0.7rem; font-weight:800; padding:4px 12px; border-radius:20px; margin-bottom:12px; }
+.hero h1 { font-size:1.35rem; font-weight:900; line-height:1.45; margin-bottom:15px; }
+.hero h1 span.xm { color:var(--xm-red); }
+.hero h1 span.fx { color:var(--fxgt-blue); }
+.hero p { font-size:0.85rem; color:var(--text-soft); margin-bottom:20px; }
 
-.bar{
-height:100%;
-width:0%;
-background:#00c853;
-transition:0.3s;
-}
+/* VS TABLE */
+.vs-table-wrap { margin:20px 0; border-radius:8px; overflow:hidden; box-shadow:var(--shadow); background:var(--white); }
+.vs-table { width:100%; border-collapse:collapse; text-align:center; }
+.vs-table th { background:var(--black); color:#fff; padding:12px 8px; font-size:0.8rem; width:33.33%; }
+.vs-table th.xm-head { background:var(--xm-red); border-right:1px solid rgba(255,255,255,0.2); }
+.vs-table th.fx-head { background:var(--fxgt-blue); }
+.vs-table td { padding:12px 8px; border-bottom:1px solid var(--border); font-size:0.8rem; font-weight:700; color:var(--text); }
+.vs-table td:first-child { background:#f8f9fa; text-align:left; font-size:0.7rem; font-weight:600; color:var(--text-soft); }
+.vs-table tr:last-child td { border-bottom:none; }
+.winner { color:var(--green); font-size:1.1rem; }
 
-.question{
-font-size:20px;
-margin-bottom:20px;
-}
+/* QUIZ SECTION */
+.quiz-section { background:var(--white); padding:25px 20px; margin-top:15px; box-shadow:var(--shadow); }
+.quiz-head { text-align:center; margin-bottom:20px; }
+.quiz-head h2 { font-size:1.1rem; font-weight:900; margin-bottom:5px; }
+.prog-bar { height:6px; background:var(--border); border-radius:4px; overflow:hidden; margin-bottom:20px; }
+.prog-fill { height:100%; background:linear-gradient(90deg,var(--fxgt-blue),var(--xm-red)); width:25%; transition:width 0.4s ease; }
 
-.option{
-display:block;
-background:#f1f1f1;
-padding:14px;
-margin:10px 0;
-border-radius:8px;
-cursor:pointer;
-text-align:center;
-}
+.q-card { display:none; animation:fadeIn 0.3s ease; }
+.q-card.active { display:block; }
+@keyframes fadeIn { from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);} }
+.q-num { font-size:0.65rem; font-weight:700; color:#90a4ae; margin-bottom:8px; }
+.q-text { font-size:1rem; font-weight:900; line-height:1.4; margin-bottom:15px; }
+.opt-btn { width:100%; background:#fff; border:2px solid var(--border); border-radius:6px; padding:14px; text-align:left; font-size:0.85rem; font-weight:600; color:var(--text-soft); display:flex; align-items:center; gap:12px; margin-bottom:10px; transition:all 0.2s; }
+.opt-btn:active { transform:scale(0.98); }
+.opt-btn.selected { border-color:var(--green); background:#e8f5e9; color:#1b5e20; }
+.opt-icon { font-size:1.2rem; flex-shrink:0; }
 
-.option:hover{
-background:#e0e0e0;
-}
+/* ANALYZING */
+.analyzing { display:none; text-align:center; padding:30px 10px; }
+.analyzing.active { display:block; }
+.spinner { display:inline-block; width:40px; height:40px; border:4px solid rgba(0,0,0,0.1); border-top-color:var(--green); border-radius:50%; animation:spin 1s linear infinite; margin-bottom:15px; }
+@keyframes spin { to {transform:rotate(360deg);} }
 
-.cta{
-display:block;
-background:#00c853;
-color:white;
-text-align:center;
-padding:18px;
-font-size:22px;
-font-weight:bold;
-border-radius:12px;
-text-decoration:none;
-margin-top:20px;
-}
+/* RESULT SCREEN */
+#result-screen { display:none; background:var(--white); padding:30px 20px; text-align:center; box-shadow:var(--shadow); border-top:5px solid var(--green); }
+.res-badge { display:inline-block; background:var(--green); color:#fff; font-weight:900; font-size:0.75rem; padding:5px 15px; border-radius:20px; margin-bottom:15px; }
+#winner-name { font-size:1.8rem; font-weight:900; margin-bottom:10px; }
+.winner-xm { color:var(--xm-red); }
+.winner-fxgt { color:var(--fxgt-blue); }
+.res-desc { font-size:0.85rem; color:var(--text-soft); line-height:1.6; margin-bottom:20px; padding:15px; background:#f8f9fa; border-radius:6px; text-align:left; }
 
-.result{
-display:none;
-text-align:center;
-}
+/* CTAs */
+.cta-btn { display:block; text-align:center; padding:18px 20px; text-decoration:none; font-weight:900; font-size:1.05rem; border-radius:6px; color:#fff; box-shadow:0 4px 15px rgba(0,0,0,0.2); transition:transform 0.2s; margin-bottom:12px; }
+.cta-btn:active { transform:scale(0.98); }
+.cta-xm { background:linear-gradient(135deg, var(--xm-red), var(--xm-dark)); }
+.cta-fx { background:linear-gradient(135deg, var(--fxgt-blue), var(--fxgt-dark)); }
+.cta-sub { display:block; font-size:0.68rem; font-weight:400; margin-top:4px; opacity:0.9; }
 
-.loading{
-font-size:20px;
-text-align:center;
-}
+/* STICKY FOOTER */
+.sticky { position:fixed; bottom:0; left:0; width:100%; background:rgba(26,26,46,0.95); backdrop-filter:blur(10px); padding:10px 15px; z-index:1000; display:none; }
+.sticky.visible { display:block; }
+.sticky-inner { display:flex; gap:10px; }
+.sticky .cta-btn { flex:1; padding:12px 5px; font-size:0.85rem; margin-bottom:0; box-shadow:none; }
 
-.sticky{
-position:fixed;
-bottom:0;
-left:0;
-width:100%;
-background:white;
-border-top:1px solid #ddd;
-padding:10px;
-text-align:center;
-display:none;
-}
-
-.sticky a{
-background:#00c853;
-color:white;
-padding:14px 20px;
-border-radius:10px;
-text-decoration:none;
-font-weight:bold;
-}
-
+/* COOKIE BANNER */
+.cookie-banner { position:fixed; bottom:0; left:0; width:100%; background:rgba(0,0,0,0.9); color:#fff; padding:12px 20px; display:none; justify-content:space-between; align-items:center; z-index:9999; }
+.cookie-banner span { font-size:0.7rem; flex:1; }
+.cookie-btn { background:var(--green); color:#000; border:none; padding:6px 12px; font-weight:bold; border-radius:4px; margin-left:15px; }
 </style>
-
 </head>
-
 <body>
 
+<header class="site-header">
+  <div class="site-logo">FX Compare <span>2026</span></div>
+</header>
+
 <div class="container">
+  
+  <div class="hero" id="intro-section">
+    <div class="hero-badge">2026年 最新比較データ</div>
+    <h1><span class="xm">XMTrading</span> vs <span class="fx">FXGT</span><br>あなたに合うのはどっち？</h1>
+    <p>日本で最も人気のある海外FX業者2社を徹底比較。<br>最短30秒の診断で、あなたの投資スタイルに最適なブローカーを判定します。</p>
 
-<h1>
-30秒で分かる  
-トレード診断
-</h1>
+    <div class="vs-table-wrap">
+      <table class="vs-table">
+        <tr>
+          <th>比較項目</th>
+          <th class="xm-head">XMTrading</th>
+          <th class="fx-head">FXGT</th>
+        </tr>
+        <tr>
+          <td>口座開設ボーナス</td>
+          <td>¥13,000</td>
+          <td>¥15,000〜</td>
+        </tr>
+        <tr>
+          <td>最大レバレッジ</td>
+          <td>1000倍</td>
+          <td>1000倍 (一部銘柄)</td>
+        </tr>
+        <tr>
+          <td>仮想通貨(BTC)</td>
+          <td>△ 限定的</td>
+          <td><span class="winner">◎ 業界最高峰</span></td>
+        </tr>
+        <tr>
+          <td>安全性・信頼性</td>
+          <td><span class="winner">◎ 老舗・安心</span></td>
+          <td>〇 成長中</td>
+        </tr>
+        <tr>
+          <td>追証(借金リスク)</td>
+          <td>なし (ゼロカット)</td>
+          <td>なし (ゼロカット)</td>
+        </tr>
+      </table>
+    </div>
+  </div>
 
-<div class="progress">
-<div class="bar" id="bar"></div>
+  <div class="quiz-section" id="quiz-section">
+    <div class="quiz-head">
+      <h2>🔍 最適ブローカー無料診断</h2>
+    </div>
+
+    <div class="prog-bar"><div class="prog-fill" id="prog-fill"></div></div>
+
+    <div class="q-card active" id="q1">
+      <div class="q-num">質問 1 / 4</div>
+      <div class="q-text">メインで取引したい銘柄は何ですか？</div>
+      <div class="options">
+        <div class="opt-btn" onclick="pick(1,'xm')"><span class="opt-icon">💱</span> ドル円などの為替（FX）</div>
+        <div class="opt-btn" onclick="pick(1,'xm')"><span class="opt-icon">🥇</span> ゴールド（金）</div>
+        <div class="opt-btn" onclick="pick(1,'fxgt')"><span class="opt-icon">₿</span> ビットコイン等の仮想通貨</div>
+        <div class="opt-btn" onclick="pick(1,'xm')"><span class="opt-icon">🤔</span> まだ決めていない</div>
+      </div>
+    </div>
+
+    <div class="q-card" id="q2">
+      <div class="q-num">質問 2 / 4</div>
+      <div class="q-text">海外FX業者を選ぶ際、最も重視する点は？</div>
+      <div class="options">
+        <div class="opt-btn" onclick="pick(2,'xm')"><span class="opt-icon">🛡️</span> 圧倒的な知名度と安全性（倒産リスクなし）</div>
+        <div class="opt-btn" onclick="pick(2,'fxgt')"><span class="opt-icon">🎁</span> とにかくボーナス額が大きいこと</div>
+        <div class="opt-btn" onclick="pick(2,'xm')"><span class="opt-icon">⚡</span> 出金スピードと確実性</div>
+      </div>
+    </div>
+
+    <div class="q-card" id="q3">
+      <div class="q-num">質問 3 / 4</div>
+      <div class="q-text">最初の自己資金はいくら用意できそうですか？</div>
+      <div class="options">
+        <div class="opt-btn" onclick="pick(3,'fxgt')"><span class="opt-icon">0️⃣</span> 0円（未入金ボーナスだけで試したい）</div>
+        <div class="opt-btn" onclick="pick(3,'xm')"><span class="opt-icon">💴</span> 1万円〜5万円程度</div>
+        <div class="opt-btn" onclick="pick(3,'xm')"><span class="opt-icon">💰</span> 10万円以上（本格的に稼ぎたい）</div>
+      </div>
+    </div>
+
+    <div class="q-card" id="q4">
+      <div class="q-num">質問 4 / 4</div>
+      <div class="q-text">今すぐ口座開設してボーナスを受け取りますか？</div>
+      <div class="options">
+        <div class="opt-btn" onclick="pick(4,'xm')"><span class="opt-icon">🚀</span> はい、一番おすすめの業者で今すぐ始める</div>
+        <div class="opt-btn" onclick="pick(4,'fxgt')"><span class="opt-icon">👀</span> 両方のボーナスを両取りしたい</div>
+      </div>
+    </div>
+
+    <div class="analyzing" id="analyzing">
+      <div class="spinner"></div>
+      <h3 style="font-weight:900; margin-bottom:5px;">回答を分析中...</h3>
+      <p style="font-size:0.8rem; color:var(--text-soft);">あなたに最適なブローカーを判定しています</p>
+    </div>
+  </div>
+
+  <div id="result-screen">
+    <div class="res-badge">診断完了</div>
+    <h2 style="font-size:1.1rem; margin-bottom:5px;">あなたに最適なブローカーは...</h2>
+    <div id="winner-name">XMTrading</div>
+    
+    <div class="res-desc" id="winner-desc">
+      </div>
+
+    <div id="cta-container">
+      </div>
+    
+    <div style="font-size:0.65rem; color:#9aa0a6; margin-top:15px;">※口座開設は完全無料・最短3分で完了します。</div>
+  </div>
+
 </div>
 
-<div id="quiz">
-
-<div class="question" id="question">
-投資経験はありますか？
+<div class="sticky" id="sticky-footer">
+  <div class="sticky-inner">
+    <a href="https://LINK_XM.com" target="_blank" rel="noopener noreferrer" class="cta-btn cta-xm track-link" id="sticky-xm">
+      XMで開始 <span class="cta-sub">¥13,000受取</span>
+    </a>
+    <a href="https://LINK_FXGT.com" target="_blank" rel="noopener noreferrer" class="cta-btn cta-fx track-link" id="sticky-fx">
+      FXGTで開始 <span class="cta-sub">高額ボーナス</span>
+    </a>
+  </div>
 </div>
 
-<div class="option" onclick="next()">初心者</div>
-<div class="option" onclick="next()">少しある</div>
-<div class="option" onclick="next()">経験者</div>
-
-</div>
-
-<div class="loading" id="loading" style="display:none;">
-AI分析中...
-</div>
-
-<div class="result" id="result">
-
-<h2>
-あなたに最適なトレード方法
-</h2>
-
-<p>
-診断結果によると、  
-初心者でも始めやすい海外FXが最適です。
-</p>
-
-<a href="YOUR_AFF_LINK" class="cta">
-↓↓公式サイトはこちら↓↓
-</a>
-
-</div>
-
-</div>
-
-<div class="sticky" id="sticky">
-<a href="YOUR_AFF_LINK">公式サイトへ</a>
+<div class="cookie-banner" id="cookie-banner">
+  <span>当サイトではCookieを使用しています。閲覧を続けることで同意したものとみなされます。</span>
+  <button class="cookie-btn" onclick="acceptCookies()">同意する</button>
 </div>
 
 <script>
+// ==========================================
+// 0. ТВОИТЕ АФИЛИЕЙТ ЛИНКОВЕ (ЗАМЕНИ ГИ ТУК!)
+// ==========================================
+const LINK_XM = "https://clicks.affstrack.com/c?c=1120254&l=ja&p=6"; 
+const LINK_FXGT = "https://your-fxgt-affiliate-link.com"; // Сложи твоя FXGT линк тук
 
-let step=0;
-
-function next(){
-
-step++;
-
-document.getElementById("bar").style.width=(step*33)+"%";
-
-if(step==1){
-
-document.getElementById("question").innerHTML="1日にどれくらいスマホを使いますか？";
-
+// ==========================================
+// 1. COOKIE CONSENT
+// ==========================================
+function acceptCookies() {
+  try { localStorage.setItem('cookies_accepted', 'true'); } catch(e) {}
+  document.getElementById('cookie-banner').style.display = 'none';
+}
+if (localStorage.getItem('cookies_accepted') !== 'true') {
+  document.getElementById('cookie-banner').style.display = 'flex';
 }
 
-else if(step==2){
+// ==========================================
+// 2. ТРАКИНГ И PROPELLERADS POSTBACK
+// ==========================================
+const urlP = new URLSearchParams(window.location.search);
+const PA = {
+  clickId    : urlP.get('clickid')    || urlP.get('visitor_id') || '',
+  zoneId     : urlP.get('zoneid')     || urlP.get('zone_id')    || 'direct',
+  campaignId : urlP.get('campaignid') || '',
+  bannerId   : urlP.get('bannerid')   || ''
+};
 
-document.getElementById("question").innerHTML="副収入に興味がありますか？";
-
+function appendParamsToUrl(baseUrl) {
+  try {
+    const url = new URL(baseUrl);
+    if (PA.zoneId) url.searchParams.set('aff_sub', PA.zoneId);
+    if (PA.clickId) url.searchParams.set('aff_sub2', PA.clickId);
+    if (PA.campaignId) url.searchParams.set('aff_sub3', PA.campaignId);
+    if (PA.bannerId) url.searchParams.set('aff_sub4', PA.bannerId);
+    return url.toString();
+  } catch(e) { return baseUrl; }
 }
 
-else{
+function sendPropellerPostback(goal) {
+  if (!PA.clickId) return;
+  let url = 'https://ad.propellerads.com/conversion.php?aid=1063015&pid=&tid=153705&visitor_id=' + encodeURIComponent(PA.clickId) + '&payout=0';
+  if (goal) url += '&goal=' + encodeURIComponent(goal);
 
-document.getElementById("quiz").style.display="none";
-document.getElementById("loading").style.display="block";
-
-setTimeout(function(){
-
-document.getElementById("loading").style.display="none";
-document.getElementById("result").style.display="block";
-document.getElementById("sticky").style.display="block";
-
-},2000);
-
+  if (navigator.sendBeacon) { navigator.sendBeacon(url); } 
+  else { new Image().src = url; }
 }
 
+function firePixel(eventName) {
+  if (typeof fbq !== 'undefined') {
+    if(eventName === 'Lead') fbq('track', 'Lead');
+    else fbq('trackCustom', eventName, { zone: PA.zoneId });
+  }
+  if (typeof gtag !== 'undefined') gtag('event', eventName.toLowerCase(), { zone_id: PA.zoneId });
 }
+
+// ==========================================
+// 3. ЛОГИКА НА ДИАГНОСТИЧНИЯ КУИЗ
+// ==========================================
+let scores = { xm: 0, fxgt: 0 };
+let curQ = 1; 
+const TOTAL = 4;
+
+function pick(n, winner, btn) {
+  btn.parentNode.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  
+  scores[winner] += 1; // Добавяме точка към избрания брокер
+  
+  setTimeout(() => advance(n), 350);
+}
+
+function advance(n) {
+  document.getElementById('q' + n).classList.remove('active');
+  if (n < TOTAL) {
+    curQ = n + 1;
+    document.getElementById('q' + curQ).classList.add('active');
+    document.getElementById('prog-fill').style.width = ((curQ / TOTAL) * 100) + '%';
+  } else {
+    runAnalysis();
+  }
+}
+
+function runAnalysis() {
+  document.getElementById('analyzing').classList.add('active');
+  setTimeout(showResult, 1800); // 1.8 секунди фалшив анализ за реализъм
+}
+
+function showResult() {
+  document.getElementById('analyzing').classList.remove('active');
+  document.getElementById('quiz-section').style.display = 'none';
+  document.getElementById('intro-section').style.display = 'none';
+  
+  const resScreen = document.getElementById('result-screen');
+  const winnerName = document.getElementById('winner-name');
+  const winnerDesc = document.getElementById('winner-desc');
+  const ctaContainer = document.getElementById('cta-container');
+  
+  let resultHtml = "";
+  
+  // Определяме победителя
+  if (scores.fxgt > scores.xm) {
+    // FXGT ПЕЧЕЛИ
+    winnerName.textContent = "FXGT";
+    winnerName.className = "winner-fxgt";
+    winnerDesc.innerHTML = "あなたの回答から、<b>仮想通貨の取引や高額な未入金ボーナス</b>を最大限に活用できる「FXGT」が最適です。まずは自己資金0円でハイレバレッジ取引を体験してみてください。";
+    
+    resultHtml = `
+      <a href="${appendParamsToUrl(LINK_FXGT)}" target="_blank" rel="noopener noreferrer" class="cta-btn cta-fx track-link" onclick="trackLead()">
+        FXGTで今すぐボーナスを受け取る
+        <span class="cta-sub">✓ 仮想通貨対応 ✓ 追証なし</span>
+      </a>
+      <div style="margin:15px 0; font-size:0.8rem; color:#90a4ae;">または</div>
+      <a href="${appendParamsToUrl(LINK_XM)}" target="_blank" rel="noopener noreferrer" class="cta-btn cta-xm track-link" onclick="trackLead()" style="opacity:0.85;">
+        定番のXMTradingも確認する
+      </a>
+    `;
+  } else {
+    // XM ПЕЧЕЛИ (По подразбиране / Равенство)
+    winnerName.textContent = "XMTrading";
+    winnerName.className = "winner-xm";
+    winnerDesc.innerHTML = "あなたの回答から、<b>圧倒的な信頼性と安定した取引環境</b>を誇る「XMTrading」が最適です。入金不要の¥13,000ボーナスを使って、ノーリスクでリアル取引を始めましょう。";
+    
+    resultHtml = `
+      <a href="${appendParamsToUrl(LINK_XM)}" target="_blank" rel="noopener noreferrer" class="cta-btn cta-xm track-link" onclick="trackLead()">
+        XMTradingで¥13,000を受け取る
+        <span class="cta-sub">✓ 日本人気No.1 ✓ 追証なし</span>
+      </a>
+      <div style="margin:15px 0; font-size:0.8rem; color:#90a4ae;">または</div>
+      <a href="${appendParamsToUrl(LINK_FXGT)}" target="_blank" rel="noopener noreferrer" class="cta-btn cta-fx track-link" onclick="trackLead()" style="opacity:0.85;">
+        FXGTの高額ボーナスも確認する
+      </a>
+    `;
+  }
+  
+  ctaContainer.innerHTML = resultHtml;
+  resScreen.style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  // Изпращаме Goal 2 към PropellerAds (Куизът е завършен)
+  sendPropellerPostback(2);
+  firePixel('QuizCompleted');
+  if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
+}
+
+function trackLead() {
+  sendPropellerPostback(); // Main Goal
+  firePixel('Lead');
+}
+
+// Закачаме линковете на Sticky Footer-а
+document.getElementById('sticky-xm').href = appendParamsToUrl(LINK_XM);
+document.getElementById('sticky-fx').href = appendParamsToUrl(LINK_FXGT);
+document.querySelectorAll('.sticky .track-link').forEach(btn => {
+  btn.addEventListener('click', trackLead);
+});
+
+// ==========================================
+// 4. EXIT-REDIRECT (BACK-BUTTON HIJACK)
+// ==========================================
+(function() {
+  let isHijacked = false;
+  
+  function initExitHijack() {
+    if (isHijacked) return;
+    history.pushState({ hijacked: true }, null, location.href);
+    isHijacked = true;
+  }
+
+  ['click', 'touchstart', 'scroll'].forEach(evt => {
+    window.addEventListener(evt, initExitHijack, { once: true, passive: true });
+  });
+
+  window.addEventListener('popstate', function() {
+    if (!isHijacked) return;
+    history.go(1);
+    
+    // Ако излизат, ги пращаме към XM (като най-конвертиращ) или към този, който е спечелил куиза. 
+    // За сигурност ползваме XM линка:
+    window.location.replace(appendParamsToUrl(LINK_XM));
+  });
+})();
+
+// Sticky Footer Display Logic
+window.addEventListener('scroll', function() {
+  const sticky = document.getElementById('sticky-footer');
+  if (window.scrollY > 300) sticky.classList.add('visible');
+  else sticky.classList.remove('visible');
+}, { passive: true });
 
 </script>
-
 </body>
-
 </html>
