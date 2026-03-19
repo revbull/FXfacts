@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>XMTrading vs FXGT 徹底比較2026｜あなたに合うのはどっち？</title>
 
+<link rel="preload" href="xm_screenshot.jpg" as="image">
+<link rel="preload" href="fxgt_5000.jpg" as="image">
+
 <script>
 !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
 fbq('init','YOUR_PIXEL_ID');
@@ -363,12 +366,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
 
 /* FRONT — лого стил */
 .flip-front{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:0;padding:0;}
-.flip-front img{width:100%; height:110px; object-fit:cover;}
+.flip-front img{width:100%; height:110px; object-fit:cover; border-bottom:1px solid rgba(255,255,255,0.1);}
 .flip-front.xm-front{background:#0d1b5e;}
 .flip-front.fxgt-front{background:#ffffff;border:1px solid #e0e0e0}
 
 /* лого текст */
-.logo-tagline{font-size:0.55rem;color:rgba(255,255,255,0.7);font-weight:600;padding:8px 5px 2px;text-align:center}
+.logo-tagline{font-size:0.55rem;color:rgba(255,255,255,0.7);font-weight:600;padding:8px 5px 2px;text-align:center;line-height:1.2;}
 .fxgt-front .logo-tagline{color:#333;}
 
 /* flip hint */
@@ -500,7 +503,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
       <div class="flip-card" id="fc-xm" onclick="flipCard('fc-xm')">
         <div class="flip-card-inner">
           <div class="flip-front xm-front">
-            <img src="/* ТУК ПОСТАВЕТЕ BASE64 КОДА ЗА XM (xm_screenshot.jpg) започвайки с data:image/jpeg;base64,... */" alt="XMTrading">
+            <img src="xm_screenshot.jpg" alt="XMTrading">
             <div class="logo-tagline">ESTABLISHED 2009 · 180 COUNTRIES</div>
             <div class="flip-hint">タップして評価を見る</div>
           </div>
@@ -535,7 +538,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
       <div class="flip-card" id="fc-fxgt" onclick="flipCard('fc-fxgt')">
         <div class="flip-card-inner">
           <div class="flip-front fxgt-front">
-            <img src="/* ТУК ПОСТАВЕТЕ BASE64 КОДА ЗА FXGT (FXGT_1;5000.jpg) започвайки с data:image/jpeg;base64,... */" alt="FXGT">
+            <img src="fxgt_5000.jpg" alt="FXGT">
             <div class="logo-tagline">HYBRID BROKER · EST. 2019</div>
             <div class="flip-hint">タップして評価を見る</div>
           </div>
@@ -1033,7 +1036,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
 
 <div class="sticky-v2" id="sticky-footer">
   <div class="sticky-v2-label">📲 今すぐ無料口座開設</div>
-  <div class="sticky-v2-row" id="sticky-cta-pair">
+  <div class="sticky-v2-row">
     <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=0" target="_blank" rel="noopener noreferrer" class="sticky-btn sb-xm track-link-xm">
       <div class="sticky-btn-name">XMTrading</div>
       <div class="sticky-btn-sub">2009年創業・老舗の信頼</div>
