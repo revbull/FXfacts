@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>XMTrading vs FXGT 徹底比較2026｜あなたに合うのはどっち？</title>
 
 <link rel="preload" href="xm_screenshot.png" as="image">
@@ -65,16 +65,73 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
 .vs-col{color:var(--vs);font-size:1.1rem}
 .hero-sub{font-size:0.8rem;color:rgba(255,255,255,0.62);margin-bottom:20px;position:relative}
 .hero-meta{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;font-size:0.66rem;color:rgba(255,255,255,0.38);position:relative;margin-bottom:22px}
-.vs-pills{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;position:relative}
-.vs-pill{flex:1;min-width:128px;max-width:175px;border-radius:8px;padding:13px 10px;text-align:center}
-.vs-pill.xm-pill{background:rgba(26,35,126,0.6);border:1px solid rgba(121,134,203,0.4)}
-.vs-pill.fxgt-pill{background:rgba(183,28,28,0.6);border:1px solid rgba(239,154,154,0.4)}
-.vs-pill-name{font-size:0.95rem;font-weight:900;color:#fff;margin-bottom:3px}
-.vs-pill-sub{font-size:0.62rem;color:rgba(255,255,255,0.48)}
-.vs-pill-score{font-size:1.5rem;font-weight:900;margin-top:5px}
-.xm-pill .vs-pill-score{color:#7986cb}
-.fxgt-pill .vs-pill-score{color:#ef9a9a}
-.vs-badge{display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:900;color:var(--vs);flex-shrink:0;padding-top:8px}
+
+/* FLIP CARDS */
+.flip-wrap{display:flex;gap:10px;justify-content:center;padding:0 4px;perspective:1000px}
+.flip-card{flex:1;min-width:0;max-width:175px;height:178px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.flip-card-inner{
+  position:relative;width:100%;height:100%;
+  transition:transform 0.6s cubic-bezier(0.4,0,0.2,1);
+  transform-style:preserve-3d;
+}
+.flip-card.flipped .flip-card-inner{transform:rotateY(180deg)}
+.flip-front,.flip-back{
+  position:absolute;inset:0;
+  border-radius:10px;
+  -webkit-backface-visibility:hidden;
+  backface-visibility:hidden;
+  overflow:hidden;
+  box-shadow:0 4px 18px rgba(0,0,0,0.18);
+}
+
+.flip-front{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:0;padding:0;}
+.flip-front img{width:100%; height:110px; object-fit:cover; border-bottom:1px solid rgba(255,255,255,0.1);}
+.flip-front.xm-front{background:#0d1b5e;}
+.flip-front.fxgt-front{background:#ffffff;border:1px solid #e0e0e0}
+
+.logo-tagline{font-size:0.55rem;color:rgba(255,255,255,0.7);font-weight:600;padding:8px 5px 2px;text-align:center;line-height:1.2;}
+.fxgt-front .logo-tagline{color:#333;}
+.flip-hint{font-size:0.52rem;color:var(--vs);margin-top:4px;font-weight:700;}
+
+.flip-back{transform:rotateY(180deg);display:flex;flex-direction:column}
+.flip-back.xm-back{background:#fff;border:2px solid #9fa8da}
+.flip-back.fxgt-back{background:#fff;border:2px solid #f48fb1}
+.flip-back-head{padding:7px 11px 6px}
+.flip-back.xm-back .flip-back-head{background:#3949ab}
+.flip-back.fxgt-back .flip-back-head{background:#c62828}
+.flip-back-name{font-size:0.75rem;font-weight:900;color:#fff}
+
+.flip-tp-body{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px 8px 8px;text-align:center}
+.tp-stars-large{display:flex;gap:3px;justify-content:center;margin-bottom:6px}
+.tp-star-lg{width:20px;height:20px;border-radius:2px;position:relative;flex-shrink:0}
+.tp-star-lg.full{background:#00b67a}
+.tp-star-lg.empty{background:#dcdce6}
+.tp-star-lg.half{background:linear-gradient(90deg,#00b67a 50%,#dcdce6 50%)}
+.tp-star-lg::after{
+  content:'★';position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;color:#fff;line-height:1;
+}
+
+.tp-score-large{font-size:1.5rem;font-weight:900;color:#191919;line-height:1;margin-bottom:2px}
+.tp-score-large span{font-size:0.75rem;color:#888;font-weight:400}
+.tp-label-large{font-size:0.68rem;font-weight:700;color:#00b67a;margin-bottom:3px}
+.tp-reviews-count{font-size:0.58rem;color:#aaa;margin-bottom:8px}
+.tp-link{
+  font-size:0.6rem;font-weight:700;color:#00b67a;text-decoration:none;
+  border:1px solid #00b67a;border-radius:3px;padding:4px 8px;
+  display:inline-block;transition:all 0.15s;
+}
+.tp-link:active{background:#00b67a;color:#fff}
+
+.flip-vs{display:flex;align-items:center;justify-content:center;flex-shrink:0;padding-top:0}
+.flip-vs-badge{
+  width:32px;height:32px;border-radius:50%;
+  background:linear-gradient(135deg,var(--xm-mid),var(--fxgt-mid));
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.65rem;font-weight:900;color:#fff;
+  box-shadow:0 2px 10px rgba(0,0,0,0.2);
+}
 
 .divider{height:8px;background:var(--bg)}
 
@@ -366,7 +423,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
 
 /* FRONT — лого стил */
 .flip-front{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:0;padding:0;}
-.flip-front img{width:100%; height:110px; object-fit:cover;}
+.flip-front img{width:100%; height:110px; object-fit:cover; border-bottom:1px solid rgba(255,255,255,0.1);}
 .flip-front.xm-front{background:#0d1b5e;}
 .flip-front.fxgt-front{background:#ffffff;border:1px solid #e0e0e0}
 
@@ -647,8 +704,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
           <td class="fxgt-td">
             MT5アプリ対応<br>
             <div class="app-stores">
-              <a href="https://fxgt.link?refid=fxgtNihon" target="_blank" rel="noopener noreferrer" class="app-store-pill ios"><span>🍎</span> App Store</a>
-              <a href="https://fxgt.link?refid=fxgtNihon" target="_blank" rel="noopener noreferrer" class="app-store-pill android"><span>🤖</span> Google Play</a>
+              <a href="https://fxgtapp.onelink.me/xgkx/lsswbbod?refid=fxgtNihon" target="_blank" rel="noopener noreferrer" class="app-store-pill ios"><span>🍎</span> App Store</a>
+              <a href="https://fxgtapp.onelink.me/xgkx/lsswbbod?refid=fxgtNihon" target="_blank" rel="noopener noreferrer" class="app-store-pill android"><span>🤖</span> Google Play</a>
             </div>
             <div class="app-rating">★ 4.0 / 5.0</div>
           </td>
@@ -988,10 +1045,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
             </ul>
           </div>
           <div class="app-dl-btns">
-            <a href="https://fxgt.link?refid=fxgtNihon" target="_blank" rel="noopener noreferrer" class="app-btn-ios track-link-fxgt">
+            <a href="https://fxgtapp.onelink.me/xgkx/lsswbbod?refid=fxgtNihon" target="_blank" rel="noopener noreferrer" class="app-btn-ios track-link-fxgt">
               <span>🍎</span> App Storeで入手
             </a>
-            <a href="https://fxgt.link?refid=fxgtNihon" target="_blank" rel="noopener noreferrer" class="app-btn-android track-link-fxgt">
+            <a href="https://fxgtapp.onelink.me/xgkx/lsswbbod?refid=fxgtNihon" target="_blank" rel="noopener noreferrer" class="app-btn-android track-link-fxgt">
               <span>🤖</span> Google Playで入手
             </a>
           </div>
@@ -1231,7 +1288,9 @@ function showResult() {
   document.getElementById('sticky-cta-pair').innerHTML = injectLinks(d.sticky);
   document.getElementById('sticky-footer').classList.add('visible');
   document.getElementById('result-screen').style.display = 'block';
-  window.scrollTo({top:0, behavior:'smooth'});
+  
+  // Коригирано скролиране: Фокусира се върху резултата, вместо да връща най-горе
+  document.getElementById('result-screen').scrollIntoView({behavior: 'smooth', block: 'start'});
 
   var el = document.getElementById('ai-msg-text');
   el.innerHTML = '<span class="ai-cursor"></span>';
