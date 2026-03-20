@@ -2,8 +2,11 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>XMTrading vs FXGT 徹底比較2026｜あなたに合うのはどっち？</title>
+
+<link rel="preload" href="xm_screenshot.png" as="image">
+<link rel="preload" href="FXGT_1_5000.png" as="image">
 
 <script>
 !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
@@ -62,16 +65,79 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
 .vs-col{color:var(--vs);font-size:1.1rem}
 .hero-sub{font-size:0.8rem;color:rgba(255,255,255,0.62);margin-bottom:20px;position:relative}
 .hero-meta{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;font-size:0.66rem;color:rgba(255,255,255,0.38);position:relative;margin-bottom:22px}
-.vs-pills{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;position:relative}
-.vs-pill{flex:1;min-width:128px;max-width:175px;border-radius:8px;padding:13px 10px;text-align:center}
-.vs-pill.xm-pill{background:rgba(26,35,126,0.6);border:1px solid rgba(121,134,203,0.4)}
-.vs-pill.fxgt-pill{background:rgba(183,28,28,0.6);border:1px solid rgba(239,154,154,0.4)}
-.vs-pill-name{font-size:0.95rem;font-weight:900;color:#fff;margin-bottom:3px}
-.vs-pill-sub{font-size:0.62rem;color:rgba(255,255,255,0.48)}
-.vs-pill-score{font-size:1.5rem;font-weight:900;margin-top:5px}
-.xm-pill .vs-pill-score{color:#7986cb}
-.fxgt-pill .vs-pill-score{color:#ef9a9a}
-.vs-badge{display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:900;color:var(--vs);flex-shrink:0;padding-top:8px}
+
+/* FLIP CARDS */
+.flip-wrap{display:flex;gap:10px;justify-content:center;padding:0 4px;perspective:1000px}
+.flip-card{flex:1;min-width:0;max-width:175px;height:178px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.flip-card-inner{
+  position:relative;width:100%;height:100%;
+  transition:transform 0.6s cubic-bezier(0.4,0,0.2,1);
+  transform-style:preserve-3d;
+}
+.flip-card.flipped .flip-card-inner{transform:rotateY(180deg)}
+.flip-front,.flip-back{
+  position:absolute;inset:0;
+  border-radius:10px;
+  -webkit-backface-visibility:hidden;
+  backface-visibility:hidden;
+  overflow:hidden;
+  box-shadow:0 4px 18px rgba(0,0,0,0.18);
+}
+
+/* FRONT — лого стил */
+.flip-front{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:0;padding:0;position:relative;overflow:hidden}
+.flip-front.xm-front{background:#0a0f2e}
+.flip-front.fxgt-front{background:#f8f8f8;border:1px solid #e0e0e0}
+
+/* лого текст */
+.logo-tagline{font-size:0.55rem;color:rgba(255,255,255,0.7);font-weight:600;padding:8px 5px 2px;text-align:center;line-height:1.2;}
+.fxgt-front .logo-tagline{color:#333;}
+
+/* flip hint */
+.flip-hint{font-size:0.52rem;color:var(--vs);margin-top:4px;font-weight:700;}
+
+/* BACK — Trustpilot focus */
+.flip-back{transform:rotateY(180deg);display:flex;flex-direction:column}
+.flip-back.xm-back{background:#fff;border:2px solid #9fa8da}
+.flip-back.fxgt-back{background:#fff;border:2px solid #f48fb1}
+.flip-back-head{padding:7px 11px 6px}
+.flip-back.xm-back .flip-back-head{background:#3949ab}
+.flip-back.fxgt-back .flip-back-head{background:#c62828}
+.flip-back-name{font-size:0.75rem;font-weight:900;color:#fff}
+
+.flip-tp-body{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px 8px 8px;text-align:center}
+
+/* Large Trustpilot stars */
+.tp-stars-large{display:flex;gap:3px;justify-content:center;margin-bottom:6px}
+.tp-star-lg{width:20px;height:20px;border-radius:2px;position:relative;flex-shrink:0}
+.tp-star-lg.full{background:#00b67a}
+.tp-star-lg.empty{background:#dcdce6}
+.tp-star-lg.half{background:linear-gradient(90deg,#00b67a 50%,#dcdce6 50%)}
+.tp-star-lg::after{
+  content:'★';position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;color:#fff;line-height:1;
+}
+
+.tp-score-large{font-size:1.5rem;font-weight:900;color:#191919;line-height:1;margin-bottom:2px}
+.tp-score-large span{font-size:0.75rem;color:#888;font-weight:400}
+.tp-label-large{font-size:0.68rem;font-weight:700;color:#00b67a;margin-bottom:3px}
+.tp-reviews-count{font-size:0.58rem;color:#aaa;margin-bottom:8px}
+.tp-link{
+  font-size:0.6rem;font-weight:700;color:#00b67a;text-decoration:none;
+  border:1px solid #00b67a;border-radius:3px;padding:4px 8px;
+  display:inline-block;transition:all 0.15s;
+}
+.tp-link:active{background:#00b67a;color:#fff}
+
+.flip-vs{display:flex;align-items:center;justify-content:center;flex-shrink:0;padding-top:0}
+.flip-vs-badge{
+  width:32px;height:32px;border-radius:50%;
+  background:linear-gradient(135deg,var(--xm-mid),var(--fxgt-mid));
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.65rem;font-weight:900;color:#fff;
+  box-shadow:0 2px 10px rgba(0,0,0,0.2);
+}
 
 .divider{height:8px;background:var(--bg)}
 
@@ -362,34 +428,16 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
 }
 
 /* FRONT — лого стил */
-.flip-front{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;padding:0;position:relative;overflow:hidden}
+.flip-front{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:0;padding:0;position:relative;overflow:hidden}
 .flip-front.xm-front{background:#0a0f2e}
 .flip-front.fxgt-front{background:#f8f8f8;border:1px solid #e0e0e0}
 
 /* лого текст */
-.logo-wordmark{font-weight:900;letter-spacing:-0.01em;line-height:1;color:#fff;text-align:center;margin-bottom:8px}
-.logo-wordmark.xm-logo{font-size:1.8rem;text-shadow:0 0 30px rgba(121,134,203,0.6)}
-.logo-wordmark.fxgt-logo{font-size:1.65rem;letter-spacing:0.04em;text-shadow:0 0 30px rgba(239,154,154,0.6)}
-.logo-tagline{font-size:0.58rem;color:rgba(255,255,255,0.55);font-weight:600;letter-spacing:0.06em;text-align:center;margin-bottom:10px}
-.fxgt-front .logo-tagline{color:rgba(0,0,0,0.4)}
-.fxgt-front .flip-hint{color:rgba(0,0,0,0.3)}
-.fxgt-front .flip-hint::before{color:rgba(0,0,0,0.3)}
-
-/* Trustpilot widget на предната страна */
-.tp-widget{background:rgba(255,255,255,0.1);border-radius:5px;padding:5px 9px;text-align:center;width:100%}
-.tp-logo{font-size:0.58rem;font-weight:700;color:rgba(255,255,255,0.6);letter-spacing:0.05em;margin-bottom:3px}
-.tp-stars{display:flex;justify-content:center;gap:2px;margin-bottom:2px}
-.tp-star{width:13px;height:13px;border-radius:2px;display:flex;align-items:center;justify-content:center}
-.tp-star.full{background:#00b67a}
-.tp-star.half{background:linear-gradient(90deg,#00b67a 50%,#dcdce6 50%)}
-.tp-star.empty{background:#dcdce6}
-.tp-star svg{width:9px;height:9px;fill:#fff}
-.tp-score{font-size:0.7rem;font-weight:900;color:#fff}
-.tp-count{font-size:0.55rem;color:rgba(255,255,255,0.45);margin-top:1px}
+.logo-tagline{font-size:0.55rem;color:rgba(255,255,255,0.7);font-weight:600;padding:8px 5px 2px;text-align:center;line-height:1.2;}
+.fxgt-front .logo-tagline{color:#333;}
 
 /* flip hint */
-.flip-hint{font-size:0.55rem;color:rgba(255,255,255,0.35);margin-top:8px;letter-spacing:0.04em;display:flex;align-items:center;gap:3px;justify-content:center}
-.flip-hint::before{content:'↺';font-size:0.7rem}
+.flip-hint{font-size:0.52rem;color:var(--vs);margin-top:4px;font-weight:700;}
 
 /* BACK — Trustpilot focus */
 .flip-back{transform:rotateY(180deg);display:flex;flex-direction:column}
@@ -555,11 +603,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
     </div>
     <div class="flip-wrap" id="broker-flip-wrap">
 
-      <!-- XM FLIP CARD -->
       <div class="flip-card" id="fc-xm" onclick="flipCard('fc-xm')">
         <div class="flip-card-inner">
-          <!-- FRONT: XM ロゴ -->
-                              <div class="flip-front xm-front">
+          <div class="flip-front xm-front">
             <img src="xm_screenshot.png" 
                  alt="XMTrading公式サイト" 
                  loading="lazy"
@@ -568,13 +614,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
               <div class="flip-hint" style="color:rgba(255,255,255,0.75)">↺ タップして評価を見る</div>
             </div>
           </div>
-          <!-- BACK: Trustpilot -->
           <div class="flip-back xm-back">
             <div class="flip-back-head">
               <div class="flip-back-name">XMTrading</div>
             </div>
             <div class="flip-tp-body">
-              <!-- Trustpilot logo SVG -->
               <svg viewBox="0 0 120 24" xmlns="http://www.w3.org/2000/svg" style="width:90px;margin-bottom:10px">
                 <rect x="0" y="0" width="24" height="24" rx="3" fill="#00b67a"/>
                 <polygon points="12,4 14.5,10 21,10.5 16,15 17.5,21.5 12,18 6.5,21.5 8,15 3,10.5 9.5,10" fill="white"/>
@@ -596,14 +640,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
         </div>
       </div>
 
-      <!-- VS -->
       <div class="flip-vs"><div class="flip-vs-badge">VS</div></div>
 
-      <!-- FXGT FLIP CARD -->
       <div class="flip-card" id="fc-fxgt" onclick="flipCard('fc-fxgt')">
         <div class="flip-card-inner">
-          <!-- FRONT: FXGT ロゴ -->
-                              <div class="flip-front fxgt-front">
+          <div class="flip-front fxgt-front">
             <img src="FXGT_1_5000.png" 
                  alt="FXGT公式サイト" 
                  loading="lazy"
@@ -612,13 +653,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
               <div class="flip-hint" style="color:rgba(255,255,255,0.85)">↺ タップして評価を見る</div>
             </div>
           </div>
-          <!-- BACK: Trustpilot -->
           <div class="flip-back fxgt-back">
             <div class="flip-back-head">
               <div class="flip-back-name">FXGT</div>
             </div>
             <div class="flip-tp-body">
-              <!-- Trustpilot logo SVG -->
               <svg viewBox="0 0 120 24" xmlns="http://www.w3.org/2000/svg" style="width:90px;margin-bottom:10px">
                 <rect x="0" y="0" width="24" height="24" rx="3" fill="#00b67a"/>
                 <polygon points="12,4 14.5,10 21,10.5 16,15 17.5,21.5 12,18 6.5,21.5 8,15 3,10.5 9.5,10" fill="white"/>
@@ -640,12 +679,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
         </div>
       </div>
 
-    </div><!-- /flip-wrap -->
+    </div>
   </div>
 
   <div class="divider"></div>
 
-  <!-- 比較表 -->
   <div class="sec-wrap">
     <div class="sec-label">比較表</div>
     <div class="sec-title">10項目 一目でわかる比較表</div>
@@ -733,7 +771,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
 
   <div class="divider"></div>
 
-  <!-- メリット・デメリット -->
   <div class="sec-wrap">
     <div class="sec-label">メリット・デメリット</div>
 
@@ -785,7 +822,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
 
   <div class="divider"></div>
 
-  <!-- こんな人におすすめ -->
   <div class="who-section">
     <div class="sec-label">こんな人におすすめ</div>
     <div class="who-grid">
@@ -808,12 +844,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
 
   <div class="divider"></div>
 
-  <!-- ══ コピートレード比較 ══ -->
   <div class="sec-wrap">
     <div class="sec-label">コピートレード比較</div>
     <div class="sec-title">📊 コピートレード — XMTrading vs FXGT 詳細比較</div>
 
-    <!-- 概要カード -->
     <div class="ct-copytrade-grid">
 
       <div class="ct-card ct-xm">
@@ -856,7 +890,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
 
     </div>
 
-    <!-- 総括 -->
     <div class="ct-summary">
       <div class="ct-summary-item ct-summary-xm">
         <div class="ct-sum-icon">🏆</div>
@@ -878,12 +911,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
 
   <div class="divider"></div>
 
-  <!-- ══ 3月限定プロモーション ══ -->
   <div class="promo-section">
     <div class="section-label">3月限定キャンペーン</div>
     <div class="promo-section-title">📅 今月だけの特別プロモーション比較</div>
 
-    <!-- XM MUGEN -->
     <div class="mugen-box">
       <div class="mugen-header">
         <div class="mugen-header-left">
@@ -894,7 +925,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
       </div>
       <div class="mugen-body">
 
-        <!-- 3ステップ -->
         <div class="mugen-steps">
           <div class="mugen-step">
             <div class="mugen-step-num">1</div>
@@ -913,7 +943,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
           </div>
         </div>
 
-        <!-- キャッシュバック表 -->
         <table class="mugen-table">
           <thead>
             <tr>
@@ -945,7 +974,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
       </div>
     </div>
 
-    <!-- XM その他のプロモーション -->
     <div class="xm-extras-box">
       <div class="xm-extras-title">🔴 XMTrading — その他のプロモーション・特典</div>
       <div class="xm-extras-grid">
@@ -1001,7 +1029,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
       </div>
     </div>
 
-    <!-- FXGT PROMO -->
     <div class="fxgt-promo-box">
       <div class="fxgt-promo-header">
         <div>
@@ -1066,11 +1093,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
           <strong>最大 $30,000相当</strong>
         </div>
         <div class="promo-cta-wrap" style="margin-top:14px">
-          <a href="https://fxgt.com/ja/" target="_blank" rel="noopener noreferrer" class="promo-cta-main promo-cta-main-fxgt track-link-fxgt">
+          <a href="https://fxgt.link?refid=fxgtNihon" target="_blank" rel="noopener noreferrer" class="promo-cta-main promo-cta-main-fxgt track-link-fxgt">
             🔵 FXGT公式サイトへ
             <span class="promo-cta-sub">✓ ウェルカムボーナス登録　✓ 最短2分で完了</span>
           </a>
-          <a href="https://fxgt.com/ja/" target="_blank" rel="noopener noreferrer" class="promo-cta-bonus promo-cta-bonus-fxgt track-link-fxgt">
+          <a href="https://fxgt.link?refid=fxgtNihon" target="_blank" rel="noopener noreferrer" class="promo-cta-bonus promo-cta-bonus-fxgt track-link-fxgt">
             🎁 段階型ボーナスプログラムの詳細を見る →
           </a>
         </div>
@@ -1080,7 +1107,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
 
   <div class="divider"></div>
 
-  <!-- クイズ -->
   <div class="quiz-section" id="quiz-section">
     <div class="quiz-head">
       <div class="quiz-badge">🎯 2分で分かる！最適業者診断クイズ</div>
@@ -1144,7 +1170,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
 
   <div class="divider"></div>
 
-  <!-- 結果画面 -->
   <div id="result-screen">
     <div id="verdict-box"></div>
     <div class="divider"></div>
@@ -1159,12 +1184,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
     <div class="cta-area-wrap" id="cta-area"></div>
     <div class="divider"></div>
 
-    <!-- 📱 APP DOWNLOAD BANNER -->
     <div class="app-dl-banner">
       <div class="app-dl-title">📲 スマホアプリで今すぐ取引開始</div>
       <div class="app-dl-grid">
 
-        <!-- XM APP -->
         <div class="app-dl-card xm-app">
           <div class="app-dl-card-head">
             <div class="app-dl-icon">🔴</div>
@@ -1191,7 +1214,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
           </div>
         </div>
 
-        <!-- FXGT APP -->
         <div class="app-dl-card fxgt-app">
           <div class="app-dl-card-head">
             <div class="app-dl-icon">🔵</div>
@@ -1209,10 +1231,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
             </ul>
           </div>
           <div class="app-dl-btns">
-            <a href="https://fxgtapp.onelink.me/xgkx/lsswbbod?refid=fxgtNihon" target="_blank" rel="noopener noreferrer" class="app-btn-ios track-link-fxgt">
+            <a href="https://fxgtapp.onelink.me/xgkx/lsswbbod?refid=fxgtNihon" target="_blank" rel="noopener noreferrer" class="app-btn-ios">
               <span>🍎</span> App Storeで入手
             </a>
-            <a href="https://fxgtapp.onelink.me/xgkx/lsswbbod?refid=fxgtNihon" target="_blank" rel="noopener noreferrer" class="app-btn-android track-link-fxgt">
+            <a href="https://fxgtapp.onelink.me/xgkx/lsswbbod?refid=fxgtNihon" target="_blank" rel="noopener noreferrer" class="app-btn-android">
               <span>🤖</span> Google Playで入手
             </a>
           </div>
@@ -1245,9 +1267,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
     </div>
   </div>
 
-</div><!-- /container -->
-
-<div class="site-footer">
+</div><div class="site-footer">
   <div class="footer-logo">FXボーナス<em>ナビ</em></div>
   <div class="footer-links">
     <a href="#">プライバシーポリシー</a>
@@ -1259,14 +1279,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
 
 <div class="sticky-v2" id="sticky-footer">
   <div class="sticky-v2-label">📲 今すぐ無料口座開設</div>
-  <div class="sticky-v2-row">
+  <div class="sticky-v2-row" id="sticky-cta-pair">
     <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=0" target="_blank" rel="noopener noreferrer" class="sticky-btn sb-xm track-link-xm">
       <div class="sticky-btn-name">XMTrading</div>
       <div class="sticky-btn-sub">2009年創業・老舗の信頼</div>
       <div class="sticky-btn-bonus">¥13,000 ボーナス</div>
       <div class="sticky-btn-tp">Trustpilot ⭐ 3.7</div>
     </a>
-    <a href="https://fxgt.com/ja/" target="_blank" rel="noopener noreferrer" class="sticky-btn sb-fxgt track-link-fxgt">
+    <a href="https://fxgt.link?refid=fxgtNihon" target="_blank" rel="noopener noreferrer" class="sticky-btn sb-fxgt track-link-fxgt">
       <div class="sticky-btn-name">FXGT</div>
       <div class="sticky-btn-sub">仮想通貨CFD最大1,000倍</div>
       <div class="sticky-btn-bonus">$70 新規登録ボーナス</div>
@@ -1454,7 +1474,9 @@ function showResult() {
   document.getElementById('sticky-cta-pair').innerHTML = injectLinks(d.sticky);
   document.getElementById('sticky-footer').classList.add('visible');
   document.getElementById('result-screen').style.display = 'block';
-  window.scrollTo({top:0, behavior:'smooth'});
+  
+  // Плавно скролиране до резултата, без връщане до върха на страницата
+  document.getElementById('result-screen').scrollIntoView({behavior: 'smooth', block: 'start'});
 
   var el = document.getElementById('ai-msg-text');
   el.innerHTML = '<span class="ai-cursor"></span>';
