@@ -1624,8 +1624,14 @@ function showResult() {
   document.getElementById('cta-area').innerHTML = injectLinks(d.cta);
   document.getElementById('sticky-cta-pair').innerHTML = injectLinks(d.sticky);
   document.getElementById('sticky-footer').classList.add('visible');
-  document.getElementById('result-screen').style.display = 'block';
-  window.scrollTo({top:0, behavior:'smooth'});
+
+  var rs = document.getElementById('result-screen');
+  rs.style.display = 'block';
+
+  // Scroll to result after brief render delay
+  setTimeout(function() {
+    rs.scrollIntoView({behavior: 'smooth', block: 'start'});
+  }, 80);
 
   var el = document.getElementById('ai-msg-text');
   el.innerHTML = '<span class="ai-cursor"></span>';
@@ -1633,7 +1639,7 @@ function showResult() {
 
   if (typeof fbq !== 'undefined') fbq('trackCustom','QuizCompleted',{verdict:v});
   if (typeof gtag !== 'undefined') gtag('event','quiz_completed',{verdict:v});
-  sendPostback(2); // goal 2 = クイズ完了
+  sendPostback(2);
   if (navigator.vibrate) navigator.vibrate([80,40,80]);
 }
 
