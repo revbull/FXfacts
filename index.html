@@ -542,6 +542,95 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
   .score-grid{gap:14px}
 }
 
+/* ── DESKTOP (1024px+) ── */
+@media (min-width: 1024px) {
+  /* Body gets dark side panels — no more white void */
+  body{
+    background:var(--black);
+  }
+
+  /* Центрирана колона с по-светъл фон */
+  .container{
+    max-width:780px;
+    background:var(--bg);
+    box-shadow:0 0 60px rgba(0,0,0,0.5);
+  }
+
+  /* Header се разтяга full-width но съдържанието е центрирано */
+  .site-header{padding:14px 40px}
+  .site-logo{font-size:1.1rem}
+  .header-badge{font-size:0.68rem;padding:5px 14px}
+
+  /* Hero по-просторен */
+  .hero{padding:44px 40px 36px}
+  .hero h1{font-size:2rem}
+  .hero-sub{font-size:0.92rem}
+  .hero-tag{font-size:0.68rem;padding:5px 18px}
+
+  /* Flip карти по-големи */
+  .flip-card{max-width:280px;height:280px}
+  .flip-wrap{gap:28px}
+
+  /* Container секции с повече padding */
+  .sec-wrap,.who-section,.quiz-section,.promo-section{padding:28px 32px}
+
+  /* Таблицата — по-четим */
+  .cmp-table{font-size:0.92rem}
+  .cmp-table td{padding:13px 12px}
+  .cmp-table td.cat{font-size:0.76rem}
+
+  /* Pros/Cons — 2 колони */
+  .pros-cons-desktop{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+
+  /* Who секция — 2 колони */
+  .who-grid{flex-direction:row;gap:14px}
+  .who-card{flex:1}
+
+  /* Copy trade таблица — по-голям текст */
+  .ct-label{width:110px;font-size:0.68rem}
+  .ct-val{font-size:0.76rem}
+  .ct-broker-name{font-size:0.88rem}
+
+  /* Quiz — по-широк */
+  .q-card{padding:26px 22px 20px}
+  .q-text{font-size:1.05rem}
+  .opt-btn{font-size:0.88rem;padding:13px 16px}
+
+  /* Sticky bar централизиран */
+  .sticky-v2{padding:10px 0 12px}
+  .sticky-v2-label{font-size:0.62rem}
+  .sticky-v2-row{max-width:780px;margin:0 auto;padding:0 20px}
+  .sticky-btn-name{font-size:0.9rem}
+  .sticky-btn-sub{font-size:0.65rem}
+  .sticky-btn-bonus{font-size:0.68rem}
+
+  /* XM extras 3 колони */
+  .xm-extras-grid{grid-template-columns:1fr 1fr 1fr}
+
+  /* App download grid */
+  .app-dl-grid{gap:20px}
+  .app-dl-features li{font-size:0.7rem}
+
+  /* Promo CTA по-широки */
+  .promo-cta-main{font-size:1.08rem;padding:18px 22px 14px}
+  .fxgt-bonus-grid{gap:10px}
+  .mugen-table{font-size:0.86rem}
+  .mugen-table td,.mugen-table th{padding:10px 12px}
+
+  /* Anchor бутони в hero */
+  .hero-anchor-btn{font-size:0.75rem;padding:7px 16px}
+  .hero-anchors{gap:10px;margin-top:24px;padding-top:22px}
+
+  /* Divider по-тесен визуално */
+  .divider{height:6px}
+
+  /* Footer */
+  .site-footer{padding:24px 40px 18px}
+  .footer-logo{font-size:1rem}
+  .risk{padding:16px 40px 10px}
+}
+
+
 /* ── COPY TRADING SECTION ── */
 .ct-copytrade-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
 .ct-card{border-radius:8px;overflow:hidden;border:2px solid var(--border)}
@@ -974,6 +1063,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
   <div class="sec-wrap" id="section-merit">
     <div class="sec-label">メリット・デメリット</div>
 
+    <div class="pros-cons-desktop">
+    <div>
     <div class="broker-block">
       <div class="broker-block-head xm-head">🔵 XMTrading — メリット</div>
       <div class="broker-block-body">
@@ -994,9 +1085,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
         <div class="con-item"><span class="con-icon">✗</span>出金はFXGTより遅め（通常1〜2営業日）</div>
       </div>
     </div>
+    </div><!-- /XM col -->
 
-    <div style="height:14px"></div>
-
+    <div>
     <div class="broker-block">
       <div class="broker-block-head fxgt-head">🔴 FXGT — メリット</div>
       <div class="broker-block-body">
@@ -1018,6 +1109,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
         <div class="con-item"><span class="con-icon">✗</span>最大5,000倍レバレッジは残高$1,000以下のOptimus口座のみ適用（残高増加で段階的に制限）</div>
       </div>
     </div>
+    </div><!-- /FXGT col -->
+    </div><!-- /pros-cons-desktop -->
   </div>
 
   <div class="divider"></div>
