@@ -1423,7 +1423,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
 
 <div class="sticky-v2" id="sticky-footer">
   <div class="sticky-v2-label">📲 今すぐ無料口座開設</div>
-  <div class="sticky-v2-row">
+  <div class="sticky-v2-row" id="sticky-cta-pair">
     <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=0" target="_blank" rel="noopener noreferrer" class="sticky-btn sb-xm track-link-xm">
       <div class="sticky-btn-name">XMTrading</div>
       <div class="sticky-btn-sub">2009年創業・老舗の信頼</div>
@@ -1451,6 +1451,10 @@ function acceptCookies() {
   document.getElementById('cookie-banner').style.display = 'none';
 }
 (function(){
+  // Force scroll to top on load — prevent browser scroll restoration to quiz
+  if (history.scrollRestoration) history.scrollRestoration = 'manual';
+  window.scrollTo(0, 0);
+
   var ok = false;
   try { ok = localStorage.getItem('cookies_accepted') === 'true'; } catch(e) {}
   if (!ok) document.getElementById('cookie-banner').style.display = 'flex';
@@ -1622,7 +1626,8 @@ function showResult() {
     +'</div>';
 
   document.getElementById('cta-area').innerHTML = injectLinks(d.cta);
-  document.getElementById('sticky-cta-pair').innerHTML = injectLinks(d.sticky);
+  var scp = document.getElementById('sticky-cta-pair');
+  if (scp) scp.innerHTML = injectLinks(d.sticky);
   document.getElementById('sticky-footer').classList.add('visible');
 
   var rs = document.getElementById('result-screen');
