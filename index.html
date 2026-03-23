@@ -62,6 +62,28 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
 .vs-col{color:var(--vs);font-size:1.1rem}
 .hero-sub{font-size:0.8rem;color:rgba(255,255,255,0.62);margin-bottom:20px;position:relative}
 .hero-meta{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;font-size:0.66rem;color:rgba(255,255,255,0.38);position:relative;margin-bottom:22px}
+
+/* Hero anchor nav */
+.hero-anchors{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:8px;
+  margin-top:20px;padding-top:18px;
+  border-top:1px solid rgba(255,255,255,0.1);
+  position:relative;
+}
+.hero-anchor-btn{
+  font-size:0.68rem;font-weight:700;
+  color:rgba(255,255,255,0.75);
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.18);
+  padding:6px 13px;border-radius:20px;
+  text-decoration:none;
+  transition:all 0.18s;
+  white-space:nowrap;
+}
+.hero-anchor-btn:hover,.hero-anchor-btn:active{
+  background:rgba(255,255,255,0.18);
+  color:#fff;
+}
 .vs-pills{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;position:relative}
 .vs-pill{flex:1;min-width:128px;max-width:175px;border-radius:8px;padding:13px 10px;text-align:center}
 .vs-pill.xm-pill{background:rgba(26,35,126,0.6);border:1px solid rgba(121,134,203,0.4)}
@@ -684,12 +706,184 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
       </div>
 
     </div><!-- /flip-wrap -->
+
+    <!-- Anchor navigation buttons -->
+    <div class="hero-anchors">
+      <a href="#section-compare" class="hero-anchor-btn">📊 比較表</a>
+      <a href="#section-merit" class="hero-anchor-btn">✓ メリット</a>
+      <a href="#section-copytrade" class="hero-anchor-btn">🔄 コピー</a>
+      <a href="#section-promo" class="hero-anchor-btn">🎁 キャンペーン</a>
+    </div>
   </div>
 
   <div class="divider"></div>
 
+  <!-- クイズ (moved to top) -->
+  <div class="quiz-section" id="quiz-section">
+    <div class="quiz-head">
+      <div class="quiz-badge">🎯 2分で分かる！最適業者診断クイズ</div>
+      <h2>📋 あなたのトレードスタイル診断</h2>
+      <p>4問に答えるだけでXMとFXGTどちらが合うか判定します</p>
+    </div>
+    <div class="prog-wrap">
+      <div class="prog-label"><span id="prog-text">質問 1 / 4</span><span id="prog-pct">25%</span></div>
+      <div class="prog-bar"><div class="prog-fill" id="prog-fill"></div></div>
+    </div>
+
+    <div class="q-card active" id="q1">
+      <div class="q-num">質問 01 / 04</div>
+      <div class="q-text">🎯 主にどんな取引スタイルですか？</div>
+      <div class="options">
+        <button class="opt-btn" onclick="pick(1,'xm',this)"><span class="opt-letter">A</span>スイングトレード・デイトレード（数時間〜数日保有）</button>
+        <button class="opt-btn" onclick="pick(1,'fxgt',this)"><span class="opt-letter">B</span>スキャルピング（数秒〜数分の超短期売買）</button>
+        <button class="opt-btn" onclick="pick(1,'fxgt',this)"><span class="opt-letter">C</span>仮想通貨の取引がメイン</button>
+        <button class="opt-btn" onclick="pick(1,'xm',this)"><span class="opt-letter">D</span>まだ決まっていない・これから始める</button>
+      </div>
+    </div>
+    <div class="q-card" id="q2">
+      <div class="q-num">質問 02 / 04</div>
+      <div class="q-text">🏆 業者選びで最も重視することは？</div>
+      <div class="options">
+        <button class="opt-btn" onclick="pick(2,'xm',this)"><span class="opt-letter">A</span>信頼性・規制の強さ・長年の実績</button>
+        <button class="opt-btn" onclick="pick(2,'fxgt',this)"><span class="opt-letter">B</span>スプレッドの狭さ・取引コストの低さ</button>
+        <button class="opt-btn" onclick="pick(2,'xm',this)"><span class="opt-letter">C</span>ボーナスの豊富さ・充実度</button>
+        <button class="opt-btn" onclick="pick(2,'fxgt',this)"><span class="opt-letter">D</span>出金の速さ・仮想通貨での入出金</button>
+      </div>
+    </div>
+    <div class="q-card" id="q3">
+      <div class="q-num">質問 03 / 04</div>
+      <div class="q-text">📈 希望するレバレッジの水準は？</div>
+      <div class="options">
+        <button class="opt-btn" onclick="pick(3,'xm',this)"><span class="opt-letter">A</span>100〜500倍程度（安全重視）</button>
+        <button class="opt-btn" onclick="pick(3,'xm',this)"><span class="opt-letter">B</span>1,000倍程度（標準的なハイレバ）</button>
+        <button class="opt-btn" onclick="pick(3,'fxgt',this)"><span class="opt-letter">C</span>1,000倍以上〜5,000倍（超ハイレバレッジ希望）</button>
+        <button class="opt-btn" onclick="pick(3,'both',this)"><span class="opt-letter">D</span>レバレッジより他の条件を優先したい</button>
+      </div>
+    </div>
+    <div class="q-card" id="q4">
+      <div class="q-num">質問 04 / 04</div>
+      <div class="q-text">💰 入出金で最も重視することは？</div>
+      <div class="options">
+        <button class="opt-btn" onclick="pick(4,'xm',this)"><span class="opt-letter">A</span>安全性・確実性（多少時間がかかっても良い）</button>
+        <button class="opt-btn" onclick="pick(4,'fxgt',this)"><span class="opt-letter">B</span>スピード重視（できるだけ早く出金したい）</button>
+        <button class="opt-btn" onclick="pick(4,'fxgt',this)"><span class="opt-letter">C</span>仮想通貨（ビットコイン等）での入出金</button>
+        <button class="opt-btn" onclick="pick(4,'both',this)"><span class="opt-letter">D</span>両方口座を開設して使い分けたい</button>
+      </div>
+    </div>
+
+    <div class="analyzing" id="analyzing">
+      <div class="analyzing-icon">⚙️</div>
+      <h3>あなたのトレードスタイルを分析中…</h3>
+      <p>回答データをもとに最適な業者を判定しています</p>
+      <div class="loader-wrap"><div class="loader-fill" id="loader-fill"></div></div>
+      <div class="analyzing-status" id="analyzing-status">回答を照合しています…</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+  <!-- 結果画面 -->
+  <div id="result-screen">
+    <div id="verdict-box"></div>
+    <div class="divider"></div>
+    <div class="ai-msg-box">
+      <div class="ai-msg-header">
+        <div class="ai-spinner" id="ai-spin"></div>
+        <span id="ai-label">あなたへの診断結果を生成中...</span>
+      </div>
+      <div id="ai-msg-text"><span class="ai-cursor"></span></div>
+    </div>
+    <div class="divider"></div>
+    <div class="cta-area-wrap" id="cta-area"></div>
+    <div class="divider"></div>
+
+    <!-- 📱 APP DOWNLOAD BANNER -->
+    <div class="app-dl-banner">
+      <div class="app-dl-title">📲 スマホアプリで今すぐ取引開始</div>
+      <div class="app-dl-grid">
+
+        <!-- XM APP -->
+        <div class="app-dl-card xm-app">
+          <div class="app-dl-card-head">
+            <div class="app-dl-icon">🔴</div>
+            <div>
+              <div class="app-dl-broker">XMTrading<br>アプリ</div>
+              <div class="app-dl-rating">★ 4.2 / 5.0</div>
+            </div>
+          </div>
+          <div class="app-dl-features">
+            <ul>
+              <li>MT4 / MT5対応</li>
+              <li>リアルタイムチャート</li>
+              <li>プッシュ通知</li>
+              <li>日本語UI完全対応</li>
+            </ul>
+          </div>
+          <div class="app-dl-btns">
+            <a href="https://clicks.affstrack.com/c?c=438318&l=en&p=1" target="_blank" rel="noopener noreferrer" class="app-btn-ios track-link-xm">
+              <span>🍎</span> App Storeで入手
+            </a>
+            <a href="https://clicks.affstrack.com/c?c=438318&l=en&p=1" target="_blank" rel="noopener noreferrer" class="app-btn-android track-link-xm">
+              <span>🤖</span> Google Playで入手
+            </a>
+          </div>
+        </div>
+
+        <!-- FXGT APP -->
+        <div class="app-dl-card fxgt-app">
+          <div class="app-dl-card-head">
+            <div class="app-dl-icon">🔵</div>
+            <div>
+              <div class="app-dl-broker">FXGT<br>アプリ</div>
+              <div class="app-dl-rating">★ 4.0 / 5.0</div>
+            </div>
+          </div>
+          <div class="app-dl-features">
+            <ul>
+              <li>MT5専用アプリ</li>
+              <li>仮想通貨CFD対応</li>
+              <li>プッシュ通知</li>
+              <li>日本語UI完全対応</li>
+            </ul>
+          </div>
+          <div class="app-dl-btns">
+            <a href="https://fxgtapp.onelink.me/xgkx/lsswbbod?refid=fxgtNihon" target="_blank" rel="noopener noreferrer" class="app-btn-ios track-link-fxgt">
+              <span>🍎</span> App Storeで入手
+            </a>
+            <a href="https://fxgtapp.onelink.me/xgkx/lsswbbod?refid=fxgtNihon" target="_blank" rel="noopener noreferrer" class="app-btn-android track-link-fxgt">
+              <span>🤖</span> Google Playで入手
+            </a>
+          </div>
+        </div>
+
+      </div>
+      <div class="app-dl-note">📲 アプリから口座開設も可能。無料・最短2分で完了します。</div>
+    </div>
+
+    <div class="divider"></div>
+    <div class="score-section">
+      <div class="sec-label">総合評価スコア</div>
+      <div class="score-grid">
+        <div class="score-card xm-sc">
+          <div class="sc-name">🔵 XMTrading</div>
+          <div class="sc-stars">★★★★☆</div>
+          <div class="sc-label">信頼性・ボーナス重視</div>
+        </div>
+        <div class="score-card fxgt-sc">
+          <div class="sc-name">🔴 FXGT</div>
+          <div class="sc-stars">★★★★☆</div>
+          <div class="sc-label">スプレッド・仮想通貨重視</div>
+        </div>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div class="risk">
+      <strong>🚨 リスク開示・免責事項</strong>
+      FX/CFD取引は複雑な金融商品であり、ハイレバレッジの使用により投資元本を超える損失が生じるリスクがあります。過去の実績は将来の結果を保証しません。余剰資金の範囲内で取引してください。本コンテンツは情報提供を目的としており、投資助言ではありません。掲載情報は2026年3月時点のものです。最新情報は各公式サイトにてご確認ください。FXボーナスナビは独立した情報ポータル兼アフィリエイトサイトです。
+    </div>
+  </div>
+
   <!-- 比較表 -->
-  <div class="sec-wrap">
+  <div class="sec-wrap" id="section-compare">
     <div class="sec-label">比較表</div>
     <div class="sec-title">10項目 一目でわかる比較表</div>
     <table class="cmp-table">
@@ -777,7 +971,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
   <div class="divider"></div>
 
   <!-- メリット・デメリット -->
-  <div class="sec-wrap">
+  <div class="sec-wrap" id="section-merit">
     <div class="sec-label">メリット・デメリット</div>
 
     <div class="broker-block">
@@ -852,7 +1046,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
   <div class="divider"></div>
 
   <!-- ══ コピートレード比較 ══ -->
-  <div class="sec-wrap">
+  <div class="sec-wrap" id="section-copytrade">
     <div class="sec-label">コピートレード比較</div>
     <div class="sec-title">📊 コピートレード — XMTrading vs FXGT 詳細比較</div>
 
@@ -922,7 +1116,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
   <div class="divider"></div>
 
   <!-- ══ 3月限定プロモーション ══ -->
-  <div class="promo-section">
+  <div class="promo-section" id="section-promo">
     <div class="section-label">3月限定キャンペーン</div>
     <div class="promo-section-title">📅 今月だけの特別プロモーション比較</div>
 
@@ -1121,172 +1315,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","N
     </div>
   </div>
 
-  <div class="divider"></div>
-
-  <!-- クイズ -->
-  <div class="quiz-section" id="quiz-section">
-    <div class="quiz-head">
-      <div class="quiz-badge">🎯 2分で分かる！最適業者診断クイズ</div>
-      <h2>📋 あなたのトレードスタイル診断</h2>
-      <p>4問に答えるだけでXMとFXGTどちらが合うか判定します</p>
-    </div>
-    <div class="prog-wrap">
-      <div class="prog-label"><span id="prog-text">質問 1 / 4</span><span id="prog-pct">25%</span></div>
-      <div class="prog-bar"><div class="prog-fill" id="prog-fill"></div></div>
-    </div>
-
-    <div class="q-card active" id="q1">
-      <div class="q-num">質問 01 / 04</div>
-      <div class="q-text">🎯 主にどんな取引スタイルですか？</div>
-      <div class="options">
-        <button class="opt-btn" onclick="pick(1,'xm',this)"><span class="opt-letter">A</span>スイングトレード・デイトレード（数時間〜数日保有）</button>
-        <button class="opt-btn" onclick="pick(1,'fxgt',this)"><span class="opt-letter">B</span>スキャルピング（数秒〜数分の超短期売買）</button>
-        <button class="opt-btn" onclick="pick(1,'fxgt',this)"><span class="opt-letter">C</span>仮想通貨の取引がメイン</button>
-        <button class="opt-btn" onclick="pick(1,'xm',this)"><span class="opt-letter">D</span>まだ決まっていない・これから始める</button>
-      </div>
-    </div>
-    <div class="q-card" id="q2">
-      <div class="q-num">質問 02 / 04</div>
-      <div class="q-text">🏆 業者選びで最も重視することは？</div>
-      <div class="options">
-        <button class="opt-btn" onclick="pick(2,'xm',this)"><span class="opt-letter">A</span>信頼性・規制の強さ・長年の実績</button>
-        <button class="opt-btn" onclick="pick(2,'fxgt',this)"><span class="opt-letter">B</span>スプレッドの狭さ・取引コストの低さ</button>
-        <button class="opt-btn" onclick="pick(2,'xm',this)"><span class="opt-letter">C</span>ボーナスの豊富さ・充実度</button>
-        <button class="opt-btn" onclick="pick(2,'fxgt',this)"><span class="opt-letter">D</span>出金の速さ・仮想通貨での入出金</button>
-      </div>
-    </div>
-    <div class="q-card" id="q3">
-      <div class="q-num">質問 03 / 04</div>
-      <div class="q-text">📈 希望するレバレッジの水準は？</div>
-      <div class="options">
-        <button class="opt-btn" onclick="pick(3,'xm',this)"><span class="opt-letter">A</span>100〜500倍程度（安全重視）</button>
-        <button class="opt-btn" onclick="pick(3,'xm',this)"><span class="opt-letter">B</span>1,000倍程度（標準的なハイレバ）</button>
-        <button class="opt-btn" onclick="pick(3,'fxgt',this)"><span class="opt-letter">C</span>1,000倍以上〜5,000倍（超ハイレバレッジ希望）</button>
-        <button class="opt-btn" onclick="pick(3,'both',this)"><span class="opt-letter">D</span>レバレッジより他の条件を優先したい</button>
-      </div>
-    </div>
-    <div class="q-card" id="q4">
-      <div class="q-num">質問 04 / 04</div>
-      <div class="q-text">💰 入出金で最も重視することは？</div>
-      <div class="options">
-        <button class="opt-btn" onclick="pick(4,'xm',this)"><span class="opt-letter">A</span>安全性・確実性（多少時間がかかっても良い）</button>
-        <button class="opt-btn" onclick="pick(4,'fxgt',this)"><span class="opt-letter">B</span>スピード重視（できるだけ早く出金したい）</button>
-        <button class="opt-btn" onclick="pick(4,'fxgt',this)"><span class="opt-letter">C</span>仮想通貨（ビットコイン等）での入出金</button>
-        <button class="opt-btn" onclick="pick(4,'both',this)"><span class="opt-letter">D</span>両方口座を開設して使い分けたい</button>
-      </div>
-    </div>
-
-    <div class="analyzing" id="analyzing">
-      <div class="analyzing-icon">⚙️</div>
-      <h3>あなたのトレードスタイルを分析中…</h3>
-      <p>回答データをもとに最適な業者を判定しています</p>
-      <div class="loader-wrap"><div class="loader-fill" id="loader-fill"></div></div>
-      <div class="analyzing-status" id="analyzing-status">回答を照合しています…</div>
-    </div>
-  </div>
-
-  <div class="divider"></div>
-
-  <!-- 結果画面 -->
-  <div id="result-screen">
-    <div id="verdict-box"></div>
-    <div class="divider"></div>
-    <div class="ai-msg-box">
-      <div class="ai-msg-header">
-        <div class="ai-spinner" id="ai-spin"></div>
-        <span id="ai-label">あなたへの診断結果を生成中...</span>
-      </div>
-      <div id="ai-msg-text"><span class="ai-cursor"></span></div>
-    </div>
-    <div class="divider"></div>
-    <div class="cta-area-wrap" id="cta-area"></div>
-    <div class="divider"></div>
-
-    <!-- 📱 APP DOWNLOAD BANNER -->
-    <div class="app-dl-banner">
-      <div class="app-dl-title">📲 スマホアプリで今すぐ取引開始</div>
-      <div class="app-dl-grid">
-
-        <!-- XM APP -->
-        <div class="app-dl-card xm-app">
-          <div class="app-dl-card-head">
-            <div class="app-dl-icon">🔴</div>
-            <div>
-              <div class="app-dl-broker">XMTrading<br>アプリ</div>
-              <div class="app-dl-rating">★ 4.2 / 5.0</div>
-            </div>
-          </div>
-          <div class="app-dl-features">
-            <ul>
-              <li>MT4 / MT5対応</li>
-              <li>リアルタイムチャート</li>
-              <li>プッシュ通知</li>
-              <li>日本語UI完全対応</li>
-            </ul>
-          </div>
-          <div class="app-dl-btns">
-            <a href="https://clicks.affstrack.com/c?c=438318&l=en&p=1" target="_blank" rel="noopener noreferrer" class="app-btn-ios track-link-xm">
-              <span>🍎</span> App Storeで入手
-            </a>
-            <a href="https://clicks.affstrack.com/c?c=438318&l=en&p=1" target="_blank" rel="noopener noreferrer" class="app-btn-android track-link-xm">
-              <span>🤖</span> Google Playで入手
-            </a>
-          </div>
-        </div>
-
-        <!-- FXGT APP -->
-        <div class="app-dl-card fxgt-app">
-          <div class="app-dl-card-head">
-            <div class="app-dl-icon">🔵</div>
-            <div>
-              <div class="app-dl-broker">FXGT<br>アプリ</div>
-              <div class="app-dl-rating">★ 4.0 / 5.0</div>
-            </div>
-          </div>
-          <div class="app-dl-features">
-            <ul>
-              <li>MT5専用アプリ</li>
-              <li>仮想通貨CFD対応</li>
-              <li>プッシュ通知</li>
-              <li>日本語UI完全対応</li>
-            </ul>
-          </div>
-          <div class="app-dl-btns">
-            <a href="https://fxgtapp.onelink.me/xgkx/lsswbbod?refid=fxgtNihon" target="_blank" rel="noopener noreferrer" class="app-btn-ios track-link-fxgt">
-              <span>🍎</span> App Storeで入手
-            </a>
-            <a href="https://fxgtapp.onelink.me/xgkx/lsswbbod?refid=fxgtNihon" target="_blank" rel="noopener noreferrer" class="app-btn-android track-link-fxgt">
-              <span>🤖</span> Google Playで入手
-            </a>
-          </div>
-        </div>
-
-      </div>
-      <div class="app-dl-note">📲 アプリから口座開設も可能。無料・最短2分で完了します。</div>
-    </div>
-
-    <div class="divider"></div>
-    <div class="score-section">
-      <div class="sec-label">総合評価スコア</div>
-      <div class="score-grid">
-        <div class="score-card xm-sc">
-          <div class="sc-name">🔵 XMTrading</div>
-          <div class="sc-stars">★★★★☆</div>
-          <div class="sc-label">信頼性・ボーナス重視</div>
-        </div>
-        <div class="score-card fxgt-sc">
-          <div class="sc-name">🔴 FXGT</div>
-          <div class="sc-stars">★★★★☆</div>
-          <div class="sc-label">スプレッド・仮想通貨重視</div>
-        </div>
-      </div>
-    </div>
-    <div class="divider"></div>
-    <div class="risk">
-      <strong>🚨 リスク開示・免責事項</strong>
-      FX/CFD取引は複雑な金融商品であり、ハイレバレッジの使用により投資元本を超える損失が生じるリスクがあります。過去の実績は将来の結果を保証しません。余剰資金の範囲内で取引してください。本コンテンツは情報提供を目的としており、投資助言ではありません。掲載情報は2026年3月時点のものです。最新情報は各公式サイトにてご確認ください。FXボーナスナビは独立した情報ポータル兼アフィリエイトサイトです。
-    </div>
-  </div>
 
 </div><!-- /container -->
 
@@ -1346,10 +1374,13 @@ function flipCard(id) {
 // ── PARAMS ──
 var urlP = new URLSearchParams(window.location.search);
 var PA = {
-  clickId    : urlP.get('clickid')    || urlP.get('visitor_id') || '',
-  zoneId     : urlP.get('zoneid')     || urlP.get('zone_id')    || 'direct',
+  clickId    : urlP.get('clickid') || '',           // PropellerAds: clickid=${SUBID}
+  zoneId     : urlP.get('zoneid')  || urlP.get('zone_id') || 'direct',
   campaignId : urlP.get('campaignid') || '',
-  bannerId   : urlP.get('bannerid')   || ''
+  cost       : urlP.get('cost') || '0',             // PropellerAds: cost={cost}
+  country    : urlP.get('country') || '',
+  device     : urlP.get('device') || '',
+  os         : urlP.get('os') || ''
 };
 var XM_URL   = 'https://clicks.affstrack.com/c?c=1120254&l=ja&p=6';
 var FXGT_URL = 'https://fxgt.link?refid=fxgtNihon';
@@ -1360,7 +1391,7 @@ function buildUrl(base) {
     if (PA.zoneId)     u.searchParams.set('aff_sub',  PA.zoneId);
     if (PA.clickId)    u.searchParams.set('aff_sub2', PA.clickId);
     if (PA.campaignId) u.searchParams.set('aff_sub3', PA.campaignId);
-    if (PA.bannerId)   u.searchParams.set('aff_sub4', PA.bannerId);
+    if (PA.device)     u.searchParams.set('aff_sub4', PA.device);
     return u.toString();
   } catch(e) { return base; }
 }
@@ -1378,14 +1409,18 @@ document.addEventListener('DOMContentLoaded', function() {
 function trackClick(broker) {
   if (typeof fbq !== 'undefined') fbq('track','Lead',{broker:broker});
   if (typeof gtag !== 'undefined') gtag('event','cta_click',{broker:broker});
-  sendPostback(); // goal なし = メインコンバージョン
+  sendPostback(); // goal なし = メインコンバージョン (goal 1)
 }
 
-// goal パラメータ付き PropellerAds S2S postback
+// PropellerAds S2S Postback — 公式URLに準拠
+// Main:   http://ad.propellerads.com/conversion.php?aid=1063015&pid=&tid=153705&visitor_id=SUBID&payout=COST
+// Goal 2: ...&goal=2  (クイズ完了)
+// Goal 3: ...&goal=3  (詳細セクション到達)
 function sendPostback(goal) {
   if (!PA.clickId) return;
-  var url = 'https://ad.propellerads.com/conversion.php?aid=1063015&pid=&tid=153705'
-    + '&visitor_id=' + encodeURIComponent(PA.clickId) + '&payout=0';
+  var url = 'http://ad.propellerads.com/conversion.php?aid=1063015&pid=&tid=153705'
+    + '&visitor_id=' + encodeURIComponent(PA.clickId)
+    + '&payout=' + encodeURIComponent(PA.cost);
   if (goal) url += '&goal=' + encodeURIComponent(goal);
   if (navigator.sendBeacon) { navigator.sendBeacon(url); }
   else { new Image().src = url; }
@@ -1547,11 +1582,24 @@ function typewrite(el, text, speed) {
 })();
 
 // ── STICKY ON SCROLL ──
+var goal3Sent = false;
 window.addEventListener('scroll', function(){
   var s = document.getElementById('sticky-footer');
   var r = document.getElementById('result-screen').style.display === 'block';
   if (window.scrollY > 500 || r) s.classList.add('visible');
   else s.classList.remove('visible');
+
+  // Goal 3 — ユーザーが比較表セクションに到達
+  if (!goal3Sent) {
+    var compareEl = document.getElementById('section-compare');
+    if (compareEl) {
+      var rect = compareEl.getBoundingClientRect();
+      if (rect.top < window.innerHeight) {
+        goal3Sent = true;
+        sendPostback(3);
+      }
+    }
+  }
 }, {passive:true});
 </script>
 </body>
