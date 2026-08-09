@@ -2,1709 +2,501 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>XMTrading vs FXGT 徹底比較2026｜あなたに合うのはどっち？</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>XMTrading と FXGT はどちらが自分に合うか｜条件を並べて採点する</title>
+<meta name="description" content="XMTradingとFXGTの条件を項目ごとに並べ、重視する項目を選ぶと自分の基準での比較結果が出ます。規制やボーナスの注意点も掲載。">
 
-<script>
-!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
-fbq('init','YOUR_PIXEL_ID');
-fbq('track','PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"/></noscript>
+<!-- ==================================================================
+     設定 — 更新するのはこのブロックだけ
+     ==================================================================
+     CHECKED_DATE は画面に表示される「情報の最終確認日」。
+     数値を直したら必ずここも直すこと。日付が古いまま数字だけ
+     新しい、あるいはその逆、という状態を作らないための仕掛け。
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-DTMQSP8BPQ"></script>
+     ITEMS の各行：
+       label  … 項目名
+       xm     … XMTrading側の値。空欄にすると「要確認」と表示され
+                 採点から自動的に除外される
+       gt     … FXGT側の値。同上
+       win    … "xm" / "gt" / "" （空 = 引き分け、勝の印は出ない）
+       note   … 補足。空なら表示しない
+
+     数値を消せば行が採点から外れる。確認できていない情報で
+     順位をつけない、という方針を構造で担保している。
+     ================================================================== -->
 <script>
-window.dataLayer=window.dataLayer||[];
-function gtag(){dataLayer.push(arguments);}
-gtag('js',new Date());
-gtag('config','G-DTMQSP8BPQ',{send_page_view:true});
+var CONFIG = {
+  CHECKED_DATE: "2026年3月",          /* ★古い。確認後に更新すること */
+
+  XM_URL:  "https://clicks.affstrack.com/c?c=1120254&l=ja&p=6",
+  GT_URL:  "https://fxgt.link?refid=fxgtNihon",
+  GT_APP:  "https://fxgtapp.onelink.me/xgkx/lsswbbod?refid=fxgtNihon",
+  SUBID_PARAM: "subid",               /* ★各社に確認 */
+  ARM: "vs",
+  CLICKID_KEYS: ["subid","clickid","click_id","cid","visitor_id","zoneid"],
+
+  CAMPAIGN_NAME: "",                  /* 空なら帯は出ない */
+  CAMPAIGN_END:  "",                  /* 例 "2026-08-31T23:59:00+09:00" */
+
+  GA4: "G-DTMQSP8BPQ",
+
+  ITEMS: [
+    { label:"運営歴",
+      xm:"2009年設立", gt:"2019年設立", win:"xm",
+      note:"日本市場での運営期間はXMのほうが長い。" },
+
+    { label:"規制・登録",
+      xm:"セーシェルFSA", gt:"セーシェルFSA・南アフリカFSCA", win:"",
+      note:"どちらもオフショア規制で、日本の金融庁には登録していない。国内業者とは投資者保護の枠組みが異なる。" },
+
+    { label:"取引ツール",
+      xm:"MT4・MT5", gt:"MT5のみ", win:"xm",
+      note:"MT4対応のEAを使いたい場合はXM一択になる。" },
+
+    { label:"仮想通貨の取扱い",
+      xm:"対応（銘柄数は控えめ）", gt:"60銘柄以上", win:"gt",
+      note:"" },
+
+    { label:"最大レバレッジ",
+      xm:"", gt:"", win:"",
+      note:"両社とも口座残高に応じて段階的に制限される。上限値だけを見て判断しないこと。" },
+
+    { label:"スプレッド",
+      xm:"", gt:"", win:"",
+      note:"口座タイプと時間帯で大きく変わる。実口座で確認するのが確実。" },
+
+    { label:"口座開設ボーナス",
+      xm:"", gt:"", win:"", note:"" },
+
+    { label:"入金ボーナス",
+      xm:"", gt:"", win:"", note:"" },
+
+    { label:"出金スピード",
+      xm:"", gt:"", win:"", note:"" },
+
+    { label:"日本語サポート",
+      xm:"24時間対応", gt:"24時間対応", win:"",
+      note:"" }
+  ]
+};
 </script>
 
 <style>
 :root{
-  --bg:#f3f4f6; --white:#fff; --black:#111;
-  --xm:#1a237e; --xm-light:#e8eaf6; --xm-mid:#3949ab;
-  --fxgt:#b71c1c; --fxgt-light:#fce4ec; --fxgt-mid:#e53935;
-  --green:#00c853; --green2:#00e676; --green-pale:#e8f5e9;
-  --vs:#ff6f00;
-  --text:#202124; --text-soft:#5f6368; --text-muted:#9aa0a6;
-  --border:#e1e4e8; --shadow:0 2px 12px rgba(0,0,0,0.08);
+  --ai:#1b3a63;        /* 藍 — XM側 */
+  --ai-pale:#eaeef4;
+  --enji:#9c2a35;      /* 臙脂 — FXGT側 */
+  --enji-pale:#f7ecec;
+  --sumi:#1a1c1f;      /* 墨 */
+  --sumi-2:#3d434b;
+  --hai:#6d757e;       /* 灰 */
+  --kincha:#a8791f;    /* 金茶 */
+  --yamabuki:#ffe485;  /* 山吹 — マーカー */
+  --paper:#f0f1ed;
+  --rule:#d6d9d3;
+  --white:#fff;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP","Times New Roman",serif;
+  --gothic:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Noto Sans JP",Meiryo,sans-serif;
 }
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Noto Sans JP",Meiryo,sans-serif;background:var(--bg);color:var(--text);font-size:16px;line-height:1.7;min-height:100vh;padding-bottom:80px}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font:15px/1.85 var(--gothic);color:var(--sumi);background:var(--paper);
+     padding-bottom:88px;-webkit-font-smoothing:antialiased}
+.wrap{max-width:660px;margin:0 auto}
+a{color:inherit;text-decoration:none}
 
-.cookie-banner{position:fixed;bottom:0;left:0;width:100%;background:rgba(17,17,17,0.97);backdrop-filter:blur(10px);color:#fff;padding:12px 20px;display:none;justify-content:space-between;align-items:center;z-index:9999;box-shadow:0 -2px 10px rgba(0,0,0,0.3)}
-.cookie-banner span{flex:1;line-height:1.4;color:rgba(255,255,255,0.8);font-size:0.7rem}
-.cookie-btn{background:var(--green);color:#000;border:none;padding:7px 14px;font-weight:700;border-radius:4px;cursor:pointer;white-space:nowrap;margin-left:15px;font-size:0.7rem}
+.notice{background:var(--sumi);color:#9aa1a9;font-size:11px;text-align:center;padding:6px 12px;line-height:1.6}
+#campaign{display:none;background:var(--kincha);color:#fff;text-align:center;
+          padding:8px 14px;font-size:12.5px;font-weight:700;letter-spacing:.02em}
+#campaign .cd{background:rgba(0,0,0,.2);padding:1px 7px;margin-left:7px;font-variant-numeric:tabular-nums}
 
-.ticker-wrap{background:var(--black);overflow:hidden;height:30px;display:flex;align-items:center}
-.ticker-inner{display:flex;white-space:nowrap;animation:ticker 32s linear infinite;will-change:transform}
-.ticker-inner span{font-size:0.64rem;font-weight:700;letter-spacing:0.07em;color:rgba(255,255,255,0.6);padding:0 22px;border-right:1px solid rgba(255,255,255,0.1)}
-.ticker-inner span.t-xm{color:#7986cb}
-.ticker-inner span.t-fxgt{color:#ef9a9a}
-@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.masthead{background:var(--white);border-bottom:3px double var(--sumi);padding:11px 18px;
+          display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.masthead .name{font-family:var(--mincho);font-size:17px;font-weight:700;letter-spacing:.08em}
+.masthead .name b{color:var(--enji);font-weight:700}
+.masthead .date{font-size:10.5px;color:var(--hai);letter-spacing:.04em}
 
-.site-header{background:var(--black);padding:12px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,0.35)}
-.site-logo{font-size:1rem;font-weight:900;color:#fff}
-.site-logo em{color:var(--green2);font-style:normal}
-.site-logo span{font-size:0.55rem;font-weight:400;color:rgba(255,255,255,0.35);display:block}
-.header-badge{font-size:0.6rem;font-weight:700;background:var(--vs);color:#fff;padding:4px 10px;border-radius:20px}
+/* ---------- 対戦表の見出し ---------- */
+.card-head{background:var(--sumi);color:#fff;padding:26px 18px 22px;text-align:center}
+.card-head .kicker{font-size:10.5px;letter-spacing:.34em;color:#8b939c;margin-bottom:14px}
+.versus{display:grid;grid-template-columns:1fr 46px 1fr;align-items:center;gap:6px}
+.side{padding:2px 0}
+.side .pos{font-family:var(--mincho);font-size:11px;letter-spacing:.3em;margin-bottom:5px}
+.side.xm .pos{color:#8fb2df}
+.side.gt .pos{color:#e59aa1}
+.side .nm{font-family:var(--mincho);font-size:23px;font-weight:700;letter-spacing:.02em;line-height:1.25}
+.side .sc{font-size:34px;font-weight:800;font-variant-numeric:tabular-nums;line-height:1;margin-top:8px}
+.side.xm .sc{color:#8fb2df}
+.side.gt .sc{color:#e59aa1}
+.vs{font-family:var(--mincho);font-size:15px;color:#6f777f;letter-spacing:.06em}
+.verdict{margin-top:18px;padding-top:15px;border-top:1px solid #333940;
+         font-size:13.5px;color:#c8ced4;line-height:1.7}
+.verdict b{color:#fff}
 
-.container{max-width:660px;margin:0 auto}
+/* ---------- 見出し ---------- */
+h2{font-family:var(--mincho);font-size:19px;font-weight:700;letter-spacing:.04em;
+   line-height:1.5;padding-left:13px;position:relative;margin-bottom:6px}
+h2::before{content:"";position:absolute;left:0;top:.28em;bottom:.28em;width:4px;background:var(--sumi)}
+.lead{font-size:13px;color:var(--hai);line-height:1.8;padding-left:13px;margin-bottom:16px}
 
-/* HERO */
-.hero{background:var(--black);padding:32px 20px 28px;text-align:center;position:relative;overflow:hidden;border-bottom:3px solid var(--vs)}
-.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(26,35,126,0.35) 0%,transparent 60%),radial-gradient(ellipse at 70% 50%,rgba(183,28,28,0.35) 0%,transparent 60%);pointer-events:none}
-.hero-tag{display:inline-block;background:var(--vs);color:#fff;font-size:0.62rem;font-weight:900;letter-spacing:0.12em;padding:4px 14px;border-radius:2px;margin-bottom:16px;position:relative}
-.hero h1{font-size:1.48rem;line-height:1.38;font-weight:900;color:#fff;margin-bottom:12px;position:relative}
-.xm-col{color:#7986cb}
-.fxgt-col{color:#ef9a9a}
-.vs-col{color:var(--vs);font-size:1.1rem}
-.hero-sub{font-size:0.8rem;color:rgba(255,255,255,0.62);margin-bottom:20px;position:relative}
-.hero-meta{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;font-size:0.66rem;color:rgba(255,255,255,0.38);position:relative;margin-bottom:22px}
+main{padding:22px 13px;display:flex;flex-direction:column;gap:26px}
+section{display:block}
 
-/* Hero anchor nav */
-.hero-anchors{
-  display:flex;flex-wrap:wrap;justify-content:center;gap:8px;
-  margin-top:20px;padding-top:18px;
-  border-top:1px solid rgba(255,255,255,0.1);
-  position:relative;
+/* ---------- 取組カード ---------- */
+.bouts{display:flex;flex-direction:column;gap:9px;margin-top:4px}
+.bout{background:var(--white);border:1px solid var(--rule);position:relative}
+.bout.off{opacity:.42}
+.bout.na{background:#f6f6f3}
+.bout-top{display:flex;align-items:center;gap:9px;padding:9px 11px;border-bottom:1px solid var(--rule)}
+.bout-no{font-family:var(--mincho);font-size:11px;color:var(--hai);font-variant-numeric:tabular-nums;letter-spacing:.06em}
+.bout-label{font-weight:700;font-size:14px;flex:1;letter-spacing:.02em}
+.pick{border:1px solid var(--rule);background:#fbfbf9;color:var(--hai);
+      font-family:var(--gothic);font-size:10.5px;font-weight:700;letter-spacing:.08em;
+      padding:4px 9px;cursor:pointer;white-space:nowrap;line-height:1.5}
+.pick[aria-pressed="true"]{background:var(--sumi);border-color:var(--sumi);color:#fff}
+.pick:focus-visible{outline:2px solid var(--kincha);outline-offset:1px}
+
+.cells{display:grid;grid-template-columns:1fr 1fr}
+.cell{padding:11px 11px 12px;position:relative;min-height:62px}
+.cell + .cell{border-left:1px solid var(--rule)}
+.cell .who{font-size:10px;letter-spacing:.14em;margin-bottom:4px}
+.cell.xm .who{color:var(--ai)}
+.cell.gt .who{color:var(--enji)}
+.cell .val{font-size:13.5px;font-weight:700;line-height:1.6}
+.cell.xm.won{background:var(--ai-pale)}
+.cell.gt.won{background:var(--enji-pale)}
+.cell .na{color:#9aa0a6;font-weight:400;font-size:12.5px}
+
+/* 判子ふうの「勝」 */
+.seal{position:absolute;right:8px;bottom:7px;width:29px;height:29px;border-radius:50%;
+      display:flex;align-items:center;justify-content:center;
+      font-family:var(--mincho);font-size:14px;font-weight:700;
+      transform:rotate(-9deg);letter-spacing:0}
+.cell.xm .seal{border:2px solid var(--ai);color:var(--ai)}
+.cell.gt .seal{border:2px solid var(--enji);color:var(--enji)}
+
+.bout-note{font-size:11.5px;color:var(--hai);line-height:1.75;padding:8px 11px;
+           border-top:1px dotted var(--rule);background:#fcfcfa}
+
+.hint{font-size:12px;color:var(--hai);background:var(--white);border:1px dashed var(--rule);
+      padding:10px 12px;line-height:1.75;margin-top:4px}
+.mk{background:linear-gradient(transparent 62%,var(--yamabuki) 62%);font-weight:700;color:var(--sumi)}
+
+/* ---------- 本文ブロック ---------- */
+.block{background:var(--white);border:1px solid var(--rule);padding:16px 15px}
+.block p{font-size:13.5px;color:var(--sumi-2);line-height:1.9}
+.block p + p{margin-top:11px}
+.block h3{font-family:var(--mincho);font-size:15.5px;letter-spacing:.03em;margin-bottom:5px}
+.block h3 + p{margin-top:0}
+.split{display:flex;flex-direction:column;gap:15px}
+
+.warn{background:#fdfaf0;border:1px solid #e6dcc0;padding:16px 15px}
+.warn h2::before{background:var(--kincha)}
+.warn li{font-size:13px;color:#5f4f22;margin-left:18px;margin-bottom:8px;line-height:1.85}
+
+/* ---------- CTA ---------- */
+.cta{display:block;text-align:center;color:#fff;font-weight:800;font-size:16px;
+     padding:14px 16px;line-height:1.5;letter-spacing:.03em}
+.cta.xm{background:var(--ai);box-shadow:0 2px 0 #12294a}
+.cta.gt{background:var(--enji);box-shadow:0 2px 0 #741f27}
+.cta:active{transform:translateY(1px)}
+.cta small{display:block;font-weight:400;font-size:11.5px;opacity:.9;margin-top:3px;letter-spacing:0}
+.cta-pair{display:flex;flex-direction:column;gap:9px;margin-top:14px}
+
+.sticky{position:fixed;left:0;right:0;bottom:0;background:rgba(255,255,255,.97);
+        border-top:1px solid var(--rule);padding:8px 13px;z-index:60;
+        box-shadow:0 -2px 12px rgba(0,0,0,.09)}
+.sticky .inner{max-width:660px;margin:0 auto;display:flex;flex-direction:column;gap:5px}
+.sticky .lbl{font-size:10.5px;color:var(--hai);text-align:center;letter-spacing:.05em}
+.sticky .cta{padding:12px;font-size:15px}
+
+.risk{font-size:11px;line-height:1.9;color:var(--hai);padding:2px 4px}
+.risk p{margin-bottom:9px;font-size:11px;color:var(--hai)}
+.risk b{color:var(--sumi-2)}
+footer{border-top:1px solid var(--rule);padding:16px 4px 4px;font-size:11px;color:var(--hai);text-align:center}
+
+.hide{display:none!important}
+@media(min-width:600px){
+  .side .nm{font-size:26px} .side .sc{font-size:40px}
+  main{padding:26px 18px}
 }
-.hero-anchor-btn{
-  font-size:0.68rem;font-weight:700;
-  color:rgba(255,255,255,0.75);
-  background:rgba(255,255,255,0.08);
-  border:1px solid rgba(255,255,255,0.18);
-  padding:6px 13px;border-radius:20px;
-  text-decoration:none;
-  transition:all 0.18s;
-  white-space:nowrap;
-}
-.hero-anchor-btn:hover,.hero-anchor-btn:active{
-  background:rgba(255,255,255,0.18);
-  color:#fff;
-}
-.vs-pills{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;position:relative}
-.vs-pill{flex:1;min-width:128px;max-width:175px;border-radius:8px;padding:13px 10px;text-align:center}
-.vs-pill.xm-pill{background:rgba(26,35,126,0.6);border:1px solid rgba(121,134,203,0.4)}
-.vs-pill.fxgt-pill{background:rgba(183,28,28,0.6);border:1px solid rgba(239,154,154,0.4)}
-.vs-pill-name{font-size:0.95rem;font-weight:900;color:#fff;margin-bottom:3px}
-.vs-pill-sub{font-size:0.62rem;color:rgba(255,255,255,0.48)}
-.vs-pill-score{font-size:1.5rem;font-weight:900;margin-top:5px}
-.xm-pill .vs-pill-score{color:#7986cb}
-.fxgt-pill .vs-pill-score{color:#ef9a9a}
-.vs-badge{display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:900;color:var(--vs);flex-shrink:0;padding-top:8px}
-
-.divider{height:8px;background:var(--bg)}
-
-.sec-wrap{background:var(--white);padding:22px 20px;box-shadow:var(--shadow)}
-.sec-label{font-size:0.63rem;font-weight:900;letter-spacing:0.12em;color:var(--vs);text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:8px}
-.sec-label::after{content:'';flex:1;height:2px;background:var(--border)}
-.sec-title{font-size:1.02rem;font-weight:900;color:var(--text);margin-bottom:18px;line-height:1.4}
-
-/* COMPARISON TABLE */
-.cmp-table{width:100%;border-collapse:collapse;font-size:0.8rem}
-.cmp-table thead tr{background:var(--black)}
-.cmp-table thead th{padding:10px 8px;font-size:0.64rem;font-weight:700;letter-spacing:0.08em;color:rgba(255,255,255,0.55)}
-.cmp-table thead th.xm-h{color:#7986cb}
-.cmp-table thead th.fxgt-h{color:#ef9a9a}
-.cmp-table tbody tr{border-bottom:1px solid var(--border)}
-.cmp-table tbody tr:last-child{border-bottom:none}
-.cmp-table td{padding:10px 8px;vertical-align:top;line-height:1.5;color:var(--text-soft)}
-.cmp-table td.cat{font-size:0.68rem;font-weight:700;color:var(--text);background:var(--bg);width:22%}
-.cmp-table td.xm-td{background:rgba(232,234,246,0.45);width:39%}
-.cmp-table td.fxgt-td{background:rgba(252,228,236,0.45);width:39%}
-.win{font-weight:700;color:#2e7d32}
-.badge-win{display:inline-block;background:var(--green);color:#000;font-size:0.56rem;font-weight:900;padding:1px 5px;border-radius:2px;margin-left:3px;vertical-align:middle}
-.badge-draw{display:inline-block;background:var(--vs);color:#fff;font-size:0.56rem;font-weight:900;padding:1px 5px;border-radius:2px;margin-left:3px;vertical-align:middle}
-
-/* PROS/CONS */
-.broker-block{margin-bottom:14px}
-.broker-block:last-child{margin-bottom:0}
-.broker-block-head{display:flex;align-items:center;gap:8px;padding:9px 14px;border-radius:5px 5px 0 0;font-size:0.8rem;font-weight:900;color:#fff}
-.broker-block-head.xm-head{background:var(--xm-mid)}
-.broker-block-head.xm-con{background:#455a64}
-.broker-block-head.fxgt-head{background:var(--fxgt-mid)}
-.broker-block-head.fxgt-con{background:#7f1d1d}
-.broker-block-body{border:1px solid var(--border);border-top:none;border-radius:0 0 5px 5px;padding:11px 14px}
-.pro-item,.con-item{display:flex;align-items:flex-start;gap:7px;font-size:0.76rem;color:var(--text-soft);padding:5px 0;border-bottom:1px solid var(--border);line-height:1.5}
-.pro-item:last-child,.con-item:last-child{border-bottom:none}
-.pro-icon{color:var(--green);font-weight:900;flex-shrink:0;margin-top:2px}
-.con-icon{color:#e53935;font-weight:900;flex-shrink:0;margin-top:2px}
-
-/* WHO */
-.who-section{background:var(--white);padding:22px 20px;box-shadow:var(--shadow)}
-.who-grid{display:flex;flex-direction:column;gap:10px}
-.who-card{border-radius:6px;padding:13px 15px;display:flex;align-items:flex-start;gap:11px}
-.who-card.xm-who{background:var(--xm-light);border:1px solid rgba(57,73,171,0.2)}
-.who-card.fxgt-who{background:var(--fxgt-light);border:1px solid rgba(229,57,53,0.2)}
-.who-icon{font-size:1.35rem;flex-shrink:0;margin-top:2px}
-.who-body h4{font-size:0.84rem;font-weight:700;margin-bottom:3px}
-.xm-who .who-body h4{color:var(--xm-mid)}
-.fxgt-who .who-body h4{color:var(--fxgt-mid)}
-.who-body p{font-size:0.73rem;color:var(--text-soft);line-height:1.55}
-
-/* QUIZ */
-.quiz-section{background:var(--white);padding:24px 20px;box-shadow:var(--shadow)}
-.quiz-head{text-align:center;margin-bottom:20px}
-.quiz-badge{display:inline-block;background:#fff8e1;color:#b08d00;border:1px solid #ffe082;font-size:0.67rem;font-weight:700;padding:4px 12px;border-radius:20px;margin-bottom:11px}
-.quiz-head h2{font-size:1.02rem;font-weight:900;color:var(--text);margin-bottom:5px}
-.quiz-head p{font-size:0.73rem;color:var(--text-muted)}
-.prog-wrap{margin-bottom:20px}
-.prog-label{display:flex;justify-content:space-between;font-size:0.67rem;font-weight:700;color:var(--text-muted);margin-bottom:6px}
-.prog-bar{height:5px;background:var(--border);border-radius:4px;overflow:hidden}
-.prog-fill{height:100%;background:linear-gradient(90deg,var(--xm-mid),var(--vs),var(--fxgt-mid));border-radius:4px;width:25%;transition:width 0.5s cubic-bezier(0.4,0,0.2,1)}
-.q-card{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:20px 15px 15px;display:none;animation:slideIn 0.3s ease}
-.q-card.active{display:block}
-@keyframes slideIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-.q-num{font-size:0.6rem;font-weight:700;letter-spacing:0.14em;color:var(--vs);text-transform:uppercase;margin-bottom:7px;display:flex;align-items:center;gap:5px}
-.q-num::before{content:'';display:block;width:13px;height:2px;background:var(--vs)}
-.q-text{font-size:0.96rem;font-weight:700;color:var(--text);line-height:1.5;margin-bottom:15px}
-.options{display:flex;flex-direction:column;gap:8px}
-.opt-btn{background:var(--white);border:2px solid var(--border);border-radius:6px;padding:11px 13px;text-align:left;cursor:pointer;font-family:inherit;font-size:0.8rem;font-weight:500;color:var(--text-soft);display:flex;align-items:center;gap:9px;transition:all 0.16s ease}
-.opt-btn:hover,.opt-btn:active{border-color:var(--vs);background:#fff8e1;color:var(--text);transform:translateX(3px)}
-.opt-btn.selected{border-color:var(--vs);background:#fff8e1;color:#5d4037;font-weight:700}
-.opt-letter{width:25px;height:25px;background:var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.67rem;font-weight:900;flex-shrink:0;transition:all 0.16s;color:var(--text-soft)}
-.opt-btn.selected .opt-letter{background:var(--vs);color:#fff}
-.analyzing{display:none;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:36px 20px;text-align:center}
-.analyzing.active{display:block;animation:slideIn 0.3s ease}
-.analyzing-icon{font-size:2rem;margin-bottom:11px;animation:spin 1.8s linear infinite;display:inline-block}
-@keyframes spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
-.analyzing h3{font-size:0.96rem;font-weight:700;color:var(--text);margin-bottom:5px}
-.analyzing p{font-size:0.73rem;color:var(--text-muted);margin-bottom:16px}
-.loader-wrap{height:5px;background:var(--border);border-radius:4px;overflow:hidden;margin-bottom:9px}
-.loader-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--xm-mid),var(--vs),var(--fxgt-mid));border-radius:4px;transition:width 0.35s linear}
-.analyzing-status{font-size:0.74rem;color:var(--vs);min-height:20px;font-weight:600}
-
-/* RESULT */
-#result-screen{display:none;animation:fadeUp 0.5s ease}
-@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
-.result-verdict{padding:26px 20px 22px;text-align:center;position:relative;overflow:hidden}
-.result-verdict.xm-verdict{background:var(--xm);border-top:4px solid #7986cb}
-.result-verdict.fxgt-verdict{background:var(--fxgt);border-top:4px solid #ef9a9a}
-.result-verdict.both-verdict{background:var(--black);border-top:4px solid var(--vs)}
-.result-verdict::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(255,255,255,0.06) 0%,transparent 60%);pointer-events:none}
-.verdict-tag{display:inline-block;background:rgba(255,255,255,0.15);color:#fff;font-size:0.62rem;font-weight:900;letter-spacing:0.12em;padding:4px 14px;border-radius:2px;margin-bottom:14px}
-.result-verdict h2{font-size:1.28rem;font-weight:900;color:#fff;line-height:1.42;margin-bottom:8px}
-.result-verdict h2 em{font-style:normal;color:#ffeb3b}
-.result-verdict p{font-size:0.77rem;color:rgba(255,255,255,0.72);line-height:1.65}
-
-/* AI MSG */
-.ai-msg-box{background:var(--bg);border:1px solid var(--border);border-left:3px solid var(--vs);padding:15px 18px}
-.ai-msg-header{display:flex;align-items:center;gap:7px;font-size:0.65rem;font-weight:700;color:var(--vs);letter-spacing:0.08em;margin-bottom:9px}
-.ai-spinner{width:11px;height:11px;border:2px solid rgba(255,111,0,0.2);border-top-color:var(--vs);border-radius:50%;animation:spin 0.8s linear infinite;flex-shrink:0}
-#ai-msg-text{font-size:0.83rem;line-height:1.8;color:var(--text);min-height:52px}
-.ai-cursor{display:inline-block;width:2px;height:13px;background:var(--vs);margin-left:2px;animation:blink 0.8s step-end infinite;vertical-align:middle}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
-
-/* CTAs */
-.cta-area-wrap{background:var(--white);padding:18px 20px;box-shadow:var(--shadow)}
-.cta-pair{display:flex;gap:9px;flex-wrap:wrap}
-.cta-btn{display:block;text-align:center;padding:16px 14px 12px;text-decoration:none;font-weight:900;font-size:0.93rem;line-height:1.35;border-radius:6px;transition:all 0.2s;position:relative;overflow:hidden}
-.cta-btn::after{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);animation:shine 2.8s ease-in-out infinite}
-@keyframes shine{0%{left:-100%}50%,100%{left:160%}}
-.cta-btn:active{transform:scale(0.98)}
-.cta-sub{display:block;font-size:0.67rem;font-weight:600;margin-top:4px;opacity:0.78}
-.cta-xm{flex:1;background:linear-gradient(180deg,#5c6bc0 0%,var(--xm-mid) 100%);color:#fff;box-shadow:0 5px 18px rgba(57,73,171,0.4)}
-.cta-fxgt{flex:1;background:linear-gradient(180deg,#ef5350 0%,var(--fxgt-mid) 100%);color:#fff;box-shadow:0 5px 18px rgba(229,57,53,0.4)}
-.cta-both{width:100%;background:linear-gradient(180deg,#ffa726 0%,var(--vs) 100%);color:#000;box-shadow:0 5px 18px rgba(255,111,0,0.4)}
-.cta-note{text-align:center;font-size:0.62rem;color:var(--text-muted);margin-top:6px}
-
-/* SCORE */
-.score-section{background:var(--white);padding:22px 20px;box-shadow:var(--shadow)}
-.score-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.score-card{border-radius:8px;padding:14px;text-align:center}
-.score-card.xm-sc{background:var(--xm-light);border:1px solid rgba(57,73,171,0.25)}
-.score-card.fxgt-sc{background:var(--fxgt-light);border:1px solid rgba(229,57,53,0.25)}
-.sc-name{font-size:0.74rem;font-weight:900;margin-bottom:5px}
-.xm-sc .sc-name{color:var(--xm-mid)}
-.fxgt-sc .sc-name{color:var(--fxgt-mid)}
-.sc-stars{font-size:0.84rem;margin-bottom:3px}
-.sc-label{font-size:0.64rem;color:var(--text-muted)}
-
-/* FOOTER */
-.site-footer{background:var(--black);padding:20px 20px 14px;text-align:center}
-.footer-logo{font-size:0.92rem;font-weight:900;color:#fff;margin-bottom:8px}
-.footer-logo em{color:var(--green2);font-style:normal}
-.footer-links{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-bottom:10px}
-.footer-links a{font-size:0.64rem;color:rgba(255,255,255,0.33);text-decoration:none}
-.footer-copy{font-size:0.59rem;color:rgba(255,255,255,0.2)}
-.risk{background:var(--black);padding:14px 20px 8px;font-size:0.61rem;color:rgba(255,255,255,0.22);line-height:1.65;border-top:1px solid rgba(255,255,255,0.07)}
-.risk strong{color:rgba(255,255,255,0.36);display:block;margin-bottom:4px}
-
-/* STICKY */
-.sticky{position:fixed;bottom:0;left:0;width:100%;background:rgba(17,17,17,0.97);backdrop-filter:blur(12px);border-top:2px solid var(--vs);padding:9px 14px;z-index:1000;display:none}
-.sticky.visible{display:block}
-.sticky .cta-pair{margin-top:0}
-.sticky .cta-btn{font-size:0.83rem;padding:11px 10px 8px}
-
-/* ── PROMO CAMPAIGNS ── */
-.promo-section{background:var(--white);padding:22px 20px;box-shadow:var(--shadow)}
-.promo-section-title{font-size:1rem;font-weight:900;color:var(--text);border-bottom:2px solid var(--border);padding-bottom:10px;margin-bottom:18px;line-height:1.4}
-
-/* XM MUGEN */
-.mugen-box{border-radius:8px;border:2px solid #e53935;background:#fff5f5;overflow:hidden;margin-bottom:16px}
-.mugen-header{background:linear-gradient(135deg,#e53935,#b71c1c);padding:14px 18px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
-.mugen-header-left h3{font-size:0.95rem;font-weight:900;color:#fff;margin-bottom:3px}
-.mugen-header-left p{font-size:0.65rem;color:rgba(255,255,255,0.8)}
-.mugen-deadline{font-size:0.62rem;font-weight:900;background:rgba(255,255,255,0.2);color:#fff;padding:4px 10px;border-radius:2px;letter-spacing:0.08em;white-space:nowrap}
-.mugen-body{padding:14px 18px}
-.mugen-steps{display:flex;gap:0;margin-bottom:14px}
-.mugen-step{flex:1;text-align:center;position:relative}
-.mugen-step:not(:last-child)::after{content:'→';position:absolute;right:-8px;top:50%;transform:translateY(-50%);font-size:0.7rem;color:#e53935;font-weight:900}
-.mugen-step-num{width:28px;height:28px;background:#e53935;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:900;margin:0 auto 5px}
-.mugen-step h5{font-size:0.65rem;font-weight:700;color:#b71c1c;margin-bottom:2px}
-.mugen-step p{font-size:0.6rem;color:var(--text-muted);line-height:1.3}
-
-.mugen-table{width:100%;border-collapse:collapse;margin-bottom:10px}
-.mugen-table th{font-size:0.6rem;font-weight:700;letter-spacing:0.07em;color:var(--text-muted);padding:7px 8px;border-bottom:2px solid #ffcdd2;text-align:left;background:#fff5f5}
-.mugen-table td{font-size:0.74rem;color:var(--text-soft);padding:7px 8px;border-bottom:1px solid #ffcdd2}
-.mugen-table tr.hl-row td{background:#ffebee;color:#b71c1c;font-weight:700}
-.mugen-table td.unlimited-val{color:#e53935;font-weight:900;font-size:0.9rem}
-.mugen-note{font-size:0.62rem;color:var(--text-muted);line-height:1.5}
-
-/* FXGT PROMO */
-.fxgt-promo-box{border-radius:8px;border:2px solid #1565c0;background:#e3f2fd;overflow:hidden;margin-bottom:0}
-.fxgt-promo-header{background:linear-gradient(135deg,#1565c0,#0d47a1);padding:14px 18px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
-.fxgt-promo-header h3{font-size:0.95rem;font-weight:900;color:#fff;margin-bottom:3px}
-.fxgt-promo-header p{font-size:0.65rem;color:rgba(255,255,255,0.8)}
-.fxgt-deadline{font-size:0.62rem;font-weight:900;background:rgba(255,255,255,0.2);color:#fff;padding:4px 10px;border-radius:2px;letter-spacing:0.08em;white-space:nowrap}
-.fxgt-promo-body{padding:14px 18px}
-.fxgt-bonus-grid{display:flex;flex-direction:column;gap:8px;margin-bottom:12px}
-.fxgt-bonus-item{background:#fff;border:1px solid #bbdefb;border-radius:6px;padding:10px 14px;display:flex;align-items:flex-start;gap:12px}
-.fxgt-bonus-badge{flex-shrink:0;font-size:0.62rem;font-weight:900;background:#1565c0;color:#fff;padding:3px 8px;border-radius:2px;letter-spacing:0.06em;margin-top:2px}
-.fxgt-bonus-item h5{font-size:0.78rem;font-weight:700;color:#0d47a1;margin-bottom:2px}
-.fxgt-bonus-item p{font-size:0.68rem;color:var(--text-soft);line-height:1.4}
-.fxgt-bonus-amount{font-size:0.88rem;font-weight:900;color:#1565c0;margin-top:3px}
-.fxgt-total-bar{background:#1565c0;border-radius:4px;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px}
-.fxgt-total-bar span{font-size:0.7rem;font-weight:700;color:rgba(255,255,255,0.85)}
-.fxgt-total-bar strong{font-size:1rem;font-weight:900;color:#fff}
-
-/* Section label */
-.section-label{font-size:0.63rem;font-weight:900;letter-spacing:0.12em;color:#6a0dad;text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:8px}
-.section-label::after{content:'';flex:1;height:2px;background:var(--border)}
-/* ── PROMO CTA BUTTONS ── */
-.promo-cta-wrap{display:flex;flex-direction:column;gap:8px;margin-top:14px}
-.promo-cta-main{
-  display:block;text-align:center;text-decoration:none;
-  background:linear-gradient(180deg,#ef5350 0%,#e53935 100%);
-  color:#fff;font-weight:900;font-size:0.95rem;line-height:1.35;
-  padding:15px 18px 12px;border-radius:6px;
-  box-shadow:0 5px 18px rgba(229,57,53,0.35);
-  position:relative;overflow:hidden;transition:transform 0.2s;
-}
-.promo-cta-main::after{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);animation:shine 2.5s ease-in-out infinite}
-@keyframes shine{0%{left:-100%}50%,100%{left:160%}}
-.promo-cta-main:active{transform:scale(0.98)}
-.promo-cta-main-fxgt{
-  background:linear-gradient(180deg,#1976d2 0%,#1565c0 100%)!important;
-  box-shadow:0 5px 18px rgba(21,101,192,0.35)!important;
-}
-.promo-cta-sub{display:block;font-size:0.68rem;font-weight:600;margin-top:4px;opacity:0.85}
-.promo-cta-bonus{
-  display:block;text-align:center;text-decoration:none;
-  background:#fff5f5;border:2px solid #e53935;
-  color:#c62828;font-weight:700;font-size:0.8rem;
-  padding:10px 14px;border-radius:6px;
-  transition:all 0.18s;
-}
-.promo-cta-bonus:hover,.promo-cta-bonus:active{background:#ffebee}
-.promo-cta-bonus-fxgt{
-  background:#e3f2fd!important;border-color:#1565c0!important;
-  color:#0d47a1!important;
-}
-.promo-cta-bonus-fxgt:hover,.promo-cta-bonus-fxgt:active{background:#bbdefb!important}
-
-/* ── MOBILE APP ROW in table ── */
-.app-row-xm{background:#e8f5e9!important}
-.app-row-fxgt{background:#e8f5e9!important}
-.app-stores{display:flex;flex-direction:column;gap:3px;margin-top:4px}
-.app-store-pill{display:inline-flex;align-items:center;gap:5px;font-size:0.62rem;font-weight:700;padding:3px 8px;border-radius:3px;text-decoration:none;width:fit-content}
-.app-store-pill.ios{background:#000;color:#fff}
-.app-store-pill.android{background:#01875f;color:#fff}
-.app-rating{font-size:0.6rem;color:#2e7d32;font-weight:700;margin-top:2px}
-
-/* ── APP DOWNLOAD BANNER (post-quiz) ── */
-.app-dl-banner{
-  background:var(--white);
-  border-top:3px solid transparent;
-  border-image:linear-gradient(90deg,#e53935,#1565c0) 1;
-  padding:20px 18px;
-  box-shadow:var(--shadow);
-}
-.app-dl-title{
-  text-align:center;font-size:0.7rem;font-weight:900;
-  letter-spacing:0.1em;color:#2e7d32;text-transform:uppercase;
-  margin-bottom:14px;display:flex;align-items:center;justify-content:center;gap:7px;
-}
-.app-dl-title::before,.app-dl-title::after{content:'';flex:1;height:2px;background:var(--border)}
-.app-dl-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.app-dl-card{border-radius:8px;overflow:hidden;border:2px solid var(--border)}
-.app-dl-card.xm-app{border-color:#ffcdd2}
-.app-dl-card.fxgt-app{border-color:#bbdefb}
-.app-dl-card-head{padding:10px 12px 8px;display:flex;align-items:center;gap:8px}
-.app-dl-card.xm-app .app-dl-card-head{background:#fff5f5}
-.app-dl-card.fxgt-app .app-dl-card-head{background:#e3f2fd}
-.app-dl-icon{font-size:1.4rem;flex-shrink:0}
-.app-dl-broker{font-size:0.78rem;font-weight:900;line-height:1.2}
-.app-dl-card.xm-app .app-dl-broker{color:#c62828}
-.app-dl-card.fxgt-app .app-dl-broker{color:#0d47a1}
-.app-dl-rating{font-size:0.62rem;color:#f57c00;font-weight:700}
-.app-dl-features{padding:8px 12px;background:#fff}
-.app-dl-features ul{list-style:none;padding:0;display:flex;flex-direction:column;gap:3px}
-.app-dl-features li{font-size:0.64rem;color:var(--text-soft);padding-left:13px;position:relative}
-.app-dl-features li::before{content:'✓';position:absolute;left:0;color:#00c853;font-weight:900;font-size:0.65rem}
-.app-dl-btns{padding:8px 10px 10px;background:#fff;display:flex;flex-direction:column;gap:5px}
-.app-btn-ios,.app-btn-android{
-  display:flex;align-items:center;justify-content:center;gap:5px;
-  text-decoration:none;border-radius:4px;padding:7px 8px;
-  font-size:0.64rem;font-weight:700;letter-spacing:0.03em;
-}
-.app-btn-ios{background:#000;color:#fff}
-.app-btn-android{background:#01875f;color:#fff}
-.app-btn-ios span,.app-btn-android span{font-size:0.78rem}
-.app-dl-note{text-align:center;font-size:0.62rem;color:var(--text-muted);margin-top:10px;line-height:1.5}
-
-/* ── FLIP BROKER CARDS ── */
-.flip-wrap{display:flex;gap:14px;justify-content:center;align-items:flex-start;padding:0 4px;perspective:1000px}
-.flip-card{
-  flex:1;min-width:0;max-width:200px;
-  height:200px;
-  cursor:pointer;
-  -webkit-tap-highlight-color:transparent;
-  position:relative; /* KEY: establishes containing block */
-}
-.flip-card-inner{
-  position:absolute;inset:0; /* fills .flip-card exactly */
-  transition:transform 0.6s cubic-bezier(0.4,0,0.2,1);
-  transform-style:preserve-3d;
-}
-.flip-card.flipped .flip-card-inner{transform:rotateY(180deg)}
-.flip-front,.flip-back{
-  position:absolute;inset:0;
-  border-radius:10px;
-  -webkit-backface-visibility:hidden;
-  backface-visibility:hidden;
-  overflow:hidden;
-  box-shadow:0 4px 18px rgba(0,0,0,0.18);
-}
-
-/* FRONT */
-.flip-front{background:#0a0f2e}
-.flip-front.fxgt-front{background:#f8f8f8;border:1px solid #e0e0e0}
-.flip-front img{
-  position:absolute;inset:0;
-  width:100%;height:100%;
-  object-fit:cover;object-position:top center;
-  display:block;
-}
-
-/* лого текст */
-.logo-wordmark{font-weight:900;letter-spacing:-0.01em;line-height:1;color:#fff;text-align:center;margin-bottom:8px}
-.logo-wordmark.xm-logo{font-size:1.8rem;text-shadow:0 0 30px rgba(121,134,203,0.6)}
-.logo-wordmark.fxgt-logo{font-size:1.65rem;letter-spacing:0.04em;text-shadow:0 0 30px rgba(239,154,154,0.6)}
-.logo-tagline{font-size:0.58rem;color:rgba(255,255,255,0.55);font-weight:600;letter-spacing:0.06em;text-align:center;margin-bottom:10px}
-.fxgt-front .logo-tagline{color:rgba(0,0,0,0.4)}
-.fxgt-front .flip-hint{color:rgba(0,0,0,0.3)}
-.fxgt-front .flip-hint::before{color:rgba(0,0,0,0.3)}
-
-/* Trustpilot widget на предната страна */
-.tp-widget{background:rgba(255,255,255,0.1);border-radius:5px;padding:5px 9px;text-align:center;width:100%}
-.tp-logo{font-size:0.58rem;font-weight:700;color:rgba(255,255,255,0.6);letter-spacing:0.05em;margin-bottom:3px}
-.tp-stars{display:flex;justify-content:center;gap:2px;margin-bottom:2px}
-.tp-star{width:13px;height:13px;border-radius:2px;display:flex;align-items:center;justify-content:center}
-.tp-star.full{background:#00b67a}
-.tp-star.half{background:linear-gradient(90deg,#00b67a 50%,#dcdce6 50%)}
-.tp-star.empty{background:#dcdce6}
-.tp-star svg{width:9px;height:9px;fill:#fff}
-.tp-score{font-size:0.7rem;font-weight:900;color:#fff}
-.tp-count{font-size:0.55rem;color:rgba(255,255,255,0.45);margin-top:1px}
-
-/* flip hint */
-.flip-hint{font-size:0.55rem;color:rgba(255,255,255,0.35);margin-top:8px;letter-spacing:0.04em;display:flex;align-items:center;gap:3px;justify-content:center}
-.flip-hint::before{content:'↺';font-size:0.7rem}
-
-/* BACK — Trustpilot focus */
-.flip-back{transform:rotateY(180deg);display:flex;flex-direction:column}
-.flip-back.xm-back{background:#fff;border:2px solid #9fa8da}
-.flip-back.fxgt-back{background:#fff;border:2px solid #f48fb1}
-.flip-back-head{padding:7px 11px 6px}
-.flip-back.xm-back .flip-back-head{background:#3949ab}
-.flip-back.fxgt-back .flip-back-head{background:#c62828}
-.flip-back-name{font-size:0.75rem;font-weight:900;color:#fff}
-
-.flip-tp-body{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px 8px 8px;text-align:center}
-
-/* Large Trustpilot stars */
-.tp-stars-large{display:flex;gap:3px;justify-content:center;margin-bottom:6px}
-.tp-star-lg{width:20px;height:20px;border-radius:2px;position:relative;flex-shrink:0}
-.tp-star-lg.full{background:#00b67a}
-.tp-star-lg.empty{background:#dcdce6}
-.tp-star-lg.half{background:linear-gradient(90deg,#00b67a 50%,#dcdce6 50%)}
-.tp-star-lg::after{
-  content:'★';position:absolute;inset:0;
-  display:flex;align-items:center;justify-content:center;
-  font-size:13px;color:#fff;line-height:1;
-}
-
-.tp-score-large{font-size:1.5rem;font-weight:900;color:#191919;line-height:1;margin-bottom:2px}
-.tp-score-large span{font-size:0.75rem;color:#888;font-weight:400}
-.tp-label-large{font-size:0.68rem;font-weight:700;color:#00b67a;margin-bottom:3px}
-.tp-reviews-count{font-size:0.58rem;color:#aaa;margin-bottom:8px}
-.tp-link{
-  font-size:0.6rem;font-weight:700;color:#00b67a;text-decoration:none;
-  border:1px solid #00b67a;border-radius:3px;padding:4px 8px;
-  display:inline-block;transition:all 0.15s;
-}
-.tp-link:active{background:#00b67a;color:#fff}
-
-.flip-vs{display:flex;align-items:center;justify-content:center;flex-shrink:0;padding-top:0}
-.flip-vs-badge{
-  width:32px;height:32px;border-radius:50%;
-  background:linear-gradient(135deg,var(--xm-mid),var(--fxgt-mid));
-  display:flex;align-items:center;justify-content:center;
-  font-size:0.65rem;font-weight:900;color:#fff;
-  box-shadow:0 2px 10px rgba(0,0,0,0.2);
-}
-
-/* ── STICKY BOTTOM BAR (redesigned) ── */
-.sticky-v2{
-  position:fixed;bottom:0;left:0;width:100%;
-  background:rgba(10,10,10,0.97);
-  backdrop-filter:blur(14px);
-  border-top:1px solid rgba(255,255,255,0.08);
-  padding:8px 12px 10px;
-  z-index:1000;display:none;
-  box-shadow:0 -4px 24px rgba(0,0,0,0.35);
-}
-.sticky-v2.visible{display:block}
-.sticky-v2-label{
-  text-align:center;font-size:0.57rem;font-weight:700;
-  color:rgba(255,255,255,0.3);letter-spacing:0.1em;
-  text-transform:uppercase;margin-bottom:6px;
-}
-.sticky-v2-row{display:grid;grid-template-columns:1fr 1fr;gap:7px}
-.sticky-btn{
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  text-decoration:none;border-radius:6px;padding:8px 6px 6px;
-  position:relative;overflow:hidden;transition:transform 0.15s;
-}
-.sticky-btn:active{transform:scale(0.97)}
-.sticky-btn.sb-xm{background:linear-gradient(135deg,#3949ab,#1a237e)}
-.sticky-btn.sb-fxgt{background:linear-gradient(135deg,#e53935,#7b0000)}
-.sticky-btn-name{font-size:0.75rem;font-weight:900;color:#fff;letter-spacing:0.02em}
-.sticky-btn-sub{font-size:0.58rem;color:rgba(255,255,255,0.65);margin-top:2px}
-.sticky-btn-bonus{
-  font-size:0.6rem;font-weight:900;
-  background:rgba(255,255,255,0.15);
-  color:#fff;padding:2px 6px;border-radius:2px;
-  margin-top:3px;letter-spacing:0.04em;
-}
-.sticky-btn-tp{font-size:0.54rem;color:rgba(255,255,255,0.45);margin-top:2px}
-
-.fxgt-bonus-highlight{border:2px solid #e65100!important;background:#fff3e0!important}
-
-/* ── DESKTOP OPTIMIZATIONS ── */
-@media (min-width: 600px) {
-  .container{padding:0 16px}
-  .flip-card{max-width:240px;height:240px}  .flip-wrap{gap:20px}
-  .tp-star-lg{width:26px;height:26px}
-  .tp-star-lg::after{font-size:16px}
-  .tp-score-large{font-size:1.8rem}
-  .flip-back-name{font-size:0.9rem}
-  .tp-reviews-count{font-size:0.7rem}
-  .tp-link{font-size:0.7rem;padding:5px 12px}
-  .hero h1{font-size:1.8rem}
-  .hero-sub{font-size:0.9rem}
-  .sec-title{font-size:1.15rem}
-  .cmp-table{font-size:0.88rem}
-  .cmp-table td{padding:12px 10px}
-  .pro-item,.con-item{font-size:0.82rem}
-  .ct-label{width:100px}
-  .ct-val{font-size:0.72rem}
-  .xm-extras-grid{grid-template-columns:1fr 1fr 1fr}
-  .ct-copytrade-grid{gap:16px}
-  .flip-vs-badge{width:40px;height:40px;font-size:0.8rem}
-  .mugen-table th,.mugen-table td{font-size:0.82rem;padding:9px 10px}
-  .fxgt-bonus-item h5{font-size:0.86rem}
-  .fxgt-bonus-item p{font-size:0.76rem}
-  .fxgt-bonus-amount{font-size:1rem}
-  .promo-cta-main{font-size:1.05rem}
-  .sticky-v2-row{max-width:660px;margin:0 auto}
-  .sticky-btn-name{font-size:0.85rem}
-  .sticky-btn-bonus{font-size:0.7rem}
-}
-
-@media (min-width: 768px) {
-  .flip-card{max-width:260px;height:260px}
-  .ct-copytrade-grid{grid-template-columns:1fr 1fr}
-  .app-dl-grid{gap:16px}
-  .score-grid{gap:14px}
-}
-
-/* ── DESKTOP (1024px+) ── */
-@media (min-width: 1024px) {
-  /* Body gets dark side panels — no more white void */
-  body{
-    background:var(--black);
-  }
-
-  /* Центрирана колона с по-светъл фон */
-  .container{
-    max-width:780px;
-    background:var(--bg);
-    box-shadow:0 0 60px rgba(0,0,0,0.5);
-  }
-
-  /* Header се разтяга full-width но съдържанието е центрирано */
-  .site-header{padding:14px 40px}
-  .site-logo{font-size:1.1rem}
-  .header-badge{font-size:0.68rem;padding:5px 14px}
-
-  /* Hero по-просторен */
-  .hero{padding:44px 40px 36px}
-  .hero h1{font-size:2rem}
-  .hero-sub{font-size:0.92rem}
-  .hero-tag{font-size:0.68rem;padding:5px 18px}
-
-  /* Flip карти по-големи */
-  .flip-card{max-width:280px;height:280px}
-  .flip-wrap{gap:28px}
-
-  /* Container секции с повече padding */
-  .sec-wrap,.who-section,.quiz-section,.promo-section{padding:28px 32px}
-
-  /* Таблицата — по-четим */
-  .cmp-table{font-size:0.92rem}
-  .cmp-table td{padding:13px 12px}
-  .cmp-table td.cat{font-size:0.76rem}
-
-  /* Pros/Cons — 2 колони */
-  .pros-cons-desktop{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-
-  /* Who секция — 2 колони */
-  .who-grid{flex-direction:row;gap:14px}
-  .who-card{flex:1}
-
-  /* Copy trade таблица — по-голям текст */
-  .ct-label{width:110px;font-size:0.68rem}
-  .ct-val{font-size:0.76rem}
-  .ct-broker-name{font-size:0.88rem}
-
-  /* Quiz — по-широк */
-  .q-card{padding:26px 22px 20px}
-  .q-text{font-size:1.05rem}
-  .opt-btn{font-size:0.88rem;padding:13px 16px}
-
-  /* Sticky bar централизиран */
-  .sticky-v2{padding:10px 0 12px}
-  .sticky-v2-label{font-size:0.62rem}
-  .sticky-v2-row{max-width:780px;margin:0 auto;padding:0 20px}
-  .sticky-btn-name{font-size:0.9rem}
-  .sticky-btn-sub{font-size:0.65rem}
-  .sticky-btn-bonus{font-size:0.68rem}
-
-  /* XM extras 3 колони */
-  .xm-extras-grid{grid-template-columns:1fr 1fr 1fr}
-
-  /* App download grid */
-  .app-dl-grid{gap:20px}
-  .app-dl-features li{font-size:0.7rem}
-
-  /* Promo CTA по-широки */
-  .promo-cta-main{font-size:1.08rem;padding:18px 22px 14px}
-  .fxgt-bonus-grid{gap:10px}
-  .mugen-table{font-size:0.86rem}
-  .mugen-table td,.mugen-table th{padding:10px 12px}
-
-  /* Anchor бутони в hero */
-  .hero-anchor-btn{font-size:0.75rem;padding:7px 16px}
-  .hero-anchors{gap:10px;margin-top:24px;padding-top:22px}
-
-  /* Divider по-тесен визуално */
-  .divider{height:6px}
-
-  /* Footer */
-  .site-footer{padding:24px 40px 18px}
-  .footer-logo{font-size:1rem}
-  .risk{padding:16px 40px 10px}
-}
-
-
-/* ── COPY TRADING SECTION ── */
-.ct-copytrade-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
-.ct-card{border-radius:8px;overflow:hidden;border:2px solid var(--border)}
-.ct-card.ct-xm{border-color:#ffcdd2}
-.ct-card.ct-fxgt{border-color:#bbdefb}
-.ct-card-head{padding:10px 14px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px}
-.ct-card.ct-xm .ct-card-head{background:#fff5f5}
-.ct-card.ct-fxgt .ct-card-head{background:#e3f2fd}
-.ct-broker-name{font-size:0.8rem;font-weight:900}
-.ct-card.ct-xm .ct-broker-name{color:#b71c1c}
-.ct-card.ct-fxgt .ct-broker-name{color:#0d47a1}
-.ct-badge{font-size:0.55rem;font-weight:700;padding:2px 7px;border-radius:2px;letter-spacing:0.06em}
-.ct-badge-own{background:#e8f5e9;color:#2e7d32;border:1px solid #a5d6a7}
-.ct-badge-3rd{background:#fff8e1;color:#f57f17;border:1px solid #ffe082}
-.ct-body{padding:8px 0}
-.ct-row{display:flex;align-items:flex-start;padding:6px 12px;border-bottom:1px solid var(--border);gap:8px}
-.ct-row:last-child{border-bottom:none}
-.ct-label{font-size:0.6rem;font-weight:700;color:var(--text-muted);flex-shrink:0;width:82px;padding-top:2px;line-height:1.3}
-.ct-val{font-size:0.65rem;color:var(--text-soft);line-height:1.45;flex:1}
-.ct-val small{font-size:0.58rem;color:var(--text-muted);display:block;margin-top:2px}
-.ct-val.ct-win{color:#2e7d32;font-weight:700}
-.ct-summary{display:flex;flex-direction:column;gap:8px;margin-top:4px}
-.ct-summary-item{border-radius:6px;padding:12px 14px;display:flex;align-items:flex-start;gap:10px}
-.ct-summary-xm{background:#fff5f5;border:1px solid #ffcdd2}
-.ct-summary-fxgt{background:#e3f2fd;border:1px solid #bbdefb}
-.ct-sum-icon{font-size:1.2rem;flex-shrink:0}
-.ct-sum-title{font-size:0.74rem;font-weight:700;margin-bottom:3px}
-.ct-summary-xm .ct-sum-title{color:#b71c1c}
-.ct-summary-fxgt .ct-sum-title{color:#0d47a1}
-.ct-sum-desc{font-size:0.66rem;color:var(--text-soft);line-height:1.5}
-
-/* ── XM EXTRAS PROMO GRID ── */
-.xm-extras-box{background:#fff5f5;border:2px solid #e53935;border-radius:8px;padding:16px 18px;margin-bottom:16px}
-.xm-extras-title{font-size:0.85rem;font-weight:900;color:#b71c1c;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid #ffcdd2}
-.xm-extras-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.xm-extra-item{background:#fff;border:1px solid #ffcdd2;border-radius:6px;padding:10px 12px;display:flex;align-items:flex-start;gap:10px}
-.xm-extra-item.xm-extra-highlight{border-color:#e53935;background:#fff8f8}
-.xm-extra-icon{font-size:1.1rem;flex-shrink:0;min-width:24px;text-align:center;font-weight:900;color:#e53935}
-.xm-extra-name{font-size:0.72rem;font-weight:700;color:#b71c1c;margin-bottom:3px;line-height:1.3}
-.xm-extra-desc{font-size:0.62rem;color:var(--text-soft);line-height:1.45}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
 <body>
 
-<div class="ticker-wrap">
-  <div class="ticker-inner">
-    <span class="t-xm">🔵 XMTrading — 2009年創業・世界1,500万人以上のユーザー</span>
-    <span class="t-fxgt">🔴 FXGT — 最大5,000倍レバレッジ・仮想通貨60銘柄以上</span>
-    <span>⚡ どちらもゼロカット・追証なし</span>
-    <span class="t-xm">🔵 XM — 豊富なボーナスと高い規制水準</span>
-    <span class="t-fxgt">🔴 FXGT — 狭スプレッド・業界最速クラスの出金</span>
-    <span>📊 2026年3月最新版：10項目で徹底比較</span>
-    <span class="t-xm">🔵 XMTrading — 2009年創業・世界1,500万人以上のユーザー</span>
-    <span class="t-fxgt">🔴 FXGT — 最大5,000倍レバレッジ・仮想通貨60銘柄以上</span>
-    <span>⚡ どちらもゼロカット・追証なし</span>
-    <span class="t-xm">🔵 XM — 豊富なボーナスと高い規制水準</span>
-    <span class="t-fxgt">🔴 FXGT — 狭スプレッド・業界最速クラスの出金</span>
-    <span>📊 2026年3月最新版：10項目で徹底比較</span>
+<div class="notice">広告・アフィリエイトリンクを含みます。当サイトは各社の運営元ではありません。</div>
+<div id="campaign"></div>
+
+<div class="masthead wrap">
+  <span class="name">海外FX<b>採点表</b></span>
+  <span class="date">情報の最終確認：<span data-f="CHECKED_DATE"></span></span>
+</div>
+
+<div class="card-head">
+  <div class="wrap">
+    <div class="kicker">取 組 表</div>
+    <div class="versus">
+      <div class="side xm">
+        <div class="pos">東</div>
+        <div class="nm">XMTrading</div>
+        <div class="sc" id="scXm">0</div>
+      </div>
+      <div class="vs">対</div>
+      <div class="side gt">
+        <div class="pos">西</div>
+        <div class="nm">FXGT</div>
+        <div class="sc" id="scGt">0</div>
+      </div>
+    </div>
+    <div class="verdict" id="verdict"></div>
   </div>
 </div>
 
-<header class="site-header">
-  <div class="site-logo">FXボーナス<em>ナビ</em><span>海外FX・投資情報メディア</span></div>
-  <div class="header-badge">2026年最新比較</div>
-</header>
+<main class="wrap">
 
-<div class="container">
-
-  <div class="hero">
-    <div class="hero-tag">【2026年3月更新】徹底比較レポート</div>
-    <h1>
-      <span class="xm-col">XMTrading</span>
-      <span class="vs-col"> VS </span>
-      <span class="fxgt-col">FXGT</span><br>
-      あなたに合うのはどっち？
-    </h1>
-    <p class="hero-sub">スプレッド・レバレッジ・ボーナス・信頼性など10項目を徹底比較<br>クイズで自分に最適な業者を2分で診断できます</p>
-    <div class="hero-meta">
-      <span>📅 2026年3月更新</span>
-      <span>⏱️ 読了約3分</span>
-      <span>📊 10項目比較</span>
+  <section>
+    <h2>重視する項目だけで採点する</h2>
+    <p class="lead">全項目の合計で「どちらが優れているか」を決めても、あまり意味がありません。人によって効く条件が違うからです。</p>
+    <div class="hint">
+      各項目の<span class="mk">「重視」を外す</span>と、その項目は採点から除かれ、上の点数がその場で変わります。<br>
+      値が確認できていない項目は自動的に採点対象外です。
     </div>
-    <div class="flip-wrap" id="broker-flip-wrap">
+    <div class="bouts" id="bouts"></div>
+  </section>
 
-      <!-- XM FLIP CARD -->
-      <div class="flip-card" id="fc-xm" onclick="flipCard('fc-xm')">
-        <div class="flip-card-inner">
-          <!-- FRONT: XM ロゴ -->
-                              <div class="flip-front xm-front">
-            <img src="https://raw.githubusercontent.com/revbull/FXfacts/main/xm_screenshot1.png" alt="XMTrading公式サイト" loading="eager">
-            <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,10,0.75));padding:10px 12px 8px;text-align:center">
-              <div class="flip-hint" style="color:rgba(255,255,255,0.75)">↺ タップして評価を見る</div>
-            </div>
-          </div>
-          <!-- BACK: Trustpilot -->
-          <div class="flip-back xm-back">
-            <div class="flip-back-head">
-              <div class="flip-back-name">XMTrading</div>
-            </div>
-            <div class="flip-tp-body">
-              <!-- Trustpilot logo SVG -->
-              <svg viewBox="0 0 120 24" xmlns="http://www.w3.org/2000/svg" style="width:90px;margin-bottom:10px">
-                <rect x="0" y="0" width="24" height="24" rx="3" fill="#00b67a"/>
-                <polygon points="12,4 14.5,10 21,10.5 16,15 17.5,21.5 12,18 6.5,21.5 8,15 3,10.5 9.5,10" fill="white"/>
-                <text x="28" y="17" font-family="Arial,sans-serif" font-size="12" font-weight="700" fill="#191919">Trustpilot</text>
-              </svg>
-              <div class="tp-stars-large">
-                <div class="tp-star-lg full"></div>
-                <div class="tp-star-lg full"></div>
-                <div class="tp-star-lg full"></div>
-                <div class="tp-star-lg half"></div>
-                <div class="tp-star-lg empty"></div>
-              </div>
-              <div class="tp-score-large">3.7 <span>/5</span></div>
-              <div class="tp-label-large">「Good」</div>
-              <div class="tp-reviews-count">2,750件以上のレビュー</div>
-              <a href="https://www.trustpilot.com/review/xmtrading.com" target="_blank" rel="noopener noreferrer" class="tp-link" onclick="event.stopPropagation()">Trustpilotで確認する →</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- VS -->
-      <div class="flip-vs"><div class="flip-vs-badge">VS</div></div>
-
-      <!-- FXGT FLIP CARD -->
-      <div class="flip-card" id="fc-fxgt" onclick="flipCard('fc-fxgt')">
-        <div class="flip-card-inner">
-          <!-- FRONT: FXGT ロゴ -->
-                              <div class="flip-front fxgt-front">
-            <img src="https://raw.githubusercontent.com/revbull/FXfacts/main/FXGT_1_50001.png" alt="FXGT公式サイト" loading="eager">
-            <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,0.55));padding:10px 12px 8px;text-align:center">
-              <div class="flip-hint" style="color:rgba(255,255,255,0.85)">↺ タップして評価を見る</div>
-            </div>
-          </div>
-          <!-- BACK: Trustpilot -->
-          <div class="flip-back fxgt-back">
-            <div class="flip-back-head">
-              <div class="flip-back-name">FXGT</div>
-            </div>
-            <div class="flip-tp-body">
-              <!-- Trustpilot logo SVG -->
-              <svg viewBox="0 0 120 24" xmlns="http://www.w3.org/2000/svg" style="width:90px;margin-bottom:10px">
-                <rect x="0" y="0" width="24" height="24" rx="3" fill="#00b67a"/>
-                <polygon points="12,4 14.5,10 21,10.5 16,15 17.5,21.5 12,18 6.5,21.5 8,15 3,10.5 9.5,10" fill="white"/>
-                <text x="28" y="17" font-family="Arial,sans-serif" font-size="12" font-weight="700" fill="#191919">Trustpilot</text>
-              </svg>
-              <div class="tp-stars-large">
-                <div class="tp-star-lg full"></div>
-                <div class="tp-star-lg full"></div>
-                <div class="tp-star-lg full"></div>
-                <div class="tp-star-lg full"></div>
-                <div class="tp-star-lg half"></div>
-              </div>
-              <div class="tp-score-large">4.3 <span>/5</span></div>
-              <div class="tp-label-large">「Excellent」</div>
-              <div class="tp-reviews-count">1,514件のレビュー</div>
-              <a href="https://www.trustpilot.com/review/fxgt.com" target="_blank" rel="noopener noreferrer" class="tp-link" onclick="event.stopPropagation()">Trustpilotで確認する →</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div><!-- /flip-wrap -->
-
-    <!-- Anchor navigation buttons -->
-    <div class="hero-anchors">
-      <a href="#section-compare" class="hero-anchor-btn">📊 比較表</a>
-      <a href="#section-merit" class="hero-anchor-btn">✓ メリット</a>
-      <a href="#section-copytrade" class="hero-anchor-btn">🔄 コピー</a>
-      <a href="#section-promo" class="hero-anchor-btn">🎁 キャンペーン</a>
+  <section>
+    <h2>規制について、先に整理しておく</h2>
+    <p class="lead">この比較で最も誤解されやすい部分です。</p>
+    <div class="block">
+      <p>XMTradingもFXGTも、<span class="mk">日本の金融庁には登録していない海外業者</span>です。ライセンスはいずれもオフショア当局のもので、この点において両社の間に決定的な差はありません。</p>
+      <p>国内業者との違いは、レバレッジの上限だけではありません。トラブルが起きた際に、日本の投資者保護制度や金融ADRの枠組みが使えない点が本質的な差です。ゼロカットによって「借金を負わない」ことと、「資金が制度的に保護されている」ことは別の話です。</p>
+      <p>そのうえで各社を比べるのであれば、運営歴の長さ、出金実績、日本語対応の質といった実務的な指標のほうが判断材料になります。</p>
     </div>
+  </section>
+
+  <section>
+    <h2>どちらを選ぶかの目安</h2>
+    <div class="split">
+      <div class="block">
+        <h3>XMTradingが向いている場合</h3>
+        <p>MT4のEAを使いたい、運営歴の長さを重視する、日本語の情報量が多いほうが安心する。こうした条件では選びやすい構成です。</p>
+      </div>
+      <div class="block">
+        <h3>FXGTが向いている場合</h3>
+        <p>仮想通貨CFDの銘柄数を重視する、MT5のみで問題ない。この場合は取扱いの幅が判断材料になります。</p>
+      </div>
+      <div class="block">
+        <h3>両方に口座を作るという選択</h3>
+        <p>口座開設自体は無料で、維持費もかかりません。条件は時期によって変わるため、実際に両方の口座を開いて操作感と約定を比べたうえで、資金を置く先を決める方法もあります。</p>
+      </div>
+    </div>
+    <div class="cta-pair">
+      <a class="cta xm" data-aff="xm" href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=6">
+        XMTrading 公式サイト<small>口座開設無料</small></a>
+      <a class="cta gt" data-aff="gt" href="https://fxgt.link?refid=fxgtNihon">
+        FXGT 公式サイト<small>口座開設無料</small></a>
+    </div>
+  </section>
+
+  <section class="warn">
+    <h2>申し込む前に読んでおくこと</h2>
+    <ul>
+      <li>ボーナスは<b>取引用のクレジット</b>であり、それ自体を出金することはできません。出金や資金移動を行うと、割合に応じて消滅します。</li>
+      <li>高レバレッジは損失も同じ倍率で拡大します。ゼロカットは追証を防ぎますが、<b>入金額を失う可能性は残ります</b>。</li>
+      <li>公表されている最大レバレッジは、多くの場合<b>口座残高が小さいときに限られます</b>。残高が増えると段階的に制限されます。</li>
+      <li>ボーナスや取引条件は予告なく変わります。金額や期限は必ず公式サイトで確認してください。</li>
+      <li>両社とも日本の金融庁には登録していません。国内業者とは制度上の位置づけが異なります。</li>
+    </ul>
+  </section>
+
+  <section class="risk">
+    <p><b>リスク開示・免責事項</b></p>
+    <p>FX/CFD取引は複雑な金融商品であり、レバレッジにより短期間で大きな損失が生じるおそれがあります。過去の実績は将来の結果を保証しません。必ず余剰資金の範囲内で取引してください。</p>
+    <p>本ページは各社のアフィリエイトパートナーとして作成された<b>広告を含むコンテンツ</b>であり、投資助言・投資勧誘ではありません。口座開設の判断はご自身の責任で行ってください。</p>
+    <p>掲載内容は<span data-f="CHECKED_DATE"></span>時点で確認したものです。条件は変更される場合がありますので、最新かつ正確な情報は各社の公式サイトおよび利用規約をご確認ください。</p>
+    <p>当サイトは独立した情報サイトであり、掲載事業者から紹介手数料を受け取っています。これによりご利用者に追加の費用が発生することはありません。</p>
+  </section>
+
+  <footer>海外FX採点表 — 独立系情報サイト</footer>
+
+</main>
+
+<div class="sticky">
+  <div class="inner">
+    <div class="lbl" id="stickyLbl">口座開設はどちらも無料です</div>
+    <a class="cta xm" id="stickyCta" data-aff="xm" href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=6">公式サイトを見る</a>
   </div>
-
-  <div class="divider"></div>
-
-  <!-- クイズ (moved to top) -->
-  <div class="quiz-section" id="quiz-section">
-    <div class="quiz-head">
-      <div class="quiz-badge">🎯 2分で分かる！最適業者診断クイズ</div>
-      <h2>📋 あなたのトレードスタイル診断</h2>
-      <p>4問に答えるだけでXMとFXGTどちらが合うか判定します</p>
-    </div>
-    <div class="prog-wrap">
-      <div class="prog-label"><span id="prog-text">質問 1 / 4</span><span id="prog-pct">25%</span></div>
-      <div class="prog-bar"><div class="prog-fill" id="prog-fill"></div></div>
-    </div>
-
-    <div class="q-card active" id="q1">
-      <div class="q-num">質問 01 / 04</div>
-      <div class="q-text">🎯 主にどんな取引スタイルですか？</div>
-      <div class="options">
-        <button class="opt-btn" onclick="pick(1,'xm',this)"><span class="opt-letter">A</span>スイングトレード・デイトレード（数時間〜数日保有）</button>
-        <button class="opt-btn" onclick="pick(1,'fxgt',this)"><span class="opt-letter">B</span>スキャルピング（数秒〜数分の超短期売買）</button>
-        <button class="opt-btn" onclick="pick(1,'fxgt',this)"><span class="opt-letter">C</span>仮想通貨の取引がメイン</button>
-        <button class="opt-btn" onclick="pick(1,'xm',this)"><span class="opt-letter">D</span>まだ決まっていない・これから始める</button>
-      </div>
-    </div>
-    <div class="q-card" id="q2">
-      <div class="q-num">質問 02 / 04</div>
-      <div class="q-text">🏆 業者選びで最も重視することは？</div>
-      <div class="options">
-        <button class="opt-btn" onclick="pick(2,'xm',this)"><span class="opt-letter">A</span>信頼性・規制の強さ・長年の実績</button>
-        <button class="opt-btn" onclick="pick(2,'fxgt',this)"><span class="opt-letter">B</span>スプレッドの狭さ・取引コストの低さ</button>
-        <button class="opt-btn" onclick="pick(2,'xm',this)"><span class="opt-letter">C</span>ボーナスの豊富さ・充実度</button>
-        <button class="opt-btn" onclick="pick(2,'fxgt',this)"><span class="opt-letter">D</span>出金の速さ・仮想通貨での入出金</button>
-      </div>
-    </div>
-    <div class="q-card" id="q3">
-      <div class="q-num">質問 03 / 04</div>
-      <div class="q-text">📈 希望するレバレッジの水準は？</div>
-      <div class="options">
-        <button class="opt-btn" onclick="pick(3,'xm',this)"><span class="opt-letter">A</span>100〜500倍程度（安全重視）</button>
-        <button class="opt-btn" onclick="pick(3,'xm',this)"><span class="opt-letter">B</span>1,000倍程度（標準的なハイレバ）</button>
-        <button class="opt-btn" onclick="pick(3,'fxgt',this)"><span class="opt-letter">C</span>1,000倍以上〜5,000倍（超ハイレバレッジ希望）</button>
-        <button class="opt-btn" onclick="pick(3,'both',this)"><span class="opt-letter">D</span>レバレッジより他の条件を優先したい</button>
-      </div>
-    </div>
-    <div class="q-card" id="q4">
-      <div class="q-num">質問 04 / 04</div>
-      <div class="q-text">💰 入出金で最も重視することは？</div>
-      <div class="options">
-        <button class="opt-btn" onclick="pick(4,'xm',this)"><span class="opt-letter">A</span>安全性・確実性（多少時間がかかっても良い）</button>
-        <button class="opt-btn" onclick="pick(4,'fxgt',this)"><span class="opt-letter">B</span>スピード重視（できるだけ早く出金したい）</button>
-        <button class="opt-btn" onclick="pick(4,'fxgt',this)"><span class="opt-letter">C</span>仮想通貨（ビットコイン等）での入出金</button>
-        <button class="opt-btn" onclick="pick(4,'both',this)"><span class="opt-letter">D</span>両方口座を開設して使い分けたい</button>
-      </div>
-    </div>
-
-    <div class="analyzing" id="analyzing">
-      <div class="analyzing-icon">⚙️</div>
-      <h3>あなたのトレードスタイルを分析中…</h3>
-      <p>回答データをもとに最適な業者を判定しています</p>
-      <div class="loader-wrap"><div class="loader-fill" id="loader-fill"></div></div>
-      <div class="analyzing-status" id="analyzing-status">回答を照合しています…</div>
-    </div>
-  </div>
-
-  <div class="divider"></div>
-  <!-- 結果画面 -->
-  <div id="result-screen">
-    <div id="verdict-box"></div>
-    <div class="divider"></div>
-    <div class="ai-msg-box">
-      <div class="ai-msg-header">
-        <div class="ai-spinner" id="ai-spin"></div>
-        <span id="ai-label">あなたへの診断結果を生成中...</span>
-      </div>
-      <div id="ai-msg-text"><span class="ai-cursor"></span></div>
-    </div>
-    <div class="divider"></div>
-    <div class="cta-area-wrap" id="cta-area"></div>
-    <div class="divider"></div>
-
-    <!-- 📱 APP DOWNLOAD BANNER -->
-    <div class="app-dl-banner">
-      <div class="app-dl-title">📲 スマホアプリで今すぐ取引開始</div>
-      <div class="app-dl-grid">
-
-        <!-- XM APP -->
-        <div class="app-dl-card xm-app">
-          <div class="app-dl-card-head">
-            <div class="app-dl-icon">🔴</div>
-            <div>
-              <div class="app-dl-broker">XMTrading<br>アプリ</div>
-              <div class="app-dl-rating">★ 4.2 / 5.0</div>
-            </div>
-          </div>
-          <div class="app-dl-features">
-            <ul>
-              <li>MT4 / MT5対応</li>
-              <li>リアルタイムチャート</li>
-              <li>プッシュ通知</li>
-              <li>日本語UI完全対応</li>
-            </ul>
-          </div>
-          <div class="app-dl-btns">
-            <a href="https://clicks.affstrack.com/c?c=438318&l=en&p=1" target="_blank" rel="noopener noreferrer" class="app-btn-ios track-link-xm">
-              <span>🍎</span> App Storeで入手
-            </a>
-            <a href="https://clicks.affstrack.com/c?c=438318&l=en&p=1" target="_blank" rel="noopener noreferrer" class="app-btn-android track-link-xm">
-              <span>🤖</span> Google Playで入手
-            </a>
-          </div>
-        </div>
-
-        <!-- FXGT APP -->
-        <div class="app-dl-card fxgt-app">
-          <div class="app-dl-card-head">
-            <div class="app-dl-icon">🔵</div>
-            <div>
-              <div class="app-dl-broker">FXGT<br>アプリ</div>
-              <div class="app-dl-rating">★ 4.0 / 5.0</div>
-            </div>
-          </div>
-          <div class="app-dl-features">
-            <ul>
-              <li>MT5専用アプリ</li>
-              <li>仮想通貨CFD対応</li>
-              <li>プッシュ通知</li>
-              <li>日本語UI完全対応</li>
-            </ul>
-          </div>
-          <div class="app-dl-btns">
-            <a href="https://fxgtapp.onelink.me/xgkx/lsswbbod?refid=fxgtNihon" target="_blank" rel="noopener noreferrer" class="app-btn-ios track-link-fxgt">
-              <span>🍎</span> App Storeで入手
-            </a>
-            <a href="https://fxgtapp.onelink.me/xgkx/lsswbbod?refid=fxgtNihon" target="_blank" rel="noopener noreferrer" class="app-btn-android track-link-fxgt">
-              <span>🤖</span> Google Playで入手
-            </a>
-          </div>
-        </div>
-
-      </div>
-      <div class="app-dl-note">📲 アプリから口座開設も可能。無料・最短2分で完了します。</div>
-    </div>
-
-    <div class="divider"></div>
-    <div class="score-section">
-      <div class="sec-label">総合評価スコア</div>
-      <div class="score-grid">
-        <div class="score-card xm-sc">
-          <div class="sc-name">🔵 XMTrading</div>
-          <div class="sc-stars">★★★★☆</div>
-          <div class="sc-label">信頼性・ボーナス重視</div>
-        </div>
-        <div class="score-card fxgt-sc">
-          <div class="sc-name">🔴 FXGT</div>
-          <div class="sc-stars">★★★★☆</div>
-          <div class="sc-label">スプレッド・仮想通貨重視</div>
-        </div>
-      </div>
-    </div>
-    <div class="divider"></div>
-    <div class="risk">
-      <strong>🚨 リスク開示・免責事項</strong>
-      FX/CFD取引は複雑な金融商品であり、ハイレバレッジの使用により投資元本を超える損失が生じるリスクがあります。過去の実績は将来の結果を保証しません。余剰資金の範囲内で取引してください。本コンテンツは情報提供を目的としており、投資助言ではありません。掲載情報は2026年3月時点のものです。最新情報は各公式サイトにてご確認ください。FXボーナスナビは独立した情報ポータル兼アフィリエイトサイトです。
-    </div>
-  </div>
-
-  <!-- 比較表 -->
-  <div class="sec-wrap" id="section-compare">
-    <div class="sec-label">比較表</div>
-    <div class="sec-title">10項目 一目でわかる比較表</div>
-    <table class="cmp-table">
-      <thead>
-        <tr>
-          <th></th>
-          <th class="xm-h">🔵 XMTrading</th>
-          <th class="fxgt-h">🔴 FXGT</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="cat">設立・実績</td>
-          <td class="xm-td"><span class="win">2009年設立</span> 1,500万人以上<span class="badge-win">勝</span></td>
-          <td class="fxgt-td">2019年設立 急成長中</td>
-        </tr>
-        <tr>
-          <td class="cat">最大レバレッジ</td>
-          <td class="xm-td">最大1,000倍（残高に応じ制限）</td>
-          <td class="fxgt-td"><span class="win">最大5,000倍</span>（Optimus口座）<span class="badge-win">勝</span></td>
-        </tr>
-        <tr>
-          <td class="cat">スプレッド（FX）</td>
-          <td class="xm-td">スタンダード口座 約1.6〜2.0pips</td>
-          <td class="fxgt-td"><span class="win">約1.2pips〜</span><br>Optimus口座はさらに狭い<span class="badge-win">勝</span></td>
-        </tr>
-        <tr>
-          <td class="cat">仮想通貨</td>
-          <td class="xm-td">対応（銘柄数少なめ）</td>
-          <td class="fxgt-td"><span class="win">60銘柄以上</span><br>最大1,000倍・スプレッド最狭水準<span class="badge-win">勝</span></td>
-        </tr>
-        <tr>
-          <td class="cat">口座開設ボーナス</td>
-          <td class="xm-td">¥13,000相当</td>
-          <td class="fxgt-td">$70新規登録ボーナス（Optimus口座・30日以内に認証）<br><small>+段階型ボーナス最大$30,000<br>（Welcome・Milestone・Loyalty）</small></td>
-        </tr>
-        <tr>
-          <td class="cat">入金ボーナス</td>
-          <td class="xm-td"><span class="win">最大$10,500</span>（100%+20%）<span class="badge-win">勝</span></td>
-          <td class="fxgt-td">最大¥120万円（Crypto Max口座は120%）</td>
-        </tr>
-        <tr>
-          <td class="cat">規制・信頼性</td>
-          <td class="xm-td"><span class="win">CySEC・DFSA・FSA他</span><br>Tier-1規制4つ取得<span class="badge-win">勝</span></td>
-          <td class="fxgt-td">セーシェルFSA・南ア FSCA<br>（Tier-1規制なし）</td>
-        </tr>
-        <tr>
-          <td class="cat">出金スピード</td>
-          <td class="xm-td">通常1〜2営業日</td>
-          <td class="fxgt-td"><span class="win">最短30分〜1時間</span><span class="badge-win">勝</span></td>
-        </tr>
-        <tr>
-          <td class="cat">取引ツール</td>
-          <td class="xm-td">MT4・MT5対応（EA自動売買に最適）<span class="badge-win xm">有利</span></td>
-          <td class="fxgt-td">MT5専用<br>（MT4非対応）</td>
-        </tr>
-        <tr>
-          <td class="cat">日本語サポート</td>
-          <td class="xm-td">24時間対応</td>
-          <td class="fxgt-td"><span class="win">24時間・レスポンス速い</span><span class="badge-win">勝</span></td>
-        </tr>
-        <tr class="app-row-xm">
-          <td class="cat">📱 モバイルアプリ</td>
-          <td class="xm-td">
-            MT4・MT5アプリ対応<br>
-            <div class="app-stores">
-              <a href="https://clicks.affstrack.com/c?c=438318&l=en&p=1" target="_blank" rel="noopener noreferrer" class="app-store-pill ios"><span>🍎</span> App Store</a>
-              <a href="https://clicks.affstrack.com/c?c=438318&l=en&p=1" target="_blank" rel="noopener noreferrer" class="app-store-pill android"><span>🤖</span> Google Play</a>
-            </div>
-            <div class="app-rating">★ 4.2 / 5.0</div>
-          </td>
-          <td class="fxgt-td">
-            MT5アプリ対応<br>
-            <div class="app-stores">
-              <a href="https://fxgtapp.onelink.me/xgkx/lsswbbod?refid=fxgtNihon" target="_blank" rel="noopener noreferrer" class="app-store-pill ios"><span>🍎</span> App Store</a>
-              <a href="https://fxgtapp.onelink.me/xgkx/lsswbbod?refid=fxgtNihon" target="_blank" rel="noopener noreferrer" class="app-store-pill android"><span>🤖</span> Google Play</a>
-            </div>
-            <div class="app-rating">★ 4.0 / 5.0</div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="divider"></div>
-
-  <!-- メリット・デメリット -->
-  <div class="sec-wrap" id="section-merit">
-    <div class="sec-label">メリット・デメリット</div>
-
-    <div class="pros-cons-desktop">
-    <div>
-    <div class="broker-block">
-      <div class="broker-block-head xm-head">🔵 XMTrading — メリット</div>
-      <div class="broker-block-body">
-        <div class="pro-item"><span class="pro-icon">✓</span>2009年創業・Tier-1規制4つ取得という圧倒的な信頼実績</div>
-        <div class="pro-item"><span class="pro-icon">✓</span>¥13,000口座開設ボーナス＋最大$10,500の入金ボーナス（100%+20%）</div>
-        <div class="pro-item"><span class="pro-icon">✓</span>MUGENキャッシュバックなど継続的なロイヤルティプログラムが充実</div>
-        <div class="pro-item"><span class="pro-icon">✓</span>MT4・MT5対応（EA自動売買に最適）・業界最高水準の教育コンテンツ</div>
-        <div class="pro-item"><span class="pro-icon">✓</span>ゼロカットシステム採用・追証リスクなし</div>
-        <div class="pro-item"><span class="pro-icon">✓</span>1,000以上の取引銘柄（FX・株・商品・仮想通貨）</div>
-      </div>
-    </div>
-    <div class="broker-block">
-      <div class="broker-block-head xm-con">🔵 XMTrading — デメリット</div>
-      <div class="broker-block-body">
-        <div class="con-item"><span class="con-icon">✗</span>スタンダード口座のスプレッドがやや広め（EUR/USD約1.6〜2.0pips）</div>
-        <div class="con-item"><span class="con-icon">✗</span>口座残高が増えるとレバレッジが段階的に制限される</div>
-        <div class="con-item"><span class="con-icon">✗</span>仮想通貨の銘柄数・スプレッドはFXGTに劣る</div>
-        <div class="con-item"><span class="con-icon">✗</span>出金はFXGTより遅め（通常1〜2営業日）</div>
-      </div>
-    </div>
-    </div><!-- /XM col -->
-
-    <div>
-    <div class="broker-block">
-      <div class="broker-block-head fxgt-head">🔴 FXGT — メリット</div>
-      <div class="broker-block-body">
-        <div class="pro-item"><span class="pro-icon">✓</span>スプレッドがXMより全体的に狭く、スキャルピングに有利</div>
-        <div class="pro-item"><span class="pro-icon">✓</span>仮想通貨CFD60銘柄以上・最大1,000倍・業界最狭水準のスプレッド</div>
-        <div class="pro-item"><span class="pro-icon">✓</span>Optimus口座で最大5,000倍のレバレッジが利用可能（残高$1,000以下時）</div>
-        <div class="pro-item"><span class="pro-icon">✓</span>出金が最速30分〜1時間と圧倒的に高速</div>
-        <div class="pro-item"><span class="pro-icon">✓</span>仮想通貨での直接入出金に対応（ウォレット送金可能）</div>
-        <div class="pro-item"><span class="pro-icon">✓</span>日本語サポートのレスポンスが速いと多数の口コミで評価</div>
-        <div class="pro-item"><span class="pro-icon">✓</span>新規登録ボーナス$70＋80%入金ボーナス（上限$1,500）＋段階型ボーナス（Welcome・Milestone・Loyalty）</div>
-      </div>
-    </div>
-    <div class="broker-block">
-      <div class="broker-block-head fxgt-con">🔴 FXGT — デメリット</div>
-      <div class="broker-block-body">
-        <div class="con-item"><span class="con-icon">✗</span>2019年設立と比較的新しく、XMより運営実績が短い</div>
-        <div class="con-item"><span class="con-icon">✗</span>Tier-1規制（FCA・ASICなど）を取得しておらず、規制の強度はXMに劣る</div>
-        <div class="con-item"><span class="con-icon">✗</span>株価指数のスプレッドがやや広め</div>
-        <div class="con-item"><span class="con-icon">✗</span>最大5,000倍レバレッジは残高$1,000以下のOptimus口座のみ適用（残高増加で段階的に制限）</div>
-      </div>
-    </div>
-    </div><!-- /FXGT col -->
-    </div><!-- /pros-cons-desktop -->
-  </div>
-
-  <div class="divider"></div>
-
-  <!-- こんな人におすすめ -->
-  <div class="who-section">
-    <div class="sec-label">こんな人におすすめ</div>
-    <div class="who-grid">
-      <div class="who-card xm-who">
-        <div class="who-icon">🔵</div>
-        <div class="who-body">
-          <h4>XMTrading がおすすめな人</h4>
-          <p>海外FX初心者・信頼性を最優先したい人・スイングトレードやデイトレードが中心の人・ボーナスを最大限活用したい人・MT4/MT5で自動売買（EA）を使いたい人</p>
-        </div>
-      </div>
-      <div class="who-card fxgt-who">
-        <div class="who-icon">🔴</div>
-        <div class="who-body">
-          <h4>FXGT がおすすめな人</h4>
-          <p>仮想通貨取引をメインにしたい人・スキャルピングで取引コストを極限まで抑えたい人・超ハイレバレッジ（最大5,000倍）を活用したい人・出金スピードを重視する人・仮想通貨で入出金したい人</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="divider"></div>
-
-  <!-- ══ コピートレード比較 ══ -->
-  <div class="sec-wrap" id="section-copytrade">
-    <div class="sec-label">コピートレード比較</div>
-    <div class="sec-title">📊 コピートレード — XMTrading vs FXGT 詳細比較</div>
-
-    <!-- 概要カード -->
-    <div class="ct-copytrade-grid">
-
-      <div class="ct-card ct-xm">
-        <div class="ct-card-head">
-          <div class="ct-broker-name">🔴 XMTrading</div>
-          <div class="ct-badge ct-badge-own">✅ 独自プラットフォーム</div>
-        </div>
-        <div class="ct-body">
-          <div class="ct-row"><span class="ct-label">サービス形態</span><span class="ct-val ct-win">公式コピートレード機能（内蔵）</span></div>
-          <div class="ct-row"><span class="ct-label">専用口座</span><span class="ct-val">「投資家口座」を無料開設</span></div>
-          <div class="ct-row"><span class="ct-label">最低投資額</span><span class="ct-val">$50相当（約7,500円）〜<br><small>※ストラテジーにより異なる（最大$1,000〜）</small></span></div>
-          <div class="ct-row"><span class="ct-label">フォロー手数料</span><span class="ct-val">利益の10%〜50%<br><small>ハイウォーターマーク方式（最高値超えのみ課金）</small></span></div>
-          <div class="ct-row"><span class="ct-label">同時フォロー数</span><span class="ct-val ct-win">最大10ストラテジー</span></div>
-          <div class="ct-row"><span class="ct-label">対象銘柄</span><span class="ct-val">FX・ゴールド・株式指数・仮想通貨</span></div>
-          <div class="ct-row"><span class="ct-label">VPS不要</span><span class="ct-val ct-win">✅ 不要（ブラウザ・アプリから操作）</span></div>
-          <div class="ct-row"><span class="ct-label">配信者になれる</span><span class="ct-val ct-win">✅ ストラテジーマネージャーとして報酬獲得可</span></div>
-          <div class="ct-row"><span class="ct-label">取引履歴の透明性</span><span class="ct-val ct-win">✅ 全データ公開（投資家数・運用額・履歴）</span></div>
-          <div class="ct-row"><span class="ct-label">対応デバイス</span><span class="ct-val">PC・スマホ両対応</span></div>
-        </div>
-      </div>
-
-      <div class="ct-card ct-fxgt">
-        <div class="ct-card-head">
-          <div class="ct-broker-name">🔵 FXGT</div>
-          <div class="ct-badge ct-badge-3rd">⚠️ サードパーティ経由</div>
-        </div>
-        <div class="ct-body">
-          <div class="ct-row"><span class="ct-label">サービス形態</span><span class="ct-val">ZuluTrade・Myfxbook等の外部プラットフォームを利用</span></div>
-          <div class="ct-row"><span class="ct-label">専用口座</span><span class="ct-val">MT5口座をプラットフォームに接続</span></div>
-          <div class="ct-row"><span class="ct-label">最低投資額</span><span class="ct-val">プラットフォームによる（数十ドル〜）</span></div>
-          <div class="ct-row"><span class="ct-label">フォロー手数料</span><span class="ct-val">プラットフォームの規定による</span></div>
-          <div class="ct-row"><span class="ct-label">同時フォロー数</span><span class="ct-val">口座2つまで作成・各口座最大4ストラテジー<br><small>合計最大8コピートレードを同時並走可能</small></span></div>
-          <div class="ct-row"><span class="ct-label">対象銘柄</span><span class="ct-val ct-win">FX・仮想通貨CFD（60銘柄以上）・貴金属</span></div>
-          <div class="ct-row"><span class="ct-label">VPS不要</span><span class="ct-val">△ プラットフォームによる</span></div>
-          <div class="ct-row"><span class="ct-label">配信者になれる</span><span class="ct-val">△ 外部プラットフォーム上で可能</span></div>
-          <div class="ct-row"><span class="ct-label">取引履歴の透明性</span><span class="ct-val">プラットフォームに依存</span></div>
-          <div class="ct-row"><span class="ct-label">対応デバイス</span><span class="ct-val">PC・スマホ（外部アプリ経由）</span></div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- 総括 -->
-    <div class="ct-summary">
-      <div class="ct-summary-item ct-summary-xm">
-        <div class="ct-sum-icon">🏆</div>
-        <div>
-          <div class="ct-sum-title">コピートレード初心者・安定重視 → XMTrading</div>
-          <div class="ct-sum-desc">公式内蔵サービスで外部登録不要。最小$50〜・ハイウォーターマーク方式で公平な手数料体系。全データ公開で透明性が高く、日本語サポートも充実。</div>
-        </div>
-      </div>
-      <div class="ct-summary-item ct-summary-fxgt">
-        <div class="ct-sum-icon">🚀</div>
-        <div>
-          <div class="ct-sum-title">仮想通貨コピートレード重視 → FXGT</div>
-          <div class="ct-sum-desc">仮想通貨CFD60銘柄以上でのコピートレードが可能。最大8コピーを同時並走できる柔軟性が強み。ただしZuluTradeなどの外部プラットフォームへの別途登録が必要。</div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="divider"></div>
-
-  <!-- ══ 3月限定プロモーション ══ -->
-  <div class="promo-section" id="section-promo">
-    <div class="section-label">3月限定キャンペーン</div>
-    <div class="promo-section-title">📅 今月だけの特別プロモーション比較</div>
-
-    <!-- XM MUGEN -->
-    <div class="mugen-box">
-      <div class="mugen-header">
-        <div class="mugen-header-left">
-          <h3>🔴 XMTrading — MUGEN無限キャッシュバック</h3>
-          <p>取引量が増えるほどキャッシュバックも無限に増額</p>
-        </div>
-        <div class="mugen-deadline">⏰ 3月3日〜31日</div>
-      </div>
-      <div class="mugen-body">
-
-        <!-- 3ステップ -->
-        <div class="mugen-steps">
-          <div class="mugen-step">
-            <div class="mugen-step-num">1</div>
-            <h5>登録</h5>
-            <p>認証済みリアル口座で登録</p>
-          </div>
-          <div class="mugen-step">
-            <div class="mugen-step-num">2</div>
-            <h5>取引</h5>
-            <p>3月3日〜31日に対象銘柄を取引</p>
-          </div>
-          <div class="mugen-step">
-            <div class="mugen-step-num">3</div>
-            <h5>獲得</h5>
-            <p>キャンペーン終了時に全額受取</p>
-          </div>
-        </div>
-
-        <!-- キャッシュバック表 -->
-        <table class="mugen-table">
-          <thead>
-            <tr>
-              <th>月間取引ロット数</th>
-              <th>ロットあたり獲得額</th>
-              <th>レベル最大還元額</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>0〜4ロット</td><td>$0</td><td>$0</td></tr>
-            <tr><td>5〜14ロット</td><td>$3 / ロット</td><td>$30</td></tr>
-            <tr><td>15〜29ロット</td><td>$3.5 / ロット</td><td>$52.50</td></tr>
-            <tr><td>30〜49ロット</td><td>$4 / ロット</td><td>$80</td></tr>
-            <tr><td>50〜74ロット</td><td>$4.5 / ロット</td><td>$112.50</td></tr>
-            <tr><td>75〜99ロット</td><td>$5 / ロット</td><td>$125</td></tr>
-            <tr class="hl-row"><td>100ロット以上</td><td>$6 / ロット</td><td class="unlimited-val">∞ 無制限</td></tr>
-          </tbody>
-        </table>
-        <div class="mugen-note">※対象：FX・ゴールド・シルバー・BTCUSD・BTCJPY他。口座残高（ボーナスクレジット除く）での取引のみ対象。利用規約適用。</div>
-        <div class="promo-cta-wrap">
-          <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=6" target="_blank" rel="noopener noreferrer" class="promo-cta-main track-link-xm">
-            🔴 XMTrading公式サイトへ
-            <span class="promo-cta-sub">✓ MUGEN参加登録　✓ 最短2分で完了</span>
-          </a>
-          <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=6" target="_blank" rel="noopener noreferrer" class="promo-cta-bonus track-link-xm">
-            🎁 MUGEN無限キャッシュバックの詳細を見る →
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- XM その他のプロモーション -->
-    <div class="xm-extras-box">
-      <div class="xm-extras-title">🔴 XMTrading — その他のプロモーション・特典</div>
-      <div class="xm-extras-grid">
-
-        <div class="xm-extra-item">
-          <div class="xm-extra-icon">🏆</div>
-          <div class="xm-extra-body">
-            <div class="xm-extra-name">XMTRADINGコンテスト</div>
-            <div class="xm-extra-desc">総額$160,000の賞金を毎月獲得のチャンス。入資者160名・毎月開催・出金可能な豪華賞金</div>
-          </div>
-        </div>
-
-        <div class="xm-extra-item">
-          <div class="xm-extra-icon">👥</div>
-          <div class="xm-extra-body">
-            <div class="xm-extra-name">ご友人を紹介</div>
-            <div class="xm-extra-desc">条件達成で紹介毎に$100獲得。紹介すればするほど報酬も増加。入出金の制限なし</div>
-          </div>
-        </div>
-
-        <div class="xm-extra-item">
-          <div class="xm-extra-icon">⭐</div>
-          <div class="xm-extra-body">
-            <div class="xm-extra-name">XMTRADINGロイヤルティプログラム</div>
-            <div class="xm-extra-desc">取引ごとにXMPポイントを獲得。ステータスアップで報酬が最大3倍。VIP限定特典あり</div>
-          </div>
-        </div>
-
-        <div class="xm-extra-item">
-          <div class="xm-extra-icon">🖥️</div>
-          <div class="xm-extra-body">
-            <div class="xm-extra-name">無料VPSサービス</div>
-            <div class="xm-extra-desc">EAに最適・ダウンタイムゼロ・24時間365日オンライン。取引スピードを向上</div>
-          </div>
-        </div>
-
-        <div class="xm-extra-item xm-extra-highlight">
-          <div class="xm-extra-icon">0%</div>
-          <div class="xm-extra-body">
-            <div class="xm-extra-name">入出金手数料 完全無料</div>
-            <div class="xm-extra-desc">全ての電子財布・全主要クレジットカードの手数料をXMが100%負担。隠れた手数料なし</div>
-          </div>
-        </div>
-
-        <div class="xm-extra-item">
-          <div class="xm-extra-icon">💰</div>
-          <div class="xm-extra-body">
-            <div class="xm-extra-name">入金ボーナス 100%+20%</div>
-            <div class="xm-extra-desc">最大$500の100%入金ボーナス＋最大総額$10,500の20%入金ボーナスを追加獲得</div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- FXGT PROMO -->
-    <div class="fxgt-promo-box">
-      <div class="fxgt-promo-header">
-        <div>
-          <h3>🔵 FXGT — 最大3万ドル ウェルカムボーナス</h3>
-          <p>入金・取引マイルストーンに応じて段階的に獲得</p>
-        </div>
-        <div class="fxgt-deadline">⏰ 2026年3月5日開始</div>
-      </div>
-      <div class="fxgt-promo-body">
-        <div class="fxgt-bonus-grid">
-          <div class="fxgt-bonus-item" style="border:2px solid #1b5e20;background:#f1f8e9">
-            <div class="fxgt-bonus-badge" style="background:#2e7d32;font-size:0.75rem;padding:5px 10px">$70</div>
-            <div>
-              <h5 style="color:#1b5e20">新規登録ボーナス（入金不要）</h5>
-              <p>アカウント認証完了で<strong>70米ドル</strong>が付与。Optimus口座保有者のみ対象。登録から<strong>30日以内</strong>に認証完了が条件。</p>
-              <div class="fxgt-bonus-amount" style="color:#2e7d32">$70（約¥10,500相当）</div>
-            </div>
-          </div>
-          <div class="fxgt-bonus-item fxgt-bonus-highlight">
-            <div class="fxgt-bonus-badge" style="background:#e65100;font-size:0.75rem;padding:5px 10px">80%</div>
-            <div>
-              <h5 style="color:#bf360c">80%入金ボーナス（上限$1,500）</h5>
-              <p>Standard・Mini口座へ<strong>$200以上</strong>の入金で獲得。期間限定キャンペーン。</p>
-              <div class="fxgt-bonus-amount" style="color:#e65100">最大 $1,500</div>
-            </div>
-          </div>
-          <div class="fxgt-bonus-item">
-            <div class="fxgt-bonus-badge">100%</div>
-            <div>
-              <h5>100% Welcomeボーナス</h5>
-              <p>初回入金額の100%がボーナスとして付与。所定期間内入金で追加20% Welcomeブーストも対象。</p>
-              <div class="fxgt-bonus-amount">最大 $10,000（$30,000プログラム内）</div>
-            </div>
-          </div>
-          <div class="fxgt-bonus-item">
-            <div class="fxgt-bonus-badge">+20%</div>
-            <div>
-              <h5>+20% Welcomeブースト</h5>
-              <p>登録から所定期間内の入金で追加付与。Welcomeボーナスへの上乗せ。最大$100追加。</p>
-              <div class="fxgt-bonus-amount">最大 $2,000（プログラム全体）</div>
-            </div>
-          </div>
-          <div class="fxgt-bonus-item">
-            <div class="fxgt-bonus-badge">50%</div>
-            <div>
-              <h5>50% Milestoneボーナス</h5>
-              <p>7有効GTLotsを達成後、次回入金額の50%が付与。例：$150入金で$75ボーナス。</p>
-              <div class="fxgt-bonus-amount">入金額の50%（例：$75〜）</div>
-            </div>
-          </div>
-          <div class="fxgt-bonus-item">
-            <div class="fxgt-bonus-badge">Loyalty</div>
-            <div>
-              <h5>5ティア Loyaltyボーナス</h5>
-              <p>累計15有効GTLots達成で次ティアへ。例：累計90 GTLots達成で$6,000付与。</p>
-              <div class="fxgt-bonus-amount">ティアに応じて変動（例：$6,000）</div>
-            </div>
-          </div>
-        </div>
-        <div class="fxgt-total-bar">
-          <span>ボーナスプログラム合計（Welcome+Milestone+Loyalty）</span>
-          <strong>最大 $30,000相当</strong>
-        </div>
-        <div class="promo-cta-wrap" style="margin-top:14px">
-          <a href="https://fxgt.com/ja/" target="_blank" rel="noopener noreferrer" class="promo-cta-main promo-cta-main-fxgt track-link-fxgt">
-            🔵 FXGT公式サイトへ
-            <span class="promo-cta-sub">✓ ウェルカムボーナス登録　✓ 最短2分で完了</span>
-          </a>
-          <a href="https://fxgt.com/ja/" target="_blank" rel="noopener noreferrer" class="promo-cta-bonus promo-cta-bonus-fxgt track-link-fxgt">
-            🎁 段階型ボーナスプログラムの詳細を見る →
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-</div><!-- /container -->
-
-<div class="site-footer">
-  <div class="footer-logo">FXボーナス<em>ナビ</em></div>
-  <div class="footer-links">
-    <a href="#">プライバシーポリシー</a>
-    <a href="#">利用規約</a>
-    <a href="#">お問い合わせ</a>
-  </div>
-  <div class="footer-copy">© 2026 FXボーナスナビ. All rights reserved.</div>
-</div>
-
-<div class="sticky-v2" id="sticky-footer">
-  <div class="sticky-v2-label">📲 今すぐ無料口座開設</div>
-  <div class="sticky-v2-row" id="sticky-cta-pair">
-    <a href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=0" target="_blank" rel="noopener noreferrer" class="sticky-btn sb-xm track-link-xm">
-      <div class="sticky-btn-name">XMTrading</div>
-      <div class="sticky-btn-sub">2009年創業・老舗の信頼</div>
-      <div class="sticky-btn-bonus">¥13,000 ボーナス</div>
-      <div class="sticky-btn-tp">Trustpilot ⭐ 3.7</div>
-    </a>
-    <a href="https://fxgt.com/ja/" target="_blank" rel="noopener noreferrer" class="sticky-btn sb-fxgt track-link-fxgt">
-      <div class="sticky-btn-name">FXGT</div>
-      <div class="sticky-btn-sub">仮想通貨CFD最大1,000倍</div>
-      <div class="sticky-btn-bonus">$70 新規登録ボーナス</div>
-      <div class="sticky-btn-tp">Trustpilot ⭐ 4.3</div>
-    </a>
-  </div>
-</div>
-
-<div class="cookie-banner" id="cookie-banner">
-  <span>当サイトでは、ユーザー体験向上のためクッキーを使用しています。閲覧を続けることで、クッキーの使用に同意したものとみなされます。</span>
-  <button class="cookie-btn" onclick="acceptCookies()">同意する</button>
 </div>
 
 <script>
-// ── COOKIE ──
-function acceptCookies() {
-  try { localStorage.setItem('cookies_accepted','true'); } catch(e) {}
-  document.getElementById('cookie-banner').style.display = 'none';
-}
 (function(){
-  // Force scroll to top on load — prevent browser scroll restoration to quiz
-  if (history.scrollRestoration) history.scrollRestoration = 'manual';
-  window.scrollTo(0, 0);
-
-  var ok = false;
-  try { ok = localStorage.getItem('cookies_accepted') === 'true'; } catch(e) {}
-  if (!ok) document.getElementById('cookie-banner').style.display = 'flex';
-})();
-
-// ── FLIP CARDS ──
-function flipCard(id) {
-  var card = document.getElementById(id);
-  if (!card) return;
-  card.classList.toggle('flipped');
-  if (navigator.vibrate) navigator.vibrate(30);
-}
-
-// ── PARAMS ──
-var urlP = new URLSearchParams(window.location.search);
-var PA = {
-  clickId    : urlP.get('clickid') || '',           // PropellerAds: clickid=${SUBID}
-  zoneId     : urlP.get('zoneid')  || urlP.get('zone_id') || 'direct',
-  campaignId : urlP.get('campaignid') || '',
-  cost       : urlP.get('cost') || '0',             // PropellerAds: cost={cost}
-  country    : urlP.get('country') || '',
-  device     : urlP.get('device') || '',
-  os         : urlP.get('os') || ''
-};
-var XM_URL   = 'https://clicks.affstrack.com/c?c=1120254&l=ja&p=6';
-var FXGT_URL = 'https://fxgt.link?refid=fxgtNihon';
-
-function buildUrl(base) {
-  try {
-    var u = new URL(base);
-    if (PA.zoneId)     u.searchParams.set('aff_sub',  PA.zoneId);
-    if (PA.clickId)    u.searchParams.set('aff_sub2', PA.clickId);
-    if (PA.campaignId) u.searchParams.set('aff_sub3', PA.campaignId);
-    if (PA.device)     u.searchParams.set('aff_sub4', PA.device);
-    return u.toString();
-  } catch(e) { return base; }
-}
-
-// DOMContentLoaded — 静的リンクを更新
-document.addEventListener('DOMContentLoaded', function() {
-  document.querySelectorAll('.track-link-xm').forEach(function(el) {
-    el.href = buildUrl(XM_URL);
-  });
-  document.querySelectorAll('.track-link-fxgt').forEach(function(el) {
-    el.href = buildUrl(FXGT_URL);
-  });
-});
-
-function trackClick(broker) {
-  if (typeof fbq !== 'undefined') fbq('track','Lead',{broker:broker});
-  if (typeof gtag !== 'undefined') gtag('event','cta_click',{broker:broker});
-  sendPostback(); // goal なし = メインコンバージョン (goal 1)
-}
-
-// PropellerAds S2S Postback — 公式URLに準拠
-// Main:   http://ad.propellerads.com/conversion.php?aid=1063015&pid=&tid=153705&visitor_id=SUBID&payout=COST
-// Goal 2: ...&goal=2  (クイズ完了)
-// Goal 3: ...&goal=3  (詳細セクション到達)
-function sendPostback(goal) {
-  if (!PA.clickId) return;
-  var url = 'http://ad.propellerads.com/conversion.php?aid=1063015&pid=&tid=153705'
-    + '&visitor_id=' + encodeURIComponent(PA.clickId)
-    + '&payout=' + encodeURIComponent(PA.cost);
-  if (goal) url += '&goal=' + encodeURIComponent(goal);
-  if (navigator.sendBeacon) { navigator.sendBeacon(url); }
-  else { new Image().src = url; }
-}
-
-// ── QUIZ ──
-var ans = {}; var curQ = 1; var TOTAL = 4;
-setProgress(1);
-
-function pick(n, val, btn) {
-  btn.closest('.options').querySelectorAll('.opt-btn')
-    .forEach(function(b){ b.classList.remove('selected'); });
-  btn.classList.add('selected');
-  ans[n] = val;
-  setTimeout(function(){ advance(n); }, 360);
-}
-
-function advance(n) {
-  if (n < TOTAL) {
-    document.getElementById('q'+n).classList.remove('active');
-    curQ = n + 1;
-    document.getElementById('q'+curQ).classList.add('active');
-    setProgress(curQ);
-  } else { runAnalysis(); }
-}
-
-function setProgress(s) {
-  var p = Math.round((s / TOTAL) * 100);
-  document.getElementById('prog-fill').style.width = p + '%';
-  document.getElementById('prog-text').textContent = '質問 ' + s + ' / ' + TOTAL;
-  document.getElementById('prog-pct').textContent  = p + '%';
-}
-
-function runAnalysis() {
-  document.getElementById('q'+TOTAL).classList.remove('active');
-  document.getElementById('analyzing').classList.add('active');
-  var fill = document.getElementById('loader-fill');
-  var status = document.getElementById('analyzing-status');
-  var ms = ['回答を照合しています…','トレードスタイルを解析中…','最適な業者を判定中…','診断レポートを生成中…','✅ 判定完了'];
-  var ps = [20,45,65,88,100]; var i = 0;
-  var iv = setInterval(function(){
-    if (i < ms.length) { status.textContent = ms[i]; fill.style.width = ps[i]+'%'; i++; }
-    else { clearInterval(iv); setTimeout(showResult, 450); }
-  }, 480);
-}
-
-function calcVerdict() {
-  var sc = {xm:0, fxgt:0, both:0};
-  for (var q in ans) {
-    var v = ans[q];
-    if (v==='xm') sc.xm++;
-    else if (v==='fxgt') sc.fxgt++;
-    else sc.both++;
+  /* ---------- 設定値の流し込み ---------- */
+  var fs = document.querySelectorAll("[data-f]");
+  for (var i = 0; i < fs.length; i++){
+    fs[i].textContent = CONFIG[fs[i].getAttribute("data-f")] || "";
   }
-  if (sc.both >= 1) return 'both';
-  if (sc.xm > sc.fxgt) return 'xm';
-  if (sc.fxgt > sc.xm) return 'fxgt';
-  return 'both';
-}
 
-var RD = {
-  xm: {
-    vc:'xm-verdict',
-    tag:'✅ 診断完了',
-    title:'あなたには<em>XMTrading</em>がおすすめです',
-    sum:'信頼性・ボーナス・幅広い取引銘柄を重視するあなたのスタイルに最適です。',
-    ai:'あなたの回答を分析した結果、XMTradingがより適していると判定されました。信頼性と豊富なボーナスを重視するトレーダーに、XMは長年にわたって支持されています。2009年創業・世界1,500万人以上のユーザーという実績は、資金を預ける安心感につながります。まずは¥13,000の入金不要ボーナスで、ノーリスクからスタートしてみてください。',
-    cta:'<div class="cta-pair"><a href="XM_L" target="_blank" rel="noopener noreferrer" class="cta-btn cta-xm" onclick="trackClick(\'xm\')">🔵 XMTrading 公式サイトへ<span class="cta-sub">✓ ¥13,000ボーナス　✓ 入金不要　✓ 追証なし</span></a></div><p class="cta-note">※クレジットカード登録不要 ｜ パートナーコード：XF6MD（任意）</p>',
-    sticky:'<a href="XM_L" target="_blank" rel="noopener noreferrer" class="cta-btn cta-xm" onclick="trackClick(\'xm\')" style="flex:1">🔵 XMTrading 無料口座開設<span class="cta-sub">✓ ¥13,000ボーナス受取</span></a>'
-  },
-  fxgt: {
-    vc:'fxgt-verdict',
-    tag:'✅ 診断完了',
-    title:'あなたには<em>FXGT</em>がおすすめです',
-    sum:'スプレッドの狭さ・仮想通貨取引・超ハイレバレッジを重視するあなたのスタイルに最適です。',
-    ai:'あなたの回答を分析した結果、FXGTがより適していると判定されました。スキャルピングや仮想通貨取引を重視するトレーダーには、FXGTのスプレッドの狭さと最大5,000倍レバレッジは大きな武器になります。出金の速さも業界トップクラスで、利益をすぐに引き出したい方にも最適です。まずは口座開設ボーナスでリスクなく始めてみてください。',
-    cta:'<div class="cta-pair"><a href="FXGT_L" target="_blank" rel="noopener noreferrer" class="cta-btn cta-fxgt" onclick="trackClick(\'fxgt\')">🔴 FXGT 公式サイトへ<span class="cta-sub">✓ 口座開設ボーナス　✓ 追証なし　✓ 最速出金</span></a></div><p class="cta-note">※クレジットカード登録不要</p>',
-    sticky:'<a href="FXGT_L" target="_blank" rel="noopener noreferrer" class="cta-btn cta-fxgt" onclick="trackClick(\'fxgt\')" style="flex:1">🔴 FXGT 無料口座開設<span class="cta-sub">✓ 口座開設ボーナス受取</span></a>'
-  },
-  both: {
-    vc:'both-verdict',
-    tag:'✅ 診断完了',
-    title:'<em>両方開設</em>がベストな選択です',
-    sum:'あなたのスタイルは両業者の特徴を最大限に活かせます。どちらも入金不要ボーナスがあるので、両方試してみることをおすすめします。',
-    ai:'あなたの回答を分析した結果、XMとFXGTを使い分けるのが最もお得な戦略です。XMでは豊富なボーナスと信頼性を活かしてFX主要通貨ペアを取引し、FXGTでは仮想通貨や狭スプレッドのスキャルピングに活用するという使い分けが、多くの日本人トレーダーに支持されています。両社とも入金不要ボーナスがあるので、まず両方口座を開設して実際の使用感を比較してみてください。',
-    cta:'<div class="cta-pair"><a href="XM_L" target="_blank" rel="noopener noreferrer" class="cta-btn cta-xm" onclick="trackClick(\'xm\')">🔵 XMTrading 無料開設<span class="cta-sub">✓ ¥13,000ボーナス</span></a><a href="FXGT_L" target="_blank" rel="noopener noreferrer" class="cta-btn cta-fxgt" onclick="trackClick(\'fxgt\')">🔴 FXGT 無料開設<span class="cta-sub">✓ 口座開設ボーナス</span></a></div><p class="cta-note">※両社とも入金不要ボーナスあり</p>',
-    sticky:'<a href="XM_L" target="_blank" rel="noopener noreferrer" class="cta-btn cta-xm" onclick="trackClick(\'xm\')" style="flex:1">🔵 XM</a><a href="FXGT_L" target="_blank" rel="noopener noreferrer" class="cta-btn cta-fxgt" onclick="trackClick(\'fxgt\')" style="flex:1">🔴 FXGT</a>'
+  /* ---------- キャンペーン帯：期限を過ぎたら出さない ---------- */
+  (function(){
+    var el = document.getElementById("campaign");
+    if (!CONFIG.CAMPAIGN_NAME || !CONFIG.CAMPAIGN_END) return;
+    var end = new Date(CONFIG.CAMPAIGN_END);
+    if (isNaN(end.getTime())) return;
+    var left = end.getTime() - Date.now();
+    if (left <= 0) return;
+    el.innerHTML = CONFIG.CAMPAIGN_NAME
+                 + '<span class="cd">残り' + Math.ceil(left / 86400000) + '日</span>';
+    el.style.display = "block";
+  })();
+
+  /* ---------- アフィリエイトリンクに subid ---------- */
+  var q = new URLSearchParams(location.search), cid = "";
+  for (var k = 0; k < CONFIG.CLICKID_KEYS.length; k++){
+    var v = q.get(CONFIG.CLICKID_KEYS[k]);
+    if (v) { cid = v; break; }
   }
-};
+  if (!cid) cid = "na" + Date.now().toString(36);
 
-function injectLinks(html) {
-  return html.replace(/XM_L/g, buildUrl(XM_URL)).replace(/FXGT_L/g, buildUrl(FXGT_URL));
-}
-
-function showResult() {
-  var v = calcVerdict();
-  var d = RD[v];
-  document.getElementById('analyzing').classList.remove('active');
-  document.getElementById('quiz-section').style.display = 'none';
-
-  document.getElementById('verdict-box').innerHTML =
-    '<div class="result-verdict '+d.vc+'">'
-    +'<div class="verdict-tag">'+d.tag+'</div>'
-    +'<h2>'+d.title+'</h2>'
-    +'<p>'+d.sum+'</p>'
-    +'</div>';
-
-  document.getElementById('cta-area').innerHTML = injectLinks(d.cta);
-  var scp = document.getElementById('sticky-cta-pair');
-  if (scp) scp.innerHTML = injectLinks(d.sticky);
-  document.getElementById('sticky-footer').classList.add('visible');
-
-  var rs = document.getElementById('result-screen');
-  rs.style.display = 'block';
-
-  // Scroll to result after brief render delay
-  setTimeout(function() {
-    rs.scrollIntoView({behavior: 'smooth', block: 'start'});
-  }, 80);
-
-  var el = document.getElementById('ai-msg-text');
-  el.innerHTML = '<span class="ai-cursor"></span>';
-  typewrite(el, d.ai);
-
-  if (typeof fbq !== 'undefined') fbq('trackCustom','QuizCompleted',{verdict:v});
-  if (typeof gtag !== 'undefined') gtag('event','quiz_completed',{verdict:v});
-  sendPostback(2);
-  if (navigator.vibrate) navigator.vibrate([80,40,80]);
-}
-
-function typewrite(el, text, speed) {
-  speed = speed || 24;
-  el.innerHTML = '';
-  var i = 0;
-  var cur = document.createElement('span'); cur.className = 'ai-cursor'; el.appendChild(cur);
-  var iv = setInterval(function(){
-    if (i < text.length) { el.insertBefore(document.createTextNode(text[i]), cur); i++; }
-    else {
-      clearInterval(iv); cur.remove();
-      var sp = document.getElementById('ai-spin');
-      if (sp) { sp.style.animation='none'; sp.style.borderColor='var(--vs)'; }
-      var lb = document.getElementById('ai-label');
-      if (lb) lb.textContent = '✅ 診断完了';
-    }
-  }, speed);
-}
-
-// ── EXIT REDIRECT ──
-(function(){
-  var hijacked = false;
-  function init() {
-    if (hijacked) return;
-    history.pushState({hijacked:true}, null, location.href);
-    hijacked = true;
+  function tag(base){
+    try {
+      var u = new URL(base);
+      u.searchParams.set(CONFIG.SUBID_PARAM, CONFIG.ARM + "_" + cid);
+      return u.toString();
+    } catch(e){ return base; }
   }
-  ['click','touchstart','scroll','mousemove'].forEach(function(evt){
-    window.addEventListener(evt, init, {once:true, passive:true});
-  });
-  window.addEventListener('popstate', function(){
-    if (!hijacked) return;
-    history.go(1);
-    var v = calcVerdict();
-    if (v === 'fxgt') { window.location.replace(buildUrl(FXGT_URL)); }
-    else              { window.location.replace(buildUrl(XM_URL)); }
-  });
-})();
+  var URLS = { xm: tag(CONFIG.XM_URL), gt: tag(CONFIG.GT_URL) };
 
-// ── STICKY ON SCROLL ──
-var goal3Sent = false;
-window.addEventListener('scroll', function(){
-  var s = document.getElementById('sticky-footer');
-  var r = document.getElementById('result-screen').style.display === 'block';
-  if (window.scrollY > 500 || r) s.classList.add('visible');
-  else s.classList.remove('visible');
-
-  // Goal 3 — ユーザーが比較表セクションに到達
-  if (!goal3Sent) {
-    var compareEl = document.getElementById('section-compare');
-    if (compareEl) {
-      var rect = compareEl.getBoundingClientRect();
-      if (rect.top < window.innerHeight) {
-        goal3Sent = true;
-        sendPostback(3);
+  function wire(a){
+    var who = a.getAttribute("data-aff");
+    a.href = URLS[who];
+    a.target = "_blank";
+    a.rel = "nofollow sponsored noopener";
+    a.onclick = function(){
+      if (typeof gtag === "function"){
+        gtag("event", "aff_click", { broker: who, arm: CONFIG.ARM });
       }
-    }
+    };
   }
-}, {passive:true});
+  var as = document.querySelectorAll("a[data-aff]");
+  for (var n = 0; n < as.length; n++) wire(as[n]);
+  /* クリックは成果ではないため、広告ネットワークへのポストバックは送らない。 */
+
+  /* ---------- 取組カードの描画 ---------- */
+  var host = document.getElementById("bouts");
+  var state = [];
+
+  function esc(s){
+    return String(s).replace(/[&<>"]/g, function(c){
+      return { "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;" }[c];
+    });
+  }
+
+  CONFIG.ITEMS.forEach(function(it, idx){
+    var scorable = !!(it.xm && it.gt);           /* 両方揃って初めて採点対象 */
+    state[idx] = { on: scorable, scorable: scorable, win: it.win || "" };
+
+    var card = document.createElement("div");
+    card.className = "bout" + (scorable ? "" : " na");
+
+    function cell(who, val, label){
+      var won = scorable && it.win === who;
+      return '<div class="cell ' + who + (won ? " won" : "") + '">'
+           +   '<div class="who">' + label + '</div>'
+           +   '<div class="val' + (val ? '' : ' na') + '">' + esc(val || "要確認") + '</div>'
+           +   (won ? '<span class="seal">勝</span>' : '')
+           + '</div>';
+    }
+
+    card.innerHTML =
+        '<div class="bout-top">'
+      +   '<span class="bout-no">' + ("0" + (idx + 1)).slice(-2) + '</span>'
+      +   '<span class="bout-label">' + esc(it.label) + '</span>'
+      +   (scorable
+            ? '<button class="pick" type="button" aria-pressed="true">重視</button>'
+            : '<span class="bout-no">採点対象外</span>')
+      + '</div>'
+      + '<div class="cells">'
+      +   cell("xm", it.xm, "XMTrading")
+      +   cell("gt", it.gt, "FXGT")
+      + '</div>'
+      + (it.note ? '<div class="bout-note">' + esc(it.note) + '</div>' : '');
+
+    if (scorable){
+      var btn = card.querySelector(".pick");
+      btn.addEventListener("click", function(){
+        state[idx].on = !state[idx].on;
+        btn.setAttribute("aria-pressed", state[idx].on ? "true" : "false");
+        btn.textContent = state[idx].on ? "重視" : "対象外";
+        card.classList.toggle("off", !state[idx].on);
+        score();
+      });
+    }
+    host.appendChild(card);
+  });
+
+  /* ---------- 採点 ---------- */
+  var elXm = document.getElementById("scXm"),
+      elGt = document.getElementById("scGt"),
+      elV  = document.getElementById("verdict"),
+      elS  = document.getElementById("stickyCta"),
+      elL  = document.getElementById("stickyLbl");
+
+  function score(){
+    var xm = 0, gt = 0, counted = 0, draw = 0;
+    state.forEach(function(s){
+      if (!s.scorable || !s.on) return;
+      counted++;
+      if (s.win === "xm") xm++;
+      else if (s.win === "gt") gt++;
+      else draw++;
+    });
+
+    elXm.textContent = xm;
+    elGt.textContent = gt;
+
+    var msg, lead = null;
+    if (counted === 0){
+      msg = "採点対象の項目がありません。項目を選び直すか、値の確認が必要です。";
+    } else if (xm > gt){
+      lead = "xm";
+      msg = "選んだ" + counted + "項目では <b>XMTrading</b> が優勢です。"
+          + (draw ? "（うち" + draw + "項目は引き分け）" : "");
+    } else if (gt > xm){
+      lead = "gt";
+      msg = "選んだ" + counted + "項目では <b>FXGT</b> が優勢です。"
+          + (draw ? "（うち" + draw + "項目は引き分け）" : "");
+    } else {
+      msg = "選んだ" + counted + "項目では <b>互角</b>です。両方の口座を開いて比べる方法もあります。";
+    }
+    elV.innerHTML = msg;
+
+    if (lead === "gt"){
+      elS.className = "cta gt"; elS.setAttribute("data-aff","gt");
+      elS.textContent = "FXGT 公式サイトを見る";
+      elL.textContent = "あなたの基準ではFXGTが優勢です";
+    } else if (lead === "xm"){
+      elS.className = "cta xm"; elS.setAttribute("data-aff","xm");
+      elS.textContent = "XMTrading 公式サイトを見る";
+      elL.textContent = "あなたの基準ではXMTradingが優勢です";
+    } else {
+      elS.className = "cta xm"; elS.setAttribute("data-aff","xm");
+      elS.textContent = "公式サイトを見る";
+      elL.textContent = "口座開設はどちらも無料です";
+    }
+    wire(elS);
+  }
+  score();
+})();
 </script>
+
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag("js", new Date());
+gtag("config", CONFIG.GA4);
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DTMQSP8BPQ"></script>
+
 </body>
 </html>
