@@ -1,351 +1,283 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>【2026】eToro Recensione: Copia i Migliori Trader in Automatico</title>
-    <meta name="description" content="Guida al Social Trading di eToro. Scopri come copiare i top investor e investire in azioni a 0% commissioni.">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>CopyTrader eToro: come copiare altri investitori | Guida 2026</title>
+<meta name="description" content="Come funziona il CopyTrader di eToro: replica automaticamente le operazioni degli investitori che scegli. Guida indipendente, rischi inclusi.">
 
-    <script type="text/javascript">
-        (function() {
-            var d = document, w = window;
-            w.MgSensorData = w.MgSensorData || [];
-            w.MgSensorData.push({
-                cid:897661, // <--- Увери се, че това е правилното ID
-                project: "a.mgid.com"
-            });
-            var l = "a.mgid.com";
-            var n = d.getElementsByTagName("script")[0];
-            var s = d.createElement("script");
-            s.type = "text/javascript";
-            s.async = true;
-            var dt = !Date.now?new Date().valueOf():Date.now();
-            s.src = "https://" + l + "/mgsensor.js?d=" + dt;
-            n.parentNode.insertBefore(s, n);
-        })();
-    </script>
+<!-- ==========================================================
+     CONFIGURAZIONE — unico punto da modificare
+     ==========================================================
+     SUBID_PARAM: il nome del parametro che eToro accetta per il
+     sub-tracking. Va CONFERMATO con l'affiliate manager.
+     Candidati abituali: "utm_medium", "utm_content", "CID".
+     Se sbagliato, il click funziona lo stesso ma non è tracciabile.
 
-   <script async src="https://www.googletagmanager.com/gtag/js?id=G-F3LEMGN5GN"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+     ARM: identifica il braccio del test A/B.
+       "lp"     = traffico che passa da questa pagina
+       "direct" = link affiliato usato direttamente in PropellerAds
+     Il subid finale sarà es. "lp_8f3ka92".
+     In eToro Partners si confrontano poi le commissioni per prefisso.
 
-      var trackingParams = {};
-      var urlParams = new URLSearchParams(window.location.search);
-      urlParams.forEach(function(value, key) {
-          var cleanKey = key.replace(/[^a-zA-Z0-9_]/g, '_');
-          trackingParams[cleanKey] = value;
-      });
-      trackingParams['debug_mode'] = true; // Това помага да виждаш данните веднага
-      gtag('config', 'G-F3LEMGN5GN', trackingParams); 
-    </script>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+     LOSS_PCT: percentuale obbligatoria nell'avvertenza di rischio.
+     eToro la aggiorna periodicamente — RIVERIFICARE prima di ogni
+     lancio su: etoro.com/it/customer-service/general-risk-disclosure/
+     Verificata il 09/08/2026 = 51.
+     ========================================================== -->
+<script>
+var CONFIG = {
+  AFF_URL:      "https://med.etoro.com/B20454_A92557_TClick.aspx",
+  SUBID_PARAM:  "utm_medium",
+  ARM:          "lp",
+  CLICKID_KEYS: ["subid","clickid","click_id","cid","visitor_id","zoneid"],
+  GA4:          "G-F3LEMGN5GN"
+};
+</script>
 
-    <style>
-        /* --- eToro THEME VARIABLES --- */
-        :root {
-            --col-primary: #111111; /* Black */
-            --col-accent: #66cc33;  /* eToro Green */
-            --col-bg: #f3f3f3;
-            --col-text: #333333;
-            --col-white: #ffffff;
-            --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.08);
-            --radius: 16px;
-        }
+<style>
+:root{
+  --green:#5cb531; --green-d:#4a9427; --ink:#12161a; --ink-2:#2a3138;
+  --grey:#5f6b76; --line:#e3e7ea; --bg:#f4f6f7; --white:#fff;
+  --amber:#8a6212; --amber-bg:#fdf6e6;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  color:var(--ink);background:var(--bg);padding-bottom:76px;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:620px;margin:0 auto}
+a{color:inherit;text-decoration:none}
 
-        /* --- RESET & BASE --- */
-        * { box-sizing: border-box; }
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: var(--col-bg);
-            color: var(--col-text);
-            margin: 0;
-            padding-bottom: 120px;
-            line-height: 1.6;
-        }
-        
-        a { text-decoration: none; color: inherit; transition: opacity 0.2s; }
-        a:hover { opacity: 0.8; }
-        strong { color: var(--col-primary); font-weight: 900; }
-        .green-text { color: var(--col-accent); }
+.disclose{
+  background:var(--ink);color:#9aa5af;font-size:11px;letter-spacing:.04em;
+  text-align:center;padding:6px 12px;
+}
+.bar{
+  background:var(--white);border-bottom:1px solid var(--line);
+  padding:12px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;
+}
+.brand{font-weight:800;font-size:15px;letter-spacing:-.01em}
+.brand i{font-style:normal;color:var(--green)}
+.bar span{font-size:11px;color:var(--grey)}
 
-        /* --- HEADER --- */
-        header {
-            background: var(--col-white);
-            padding: 15px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            font-weight: bold;
-            color: var(--col-primary);
-        }
+.hero{background:var(--ink);color:var(--white);padding:32px 18px 28px;text-align:center}
+.tag{
+  display:inline-block;border:1px solid rgba(255,255,255,.28);border-radius:2px;
+  font-size:11px;letter-spacing:.11em;text-transform:uppercase;
+  padding:4px 10px;color:#c3ccd4;margin-bottom:16px;
+}
+h1{font-size:29px;line-height:1.18;letter-spacing:-.022em;font-weight:800;text-wrap:balance}
+h1 i{font-style:normal;color:var(--green)}
+.sub{margin-top:12px;color:#b9c3cc;font-size:16px;text-wrap:balance}
 
-        /* --- HERO SECTION --- */
-        .hero {
-            background: var(--col-primary);
-            color: white;
-            text-align: center;
-            padding: 40px 20px 70px;
-            position: relative;
-        }
-        
-        .hero-tag {
-            background: rgba(102, 204, 51, 0.2);
-            color: var(--col-accent);
-            border: 1px solid var(--col-accent);
-            font-weight: bold;
-            padding: 6px 16px;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            display: inline-block;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-        }
+.cta{
+  display:block;background:var(--green);color:#fff;font-weight:800;font-size:17px;
+  text-align:center;padding:15px 18px;border-radius:4px;margin-top:20px;
+  box-shadow:0 2px 0 var(--green-d);
+}
+.cta:active{transform:translateY(1px);box-shadow:0 1px 0 var(--green-d)}
+.cta small{display:block;font-weight:400;font-size:12px;opacity:.9;margin-top:2px}
+.micro{margin-top:10px;font-size:11.5px;color:#8e99a3}
 
-        .hero h1 {
-            font-size: 2rem;
-            margin: 0;
-            line-height: 1.2;
-            font-weight: 900;
-        }
+main{padding:20px 14px;display:flex;flex-direction:column;gap:14px}
+.card{background:var(--white);border:1px solid var(--line);border-radius:6px;padding:18px}
+h2{font-size:19px;letter-spacing:-.015em;font-weight:800;margin-bottom:12px}
+h3{font-size:15px;font-weight:700;margin-bottom:3px}
+p{color:var(--ink-2)}
 
-        .hero-sub { font-size: 1rem; color: #cccccc; margin-top: 15px; max-width: 500px; margin-left: auto; margin-right: auto;}
+.steps{display:flex;flex-direction:column;gap:16px;counter-reset:s}
+.step{display:grid;grid-template-columns:30px 1fr;gap:14px;align-items:start}
+.step::before{
+  counter-increment:s;content:counter(s);
+  width:30px;height:30px;border-radius:50%;background:var(--ink);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;
+}
+.step p{font-size:14.5px;color:var(--grey)}
 
-        /* --- CONTAINER --- */
-        .container {
-            max-width: 600px;
-            margin: -50px auto 0;
-            padding: 0 15px;
-            position: relative;
-            z-index: 10;
-        }
+.facts{display:flex;flex-direction:column;gap:12px}
+.fact{display:grid;grid-template-columns:20px 1fr;gap:12px;align-items:start}
+.fact::before{content:"";width:8px;height:8px;margin-top:8px;margin-left:6px;
+  background:var(--green);border-radius:50%}
+.fact b{display:block;font-size:14.5px}
+.fact span{font-size:13.5px;color:var(--grey)}
 
-        /* --- CARDS --- */
-        .card {
-            background: var(--col-white);
-            border-radius: var(--radius);
-            padding: 25px 20px;
-            margin-bottom: 25px;
-            box-shadow: var(--shadow-card);
-        }
+.honest{background:var(--amber-bg);border:1px solid #ecdcb4;border-radius:6px;padding:16px 18px}
+.honest h2{font-size:16px;color:var(--amber);margin-bottom:8px}
+.honest li{font-size:13.5px;color:#6b5518;margin-left:17px;margin-bottom:6px;line-height:1.55}
 
-        /* --- COPY TRADER SHOWCASE --- */
-        .trader-row {
-            display: flex;
-            align-items: center;
-            padding: 15px 0;
-            border-bottom: 1px solid #eee;
-        }
-        .trader-row:last-child { border-bottom: none; }
-        
-        .trader-avatar {
-            width: 50px; height: 50px;
-            border-radius: 50%;
-            background: #ddd;
-            margin-right: 15px;
-            overflow: hidden;
-        }
-        .trader-avatar img { width: 100%; height: 100%; object-fit: cover; }
-        
-        .trader-info { flex: 1; }
-        .trader-name { font-weight: bold; display: block; font-size: 1rem; }
-        .trader-stat { font-size: 0.85rem; color: #666; }
-        
-        .trader-gain {
-            background: var(--col-accent);
-            color: white;
-            padding: 5px 10px;
-            border-radius: 6px;
-            font-weight: bold;
-            font-size: 0.9rem;
-        }
+.risk{font-size:11.5px;line-height:1.6;color:var(--grey);padding:4px 4px 8px}
+.risk p{margin-bottom:8px;color:var(--grey);font-size:11.5px}
+.risk b{color:var(--ink-2)}
 
-        /* --- BUTTONS --- */
-        .btn-etoro {
-            display: block; width: 100%; text-align: center;
-            background: var(--col-accent);
-            color: white; font-weight: bold; font-size: 1.2rem; padding: 16px;
-            border-radius: 50px; 
-            box-shadow: 0 10px 20px rgba(102, 204, 51, 0.3);
-            margin-top: 20px;
-        }
-        .btn-etoro:hover { transform: translateY(-2px); }
+.sticky{
+  position:fixed;left:0;right:0;bottom:0;background:rgba(255,255,255,.97);
+  border-top:1px solid var(--line);padding:9px 14px;z-index:50;
+  box-shadow:0 -2px 10px rgba(0,0,0,.07);
+}
+.sticky .inner{max-width:620px;margin:0 auto}
+.sticky .cta{margin-top:0;padding:13px;font-size:16px}
 
-        /* --- FOOTER --- */
-        .sticky-footer {
-            position: fixed; bottom: 0; left: 0; right: 0; background: white;
-            border-top: 1px solid #eee; padding: 15px;
-            z-index: 100; text-align: center;
-            box-shadow: 0 -5px 15px rgba(0,0,0,0.05);
-        }
-        .disclaimer { font-size: 0.65rem; color: #999; margin-top: 30px; text-align: center; line-height: 1.4; }
-    </style>
+@media(min-width:560px){ h1{font-size:34px} main{padding:24px 18px} }
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
 </head>
 <body>
 
-    <header style="justify-content: space-between;"> 
-        <span>Smart Finance Italia</span>
-    
-        <div style="font-size: 1.2rem; cursor: pointer;">
-            <span onclick="forceItalian()">🇮🇹</span> 
-            <span onclick="forceEnglish()" style="margin-left:10px;">🇬🇧</span>
-        </div>
-    </header>
+<div class="disclose">Contenuto promozionale · Sito affiliato indipendente, non gestito da eToro</div>
 
-    <div class="hero">
-        <div class="hero-tag">Social Trading Leader</div>
-        <h1 id="txt-headline">
-            Non sai fare trading?<br>
-            <span class="green-text" id="txt-subheadline">Copia i Migliori.</span>
-        </h1>
-        <p class="hero-sub" id="txt-description">Unisciti a 30 milioni di utenti. Replica le mosse dei top investor in automatico.</p>
+<div class="bar wrap">
+  <span class="brand">Smart Finance <i>Italia</i></span>
+  <span>Guida aggiornata · 2026</span>
+</div>
+
+<div class="hero">
+  <div class="wrap">
+    <div class="tag">Social trading</div>
+    <h1>Non sai da dove iniziare?<br><i>Copia chi lo fa già.</i></h1>
+    <p class="sub">Il CopyTrader di eToro replica in automatico le operazioni degli investitori che scegli tu.</p>
+    <a class="cta" href="https://med.etoro.com/B20454_A92557_TClick.aspx" data-aff>
+      Scopri come funziona
+      <small>Registrazione gratuita · Conto demo incluso</small>
+    </a>
+    <p class="micro">Investire comporta rischi. Il 51% dei conti retail perde denaro con i CFD di questo fornitore.</p>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <div class="card">
+    <h2>Come funziona</h2>
+    <div class="steps">
+      <div class="step">
+        <div>
+          <h3>Apri un conto</h3>
+          <p>Registrazione in pochi minuti. Prima di versare denaro puoi provare tutto con il conto demo da 100.000 dollari virtuali.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <h3>Scegli chi copiare</h3>
+          <p>Sulla piattaforma ogni investitore copiabile ha statistiche pubbliche e verificabili: rendimento storico, punteggio di rischio, composizione del portafoglio, numero di persone che lo copiano.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <h3>Il portafoglio si allinea</h3>
+          <p>Da quel momento le sue operazioni vengono replicate in proporzione al capitale che hai destinato alla copia. Puoi interrompere quando vuoi.</p>
+        </div>
+      </div>
     </div>
+    <a class="cta" href="https://med.etoro.com/B20454_A92557_TClick.aspx" data-aff>Vai alla piattaforma</a>
+  </div>
 
-    <div class="container">
-
-        <div class="card">
-            <h2 style="text-align:center; margin-top:0;" id="txt-table-title">Top Trader da Copiare 📈</h2>
-            <p style="text-align:center; font-size:0.9rem; color:#666; margin-bottom:20px;" id="txt-table-sub">
-                Questi investitori hanno ottenuto profitti consistenti. Puoi copiarli con un click.
-            </p>
-            
-            <div class="trader-row">
-                <div class="trader-avatar" style="background:#333; display:flex; align-items:center; justify-content:center; color:white;">👨‍💼</div>
-                <div class="trader-info">
-                    <span class="trader-name">Marco_L</span>
-                    <span class="trader-stat">Rischio: Basso</span>
-                </div>
-                <div class="trader-gain">+42.5%</div>
-            </div>
-
-            <div class="trader-row">
-                <div class="trader-avatar" style="background:#555; display:flex; align-items:center; justify-content:center; color:white;">👩‍💻</div>
-                <div class="trader-info">
-                    <span class="trader-name">Anna_Invest</span>
-                    <span class="trader-stat">Crypto & Stocks</span>
-                </div>
-                <div class="trader-gain">+68.1%</div>
-            </div>
-
-            <div class="trader-row">
-                <div class="trader-avatar" style="background:#777; display:flex; align-items:center; justify-content:center; color:white;">🚀</div>
-                <div class="trader-info">
-                    <span class="trader-name">Global_Tech</span>
-                    <span class="trader-stat">A lungo termine</span>
-                </div>
-                <div class="trader-gain">+21.3%</div>
-            </div>
-            
-            <a href="https://med.etoro.com/B20454_A92557_TClick.aspx" onclick="handleAdClick()" class="btn-etoro" id="txt-main-btn">
-                Inizia a Copiare Ora
-            </a>
-        
-            <p style="font-size:0.7rem; text-align:center; color:#999; margin-top:10px;">
-                *Le performance passate non garantiscono risultati futuri.
-            </p>
-        </div>
-
-        <div class="card">
-            <h3>Perché eToro?</h3>
-            <ul style="padding-left:20px; color:#555;">
-                <li style="margin-bottom:10px;"><strong>CopyTrader™:</strong> Copia investitori esperti senza pagare commissioni di gestione.</li>
-                <li style="margin-bottom:10px;"><strong>0% Commissioni:</strong> Investi in azioni reali senza markup.</li>
-                <li style="margin-bottom:10px;"><strong>Sicuro:</strong> Regolato in Europa (CySEC, FCA).</li>
-                <li><strong>Conto Demo:</strong> Prova con $100k virtuali gratis.</li>
-            </ul>
-        </div>
-
-        <div class="card" style="text-align:center;">
-            <h3>Come Funziona?</h3>
-            <div style="margin-bottom:15px;">
-                <div style="font-size:2rem;">1️⃣</div>
-                <strong>Registrati Gratis</strong>
-                <p style="font-size:0.9rem; margin:0;">Crea il tuo account in 2 minuti.</p>
-            </div>
-            <div style="margin-bottom:15px;">
-                <div style="font-size:2rem;">2️⃣</div>
-                <strong>Scegli chi Copiare</strong>
-                <p style="font-size:0.9rem; margin:0;">Filtra per profitto e rischio.</p>
-            </div>
-            <div>
-                <div style="font-size:2rem;">3️⃣</div>
-                <strong>Clicca "Copia"</strong>
-                <p style="font-size:0.9rem; margin:0;">Il tuo portafoglio copierà le loro mosse.</p>
-            </div>
-        </div>
-
-        <div class="disclaimer">
-            <p><strong>Disclaimer eToro:</strong> eToro è una piattaforma multi-asset che offre investimenti in azioni e cripto-asset, nonché trading di CFD.</p>
-            <p>Si prega di notare che i CFD sono strumenti complessi e comportano un alto rischio di perdere denaro rapidamente a causa della leva finanziaria. <strong>Il 76% dei conti degli investitori al dettaglio perde denaro quando fa trading di CFD con questo fornitore.</strong> Dovresti considerare se comprendi come funzionano i CFD e se puoi permetterti di correre il rischio elevato di perdere i tuoi soldi.</p>
-            <p>Le performance passate non sono indicative dei risultati futuri.</p>
-        </div>
-
+  <div class="card">
+    <h2>Cosa mette a disposizione eToro</h2>
+    <div class="facts">
+      <div class="fact"><div><b>Oltre 30 milioni di utenti registrati</b><span>Una delle piattaforme di social trading più diffuse al mondo.</span></div></div>
+      <div class="fact"><div><b>Regolamentata in Europa</b><span>Il gruppo opera tramite entità autorizzate da CySEC, FCA e ASIC a seconda del paese.</span></div></div>
+      <div class="fact"><div><b>Azioni ed ETF reali a 0% di commissioni</b><span>Oltre ai CFD, la piattaforma consente l'acquisto di titoli reali senza commissione di negoziazione.</span></div></div>
+      <div class="fact"><div><b>Conto demo gratuito</b><span>100.000 dollari virtuali per capire il funzionamento prima di rischiare capitale reale.</span></div></div>
+      <div class="fact"><div><b>Nessuna commissione di gestione sul CopyTrader</b><span>La copia in sé non prevede un costo aggiuntivo: si applicano gli spread e le condizioni standard della piattaforma.</span></div></div>
     </div>
+  </div>
 
-    <div class="sticky-footer">
-        <a href="https://med.etoro.com/B20454_A92557_TClick.aspx" onclick="handleAdClick()" class="btn-etoro" style="margin-top:0; padding:12px; font-size:1rem;" id="txt-sticky-btn">
-            Iscriviti Gratuitamente
-        </a>
-    </div>
+  <div class="honest">
+    <h2>Cosa sapere prima di iniziare</h2>
+    <ul>
+      <li>Copiare un investitore <b>non garantisce alcun guadagno</b>. Se lui perde, perdi anche tu.</li>
+      <li>I rendimenti passati mostrati sulla piattaforma <b>non indicano</b> i risultati futuri.</li>
+      <li>I CFD sono strumenti complessi con leva finanziaria: le perdite possono essere rapide e superiori alle attese.</li>
+      <li>Investi soltanto denaro che puoi permetterti di perdere, e prenditi il tempo di usare il conto demo.</li>
+    </ul>
+  </div>
 
-    <script>
-    function handleAdClick() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const source = urlParams.get('utm_source'); 
-        const clickId = urlParams.get('clickid') || urlParams.get('click_id'); 
+  <div class="card" style="text-align:center">
+    <h2 style="margin-bottom:6px">Pronto a dare un'occhiata?</h2>
+    <p style="font-size:14px;color:var(--grey);margin-bottom:4px">La registrazione è gratuita e non impegna a versare denaro.</p>
+    <a class="cta" href="https://med.etoro.com/B20454_A92557_TClick.aspx" data-aff>Apri il sito ufficiale eToro</a>
+  </div>
 
-        // GA4
-        if (typeof gtag === 'function') {
-            gtag('event', 'eToroClick', { 'event_category': 'conversion', 'debug_mode': true });
-        }
+  <div class="risk">
+    <p><b>Avvertenza sui rischi.</b> eToro è una piattaforma multi-asset che offre investimenti in azioni e cripto-attività, nonché negoziazione di CFD.</p>
+    <p><b>I CFD sono strumenti complessi e comportano un alto rischio di perdere denaro rapidamente a causa della leva finanziaria. Il 51% dei conti degli investitori retail perde denaro negoziando CFD con questo fornitore.</b> Valuta se comprendi il funzionamento dei CFD e se puoi permetterti di correre il rischio elevato di perdere il tuo denaro.</p>
+    <p>Le performance passate non sono indicative dei risultati futuri. Il contenuto di questa pagina ha finalità informative e promozionali e non costituisce consulenza finanziaria, raccomandazione di investimento o sollecitazione all'acquisto.</p>
+    <p>Smart Finance Italia è un sito indipendente e riceve un compenso dagli operatori citati per i clienti segnalati. Questo non comporta alcun costo aggiuntivo per l'utente.</p>
+  </div>
 
-        // MGID Postback
-        if (source === 'mgid' && clickId) {
-            const mgidUrl = "https://a.mgid.com/postback/897661?c=" + clickId + "&e=eToroClick"; 
-            new Image().src = mgidUrl;
-        }
+</main>
 
-        // PropellerAds
-        if (source === 'propellerads' && clickId) {
-            const propUrl = "https://ad.propellerads.com/conversion.php?aid=1063015&pid=&tid=114050&visitor_id=" + clickId;
-            new Image().src = propUrl;
-        }
+<div class="sticky">
+  <div class="inner">
+    <a class="cta" href="https://med.etoro.com/B20454_A92557_TClick.aspx" data-aff>Registrati gratuitamente</a>
+  </div>
+</div>
+
+<script>
+(function(){
+  var q = new URLSearchParams(location.search);
+
+  /* ---- 1. Recupera il click id dalla fonte di traffico ----
+     PropellerAds va configurato con ?subid=${SUBID} nell'URL della campagna. */
+  var cid = "";
+  for (var i = 0; i < CONFIG.CLICKID_KEYS.length; i++){
+    var v = q.get(CONFIG.CLICKID_KEYS[i]);
+    if (v) { cid = v; break; }
+  }
+  if (!cid) cid = "na" + Date.now().toString(36);
+
+  /* ---- 2. Costruisce il link affiliato con il subid ---- */
+  var target = CONFIG.AFF_URL;
+  try {
+    var u = new URL(CONFIG.AFF_URL);
+    u.searchParams.set(CONFIG.SUBID_PARAM, CONFIG.ARM + "_" + cid);
+    target = u.toString();
+  } catch(e){ /* fallback: href statico già presente nell'HTML */ }
+
+  var links = document.querySelectorAll("a[data-aff]");
+  for (var j = 0; j < links.length; j++){
+    links[j].href = target;
+    links[j].rel = "nofollow sponsored noopener";
+    links[j].addEventListener("click", onClick);
+  }
+
+  function onClick(){
+    /* Evento lato pagina: serve solo a misurare il CTR verso il broker.
+       NON è una conversione e non viene inviato ad alcuna rete pubblicitaria.
+       La conversione reale la comunica eToro via postback S2S quando il
+       cliente si qualifica. Vedi nota sotto. */
+    if (typeof gtag === "function"){
+      gtag("event", "aff_click", { broker: "etoro", arm: CONFIG.ARM });
     }
-    </script>
+  }
 
-    <script>
-    // Проверка на езика на браузъра
-    var userLang = navigator.language || navigator.userLanguage; 
-    
-    // Ако езикът НЕ започва с "it" (т.е. не е италиански), смени на Английски
-    if (!userLang.startsWith('it')) {
-        forceEnglish();
-    }
+  /* ---- 3. NOTA SUL POSTBACK ----
+     La versione precedente di questa pagina inviava un postback a
+     MGID e PropellerAds al momento del click. Era sbagliato: diceva
+     alle reti che "conversione = click sul bottone", quindi venivano
+     ottimizzate verso chi clicca, non verso chi deposita e opera.
 
-    function forceEnglish() {
-        document.getElementById('txt-headline').innerHTML = 'Don\'t know how to trade?<br><span class="green-text">Copy the Best.</span>';
-        document.getElementById('txt-description').innerText = 'Join 30 million users. Automatically replicate the moves of top investors.';
-        document.getElementById('txt-table-title').innerText = 'Top Traders to Copy 📈';
-        document.getElementById('txt-table-sub').innerText = 'These investors have achieved consistent profits. You can copy them with one click.';
-        document.getElementById('txt-main-btn').innerText = 'Start Copying Now';
-        document.getElementById('txt-sticky-btn').innerText = 'Join for Free';
-    }
+     Il postback corretto deve partire dai server di eToro verso
+     PropellerAds quando il cliente si qualifica, con questo formato:
 
-    // НОВА ФУНКЦИЯ: Връща италианския, ако някой кликне знамето
-    function forceItalian() {
-        document.getElementById('txt-headline').innerHTML = 'Non sai fare trading?<br><span class="green-text">Copia i Migliori.</span>';
-        document.getElementById('txt-description').innerText = 'Unisciti a 30 milioni di utenti. Replica le mosse dei top investor in automatico.';
-        document.getElementById('txt-table-title').innerText = 'Top Trader da Copiare 📈';
-        document.getElementById('txt-table-sub').innerText = 'Questi investitori hanno ottenuto profitti consistenti. Puoi copiarli con un click.';
-        document.getElementById('txt-main-btn').innerText = 'Inizia a Copiare Ora';
-        document.getElementById('txt-sticky-btn').innerText = 'Iscriviti Gratuitamente';
-    }
+       https://ad.propellerads.com/conversion.php?aid=1063015&pid=&tid=114050&visitor_id={SUBID}
+
+     dove {SUBID} è il valore passato in CONFIG.SUBID_PARAM.
+     Da configurare nel pannello eToro Partners. Finché non è attivo,
+     nessuna conversione viene inviata: meglio nessun dato che dati falsi. */
+})();
 </script>
+
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag("js", new Date());
+gtag("config", CONFIG.GA4);
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-F3LEMGN5GN"></script>
 
 </body>
 </html>
