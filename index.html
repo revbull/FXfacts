@@ -1,502 +1,60 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>XMTrading と FXGT はどちらが自分に合うか｜条件を並べて採点する</title>
-<meta name="description" content="XMTradingとFXGTの条件を項目ごとに並べ、重視する項目を選ぶと自分の基準での比較結果が出ます。規制やボーナスの注意点も掲載。">
-
-<!-- ==================================================================
-     設定 — 更新するのはこのブロックだけ
-     ==================================================================
-     CHECKED_DATE は画面に表示される「情報の最終確認日」。
-     数値を直したら必ずここも直すこと。日付が古いまま数字だけ
-     新しい、あるいはその逆、という状態を作らないための仕掛け。
-
-     ITEMS の各行：
-       label  … 項目名
-       xm     … XMTrading側の値。空欄にすると「要確認」と表示され
-                 採点から自動的に除外される
-       gt     … FXGT側の値。同上
-       win    … "xm" / "gt" / "" （空 = 引き分け、勝の印は出ない）
-       note   … 補足。空なら表示しない
-
-     数値を消せば行が採点から外れる。確認できていない情報で
-     順位をつけない、という方針を構造で担保している。
-     ================================================================== -->
-<script>
-var CONFIG = {
-  CHECKED_DATE: "2026年3月",          /* ★古い。確認後に更新すること */
-
-  XM_URL:  "https://clicks.affstrack.com/c?c=1120254&l=ja&p=6",
-  GT_URL:  "https://fxgt.link?refid=fxgtNihon",
-  GT_APP:  "https://fxgtapp.onelink.me/xgkx/lsswbbod?refid=fxgtNihon",
-  SUBID_PARAM: "subid",               /* ★各社に確認 */
-  ARM: "vs",
-  CLICKID_KEYS: ["subid","clickid","click_id","cid","visitor_id","zoneid"],
-
-  CAMPAIGN_NAME: "",                  /* 空なら帯は出ない */
-  CAMPAIGN_END:  "",                  /* 例 "2026-08-31T23:59:00+09:00" */
-
-  GA4: "G-DTMQSP8BPQ",
-
-  ITEMS: [
-    { label:"運営歴",
-      xm:"2009年設立", gt:"2019年設立", win:"xm",
-      note:"日本市場での運営期間はXMのほうが長い。" },
-
-    { label:"規制・登録",
-      xm:"セーシェルFSA", gt:"セーシェルFSA・南アフリカFSCA", win:"",
-      note:"どちらもオフショア規制で、日本の金融庁には登録していない。国内業者とは投資者保護の枠組みが異なる。" },
-
-    { label:"取引ツール",
-      xm:"MT4・MT5", gt:"MT5のみ", win:"xm",
-      note:"MT4対応のEAを使いたい場合はXM一択になる。" },
-
-    { label:"仮想通貨の取扱い",
-      xm:"対応（銘柄数は控えめ）", gt:"60銘柄以上", win:"gt",
-      note:"" },
-
-    { label:"最大レバレッジ",
-      xm:"", gt:"", win:"",
-      note:"両社とも口座残高に応じて段階的に制限される。上限値だけを見て判断しないこと。" },
-
-    { label:"スプレッド",
-      xm:"", gt:"", win:"",
-      note:"口座タイプと時間帯で大きく変わる。実口座で確認するのが確実。" },
-
-    { label:"口座開設ボーナス",
-      xm:"", gt:"", win:"", note:"" },
-
-    { label:"入金ボーナス",
-      xm:"", gt:"", win:"", note:"" },
-
-    { label:"出金スピード",
-      xm:"", gt:"", win:"", note:"" },
-
-    { label:"日本語サポート",
-      xm:"24時間対応", gt:"24時間対応", win:"",
-      note:"" }
-  ]
-};
-</script>
-
-<style>
-:root{
-  --ai:#1b3a63;        /* 藍 — XM側 */
-  --ai-pale:#eaeef4;
-  --enji:#9c2a35;      /* 臙脂 — FXGT側 */
-  --enji-pale:#f7ecec;
-  --sumi:#1a1c1f;      /* 墨 */
-  --sumi-2:#3d434b;
-  --hai:#6d757e;       /* 灰 */
-  --kincha:#a8791f;    /* 金茶 */
-  --yamabuki:#ffe485;  /* 山吹 — マーカー */
-  --paper:#f0f1ed;
-  --rule:#d6d9d3;
-  --white:#fff;
-  --mincho:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP","Times New Roman",serif;
-  --gothic:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Noto Sans JP",Meiryo,sans-serif;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html{-webkit-text-size-adjust:100%}
-body{font:15px/1.85 var(--gothic);color:var(--sumi);background:var(--paper);
-     padding-bottom:88px;-webkit-font-smoothing:antialiased}
-.wrap{max-width:660px;margin:0 auto}
-a{color:inherit;text-decoration:none}
-
-.notice{background:var(--sumi);color:#9aa1a9;font-size:11px;text-align:center;padding:6px 12px;line-height:1.6}
-#campaign{display:none;background:var(--kincha);color:#fff;text-align:center;
-          padding:8px 14px;font-size:12.5px;font-weight:700;letter-spacing:.02em}
-#campaign .cd{background:rgba(0,0,0,.2);padding:1px 7px;margin-left:7px;font-variant-numeric:tabular-nums}
-
-.masthead{background:var(--white);border-bottom:3px double var(--sumi);padding:11px 18px;
-          display:flex;align-items:baseline;justify-content:space-between;gap:10px}
-.masthead .name{font-family:var(--mincho);font-size:17px;font-weight:700;letter-spacing:.08em}
-.masthead .name b{color:var(--enji);font-weight:700}
-.masthead .date{font-size:10.5px;color:var(--hai);letter-spacing:.04em}
-
-/* ---------- 対戦表の見出し ---------- */
-.card-head{background:var(--sumi);color:#fff;padding:26px 18px 22px;text-align:center}
-.card-head .kicker{font-size:10.5px;letter-spacing:.34em;color:#8b939c;margin-bottom:14px}
-.versus{display:grid;grid-template-columns:1fr 46px 1fr;align-items:center;gap:6px}
-.side{padding:2px 0}
-.side .pos{font-family:var(--mincho);font-size:11px;letter-spacing:.3em;margin-bottom:5px}
-.side.xm .pos{color:#8fb2df}
-.side.gt .pos{color:#e59aa1}
-.side .nm{font-family:var(--mincho);font-size:23px;font-weight:700;letter-spacing:.02em;line-height:1.25}
-.side .sc{font-size:34px;font-weight:800;font-variant-numeric:tabular-nums;line-height:1;margin-top:8px}
-.side.xm .sc{color:#8fb2df}
-.side.gt .sc{color:#e59aa1}
-.vs{font-family:var(--mincho);font-size:15px;color:#6f777f;letter-spacing:.06em}
-.verdict{margin-top:18px;padding-top:15px;border-top:1px solid #333940;
-         font-size:13.5px;color:#c8ced4;line-height:1.7}
-.verdict b{color:#fff}
-
-/* ---------- 見出し ---------- */
-h2{font-family:var(--mincho);font-size:19px;font-weight:700;letter-spacing:.04em;
-   line-height:1.5;padding-left:13px;position:relative;margin-bottom:6px}
-h2::before{content:"";position:absolute;left:0;top:.28em;bottom:.28em;width:4px;background:var(--sumi)}
-.lead{font-size:13px;color:var(--hai);line-height:1.8;padding-left:13px;margin-bottom:16px}
-
-main{padding:22px 13px;display:flex;flex-direction:column;gap:26px}
-section{display:block}
-
-/* ---------- 取組カード ---------- */
-.bouts{display:flex;flex-direction:column;gap:9px;margin-top:4px}
-.bout{background:var(--white);border:1px solid var(--rule);position:relative}
-.bout.off{opacity:.42}
-.bout.na{background:#f6f6f3}
-.bout-top{display:flex;align-items:center;gap:9px;padding:9px 11px;border-bottom:1px solid var(--rule)}
-.bout-no{font-family:var(--mincho);font-size:11px;color:var(--hai);font-variant-numeric:tabular-nums;letter-spacing:.06em}
-.bout-label{font-weight:700;font-size:14px;flex:1;letter-spacing:.02em}
-.pick{border:1px solid var(--rule);background:#fbfbf9;color:var(--hai);
-      font-family:var(--gothic);font-size:10.5px;font-weight:700;letter-spacing:.08em;
-      padding:4px 9px;cursor:pointer;white-space:nowrap;line-height:1.5}
-.pick[aria-pressed="true"]{background:var(--sumi);border-color:var(--sumi);color:#fff}
-.pick:focus-visible{outline:2px solid var(--kincha);outline-offset:1px}
-
-.cells{display:grid;grid-template-columns:1fr 1fr}
-.cell{padding:11px 11px 12px;position:relative;min-height:62px}
-.cell + .cell{border-left:1px solid var(--rule)}
-.cell .who{font-size:10px;letter-spacing:.14em;margin-bottom:4px}
-.cell.xm .who{color:var(--ai)}
-.cell.gt .who{color:var(--enji)}
-.cell .val{font-size:13.5px;font-weight:700;line-height:1.6}
-.cell.xm.won{background:var(--ai-pale)}
-.cell.gt.won{background:var(--enji-pale)}
-.cell .na{color:#9aa0a6;font-weight:400;font-size:12.5px}
-
-/* 判子ふうの「勝」 */
-.seal{position:absolute;right:8px;bottom:7px;width:29px;height:29px;border-radius:50%;
-      display:flex;align-items:center;justify-content:center;
-      font-family:var(--mincho);font-size:14px;font-weight:700;
-      transform:rotate(-9deg);letter-spacing:0}
-.cell.xm .seal{border:2px solid var(--ai);color:var(--ai)}
-.cell.gt .seal{border:2px solid var(--enji);color:var(--enji)}
-
-.bout-note{font-size:11.5px;color:var(--hai);line-height:1.75;padding:8px 11px;
-           border-top:1px dotted var(--rule);background:#fcfcfa}
-
-.hint{font-size:12px;color:var(--hai);background:var(--white);border:1px dashed var(--rule);
-      padding:10px 12px;line-height:1.75;margin-top:4px}
-.mk{background:linear-gradient(transparent 62%,var(--yamabuki) 62%);font-weight:700;color:var(--sumi)}
-
-/* ---------- 本文ブロック ---------- */
-.block{background:var(--white);border:1px solid var(--rule);padding:16px 15px}
-.block p{font-size:13.5px;color:var(--sumi-2);line-height:1.9}
-.block p + p{margin-top:11px}
-.block h3{font-family:var(--mincho);font-size:15.5px;letter-spacing:.03em;margin-bottom:5px}
-.block h3 + p{margin-top:0}
-.split{display:flex;flex-direction:column;gap:15px}
-
-.warn{background:#fdfaf0;border:1px solid #e6dcc0;padding:16px 15px}
-.warn h2::before{background:var(--kincha)}
-.warn li{font-size:13px;color:#5f4f22;margin-left:18px;margin-bottom:8px;line-height:1.85}
-
-/* ---------- CTA ---------- */
-.cta{display:block;text-align:center;color:#fff;font-weight:800;font-size:16px;
-     padding:14px 16px;line-height:1.5;letter-spacing:.03em}
-.cta.xm{background:var(--ai);box-shadow:0 2px 0 #12294a}
-.cta.gt{background:var(--enji);box-shadow:0 2px 0 #741f27}
-.cta:active{transform:translateY(1px)}
-.cta small{display:block;font-weight:400;font-size:11.5px;opacity:.9;margin-top:3px;letter-spacing:0}
-.cta-pair{display:flex;flex-direction:column;gap:9px;margin-top:14px}
-
-.sticky{position:fixed;left:0;right:0;bottom:0;background:rgba(255,255,255,.97);
-        border-top:1px solid var(--rule);padding:8px 13px;z-index:60;
-        box-shadow:0 -2px 12px rgba(0,0,0,.09)}
-.sticky .inner{max-width:660px;margin:0 auto;display:flex;flex-direction:column;gap:5px}
-.sticky .lbl{font-size:10.5px;color:var(--hai);text-align:center;letter-spacing:.05em}
-.sticky .cta{padding:12px;font-size:15px}
-
-.risk{font-size:11px;line-height:1.9;color:var(--hai);padding:2px 4px}
-.risk p{margin-bottom:9px;font-size:11px;color:var(--hai)}
-.risk b{color:var(--sumi-2)}
-footer{border-top:1px solid var(--rule);padding:16px 4px 4px;font-size:11px;color:var(--hai);text-align:center}
-
-.hide{display:none!important}
-@media(min-width:600px){
-  .side .nm{font-size:26px} .side .sc{font-size:40px}
-  main{padding:26px 18px}
-}
-@media(prefers-reduced-motion:reduce){*{transition:none!important}}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Smart FX Facts — Free Trading Signals (Gold, Forex, Stocks)</title>
+  <meta name="description" content="Free daily trading signals for gold, forex and stocks. Past performance published, no paid subscription required.">
+  <link rel="stylesheet" href="/assets/style.css">
+  <link rel="canonical" href="https://smart-fx-facts.com/">
 </head>
 <body>
-
-<div class="notice">広告・アフィリエイトリンクを含みます。当サイトは各社の運営元ではありません。</div>
-<div id="campaign"></div>
-
-<div class="masthead wrap">
-  <span class="name">海外FX<b>採点表</b></span>
-  <span class="date">情報の最終確認：<span data-f="CHECKED_DATE"></span></span>
-</div>
-
-<div class="card-head">
-  <div class="wrap">
-    <div class="kicker">取 組 表</div>
-    <div class="versus">
-      <div class="side xm">
-        <div class="pos">東</div>
-        <div class="nm">XMTrading</div>
-        <div class="sc" id="scXm">0</div>
-      </div>
-      <div class="vs">対</div>
-      <div class="side gt">
-        <div class="pos">西</div>
-        <div class="nm">FXGT</div>
-        <div class="sc" id="scGt">0</div>
-      </div>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="/">Smart<span>FX</span>Facts</a>
+      <nav class="nav" aria-label="Main">
+        <a href="/signals/">Signals</a>
+        <a href="/vantage/">Free Signals</a>
+      </nav>
     </div>
-    <div class="verdict" id="verdict"></div>
-  </div>
-</div>
+  </header>
 
-<main class="wrap">
+  <main>
+    <section class="hero wrap">
+      <div class="badge">Free — no subscription</div>
+      <h1>Free Trading Signals for Gold, Forex &amp; Stocks</h1>
+      <p class="lead">Daily trade ideas with clear entry, stop-loss and take-profit levels. Every past signal stays published — wins and losses. See for yourself before you sign up anywhere.</p>
+      <p><a class="btn btn-primary" href="/vantage/" style="width:auto">Get Free Signals</a></p>
+    </section>
 
-  <section>
-    <h2>重視する項目だけで採点する</h2>
-    <p class="lead">全項目の合計で「どちらが優れているか」を決めても、あまり意味がありません。人によって効く条件が違うからです。</p>
-    <div class="hint">
-      各項目の<span class="mk">「重視」を外す</span>と、その項目は採点から除かれ、上の点数がその場で変わります。<br>
-      値が確認できていない項目は自動的に採点対象外です。
-    </div>
-    <div class="bouts" id="bouts"></div>
-  </section>
-
-  <section>
-    <h2>規制について、先に整理しておく</h2>
-    <p class="lead">この比較で最も誤解されやすい部分です。</p>
-    <div class="block">
-      <p>XMTradingもFXGTも、<span class="mk">日本の金融庁には登録していない海外業者</span>です。ライセンスはいずれもオフショア当局のもので、この点において両社の間に決定的な差はありません。</p>
-      <p>国内業者との違いは、レバレッジの上限だけではありません。トラブルが起きた際に、日本の投資者保護制度や金融ADRの枠組みが使えない点が本質的な差です。ゼロカットによって「借金を負わない」ことと、「資金が制度的に保護されている」ことは別の話です。</p>
-      <p>そのうえで各社を比べるのであれば、運営歴の長さ、出金実績、日本語対応の質といった実務的な指標のほうが判断材料になります。</p>
-    </div>
-  </section>
-
-  <section>
-    <h2>どちらを選ぶかの目安</h2>
-    <div class="split">
-      <div class="block">
-        <h3>XMTradingが向いている場合</h3>
-        <p>MT4のEAを使いたい、運営歴の長さを重視する、日本語の情報量が多いほうが安心する。こうした条件では選びやすい構成です。</p>
+    <section class="block wrap" aria-labelledby="how">
+      <h2 id="how">How it works</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="num" aria-hidden="true">1</div>
+          <h3>Enter your email</h3>
+          <p>It takes 10 seconds. No card, no subscription.</p>
+        </div>
+        <div class="step">
+          <div class="num" aria-hidden="true">2</div>
+          <h3>Receive the signals</h3>
+          <p>Gold, forex and stock setups sent straight to your inbox and Telegram.</p>
+        </div>
+        <div class="step">
+          <div class="num" aria-hidden="true">3</div>
+          <h3>Trade with a regulated broker</h3>
+          <p>If you need a broker, we recommend Vantage — fast execution and tight spreads.</p>
+        </div>
       </div>
-      <div class="block">
-        <h3>FXGTが向いている場合</h3>
-        <p>仮想通貨CFDの銘柄数を重視する、MT5のみで問題ない。この場合は取扱いの幅が判断材料になります。</p>
-      </div>
-      <div class="block">
-        <h3>両方に口座を作るという選択</h3>
-        <p>口座開設自体は無料で、維持費もかかりません。条件は時期によって変わるため、実際に両方の口座を開いて操作感と約定を比べたうえで、資金を置く先を決める方法もあります。</p>
-      </div>
+      <p style="text-align:center"><a class="btn btn-primary" href="/vantage/" style="width:auto">Get Free Signals</a></p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap disclaimer">
+      <p><strong>Risk warning:</strong> Trading forex, gold, stocks and CFDs carries a high level of risk and may not be suitable for all investors. You can lose more than your initial investment. Past performance of any signal is not indicative of future results. Nothing on this site is financial advice.</p>
+      <p><strong>Affiliate disclosure:</strong> Smart FX Facts may receive compensation from Vantage Markets for referred customers. This does not affect the price you pay.</p>
     </div>
-    <div class="cta-pair">
-      <a class="cta xm" data-aff="xm" href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=6">
-        XMTrading 公式サイト<small>口座開設無料</small></a>
-      <a class="cta gt" data-aff="gt" href="https://fxgt.link?refid=fxgtNihon">
-        FXGT 公式サイト<small>口座開設無料</small></a>
-    </div>
-  </section>
-
-  <section class="warn">
-    <h2>申し込む前に読んでおくこと</h2>
-    <ul>
-      <li>ボーナスは<b>取引用のクレジット</b>であり、それ自体を出金することはできません。出金や資金移動を行うと、割合に応じて消滅します。</li>
-      <li>高レバレッジは損失も同じ倍率で拡大します。ゼロカットは追証を防ぎますが、<b>入金額を失う可能性は残ります</b>。</li>
-      <li>公表されている最大レバレッジは、多くの場合<b>口座残高が小さいときに限られます</b>。残高が増えると段階的に制限されます。</li>
-      <li>ボーナスや取引条件は予告なく変わります。金額や期限は必ず公式サイトで確認してください。</li>
-      <li>両社とも日本の金融庁には登録していません。国内業者とは制度上の位置づけが異なります。</li>
-    </ul>
-  </section>
-
-  <section class="risk">
-    <p><b>リスク開示・免責事項</b></p>
-    <p>FX/CFD取引は複雑な金融商品であり、レバレッジにより短期間で大きな損失が生じるおそれがあります。過去の実績は将来の結果を保証しません。必ず余剰資金の範囲内で取引してください。</p>
-    <p>本ページは各社のアフィリエイトパートナーとして作成された<b>広告を含むコンテンツ</b>であり、投資助言・投資勧誘ではありません。口座開設の判断はご自身の責任で行ってください。</p>
-    <p>掲載内容は<span data-f="CHECKED_DATE"></span>時点で確認したものです。条件は変更される場合がありますので、最新かつ正確な情報は各社の公式サイトおよび利用規約をご確認ください。</p>
-    <p>当サイトは独立した情報サイトであり、掲載事業者から紹介手数料を受け取っています。これによりご利用者に追加の費用が発生することはありません。</p>
-  </section>
-
-  <footer>海外FX採点表 — 独立系情報サイト</footer>
-
-</main>
-
-<div class="sticky">
-  <div class="inner">
-    <div class="lbl" id="stickyLbl">口座開設はどちらも無料です</div>
-    <a class="cta xm" id="stickyCta" data-aff="xm" href="https://clicks.affstrack.com/c?c=1120254&l=ja&p=6">公式サイトを見る</a>
-  </div>
-</div>
-
-<script>
-(function(){
-  /* ---------- 設定値の流し込み ---------- */
-  var fs = document.querySelectorAll("[data-f]");
-  for (var i = 0; i < fs.length; i++){
-    fs[i].textContent = CONFIG[fs[i].getAttribute("data-f")] || "";
-  }
-
-  /* ---------- キャンペーン帯：期限を過ぎたら出さない ---------- */
-  (function(){
-    var el = document.getElementById("campaign");
-    if (!CONFIG.CAMPAIGN_NAME || !CONFIG.CAMPAIGN_END) return;
-    var end = new Date(CONFIG.CAMPAIGN_END);
-    if (isNaN(end.getTime())) return;
-    var left = end.getTime() - Date.now();
-    if (left <= 0) return;
-    el.innerHTML = CONFIG.CAMPAIGN_NAME
-                 + '<span class="cd">残り' + Math.ceil(left / 86400000) + '日</span>';
-    el.style.display = "block";
-  })();
-
-  /* ---------- アフィリエイトリンクに subid ---------- */
-  var q = new URLSearchParams(location.search), cid = "";
-  for (var k = 0; k < CONFIG.CLICKID_KEYS.length; k++){
-    var v = q.get(CONFIG.CLICKID_KEYS[k]);
-    if (v) { cid = v; break; }
-  }
-  if (!cid) cid = "na" + Date.now().toString(36);
-
-  function tag(base){
-    try {
-      var u = new URL(base);
-      u.searchParams.set(CONFIG.SUBID_PARAM, CONFIG.ARM + "_" + cid);
-      return u.toString();
-    } catch(e){ return base; }
-  }
-  var URLS = { xm: tag(CONFIG.XM_URL), gt: tag(CONFIG.GT_URL) };
-
-  function wire(a){
-    var who = a.getAttribute("data-aff");
-    a.href = URLS[who];
-    a.target = "_blank";
-    a.rel = "nofollow sponsored noopener";
-    a.onclick = function(){
-      if (typeof gtag === "function"){
-        gtag("event", "aff_click", { broker: who, arm: CONFIG.ARM });
-      }
-    };
-  }
-  var as = document.querySelectorAll("a[data-aff]");
-  for (var n = 0; n < as.length; n++) wire(as[n]);
-  /* クリックは成果ではないため、広告ネットワークへのポストバックは送らない。 */
-
-  /* ---------- 取組カードの描画 ---------- */
-  var host = document.getElementById("bouts");
-  var state = [];
-
-  function esc(s){
-    return String(s).replace(/[&<>"]/g, function(c){
-      return { "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;" }[c];
-    });
-  }
-
-  CONFIG.ITEMS.forEach(function(it, idx){
-    var scorable = !!(it.xm && it.gt);           /* 両方揃って初めて採点対象 */
-    state[idx] = { on: scorable, scorable: scorable, win: it.win || "" };
-
-    var card = document.createElement("div");
-    card.className = "bout" + (scorable ? "" : " na");
-
-    function cell(who, val, label){
-      var won = scorable && it.win === who;
-      return '<div class="cell ' + who + (won ? " won" : "") + '">'
-           +   '<div class="who">' + label + '</div>'
-           +   '<div class="val' + (val ? '' : ' na') + '">' + esc(val || "要確認") + '</div>'
-           +   (won ? '<span class="seal">勝</span>' : '')
-           + '</div>';
-    }
-
-    card.innerHTML =
-        '<div class="bout-top">'
-      +   '<span class="bout-no">' + ("0" + (idx + 1)).slice(-2) + '</span>'
-      +   '<span class="bout-label">' + esc(it.label) + '</span>'
-      +   (scorable
-            ? '<button class="pick" type="button" aria-pressed="true">重視</button>'
-            : '<span class="bout-no">採点対象外</span>')
-      + '</div>'
-      + '<div class="cells">'
-      +   cell("xm", it.xm, "XMTrading")
-      +   cell("gt", it.gt, "FXGT")
-      + '</div>'
-      + (it.note ? '<div class="bout-note">' + esc(it.note) + '</div>' : '');
-
-    if (scorable){
-      var btn = card.querySelector(".pick");
-      btn.addEventListener("click", function(){
-        state[idx].on = !state[idx].on;
-        btn.setAttribute("aria-pressed", state[idx].on ? "true" : "false");
-        btn.textContent = state[idx].on ? "重視" : "対象外";
-        card.classList.toggle("off", !state[idx].on);
-        score();
-      });
-    }
-    host.appendChild(card);
-  });
-
-  /* ---------- 採点 ---------- */
-  var elXm = document.getElementById("scXm"),
-      elGt = document.getElementById("scGt"),
-      elV  = document.getElementById("verdict"),
-      elS  = document.getElementById("stickyCta"),
-      elL  = document.getElementById("stickyLbl");
-
-  function score(){
-    var xm = 0, gt = 0, counted = 0, draw = 0;
-    state.forEach(function(s){
-      if (!s.scorable || !s.on) return;
-      counted++;
-      if (s.win === "xm") xm++;
-      else if (s.win === "gt") gt++;
-      else draw++;
-    });
-
-    elXm.textContent = xm;
-    elGt.textContent = gt;
-
-    var msg, lead = null;
-    if (counted === 0){
-      msg = "採点対象の項目がありません。項目を選び直すか、値の確認が必要です。";
-    } else if (xm > gt){
-      lead = "xm";
-      msg = "選んだ" + counted + "項目では <b>XMTrading</b> が優勢です。"
-          + (draw ? "（うち" + draw + "項目は引き分け）" : "");
-    } else if (gt > xm){
-      lead = "gt";
-      msg = "選んだ" + counted + "項目では <b>FXGT</b> が優勢です。"
-          + (draw ? "（うち" + draw + "項目は引き分け）" : "");
-    } else {
-      msg = "選んだ" + counted + "項目では <b>互角</b>です。両方の口座を開いて比べる方法もあります。";
-    }
-    elV.innerHTML = msg;
-
-    if (lead === "gt"){
-      elS.className = "cta gt"; elS.setAttribute("data-aff","gt");
-      elS.textContent = "FXGT 公式サイトを見る";
-      elL.textContent = "あなたの基準ではFXGTが優勢です";
-    } else if (lead === "xm"){
-      elS.className = "cta xm"; elS.setAttribute("data-aff","xm");
-      elS.textContent = "XMTrading 公式サイトを見る";
-      elL.textContent = "あなたの基準ではXMTradingが優勢です";
-    } else {
-      elS.className = "cta xm"; elS.setAttribute("data-aff","xm");
-      elS.textContent = "公式サイトを見る";
-      elL.textContent = "口座開設はどちらも無料です";
-    }
-    wire(elS);
-  }
-  score();
-})();
-</script>
-
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag("js", new Date());
-gtag("config", CONFIG.GA4);
-</script>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-DTMQSP8BPQ"></script>
-
+  </footer>
 </body>
 </html>
