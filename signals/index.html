@@ -38,17 +38,60 @@
               <th scope="col">Result</th>
             </tr>
           </thead>
-          <tbody>
-            <tr><td>2026-09-24</td><td>XAUUSD</td><td>Buy</td><td>2,412.30</td><td>2,438.50</td><td>2,399.80</td><td class="win">+262 pips</td></tr>
-            <tr><td>2026-09-23</td><td>EURUSD</td><td>Sell</td><td>1.0892</td><td>1.0820</td><td>1.0928</td><td class="win">+72 pips</td></tr>
-            <tr><td>2026-09-22</td><td>GBPUSD</td><td>Buy</td><td>1.2710</td><td>1.2785</td><td>1.2675</td><td class="loss">−35 pips</td></tr>
-            <tr><td>2026-09-21</td><td>USDJPY</td><td>Sell</td><td>144.80</td><td>143.90</td><td>145.30</td><td class="win">+90 pips</td></tr>
-            <tr><td>2026-09-19</td><td>XAUUSD</td><td>Buy</td><td>2,388.00</td><td>2,405.00</td><td>2,380.00</td><td class="win">+170 pips</td></tr>
-            <tr><td>2026-09-18</td><td>US30</td><td>Buy</td><td>41,250</td><td>41,600</td><td>41,050</td><td class="loss">−200 pts</td></tr>
+          <tbody id="signals-body">
+            <tr><td colspan="7" style="text-align:center;color:var(--text-dim)">Loading live signals…</td></tr>
           </tbody>
         </table>
-        <p style="font-size:0.85rem;color:var(--text-dim);margin-bottom:0">Sample rows for layout preview — replace with real signal data before publishing.</p>
+        <p style="font-size:0.85rem;color:var(--text-dim);margin-bottom:0">Live feed — updates automatically every minute.</p>
       </div>
+      <script>
+      (function () {
+        var FEED_URL = "https://web-production-49f47.up.railway.app/signals.json";
+        var REFRESH_MS = 60000;
+
+        function fmtDate(ts) {
+          var d = new Date(ts * 1000);
+          return d.toISOString().slice(0, 10) + " " + d.toISOString().slice(11, 16) + " UTC";
+        }
+        function fmtPrice(p) {
+          if (p == null) return "—";
+          return p >= 100 ? p.toLocaleString("en-US", {maximumFractionDigits: 1})
+                          : p.toLocaleString("en-US", {maximumFractionDigits: 4});
+        }
+        function esc(s) {
+          return String(s).replace(/[&<>"']/g, function (c) {
+            return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
+          });
+        }
+        function render(signals) {
+          var body = document.getElementById("signals-body");
+          if (!signals || !signals.length) {
+            body.innerHTML = '<tr><td colspan="7" style="text-align:center;color:var(--text-dim)">No signals yet — check back soon.</td></tr>';
+            return;
+          }
+          body.innerHTML = signals.map(function (s) {
+            var dir = (s.side || "").toUpperCase();
+            var cls = (dir === "LONG" || dir === "BUY") ? "win" : "loss";
+            return "<tr>"
+              + "<td>" + fmtDate(s.ts) + "</td>"
+              + "<td>" + esc(s.asset) + "</td>"
+              + "<td class='" + cls + "'>" + esc(dir) + "</td>"
+              + "<td>" + fmtPrice(s.price) + "</td>"
+              + "<td>—</td><td>—</td>"
+              + "<td>Open</td>"
+              + "</tr>";
+          }).join("");
+        }
+        function load() {
+          fetch(FEED_URL, {cache: "no-store"})
+            .then(function (r) { return r.ok ? r.json() : {signals: []}; })
+            .then(function (j) { render(j.signals); })
+            .catch(function () { render([]); });
+        }
+        load();
+        setInterval(load, REFRESH_MS);
+      })();
+      </script>
       <p style="text-align:center"><a class="btn btn-primary" href="/vantage/" style="width:auto">Get the next signal free</a></p>
     </section>
   </main>
