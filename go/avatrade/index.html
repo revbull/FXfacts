@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Redirecting to AvaTrade…</title>
+  <meta name="robots" content="noindex">
+  <!-- ============================================================
+       TODO: Replace the URL below with your real AvaTrade affiliate link
+       (also in the JS fallback a few lines down).
+       ============================================================ -->
+  <meta http-equiv="refresh" content="2; url=https://www.avatrade.com/">
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+  <main class="center-page wrap">
+    <div>
+      <div class="badge">Partner offer</div>
+      <h1 style="font-size:1.5rem">Taking you to AvaTrade…</h1>
+      <p style="color:var(--text-dim)">If you are not redirected automatically,
+        <a id="fallback" href="https://www.avatrade.com/" rel="sponsored noopener">continue here</a>.
+      </p>
+    </div>
+  </main>
+  <script>
+    // TODO: replace with your real AvaTrade affiliate link
+    var AFFILIATE_URL = "https://www.avatrade.com/";
+    document.getElementById('fallback').href = AFFILIATE_URL;
+    setTimeout(function () { window.location.replace(AFFILIATE_URL); }, 1500);
+  </script>
+</body>
+</html>
