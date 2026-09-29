@@ -3,85 +3,135 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Past Trading Signals — Full History | Smart FX Facts</title>
-  <meta name="description" content="Full history of our trading signals for gold, stocks and indices — wins and losses published. Transparency first.">
+  <title>Live Trading Signals — Bot Feed | Smart FX Facts</title>
+  <meta name="description" content="Live trading signals from our bot — direction, entry, stop loss and take profit published in real time. Wins and losses, no cherry-picking.">
   <link rel="stylesheet" href="/assets/style.css">
   <link rel="canonical" href="https://smart-fx-facts.com/signals/">
+  <style>
+    .sig-list{display:grid;gap:1.25rem}
+    .sig-card{
+      background:var(--bg-card);border:1px solid var(--border);border-radius:12px;
+      padding:1.25rem 1.5rem;font-family:'SF Mono',Menlo,Consolas,monospace;
+      font-size:0.92rem;line-height:1.9;overflow-x:auto;
+    }
+    .sig-head{color:var(--text);font-weight:700}
+    .sig-dir-buy{color:var(--green);font-weight:700}
+    .sig-dir-sell{color:var(--red);font-weight:700}
+    .sig-dim{color:var(--text-dim)}
+    .sig-warn{color:var(--accent);font-weight:700}
+    .sig-time{color:var(--text-dim);font-size:0.78rem;font-family:-apple-system,sans-serif;margin-top:0.35rem}
+    .sig-status{font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;
+      padding:0.15rem 0.6rem;border-radius:4px;margin-left:0.5rem;vertical-align:middle}
+    .sig-status.open{background:rgba(154,167,180,.15);color:var(--text-dim)}
+    .sig-status.tp{background:rgba(46,160,67,.2);color:var(--green)}
+    .sig-status.sl{background:rgba(248,81,73,.2);color:var(--red)}
+  </style>
 </head>
 <body>
   <header class="site-header">
     <div class="wrap">
       <a class="brand" href="/">Smart<span>FX</span>Facts</a>
       <nav class="nav" aria-label="Main">
-        <a href="/vantage/">Free Signals</a>
+        <a href="/">Free Signals</a>
       </nav>
     </div>
   </header>
 
   <main>
     <section class="hero wrap">
-      <h1>Signal History — Wins and Losses</h1>
-      <p class="lead">Every signal we send stays here. No cherry-picking, no deleted losers.</p>
+      <h1>Live Signal Feed</h1>
+      <p class="lead">Every trade our bot opens, published here in real time — entry, stop loss, take profit, score. Wins and losses, no cherry-picking.</p>
     </section>
 
-    <section class="wrap" style="padding-block-end:3rem" aria-label="Signal history table">
-      <div class="card" style="overflow-x:auto">
-        <table class="signals">
-          <thead>
-            <tr>
-              <th scope="col">Date</th>
-              <th scope="col">Pair</th>
-              <th scope="col">Direction</th>
-              <th scope="col">Entry</th>
-              <th scope="col">TP</th>
-              <th scope="col">SL</th>
-              <th scope="col">Result</th>
-            </tr>
-          </thead>
-          <tbody id="signals-body">
-            <tr><td colspan="7" style="text-align:center;color:var(--text-dim)">Loading live signals…</td></tr>
-          </tbody>
-        </table>
-        <p style="font-size:0.85rem;color:var(--text-dim);margin-bottom:0">Live feed — updates automatically every minute.</p>
+    <section class="wrap" style="padding-block-end:3rem" aria-label="Live signal feed">
+      <div id="sig-list" class="sig-list">
+        <p style="text-align:center;color:var(--text-dim)">Loading live signals…</p>
       </div>
+      <p style="font-size:0.85rem;color:var(--text-dim);margin-top:1.25rem">Live feed — updates automatically every minute.</p>
       <script>
       (function () {
         var FEED_URL = "https://web-production-49f47.up.railway.app/signals.json";
         var REFRESH_MS = 60000;
 
-        function fmtDate(ts) {
-          var d = new Date(ts * 1000);
-          return d.toISOString().slice(0, 10) + " " + d.toISOString().slice(11, 16) + " UTC";
-        }
-        function fmtPrice(p) {
-          if (p == null) return "—";
-          return p >= 100 ? p.toLocaleString("en-US", {maximumFractionDigits: 1})
-                          : p.toLocaleString("en-US", {maximumFractionDigits: 4});
-        }
         function esc(s) {
-          return String(s).replace(/[&<>"']/g, function (c) {
+          return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
             return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
           });
         }
+        function num(v, digits) {
+          if (v == null || isNaN(v)) return null;
+          return Number(v).toFixed(digits == null ? 4 : digits);
+        }
+        function fmtTime(ts) {
+          var d = new Date(ts * 1000);
+          return d.toISOString().slice(0, 10) + " " + d.toISOString().slice(11, 16) + " UTC";
+        }
+        function statusBadge(s) {
+          var st = (s.status || "open").toLowerCase();
+          var cls = st === "tp" || st === "closed_tp" || st === "win" ? "tp"
+                  : st === "sl" || st === "closed_sl" || st === "loss" ? "sl" : "open";
+          var label = cls === "tp" ? "TP hit" : cls === "sl" ? "SL hit" : "Open";
+          return '<span class="sig-status ' + cls + '">' + label + '</span>';
+        }
+
+        /* Render one NEW TRADE card, in the bot's own format (English) */
+        function renderTrade(s) {
+          var dir = (s.side || s.direction || "").toUpperCase();
+          var dirCls = (dir === "BUY" || dir === "LONG") ? "sig-dir-buy" : "sig-dir-sell";
+          var L = [];
+          L.push('<div class="sig-head">🤖 NEW TRADE: ' + esc(s.asset) + statusBadge(s) + '</div>');
+          if (dir) L.push('<div>📈 Direction: <span class="' + dirCls + '">' + esc(dir) + '</span></div>');
+          var entry = num(s.entry != null ? s.entry : s.price, 4);
+          if (entry) L.push('<div>💰 Entry: ' + entry + '</div>');
+          var sl = num(s.sl), tp = num(s.tp);
+          if (sl || tp) {
+            L.push('<div>' + (sl ? '🛑 SL: ' + sl : '') + (sl && tp ? ' | ' : '') + (tp ? '🎯 TP: ' + tp : '') + '</div>');
+          }
+          var score = num(s.score), conf = num(s.conf != null ? s.conf : s.confidence);
+          if (score || conf) {
+            L.push('<div>' + (score ? '📊 Score: ' + score : '') + (score && conf ? ' | ' : '') + (conf ? 'Conf: ' + conf : '') + '</div>');
+          }
+          var size = num(s.size != null ? s.size : s.size_mult, 2);
+          if (size) {
+            var cMult = num(s.conf_mult, 2), bMult = num(s.btc_mult, 2);
+            L.push('<div>📐 Size: x' + size + (cMult || bMult ? ' (conf=' + (cMult || '—') + ', btc=' + (bMult || '—') + ')' : '') + '</div>');
+          }
+          if (s.btc_trend || s.btc) L.push('<div>🌐 BTC: ' + esc((s.btc_trend || s.btc).toUpperCase()) + '</div>');
+          var regime = s.regime, cons = num(s.cons != null ? s.cons : s.consistency, 2);
+          if (regime || cons) {
+            L.push('<div class="sig-dim">📊 Regime: ' + esc(regime || '—') + (cons ? ' | Cons: ' + cons : '') + '</div>');
+          }
+          return L.join("");
+        }
+
+        /* Render a REVERSAL WARNING card */
+        function renderReversal(s) {
+          var L = [];
+          L.push('<div class="sig-warn">⚠️ REVERSAL WARNING: ' + esc(s.asset) + statusBadge(s) + '</div>');
+          var closed = num(s.closed_pct != null ? s.closed_pct : s.closed, 1);
+          var newSl = num(s.new_sl);
+          if (closed || newSl) {
+            L.push('<div>✂️ Closed ' + (closed ? closed + '%' : '—') + (newSl ? ' | New SL: ' + newSl : '') + '</div>');
+          }
+          var price = num(s.price, 4);
+          if (price) L.push('<div>💰 Price: ' + price + '</div>');
+          return L.join("");
+        }
+
         function render(signals) {
-          var body = document.getElementById("signals-body");
+          var box = document.getElementById("sig-list");
           if (!signals || !signals.length) {
-            body.innerHTML = '<tr><td colspan="7" style="text-align:center;color:var(--text-dim)">No signals yet — check back soon.</td></tr>';
+            box.innerHTML = '<p style="text-align:center;color:var(--text-dim)">No signals yet — check back soon.</p>';
             return;
           }
-          body.innerHTML = signals.map(function (s) {
-            var dir = (s.side || "").toUpperCase();
-            var cls = (dir === "LONG" || dir === "BUY") ? "win" : "loss";
-            return "<tr>"
-              + "<td>" + fmtDate(s.ts) + "</td>"
-              + "<td>" + esc(s.asset) + "</td>"
-              + "<td class='" + cls + "'>" + esc(dir) + "</td>"
-              + "<td>" + fmtPrice(s.price) + "</td>"
-              + "<td>—</td><td>—</td>"
-              + "<td>Open</td>"
-              + "</tr>";
+          box.innerHTML = signals.map(function (s) {
+            var type = (s.type || "").toLowerCase();
+            var inner = (type === "reversal" || type === "warning") ? renderReversal(s) : renderTrade(s);
+            return '<div class="sig-card">' + inner
+                 + '<div class="sig-time">' + esc(fmtTime(s.ts)) + '</div></div>';
           }).join("");
         }
+
         function load() {
           fetch(FEED_URL, {cache: "no-store"})
             .then(function (r) { return r.ok ? r.json() : {signals: []}; })
@@ -92,14 +142,14 @@
         setInterval(load, REFRESH_MS);
       })();
       </script>
-      <p style="text-align:center"><a class="btn btn-primary" href="/vantage/" style="width:auto">Get the next signal free</a></p>
+      <p style="text-align:center;margin-top:2rem"><a class="btn btn-primary" href="/#join" style="width:auto">Get the next signal free</a></p>
     </section>
   </main>
 
   <footer>
     <div class="wrap disclaimer">
-      <p><strong>Risk warning:</strong> Trading forex, gold, stocks and CFDs carries a high level of risk. Past performance of any signal is not indicative of future results. Nothing on this site is financial advice.</p>
-      <p><strong>Affiliate disclosure:</strong> Smart FX Facts may receive compensation from Vantage Markets for referred customers.</p>
+      <p><strong>Risk warning:</strong> Trading leveraged products carries a high level of risk. Past performance of any signal is not indicative of future results. Nothing on this site is financial advice.</p>
+      <p><strong>Affiliate disclosure:</strong> Smart FX Facts may receive compensation from partner brokers for referred customers.</p>
     </div>
   </footer>
 </body>
