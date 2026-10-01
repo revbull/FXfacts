@@ -314,6 +314,22 @@ td.res-loss{color:var(--down);font-weight:600}
 .geo-pill:hover{color:var(--cream);border-color:var(--gold)}
 .geo-pill.active{color:var(--bg-deep);background:var(--gold-bright);border-color:var(--gold-bright);font-weight:600}
 
+/* ---------- bonus callout (config-driven — see /go/config.js) ---------- */
+.bonus-callout{
+  margin:16px 0 22px;padding:15px 18px;border-radius:8px;
+  border:1px solid rgba(212,164,55,.42);background:rgba(212,164,55,.07);
+}
+.bonus-pill{
+  display:inline-block;font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;
+  text-transform:uppercase;font-weight:600;color:var(--bg-deep);
+  background:#d4a437;padding:4px 12px;border-radius:999px;
+}
+.bonus-text{display:block;margin-top:11px;font-size:15px;color:var(--cream)}
+.bonus-foot{
+  display:block;margin-top:7px;font-family:var(--mono);font-size:10.5px;
+  letter-spacing:.05em;line-height:1.6;color:var(--text-faint);
+}
+
 /* ---------- email capture ---------- */
 .email-row{
   display:flex;flex-wrap:wrap;gap:14px;justify-content:center;align-items:stretch;
@@ -531,6 +547,11 @@ footer{background:var(--bg-deep);border-top:1px solid var(--line);padding:56px 0
       <div class="broker-card rv">
         <div class="detect"><span class="dot"></span><span id="detectLabel">Detecting your region…</span></div>
         <div class="broker-name" id="brokerName">—</div>
+        <div class="bonus-callout" id="brokerBonus" hidden>
+          <span class="bonus-pill">Bonus</span>
+          <span class="bonus-text"></span>
+          <span class="bonus-foot"></span>
+        </div>
         <div class="broker-note" id="brokerNote"></div>
         <ul class="broker-feats" id="brokerFeats"></ul>
         <a class="btn-broker" id="brokerBtn" href="#" target="_blank" rel="noopener sponsored">Open free account →</a>
@@ -789,6 +810,16 @@ function renderBroker(region){
     || window.AFFILIATE_CONFIG.ACTIVE_BROKERS.includes(key);
   document.getElementById('brokerName').textContent = b.name;
   document.getElementById('brokerNote').textContent = b.note;
+  const bonusEl = document.getElementById('brokerBonus');
+  const callout = window.bonusCalloutFor ? window.bonusCalloutFor(key, region) : null;
+  if (callout){
+    bonusEl.hidden = false;
+    bonusEl.querySelector('.bonus-text').textContent = callout.text;
+    bonusEl.querySelector('.bonus-foot').textContent =
+      (window.AFFILIATE_CONFIG && window.AFFILIATE_CONFIG.BONUS_FOOTNOTE) || '';
+  } else {
+    bonusEl.hidden = true;
+  }
   document.getElementById('brokerFeats').innerHTML = b.feats.map(f => `<li>${f}</li>`).join('');
   const btn = document.getElementById('brokerBtn');
   btn.textContent = (active && !b.comingSoon) ? 'Open free account →' : 'Coming soon';

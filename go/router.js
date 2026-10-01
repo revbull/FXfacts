@@ -20,6 +20,8 @@
       configured yet (contains "REPLACE_ME") or the broker is
       inactive, the page stays up as a region/broker chooser
       instead of redirecting to a broken link.
+   5. The chooser also shows the region-matched bonus callout from
+      BONUS_CALLOUTS (config.js), or nothing for brokers without one.
    ============================================================ */
 (function () {
   "use strict";
@@ -148,6 +150,21 @@
       document.getElementById("recLine").innerHTML =
         "Recommended for <b>" + esc(REGION_LABELS[region]) + "</b>: <b>" + esc(b.name) + "</b>" +
         (usable ? "" : " — <span style=\"color:var(--accent)\">coming soon</span>");
+
+      var bonusEl = document.getElementById("routerBonus");
+      if (bonusEl) {
+        var callout = window.bonusCalloutFor ? window.bonusCalloutFor(key, region) : null;
+        if (callout && callout.text) {
+          bonusEl.hidden = false;
+          bonusEl.innerHTML =
+            '<span class="bonus-pill">Bonus</span>' +
+            '<span class="bonus-text">' + esc(callout.text) + "</span>" +
+            '<span class="bonus-foot">' + esc(CFG.BONUS_FOOTNOTE || "") + "</span>";
+        } else {
+          bonusEl.hidden = true;
+          bonusEl.innerHTML = "";
+        }
+      }
 
       var goBtn = document.getElementById("goBtn");
       if (usable) {
