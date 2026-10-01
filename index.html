@@ -226,6 +226,36 @@ td.res-loss{color:var(--down);font-weight:600}
 .step p{color:var(--text-dim);font-size:15.5px;max-width:52ch}
 @media(max-width:760px){.step{grid-template-columns:64px 1fr}.step p{grid-column:2}}
 
+/* ---------- weekly intelligence ---------- */
+.weekly-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,3vw,32px)}
+@media(max-width:760px){.weekly-grid{grid-template-columns:1fr}}
+.wk-card{
+  border:1px solid var(--line);background:rgba(22,38,56,.65);
+  padding:clamp(26px,3vw,40px);display:flex;flex-direction:column;position:relative;
+  transition:border-color .3s;
+}
+.wk-card:hover{border-color:rgba(252,225,182,.32)}
+.wk-tag{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--gold-bright);margin-bottom:20px;
+}
+.wk-card h3{
+  font-family:var(--display);font-weight:400;font-size:clamp(21px,2.2vw,27px);
+  letter-spacing:.05em;text-transform:uppercase;line-height:1.2;
+}
+.wk-card p{color:var(--text-dim);font-size:15px;margin-top:14px;flex:1}
+.wk-btn{
+  align-self:flex-start;margin-top:26px;
+  font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;
+  border:1px solid var(--gold);color:var(--gold-bright);padding:12px 26px;border-radius:999px;
+  transition:background .3s,color .3s;
+}
+.wk-btn:hover{background:var(--gold);color:var(--bg-deep)}
+.weekly-note{margin-top:clamp(30px,4vw,44px);text-align:center;color:var(--text-dim);font-size:15px}
+.weekly-note a{color:var(--cream);border-bottom:1px solid var(--gold);transition:color .3s}
+.weekly-note a:hover{color:var(--gold-bright)}
+#emailForm{scroll-margin-top:110px}
+
 /* ---------- broker / geo CTA ---------- */
 .broker{background:var(--bg-deep);position:relative;overflow:hidden}
 .broker::before{
@@ -324,7 +354,10 @@ td.res-loss{color:var(--down);font-weight:600}
 
 /* ---------- footer ---------- */
 footer{background:var(--bg-deep);border-top:1px solid var(--line);padding:56px 0 40px}
-.foot-grid{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;margin-bottom:44px}
+.foot-grid{display:flex;justify-content:space-between;align-items:baseline;gap:40px;flex-wrap:wrap;margin-bottom:44px}
+.foot-nav{display:flex;gap:28px;flex-wrap:wrap;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-faint)}
+.foot-nav a{transition:color .3s}
+.foot-nav a:hover{color:var(--cream)}
 .foot-legal{font-size:11.5px;color:var(--text-faint);line-height:1.8;max-width:980px}
 .foot-legal b{color:var(--text-dim);font-weight:500;text-transform:uppercase;letter-spacing:.14em;font-size:10.5px;display:block;margin:18px 0 6px}
 .foot-copy{margin-top:36px;padding-top:24px;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-faint)}
@@ -424,11 +457,36 @@ footer{background:var(--bg-deep);border-top:1px solid var(--line);padding:56px 0
   </div>
 </section>
 
+<!-- ===================== WEEKLY INTELLIGENCE ===================== -->
+<section class="weekly" id="weekly">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="idx">02 — Free weekly intelligence</span>
+      <h2>Every week, on the record.</h2>
+    </div>
+    <div class="weekly-grid rv">
+      <div class="wk-card">
+        <span class="wk-tag">Transparency report · every Sunday</span>
+        <h3>Weekly Scorecard</h3>
+        <p>Every signal from the week — wins and losses, nothing edited out. The full record, published free for everyone to check.</p>
+        <a class="wk-btn" href="/weekly/scorecard.html">Read free →</a>
+      </div>
+      <div class="wk-card">
+        <span class="wk-tag">Week-ahead watchlist · every Sunday</span>
+        <h3>Sunday Forecast</h3>
+        <p>Gold, FX &amp; stocks outlook for the week ahead — bias, key levels and events to watch. A watchlist, not trade recommendations.</p>
+        <a class="wk-btn" href="/weekly/forecast.html">Read free →</a>
+      </div>
+    </div>
+    <p class="weekly-note rv">Get them by email every Sunday — <a href="#emailForm">join the list below</a>.</p>
+  </div>
+</section>
+
 <!-- ===================== HOW IT WORKS ===================== -->
 <section id="how">
   <div class="wrap">
     <div class="sec-head rv">
-      <span class="idx">02 — The process</span>
+      <span class="idx">03 — The process</span>
       <h2>From join to first signal in under a minute.</h2>
     </div>
     <div class="steps">
@@ -456,7 +514,7 @@ footer{background:var(--bg-deep);border-top:1px solid var(--line);padding:56px 0
   <div class="wrap">
     <div class="broker-grid">
       <div class="broker-copy rv">
-        <span class="idx" style="font-family:var(--mono);font-size:12px;letter-spacing:.3em;color:var(--gold-bright);text-transform:uppercase;display:block;margin-bottom:16px">03 — Where to trade</span>
+        <span class="idx" style="font-family:var(--mono);font-size:12px;letter-spacing:.3em;color:var(--gold-bright);text-transform:uppercase;display:block;margin-bottom:16px">04 — Where to trade</span>
         <h2>The broker we trade our own signals on.</h2>
         <p>Signal execution lives and dies by spreads and fill speed. We partner with a different regulated broker per region — raw spreads, fast execution and proper licensing — so the entries you see in the channel are the entries you actually get.</p>
         <p style="margin-top:14px">We detect your region automatically to confirm availability. Already have a broker you trust? Keep it — the signals are broker-agnostic.</p>
@@ -483,7 +541,7 @@ footer{background:var(--bg-deep);border-top:1px solid var(--line);padding:56px 0
 <section id="faq">
   <div class="wrap">
     <div class="sec-head rv">
-      <span class="idx">04 — Questions</span>
+      <span class="idx">05 — Questions</span>
       <h2>Asked before you ask.</h2>
     </div>
     <div class="rv">
@@ -514,7 +572,7 @@ footer{background:var(--bg-deep);border-top:1px solid var(--line);padding:56px 0
 <!-- ===================== FINAL CTA ===================== -->
 <section class="final" id="join">
   <div class="wrap rv">
-    <span class="idx" style="font-family:var(--mono);font-size:12px;letter-spacing:.3em;color:var(--gold-bright);text-transform:uppercase;display:block;margin-bottom:16px">05 — Start now</span>
+    <span class="idx" style="font-family:var(--mono);font-size:12px;letter-spacing:.3em;color:var(--gold-bright);text-transform:uppercase;display:block;margin-bottom:16px">06 — Start now</span>
     <h2>Tomorrow's signals drop at 07:00 GMT.</h2>
     <p>Be in the channel before they do. One tap, zero cost, leave anytime.</p>
     <a class="btn-glow tg-link" href="#" target="_blank" rel="noopener">
@@ -541,6 +599,10 @@ footer{background:var(--bg-deep);border-top:1px solid var(--line);padding:56px 0
   <div class="wrap">
     <div class="foot-grid">
       <a class="logo" href="#top">Smart<em>FX</em>Facts</a>
+      <nav class="foot-nav" aria-label="Weekly reports">
+        <a href="/weekly/scorecard.html">Weekly Scorecard</a>
+        <a href="/weekly/forecast.html">Sunday Forecast</a>
+      </nav>
     </div>
     <div class="foot-legal">
       <b>Risk warning</b>
