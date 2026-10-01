@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /weekly/*-W*.html
+
+Sitemap: https://smart-fx-facts.com/sitemap.xml
