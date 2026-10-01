@@ -3,30 +3,44 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Redirecting to XM Trading…</title>
+  <title>Partner broker — Smart FX Facts</title>
   <meta name="robots" content="noindex">
-  <!-- ============================================================
-       TODO: Replace the URL below with your real XM Trading affiliate link
-       (also in the JS fallback a few lines down).
-       ============================================================ -->
-  <meta http-equiv="refresh" content="2; url=https://www.xmtrading.com/">
   <link rel="stylesheet" href="/assets/style.css">
 </head>
 <body>
   <main class="center-page wrap">
-    <div>
+    <div style="max-width:34rem">
       <div class="badge">Partner offer</div>
-      <h1 style="font-size:1.5rem">Taking you to XM Trading…</h1>
-      <p style="color:var(--text-dim)">If you are not redirected automatically,
-        <a id="fallback" href="https://www.xmtrading.com/" rel="sponsored noopener">continue here</a>.
+      <h1 id="routerTitle" style="font-size:1.5rem">Finding your broker…</h1>
+      <p id="routerMsg" style="color:var(--text-dim)">Detecting your region…</p>
+
+      <div id="routerChoice" hidden>
+        <div class="geo-pills" id="geoPills">
+          <button class="geo-pill" type="button" data-region="europe">Europe</button>
+          <button class="geo-pill" type="button" data-region="japan">Japan</button>
+          <button class="geo-pill" type="button" data-region="seasia">SE Asia</button>
+          <button class="geo-pill" type="button" data-region="mena">Middle East</button>
+          <button class="geo-pill" type="button" data-region="other">Other</button>
+        </div>
+        <p id="recLine" style="margin-top:1.25rem"></p>
+        <a class="btn btn-primary" id="goBtn" style="width:auto" rel="sponsored noopener">Continue →</a>
+        <p style="font-size:0.8rem;color:var(--text-dim);margin-top:1.75rem">All partner brokers:</p>
+        <ul id="brokerList" style="list-style:none;padding:0;margin:0;font-size:0.9rem;color:var(--text-dim);display:grid;gap:0.375rem"></ul>
+      </div>
+
+      <noscript>
+        <p style="color:var(--text-dim)">JavaScript is required to pick your broker automatically —
+          please start from <a href="/">smart-fx-facts.com</a>.</p>
+      </noscript>
+
+      <p style="font-size:0.78rem;color:var(--text-dim);margin-top:2rem">
+        Affiliate link — we may receive a commission from the broker at no additional cost to you.
+        Trading leveraged products carries a high risk of losing money rapidly due to leverage.
       </p>
     </div>
   </main>
-  <script>
-    // TODO: replace with your real XM Trading affiliate link
-    var AFFILIATE_URL = "https://www.xmtrading.com/";
-    document.getElementById('fallback').href = AFFILIATE_URL;
-    setTimeout(function () { window.location.replace(AFFILIATE_URL); }, 1500);
-  </script>
+  <script src="../config.js"></script>
+  <script src="../router.js"></script>
+  <script>window.GeoRouter.init();</script>
 </body>
 </html>

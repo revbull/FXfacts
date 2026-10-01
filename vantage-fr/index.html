@@ -37,7 +37,7 @@
     </section>
 
     <section class="wrap signup" aria-labelledby="inscription" style="padding-block:2rem 3rem">
-      <form class="capture" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+      <form class="capture" id="emailForm" action="https://formspree.io/f/" method="POST">
         <!-- Piège anti-spam -->
         <div class="hp-field" aria-hidden="true">
           <label>Laissez ce champ vide <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label>
@@ -47,7 +47,7 @@
           <input type="email" id="email" name="email" autocomplete="username" inputmode="email" enterkeyhint="done" required>
         </div>
         <button class="btn btn-primary" type="submit">Recevoir les signaux gratuits</button>
-        <a class="btn btn-telegram" href="https://t.me/YOUR_CHANNEL" rel="noopener">Ou rejoignez notre chaîne Telegram →</a>
+        <a class="btn btn-telegram tg-link" href="#" rel="noopener">Ou rejoignez notre chaîne Telegram →</a>
         <p style="font-size:0.8rem;color:var(--text-dim);text-align:center;margin:0">Pas de spam. Désinscription à tout moment.</p>
       </form>
     </section>
@@ -68,7 +68,7 @@
         <div class="step">
           <div class="num" aria-hidden="true">3</div>
           <h3>Un broker de confiance</h3>
-          <p>Besoin d'un compte ? Nous suggérons <a href="/go/vantage/">Vantage</a> — régulé, spreads serrés, exécution rapide.</p>
+          <p>Besoin d'un compte ? Nous suggérons <a href="/go/vantage/">Vantage</a> <span class="direction closed">Bientôt disponible</span> — régulé, spreads serrés, exécution rapide.</p>
         </div>
       </div>
     </section>
@@ -80,5 +80,48 @@
       <p><strong>Divulgation d'affiliation :</strong> Smart FX Facts peut recevoir une compensation de Vantage Markets pour les clients recommandés. Les signaux sont gratuits, avec ou sans ouverture de compte.</p>
     </div>
   </footer>
+  <script src="/go/config.js"></script>
+  <script>
+  (function () {
+    var cfg = window.AFFILIATE_CONFIG || {};
+
+    /* Lien de la chaîne Telegram — masqué tant qu'il n'est pas configuré dans /go/config.js */
+    var tg = cfg.TELEGRAM_CHANNEL || "";
+    var tgOk = tg && tg.indexOf("REPLACE_ME") === -1;
+    document.querySelectorAll("a.tg-link").forEach(function (a) {
+      if (tgOk) { a.href = tg; } else { a.style.display = "none"; }
+    });
+
+    /* Inscription par email via Formspree (ID depuis /go/config.js) */
+    var form = document.getElementById("emailForm");
+    if (!form) return;
+    var btn = form.querySelector("button[type='submit']");
+    function setNote(t) {
+      var n = form.querySelector("p:last-of-type");
+      if (n) n.textContent = t;
+    }
+    var id = cfg.FORMSPREE_FORM_ID || "";
+    var configured = id && id.indexOf("REPLACE_ME") === -1;
+    if (!configured) {
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        setNote("Bientôt disponible — l'inscription par email n'est pas encore ouverte. Rejoignez plutôt notre chaîne Telegram.");
+      });
+      return;
+    }
+    form.action = "https://formspree.io/f/" + id;
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      if (btn) { btn.disabled = true; btn.textContent = "Envoi…"; }
+      fetch(form.action, { method: "POST", body: new FormData(form), headers: { "Accept": "application/json" } })
+        .then(function (r) {
+          setNote(r.ok ? "C'est bon — vérifiez votre boîte mail pour confirmer." : "Une erreur est survenue — veuillez réessayer.");
+          if (r.ok) form.reset();
+        })
+        .catch(function () { setNote("Une erreur est survenue — veuillez réessayer."); })
+        .finally(function () { if (btn) { btn.disabled = false; btn.textContent = "Recevoir les signaux gratuits"; } });
+    });
+  })();
+  </script>
 </body>
 </html>
