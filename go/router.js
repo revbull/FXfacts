@@ -15,7 +15,10 @@
                                                 (avatrade if fxgt
                                                  isn't configured)
    3. Redirects with utm_source=site&utm_medium=cta appended,
-      unless the URL already carries utm parameters.
+      unless the URL already carries utm parameters. The destination
+      URL is resolved per country via window.affiliateLinkFor()
+      (config.js): exact country match first, broker default as
+      fallback.
    4. Graceful degradation: if the chosen broker's link is not
       configured yet (contains "REPLACE_ME") or the broker is
       inactive, the page stays up as a region/broker chooser
@@ -39,6 +42,7 @@
 
   var SE_ASIA   = ["TH", "MY", "PH", "BN"];
   var MENA      = ["SA", "AE", "QA", "KW", "BH", "OM", "EG", "JO", "LB", "MA", "DZ", "TN", "IQ"];
+  var XM_EXTRA  = ["ZA"];   /* South Africa — dedicated XMGlobal campaign */
   var EU_EEA_UK = ["AT", "BE", "BG", "HR", "CY", "CZ", "DK", "EE", "FI", "FR", "DE", "GR", "HU",
                    "IE", "IT", "LV", "LT", "LU", "MT", "NL", "PL", "PT", "RO", "SK", "SI", "ES",
                    "SE", "IS", "LI", "NO", "GB"];
@@ -48,10 +52,12 @@
     mena: "Middle East", other: "International"
   };
 
-  function rawUrl(key)  { return (CFG.AFFILIATE_LINKS || {})[key] || ""; }
+  function linkFor(key, cc) {
+    return window.affiliateLinkFor ? window.affiliateLinkFor(key, cc) : "";
+  }
   function isActive(key) { return (CFG.ACTIVE_BROKERS || []).indexOf(key) !== -1; }
-  function isUsable(key) {
-    var u = rawUrl(key);
+  function isUsable(key, cc) {
+    var u = linkFor(key, cc);
     return isActive(key) && !!u && u.indexOf("REPLACE_ME") === -1;
   }
 
@@ -64,18 +70,18 @@
   function countryToRegion(cc) {
     if (cc === "JP") return "japan";
     if (SE_ASIA.indexOf(cc) !== -1) return "seasia";
-    if (MENA.indexOf(cc) !== -1) return "mena";
+    if (MENA.indexOf(cc) !== -1 || XM_EXTRA.indexOf(cc) !== -1) return "mena";
     if (EU_EEA_UK.indexOf(cc) !== -1) return "europe";
     return "other";
   }
 
-  function regionBroker(region) {
+  function regionBroker(region, cc) {
     switch (region) {
       case "japan":  return "xmtrading";
       case "seasia":
       case "mena":   return "xmglobal";
       case "europe": return "etoro";
-      default:       return isUsable("fxgt") ? "fxgt" : "avatrade";
+      default:       return isUsable("fxgt", cc) ? "fxgt" : "avatrade";
     }
   }
 
@@ -109,14 +115,16 @@
     var choice = document.getElementById("routerChoice");
     if (!title || !msg || !choice) return;
 
-    detectCountry()
-      .then(function (cc) { route(countryToRegion(cc)); })
-      .catch(function ()  { route("other"); });
+    var detectedCC = "";
 
-    function route(region) {
-      var key = regionBroker(region);
-      if (isUsable(key)) {
-        var url = withUtm(rawUrl(key));
+    detectCountry()
+      .then(function (cc) { detectedCC = cc; route(countryToRegion(cc), cc); })
+      .catch(function ()  { route("other", ""); });
+
+    function route(region, cc) {
+      var key = regionBroker(region, cc);
+      if (isUsable(key, cc)) {
+        var url = withUtm(linkFor(key, cc));
         title.textContent = "Taking you to " + BROKERS[key].name + "…";
         msg.innerHTML = "Detected region: <b>" + esc(REGION_LABELS[region]) + "</b>. " +
           "If you are not redirected automatically, " +
@@ -139,9 +147,10 @@
     }
 
     function render(region) {
-      var key = regionBroker(region);
+      var cc = detectedCC;
+      var key = regionBroker(region, cc);
       var b = BROKERS[key] || { name: key, blurb: "" };
-      var usable = isUsable(key);
+      var usable = isUsable(key, cc);
 
       Array.prototype.forEach.call(choice.querySelectorAll(".geo-pill"), function (p) {
         p.classList.toggle("active", p.getAttribute("data-region") === region);
@@ -169,7 +178,7 @@
       var goBtn = document.getElementById("goBtn");
       if (usable) {
         goBtn.textContent = "Continue to " + b.name + " →";
-        goBtn.href = withUtm(rawUrl(key));
+        goBtn.href = withUtm(linkFor(key, cc));
         goBtn.removeAttribute("aria-disabled");
       } else {
         goBtn.textContent = "Coming soon";
@@ -179,8 +188,8 @@
 
       document.getElementById("brokerList").innerHTML = Object.keys(BROKERS).map(function (k) {
         var bb = BROKERS[k];
-        if (isUsable(k)) {
-          return '<li><a href="' + esc(withUtm(rawUrl(k))) + '" rel="sponsored noopener">' +
+        if (isUsable(k, cc)) {
+          return '<li><a href="' + esc(withUtm(linkFor(k, cc))) + '" rel="sponsored noopener">' +
                  esc(bb.name) + "</a> — " + esc(bb.blurb) + "</li>";
         }
         return '<li><span style="color:var(--text-dim)">' + esc(bb.name) +

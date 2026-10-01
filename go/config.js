@@ -9,14 +9,34 @@
    ============================================================ */
 window.AFFILIATE_CONFIG = {
 
-  /* Real partner links, one per broker */
+  /* Real partner links, one per broker.
+     xmtrading / fxgt / avatrade are plain URLs. xmglobal and etoro
+     resolve per country / language: an exact country match in `links`
+     wins, otherwise `default` is used. Always read these through
+     window.affiliateLinkFor(brokerKey, countryCode) — never directly. */
   AFFILIATE_LINKS: {
     vantage:   "https://REPLACE_ME/vantage",    // ← real Vantage partner link
-    etoro:     "https://REPLACE_ME/etoro",      // ← real eToro partner link
-    avatrade:  "https://REPLACE_ME/avatrade",   // ← real AvaTrade partner link
-    xmtrading: "https://REPLACE_ME/xmtrading",  // ← real XM Trading (JP) partner link
-    xmglobal:  "https://REPLACE_ME/xmglobal",   // ← real XM Global partner link
-    fxgt:      "https://REPLACE_ME/fxgt"        // ← real FXGT partner link
+    avatrade:  "https://REPLACE_ME/avatrade",   // still missing — stays REPLACE_ME (fallback only, unused while FXGT is active)
+    fxgt:      "https://fxgt.link?refid=fxgtNihon",              // global — one link for every region
+    xmtrading: "https://clicks.affstrack.com/c?c=438318&l=en&p=6",  // JP partner code за рег. форма: 8HDXW (see BROKER_TIPS)
+    xmglobal:  {
+      links: {
+        TH: "https://clicks.pipaffiliates.com/c?c=507156&l=th&p=6161",
+        MY: "https://clicks.pipaffiliates.com/c?c=469889&l=ms&p=6161",
+        PH: "https://clicks.pipaffiliates.com/c?c=805464&l=en&p=6161",
+        ZA: "https://clicks.pipaffiliates.com/c?c=453165&l=en&p=6161"
+      },
+      default: "https://clicks.pipaffiliates.com/c?c=805464&l=en&p=6161"
+      // Останалите XMGlobal страни (BN, SA, AE, QA, KW, BH, OM, EG, JO, LB, MA, DZ, TN, IQ) ползват
+      // PH default-а; при нужда потребителят да даде специфични кампании.
+    },
+    etoro:     {
+      links: {
+        FR: "https://med.etoro.com/B22473_A92557_TClick.aspx",
+        IT: "https://med.etoro.com/B22477_A92557_TClick.aspx"
+      },
+      default: "https://med.etoro.com/B22474_A92557_TClick.aspx"   // EN — default за цялото ЕС/EEA+UK
+    }
   },
 
   /* Formspree form ID (from https://formspree.io dashboard) */
@@ -47,7 +67,7 @@ window.AFFILIATE_CONFIG = {
   BONUS_CALLOUTS: {
     xmtrading: { regions: "JP",
                  text: "¥13,000 no-deposit bonus + 100% deposit bonus up to $10,500" },
-    xmglobal:  { regions: "TH,MY,PH,BN,SA,AE,QA,KW,BH,OM,EG,JO,LB,MA,DZ,TN,IQ",
+    xmglobal:  { regions: "TH,MY,PH,BN,ZA,SA,AE,QA,KW,BH,OM,EG,JO,LB,MA,DZ,TN,IQ",
                  text: "Welcome bonus up to $30 — no deposit required" },
     /* verify current XMGlobal offer in partner portal */
     fxgt:      { regions: "*",
@@ -57,7 +77,14 @@ window.AFFILIATE_CONFIG = {
 
   /* Compliance footnote rendered under every callout (see BONUS_CALLOUTS). */
   BONUS_FOOTNOTE: "T&Cs apply — check the current offer on the broker's site. " +
-                  "Bonuses are trading credit, not withdrawable cash. Trading involves risk."
+                  "Bonuses are trading credit, not withdrawable cash. Trading involves risk.",
+
+  /* Optional per-broker tips on the broker card. Same `regions`
+     semantics as BONUS_CALLOUTS. The code is typed by the trader into
+     the broker's registration form — it is NOT part of the URL. */
+  BROKER_TIPS: {
+    xmtrading: { regions: "JP", code: "8HDXW" }   // JP partner code за рег. форма
+  }
 };
 
 /* ============================================================
@@ -94,5 +121,29 @@ window.AFFILIATE_CONFIG = {
     var r = String(c.regions || "*").replace(/\s+/g, "");
     if (r === "*") return c;
     return r.split(",").some(function (cc) { return ccToRegion(cc) === region; }) ? c : null;
+  };
+
+  /* Affiliate URL for a broker + ISO country code (upper- or lowercase)
+     as detected by the geo logic. Plain-string entries return as-is;
+     { links: {CC: url}, default: url } entries prefer an exact country
+     match and fall back to `default`. Returns "" when the broker has
+     no entry or nothing is configured for it. */
+  window.affiliateLinkFor = function (brokerKey, countryCode) {
+    var entry = (((window.AFFILIATE_CONFIG || {}).AFFILIATE_LINKS) || {})[brokerKey];
+    if (!entry) return "";
+    if (typeof entry === "string") return entry;
+    var cc = String(countryCode || "").toUpperCase().replace(/\s+/g, "");
+    if (cc && entry.links && typeof entry.links[cc] === "string") return entry.links[cc];
+    return typeof entry.default === "string" ? entry.default : "";
+  };
+
+  /* Registration-tip (e.g. partner code) for a broker + region key, or
+     null. Same matching rule as bonusCalloutFor. */
+  window.brokerTipFor = function (brokerKey, region) {
+    var t = ((window.AFFILIATE_CONFIG || {}).BROKER_TIPS || {})[brokerKey];
+    if (!t || !t.code) return null;
+    var r = String(t.regions || "*").replace(/\s+/g, "");
+    if (r === "*") return t;
+    return r.split(",").some(function (cc) { return ccToRegion(cc) === region; }) ? t : null;
   };
 })();

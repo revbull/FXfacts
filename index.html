@@ -329,6 +329,12 @@ td.res-loss{color:var(--down);font-weight:600}
   display:block;margin-top:7px;font-family:var(--mono);font-size:10.5px;
   letter-spacing:.05em;line-height:1.6;color:var(--text-faint);
 }
+.broker-tip{
+  margin:0 0 20px;padding:8px 0 8px 14px;border-left:2px solid var(--gold);
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;line-height:1.6;
+  color:var(--text-dim);
+}
+.broker-tip b{color:var(--gold-bright);font-weight:600;letter-spacing:.1em}
 
 /* ---------- email capture ---------- */
 .email-row{
@@ -552,6 +558,7 @@ footer{background:var(--bg-deep);border-top:1px solid var(--line);padding:56px 0
           <span class="bonus-text"></span>
           <span class="bonus-foot"></span>
         </div>
+        <div class="broker-tip" id="brokerTip" hidden></div>
         <div class="broker-note" id="brokerNote"></div>
         <ul class="broker-feats" id="brokerFeats"></ul>
         <a class="btn-broker" id="brokerBtn" href="#" target="_blank" rel="noopener sponsored">Open free account →</a>
@@ -712,7 +719,7 @@ const CONFIG = {
 
 /* EU / EEA country codes (+UK) → europe */
 const EU = ["AT","BE","BG","HR","CY","CZ","DK","EE","FI","FR","DE","GR","HU","IE","IT","LV","LT","LU","MT","NL","PL","PT","RO","SK","SI","ES","SE","IS","LI","NO"];
-const SEASIA = ["TH","MY","PH","BN"];
+const SEASIA = ["TH","MY","PH","BN","ZA"];  /* ZA: dedicated XMGlobal campaign */
 const MENA = ["SA","AE","QA","KW","BH","OM","JO","EG","MA","TN","DZ","IQ","LB"];
 
 /* =========================================================
@@ -803,7 +810,17 @@ document.querySelectorAll('.faq-q').forEach(btn => {
    ========================================================= */
 const REGION_LABELS = {europe:'Region: Europe', japan:'Region: Japan', seasia:'Region: Southeast Asia', mena:'Region: Middle East', other:'Region: International'};
 
-function renderBroker(region){
+/* Append UTM tags unless the URL already carries utm parameters */
+function withUtm(url){
+  if (!url || /[?&]utm_/.test(url)) return url;
+  return url + (url.indexOf('?') === -1 ? '?' : '&') + 'utm_source=site&utm_medium=cta';
+}
+function escAttr(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+let detectedCC = '';
+
+function renderBroker(region, cc){
+  cc = cc || detectedCC || '';
   const key = CONFIG.regionBroker[region] || 'fxgt';
   const b = CONFIG.brokers[key];
   const active = !window.AFFILIATE_CONFIG || !window.AFFILIATE_CONFIG.ACTIVE_BROKERS
@@ -820,10 +837,24 @@ function renderBroker(region){
   } else {
     bonusEl.hidden = true;
   }
+  const tipEl = document.getElementById('brokerTip');
+  const tip = window.brokerTipFor ? window.brokerTipFor(key, region) : null;
+  if (tip && tip.code){
+    tipEl.hidden = false;
+    tipEl.innerHTML = 'Partner code <b>' + escAttr(tip.code) +
+      '</b> — enter it in the broker\'s registration form after opening your account.';
+  } else {
+    tipEl.hidden = true;
+    tipEl.innerHTML = '';
+  }
   document.getElementById('brokerFeats').innerHTML = b.feats.map(f => `<li>${f}</li>`).join('');
+  /* Direct partner link when configured (per-country via affiliateLinkFor);
+     otherwise fall back to the /go/ page, which offers the geo chooser. */
+  const direct = window.affiliateLinkFor ? window.affiliateLinkFor(key, cc) : '';
+  const live = active && !b.comingSoon && !!direct && direct.indexOf('REPLACE_ME') === -1;
   const btn = document.getElementById('brokerBtn');
   btn.textContent = (active && !b.comingSoon) ? 'Open free account →' : 'Coming soon';
-  btn.href = (active && !b.comingSoon) ? b.url : '#';
+  btn.href = (active && !b.comingSoon) ? (live ? withUtm(direct) : b.url) : '#';
   btn.classList.toggle('disabled', !active || !!b.comingSoon);
   document.getElementById('detectLabel').textContent = REGION_LABELS[region];
   document.querySelectorAll('.geo-pill').forEach(p => p.classList.toggle('active', p.dataset.region === region));
@@ -843,12 +874,12 @@ async function detectRegion(){
     const r = await fetch('/cdn-cgi/trace', {cache:'no-store'});
     const t = await r.text();
     const m = t.match(/loc=([A-Z]{2})/);
-    if (m && m[1] !== 'XX' && m[1] !== 'T1') return renderBroker(countryToRegion(m[1]));
+    if (m && m[1] !== 'XX' && m[1] !== 'T1'){ detectedCC = m[1]; return renderBroker(countryToRegion(m[1]), m[1]); }
   } catch(e){}
   try {                                   /* fallback API (local preview) */
     const r = await fetch('https://ipapi.co/json/');
     const j = await r.json();
-    if (j && j.country_code) return renderBroker(countryToRegion(j.country_code));
+    if (j && j.country_code){ detectedCC = j.country_code; return renderBroker(countryToRegion(j.country_code), j.country_code); }
   } catch(e){}
   renderBroker('other');
 }
