@@ -51,7 +51,7 @@ window.AFFILIATE_CONFIG = {
                  text: "Welcome bonus up to $30 — no deposit required" },
     /* verify current XMGlobal offer in partner portal */
     fxgt:      { regions: "*",
-                 text: "No-deposit bonus up to ¥20,000 in Japan — check the current offer" }
+                 text: "No-deposit welcome bonus — amounts vary by region (up to ¥20,000 in Japan). Check the current offer" }
     /* FXGT променя бонуса месечно — сменяй тук */
   },
 
