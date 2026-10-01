@@ -146,4 +146,21 @@ window.AFFILIATE_CONFIG = {
     if (r === "*") return t;
     return r.split(",").some(function (cc) { return ccToRegion(cc) === region; }) ? t : null;
   };
+
+  /* Telegram channel — the single gate for every Telegram CTA on the
+     site (homepage hero/final CTAs, the line under the email form, the
+     /signals/ nav link + strip). While TELEGRAM_CHANNEL still contains
+     "REPLACE_ME" telegramConfigured() is false and pages hide their
+     Telegram elements instead of linking a placeholder. */
+  window.telegramConfigured = function () {
+    var tg = ((window.AFFILIATE_CONFIG || {}).TELEGRAM_CHANNEL) || "";
+    return !!tg && tg.indexOf("REPLACE_ME") === -1;
+  };
+
+  /* Channel URL ready to link, or "" while unconfigured. */
+  window.telegramUrl = function () {
+    return window.telegramConfigured()
+      ? window.AFFILIATE_CONFIG.TELEGRAM_CHANNEL
+      : "";
+  };
 })();

@@ -43,6 +43,16 @@
     .unlock-alt{font-size:0.85rem}
     .unlock-alt a{color:var(--accent)}
 
+    /* ---------- telegram (config-driven — see /go/config.js) ---------- */
+    .nav-tg{display:inline-flex;align-items:center;gap:.35rem}
+    .tg-strip{
+      margin-top:1.5rem;padding:.95rem 1.25rem;border-radius:8px;
+      border:1px solid var(--border);border-inline-start:3px solid var(--accent);
+      background:rgba(212,164,55,.07);color:var(--text-dim);font-size:.95rem;text-align:center;
+    }
+    .tg-strip a{color:var(--accent);font-weight:600}
+    .tg-strip a:hover{text-decoration:underline}
+
     /* ---------- unlock / access form ---------- */
     form.capture{display:grid;gap:0.875rem}
     form.capture label{display:grid;gap:0.35rem;text-align:start;font-size:0.9rem;font-weight:600;color:var(--text)}
@@ -66,6 +76,10 @@
         <a href="/">Free Signals</a>
         <a href="#unlock">Unlock Feed</a>
         <a href="/weekly/scorecard.html">Weekly Scorecard</a>
+        <a class="nav-tg tg-link" href="#" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.9 3.4 2.8 10.8c-.9.35-.86 1.6.05 1.9l4.7 1.5 1.8 5.6c.3.85 1.36 1 1.86.28l2.6-3.7 4.5 3.3c.72.53 1.75.13 1.95-.72l3-14c.17-.94-.75-1.68-1.56-1.56ZM8.6 13.5l9.2-6.7c.22-.16.46.16.28.35l-7.5 7-.3 2.9-1.68-3.55Z"/></svg>
+          Telegram
+        </a>
       </nav>
     </div>
   </header>
@@ -88,6 +102,8 @@
         <p style="text-align:center;color:var(--text-dim)">Loading live signals…</p>
       </div>
       <p id="feed-foot" style="font-size:0.85rem;color:var(--text-dim);margin-top:1.25rem">Live feed — updates automatically every minute. The first 2 signals of each day are free, the rest is locked.</p>
+
+      <p class="tg-strip tg-link" hidden>New signals drop in Telegram first — <a href="#" target="_blank" rel="noopener">join free →</a></p>
 
       <div class="card" id="unlock" style="margin-top:2.5rem;scroll-margin-top:2rem">
         <h2 style="margin-top:0;font-size:1.35rem">Confirm your access</h2>
@@ -141,6 +157,20 @@
     var CFG = window.AFFILIATE_CONFIG || {};
     var UNLOCK_KEY = CFG.UNLOCK_KEY || "";
     var KEY_CONFIGURED = UNLOCK_KEY && UNLOCK_KEY.indexOf("REPLACE_ME") === -1;
+
+    /* Telegram CTAs — gate + URL from the shared helpers in
+       /go/config.js. .tg-link elements (nav link, strip under the
+       feed) stay hidden until TELEGRAM_CHANNEL is configured. */
+    (function () {
+      var ok = window.telegramConfigured ? window.telegramConfigured() : false;
+      var tg = window.telegramUrl ? window.telegramUrl() : "";
+      document.querySelectorAll(".tg-link").forEach(function (el) {
+        if (!ok) { el.style.display = "none"; return; }
+        el.removeAttribute("hidden");
+        var a = el.tagName === "A" ? el : el.querySelector("a");
+        if (a) a.href = tg;
+      });
+    })();
 
     /* ---------- helpers ---------- */
     function esc(s) {

@@ -4,16 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Smart FX Facts — Free Trading Signals | Gold, Stocks, Indices</title>
-<meta name="description" content="Free daily trading signals for Gold, Stocks and major indices. Live signal feed, transparent weekly scorecard and Sunday forecast. No payment, no card required.">
+<meta name="description" content="Free daily trading signals for Gold, Stocks and major indices — delivered in real time on Telegram and the site. Live signal feed, transparent weekly scorecard and Sunday forecast. No payment, no card required.">
 <link rel="canonical" href="https://smart-fx-facts.com/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Smart FX Facts">
 <meta property="og:title" content="Smart FX Facts — Free Trading Signals | Gold, Stocks, Indices">
-<meta property="og:description" content="Free daily trading signals with a transparent weekly scorecard and Sunday forecast. No payment, no card required.">
+<meta property="og:description" content="Free daily trading signals — delivered in real time on Telegram and the site — with a transparent weekly scorecard and Sunday forecast. No payment, no card required.">
 <meta property="og:url" content="https://smart-fx-facts.com/">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Smart FX Facts — Free Trading Signals">
-<meta name="twitter:description" content="Free daily trading signals with a transparent weekly scorecard. No payment required.">
+<meta name="twitter:description" content="Free daily trading signals delivered in real time on Telegram and the site. No payment required.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -359,6 +359,9 @@ td.res-loss{color:var(--down);font-weight:600}
 }
 .email-form button:hover{background:var(--gold);color:var(--bg-deep)}
 .email-note{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--text-faint);margin-top:18px}
+.tg-alt{margin-top:16px;font-size:14px;color:var(--text-dim)}
+.tg-alt a{color:var(--gold-bright);border-bottom:1px solid var(--gold);transition:color .3s}
+.tg-alt a:hover{color:var(--cream)}
 .or-divider{
   display:flex;align-items:center;gap:18px;justify-content:center;margin:26px auto;max-width:620px;
   font-family:var(--mono);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--text-faint);
@@ -529,7 +532,7 @@ footer{background:var(--bg-deep);border-top:1px solid var(--line);padding:56px 0
       <div class="step rv">
         <div class="num">02</div>
         <h3>Get the full setup</h3>
-        <p>Every signal comes with instrument, direction, entry zone, take profit and stop loss — plus a one-line reason behind the trade, so you learn while you follow.</p>
+        <p>Every signal comes with instrument, direction, entry zone, take profit and stop loss — plus a one-line reason behind the trade, so you learn while you follow. Signals go live on the site and in our Telegram the moment they're generated.</p>
       </div>
       <div class="step rv">
         <div class="num">03</div>
@@ -628,6 +631,7 @@ footer{background:var(--bg-deep);border-top:1px solid var(--line);padding:56px 0
       </form>
     </div>
     <p class="email-note">No spam. Unsubscribe anytime. Your email is never shared.</p>
+    <p class="tg-alt tg-link">Prefer instant alerts? <a href="#" target="_blank" rel="noopener">Join the Telegram channel — it's free.</a></p>
   </div>
 </section>
 
@@ -723,15 +727,19 @@ const SEASIA = ["TH","MY","PH","BN","ZA"];  /* ZA: dedicated XMGlobal campaign *
 const MENA = ["SA","AE","QA","KW","BH","OM","JO","EG","MA","TN","DZ","IQ","LB"];
 
 /* =========================================================
-   Telegram links (channel URL from /go/config.js — hidden
-   until it is configured)
+   Telegram links — gate + URL come from the shared helpers in
+   /go/config.js (telegramConfigured / telegramUrl). Every .tg-link
+   is hidden until TELEGRAM_CHANNEL is configured; a .tg-link that
+   wraps an <a> (the line under the email form) gets the URL on its
+   inner anchor.
    ========================================================= */
 (function(){
-  const tg = (window.AFFILIATE_CONFIG && window.AFFILIATE_CONFIG.TELEGRAM_CHANNEL) || '';
-  const ok = tg && !tg.includes('REPLACE_ME');
-  document.querySelectorAll('.tg-link').forEach(a => {
-    if (ok) a.href = tg;
-    else a.style.display = 'none';
+  const ok = window.telegramConfigured ? window.telegramConfigured() : false;
+  const tg = window.telegramUrl ? window.telegramUrl() : '';
+  document.querySelectorAll('.tg-link').forEach(el => {
+    if (!ok){ el.style.display = 'none'; return; }
+    const a = el.tagName === 'A' ? el : el.querySelector('a');
+    if (a) a.href = tg;
   });
 })();
 
