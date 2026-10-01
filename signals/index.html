@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Live Trading Signals — Bot Feed | Smart FX Facts</title>
-  <meta name="description" content="Live trading signals from our bot — direction, entry, stop loss and take profit published in real time. Wins and losses, no cherry-picking.">
+  <meta name="description" content="Live trading signals from our bot — the first signals of each day free, the full real-time feed unlocks free through a partner broker. Wins and losses, no cherry-picking.">
   <link rel="stylesheet" href="/assets/style.css">
   <link rel="canonical" href="https://smart-fx-facts.com/signals/">
   <style>
@@ -12,7 +12,7 @@
     .sig-card{
       background:var(--bg-card);border:1px solid var(--border);border-radius:12px;
       padding:1.25rem 1.5rem;font-family:'SF Mono',Menlo,Consolas,monospace;
-      font-size:0.92rem;line-height:1.9;overflow-x:auto;
+      font-size:0.92rem;line-height:1.9;overflow-x:auto;position:relative;
     }
     .sig-head{color:var(--text);font-weight:700}
     .sig-dir-buy{color:var(--green);font-weight:700}
@@ -25,6 +25,37 @@
     .sig-status.open{background:rgba(154,167,180,.15);color:var(--text-dim)}
     .sig-status.tp{background:rgba(46,160,67,.2);color:var(--green)}
     .sig-status.sl{background:rgba(248,81,73,.2);color:var(--red)}
+
+    /* ---------- locked (gated) signals ---------- */
+    .sig-locked .sig-head{opacity:.55}
+    .sig-locked .sig-dir-buy,.sig-locked .sig-dir-sell{opacity:.55}
+    .sig-lock{position:absolute;top:1.1rem;right:1.25rem;font-size:1rem;opacity:.7}
+    .sig-lock-body{filter:blur(5px);user-select:none;pointer-events:none;opacity:.75}
+
+    /* ---------- unlock panel ---------- */
+    .unlock-panel{
+      border-color:var(--accent);text-align:center;
+      padding:2rem 1.5rem;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    }
+    .unlock-panel .sig-head{font-size:1.15rem}
+    .unlock-panel p{color:var(--text-dim);font-size:0.95rem;max-width:34rem;margin:0.75rem auto 0}
+    .unlock-panel .btn{width:auto;margin-top:1.25rem;padding-inline:2rem}
+    .unlock-alt{font-size:0.85rem}
+    .unlock-alt a{color:var(--accent)}
+
+    /* ---------- unlock / access form ---------- */
+    form.capture{display:grid;gap:0.875rem}
+    form.capture label{display:grid;gap:0.35rem;text-align:start;font-size:0.9rem;font-weight:600;color:var(--text)}
+    form.capture input,form.capture select{
+      font-size:1rem;padding:0.75rem;min-height:48px;width:100%;
+      background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);
+      font-family:inherit;
+    }
+    form.capture input:focus-visible,form.capture select:focus-visible{
+      outline:3px solid var(--accent);outline-offset:2px;
+    }
+    form.capture input:invalid:user-invalid{border-color:var(--red)}
+    .form-note{font-size:0.85rem;color:var(--text-dim);margin:0.9rem 0 0}
   </style>
 </head>
 <body>
@@ -33,6 +64,7 @@
       <a class="brand" href="/">Smart<span>FX</span>Facts</a>
       <nav class="nav" aria-label="Main">
         <a href="/">Free Signals</a>
+        <a href="#unlock">Unlock Feed</a>
       </nav>
     </div>
   </header>
@@ -40,109 +72,52 @@
   <main>
     <section class="hero wrap">
       <h1>Live Signal Feed</h1>
-      <p class="lead">Every trade our bot opens, published here in real time — entry, stop loss, take profit, score. Wins and losses, no cherry-picking.</p>
+      <p class="lead">Every trade our bot opens, published here in real time — entry, stop loss, take profit. The first signals of each day are free; the full feed unlocks free through a partner broker. Wins and losses, no cherry-picking.</p>
     </section>
 
+    <!--
+      GATING NOTE (MVP): the "locked" state only hides signal details in the
+      browser. The unlock key below is security-through-obscurity — anyone who
+      knows UNLOCK_KEY (from go/config.js) sees everything. This is deliberate
+      for the MVP; replace with real server-side verification before treating
+      the gate as actual access control.
+    -->
     <section class="wrap" style="padding-block-end:3rem" aria-label="Live signal feed">
       <div id="sig-list" class="sig-list">
         <p style="text-align:center;color:var(--text-dim)">Loading live signals…</p>
       </div>
-      <p style="font-size:0.85rem;color:var(--text-dim);margin-top:1.25rem">Live feed — updates automatically every minute.</p>
-      <script>
-      (function () {
-        var FEED_URL = "https://web-production-49f47.up.railway.app/signals.json";
-        var REFRESH_MS = 60000;
+      <p id="feed-foot" style="font-size:0.85rem;color:var(--text-dim);margin-top:1.25rem">Live feed — updates automatically every minute. The first 2 signals of each day are free, the rest is locked.</p>
 
-        function esc(s) {
-          return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
-            return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
-          });
-        }
-        function num(v, digits) {
-          if (v == null || isNaN(v)) return null;
-          return Number(v).toFixed(digits == null ? 4 : digits);
-        }
-        function fmtTime(ts) {
-          var d = new Date(ts * 1000);
-          return d.toISOString().slice(0, 10) + " " + d.toISOString().slice(11, 16) + " UTC";
-        }
-        function statusBadge(s) {
-          var st = (s.status || "open").toLowerCase();
-          var cls = st === "tp" || st === "closed_tp" || st === "win" ? "tp"
-                  : st === "sl" || st === "closed_sl" || st === "loss" ? "sl" : "open";
-          var label = cls === "tp" ? "TP hit" : cls === "sl" ? "SL hit" : "Open";
-          return '<span class="sig-status ' + cls + '">' + label + '</span>';
-        }
+      <div class="card" id="unlock" style="margin-top:2.5rem;scroll-margin-top:2rem">
+        <h2 style="margin-top:0;font-size:1.35rem">Confirm your access</h2>
+        <p style="color:var(--text-dim);font-size:0.95rem">Already registered with a partner broker? Send us your details — we verify the registration in the partner portal and email you a full-access link within 24 hours.</p>
+        <div id="unlockFormWrap" style="margin-top:1.25rem">
+          <form class="capture" id="unlockForm" action="https://formspree.io/f/" method="POST">
+            <div class="hp-field" aria-hidden="true">
+              <label>Leave this field empty <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label>
+            </div>
+            <input type="hidden" name="_subject" value="Feed unlock request">
+            <label for="uName">Name
+              <input type="text" id="uName" name="name" autocomplete="name" placeholder="Your name" required>
+            </label>
+            <label for="uEmail">Email
+              <input type="email" id="uEmail" name="email" autocomplete="username" inputmode="email" placeholder="your@email.com" required>
+            </label>
+            <label for="uBroker">Broker
+              <select id="uBroker" name="broker" required>
+                <option value="" disabled selected>Loading brokers…</option>
+              </select>
+            </label>
+            <label for="uAcct">Broker account ID
+              <input type="text" id="uAcct" name="account_id" autocomplete="off" placeholder="e.g. 12345678" required>
+            </label>
+            <button type="submit" class="btn btn-primary">Send for verification</button>
+          </form>
+          <p class="form-note" id="unlockNote">We verify your registration in the partner portal and email you a full-access link within 24 hours. No payment, no card — the feed stays free.</p>
+        </div>
+      </div>
 
-        /* Render one NEW TRADE card, in the bot's own format (English) */
-        function renderTrade(s) {
-          var dir = (s.side || s.direction || "").toUpperCase();
-          var dirCls = (dir === "BUY" || dir === "LONG") ? "sig-dir-buy" : "sig-dir-sell";
-          var L = [];
-          L.push('<div class="sig-head">🤖 NEW TRADE: ' + esc(s.asset) + statusBadge(s) + '</div>');
-          if (dir) L.push('<div>📈 Direction: <span class="' + dirCls + '">' + esc(dir) + '</span></div>');
-          var entry = num(s.entry != null ? s.entry : s.price, 4);
-          if (entry) L.push('<div>💰 Entry: ' + entry + '</div>');
-          var sl = num(s.sl), tp = num(s.tp);
-          if (sl || tp) {
-            L.push('<div>' + (sl ? '🛑 SL: ' + sl : '') + (sl && tp ? ' | ' : '') + (tp ? '🎯 TP: ' + tp : '') + '</div>');
-          }
-          var score = num(s.score), conf = num(s.conf != null ? s.conf : s.confidence);
-          if (score || conf) {
-            L.push('<div>' + (score ? '📊 Score: ' + score : '') + (score && conf ? ' | ' : '') + (conf ? 'Conf: ' + conf : '') + '</div>');
-          }
-          var size = num(s.size != null ? s.size : s.size_mult, 2);
-          if (size) {
-            var cMult = num(s.conf_mult, 2), bMult = num(s.btc_mult, 2);
-            L.push('<div>📐 Size: x' + size + (cMult || bMult ? ' (conf=' + (cMult || '—') + ', btc=' + (bMult || '—') + ')' : '') + '</div>');
-          }
-          if (s.btc_trend || s.btc) L.push('<div>🌐 BTC: ' + esc((s.btc_trend || s.btc).toUpperCase()) + '</div>');
-          var regime = s.regime, cons = num(s.cons != null ? s.cons : s.consistency, 2);
-          if (regime || cons) {
-            L.push('<div class="sig-dim">📊 Regime: ' + esc(regime || '—') + (cons ? ' | Cons: ' + cons : '') + '</div>');
-          }
-          return L.join("");
-        }
-
-        /* Render a REVERSAL WARNING card */
-        function renderReversal(s) {
-          var L = [];
-          L.push('<div class="sig-warn">⚠️ REVERSAL WARNING: ' + esc(s.asset) + statusBadge(s) + '</div>');
-          var closed = num(s.closed_pct != null ? s.closed_pct : s.closed, 1);
-          var newSl = num(s.new_sl);
-          if (closed || newSl) {
-            L.push('<div>✂️ Closed ' + (closed ? closed + '%' : '—') + (newSl ? ' | New SL: ' + newSl : '') + '</div>');
-          }
-          var price = num(s.price, 4);
-          if (price) L.push('<div>💰 Price: ' + price + '</div>');
-          return L.join("");
-        }
-
-        function render(signals) {
-          var box = document.getElementById("sig-list");
-          if (!signals || !signals.length) {
-            box.innerHTML = '<p style="text-align:center;color:var(--text-dim)">No signals yet — check back soon.</p>';
-            return;
-          }
-          box.innerHTML = signals.map(function (s) {
-            var type = (s.type || "").toLowerCase();
-            var inner = (type === "reversal" || type === "warning") ? renderReversal(s) : renderTrade(s);
-            return '<div class="sig-card">' + inner
-                 + '<div class="sig-time">' + esc(fmtTime(s.ts)) + '</div></div>';
-          }).join("");
-        }
-
-        function load() {
-          fetch(FEED_URL, {cache: "no-store"})
-            .then(function (r) { return r.ok ? r.json() : {signals: []}; })
-            .then(function (j) { render(j.signals); })
-            .catch(function () { render([]); });
-        }
-        load();
-        setInterval(load, REFRESH_MS);
-      })();
-      </script>
-      <p style="text-align:center;margin-top:2rem"><a class="btn btn-primary" href="/#join" style="width:auto">Get the next signal free</a></p>
+      <p style="text-align:center;margin-top:2rem"><a class="btn btn-primary" href="/#broker" style="width:auto">Get the next signal free</a></p>
     </section>
   </main>
 
@@ -152,5 +127,298 @@
       <p><strong>Affiliate disclosure:</strong> Smart FX Facts may receive compensation from partner brokers for referred customers.</p>
     </div>
   </footer>
+
+  <script src="/go/config.js"></script>
+  <script>
+  (function () {
+    var FEED_URL = "https://web-production-49f47.up.railway.app/signals.json";
+    var REFRESH_MS = 60000;
+    var FREE_PER_DAY = 2;          /* full cards shown free, per day */
+    var LOCKED_TEASERS = 3;        /* blurred cards behind the panel (total count stays hidden) */
+    var LS_KEY = "sff_feed_unlocked";
+
+    var CFG = window.AFFILIATE_CONFIG || {};
+    var UNLOCK_KEY = CFG.UNLOCK_KEY || "";
+    var KEY_CONFIGURED = UNLOCK_KEY && UNLOCK_KEY.indexOf("REPLACE_ME") === -1;
+
+    /* ---------- helpers ---------- */
+    function esc(s) {
+      return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+        return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
+      });
+    }
+    function num(v, digits) {
+      if (v == null || isNaN(v)) return null;
+      return Number(v).toFixed(digits == null ? 4 : digits);
+    }
+    /* The feed switched between epoch timestamps and ISO strings —
+       accept both (epoch seconds, epoch millis, ISO / any Date-parseable). */
+    function toDate(ts) {
+      if (ts == null) return null;
+      if (typeof ts === "number") return new Date(ts < 1e12 ? ts * 1000 : ts);
+      var s = String(ts).trim();
+      if (/^\d+(\.\d+)?$/.test(s)) {
+        var n = Number(s);
+        return new Date(n < 1e12 ? n * 1000 : n);
+      }
+      var d = new Date(s);
+      return isNaN(d.getTime()) ? null : d;
+    }
+    function fmtTime(ts) {
+      var d = toDate(ts);
+      if (!d) return String(ts == null ? "" : ts);
+      return d.toISOString().slice(0, 10) + " " + d.toISOString().slice(11, 16) + " UTC";
+    }
+    function dayKey(ts) {
+      var d = toDate(ts);
+      return d ? d.toISOString().slice(0, 10) : "";
+    }
+    function byNewest(a, b) {
+      var da = toDate(a.ts), db = toDate(b.ts);
+      return (db ? db.getTime() : 0) - (da ? da.getTime() : 0);
+    }
+
+    /* ---------- unlock state ---------- */
+    /* MVP: security-through-obscurity. A matching ?key= (or #key=) unlocks
+       the feed and is remembered on this device via localStorage. Replace
+       with real server-side verification before relying on the gate. */
+    function lsGet() { try { return localStorage.getItem(LS_KEY); } catch (e) { return null; } }
+    function lsSet(v) { try { localStorage.setItem(LS_KEY, v); } catch (e) {} }
+    function urlKey() {
+      var hay = location.search + "&" + (location.hash.charAt(0) === "#" ? location.hash.slice(1) : location.hash);
+      var m = /[?&#]key=([^&#]+)/.exec(hay);
+      return m ? decodeURIComponent(m[1]) : null;
+    }
+    function isUnlocked() {
+      if (!KEY_CONFIGURED) return false;
+      var k = urlKey();
+      if (k && k === UNLOCK_KEY) { lsSet("1"); return true; }
+      return lsGet() === "1";
+    }
+
+    /* ---------- status badge (old + extended feed fields) ---------- */
+    function statusBadge(s) {
+      var st = (s.status || "open").toLowerCase();
+      var cls, label;
+      switch (st) {
+        case "tp1_hit":           cls = "tp";   label = "TP1 hit"; break;
+        case "tp2_hit":           cls = "tp";   label = "TP2 hit"; break;
+        case "tp": case "closed_tp": case "win":
+                                  cls = "tp";   label = "TP hit";  break;
+        case "sl_hit": case "sl": case "closed_sl": case "loss":
+                                  cls = "sl";   label = "SL hit";  break;
+        case "closed":            cls = "open"; label = "Closed";  break;
+        default:                  cls = "open"; label = "Open";
+      }
+      return '<span class="sig-status ' + cls + '">' + label + '</span>';
+    }
+
+    /* ---------- card renderers (all extra fields are optional) ---------- */
+    function renderTrade(s) {
+      var dir = (s.side || s.direction || "").toUpperCase();
+      var dirCls = (dir === "BUY" || dir === "LONG") ? "sig-dir-buy" : "sig-dir-sell";
+      var L = [];
+      L.push('<div class="sig-head">🤖 NEW TRADE: ' + esc(s.asset) + statusBadge(s) + '</div>');
+      if (dir) L.push('<div>📈 Direction: <span class="' + dirCls + '">' + esc(dir) + '</span></div>');
+      var entry = num(s.entry != null ? s.entry : s.price, 4);
+      if (entry) L.push('<div>💰 Entry: ' + entry + '</div>');
+      var sl = num(s.sl);
+      var tp1 = num(s.tp1), tp2 = num(s.tp2), tp = num(s.tp);
+      if (sl || tp1 || tp2 || tp) {
+        var tpTxt = (tp1 || tp2)
+          ? (tp1 ? 'TP1: ' + tp1 : '') + (tp1 && tp2 ? ' | ' : '') + (tp2 ? 'TP2: ' + tp2 : '')
+          : (tp ? 'TP: ' + tp : '');
+        L.push('<div>' + (sl ? '🛑 SL: ' + sl : '') + (sl && tpTxt ? ' | ' : '') + (tpTxt ? '🎯 ' + tpTxt : '') + '</div>');
+      }
+      var pnl = num(s.pnl_r, 2);
+      if (pnl) {
+        var pnlCls = Number(s.pnl_r) > 0 ? "sig-dir-buy" : Number(s.pnl_r) < 0 ? "sig-dir-sell" : "sig-dim";
+        L.push('<div>💵 Result: <span class="' + pnlCls + '">' + (Number(s.pnl_r) > 0 ? "+" : "") + pnl + ' R</span></div>');
+      }
+      var score = num(s.score), conf = num(s.conf != null ? s.conf : s.confidence);
+      if (score || conf) {
+        L.push('<div>' + (score ? '📊 Score: ' + score : '') + (score && conf ? ' | ' : '') + (conf ? 'Conf: ' + conf : '') + '</div>');
+      }
+      var size = num(s.size != null ? s.size : s.size_mult, 2);
+      if (size) {
+        var cMult = num(s.conf_mult, 2), bMult = num(s.btc_mult, 2);
+        L.push('<div>📐 Size: x' + size + (cMult || bMult ? ' (conf=' + (cMult || '—') + ', btc=' + (bMult || '—') + ')' : '') + '</div>');
+      }
+      if (s.btc_trend || s.btc) L.push('<div>🌐 BTC: ' + esc((s.btc_trend || s.btc).toUpperCase()) + '</div>');
+      var regime = s.regime, cons = num(s.cons != null ? s.cons : s.consistency, 2);
+      if (regime || cons) {
+        L.push('<div class="sig-dim">📊 Regime: ' + esc(regime || '—') + (cons ? ' | Cons: ' + cons : '') + '</div>');
+      }
+      if (s.leader) L.push('<div>🐋 Leader: ' + esc(s.leader) + '</div>');
+      if (s.reason) L.push('<div class="sig-dim">🧠 Reason: ' + esc(s.reason) + '</div>');
+      return L.join("");
+    }
+
+    function renderReversal(s) {
+      var L = [];
+      L.push('<div class="sig-warn">⚠️ REVERSAL WARNING: ' + esc(s.asset) + statusBadge(s) + '</div>');
+      var closed = num(s.closed_pct != null ? s.closed_pct : s.closed, 1);
+      var newSl = num(s.new_sl);
+      if (closed || newSl) {
+        L.push('<div>✂️ Closed ' + (closed ? closed + '%' : '—') + (newSl ? ' | New SL: ' + newSl : '') + '</div>');
+      }
+      var price = num(s.price, 4);
+      if (price) L.push('<div>💰 Price: ' + price + '</div>');
+      return L.join("");
+    }
+
+    function cardInner(s) {
+      var type = (s.type || "").toLowerCase();
+      return (type === "reversal" || type === "warning") ? renderReversal(s) : renderTrade(s);
+    }
+
+    /* Locked teaser: ts / asset / side stay visible (activity is not a
+       secret), every other detail is blurred. */
+    function renderLocked(s) {
+      var dir = (s.side || s.direction || "").toUpperCase();
+      var dirCls = (dir === "BUY" || dir === "LONG") ? "sig-dir-buy" : "sig-dir-sell";
+      var type = (s.type || "").toLowerCase();
+      var head = (type === "reversal" || type === "warning")
+        ? '<div class="sig-warn">⚠️ ' + esc(s.asset) + '</div>'
+        : '<div class="sig-head">🤖 NEW TRADE: ' + esc(s.asset) + '</div>';
+      var dirLine = dir ? '<div>📈 Direction: <span class="' + dirCls + '">' + esc(dir) + '</span></div>' : '';
+      return head + dirLine
+        + '<div class="sig-lock-body">' + cardInner(s) + '</div>'
+        + '<div class="sig-time">' + esc(fmtTime(s.ts)) + '</div>';
+    }
+
+    function unlockPanelHTML() {
+      return '<div class="sig-card unlock-panel">'
+        + '<div class="sig-head">🔓 Unlock the full feed — free</div>'
+        + '<p>Every entry, stop loss and take profit the moment the bot posts it. Register with a partner broker and the whole feed opens on this device — no payment, no card.</p>'
+        + '<a class="btn btn-primary" href="/#broker" rel="sponsored">Unlock via partner broker — free</a>'
+        + '<p class="unlock-alt">Already registered? <a href="#unlock">Confirm your access →</a></p>'
+        + '</div>';
+    }
+
+    /* ---------- feed render with gating ---------- */
+    function render(j) {
+      var box = document.getElementById("sig-list");
+      var foot = document.getElementById("feed-foot");
+      var signals = (j && j.signals ? j.signals.slice() : []).sort(byNewest);
+      if (!signals.length) {
+        box.innerHTML = '<p style="text-align:center;color:var(--text-dim)">No signals yet — check back soon.</p>';
+        return;
+      }
+      var unlocked = isUnlocked();
+
+      if (unlocked) {
+        box.innerHTML = signals.map(function (s) {
+          return '<div class="sig-card">' + cardInner(s)
+               + '<div class="sig-time">' + esc(fmtTime(s.ts)) + '</div></div>';
+        }).join("");
+        if (foot) foot.textContent = "Live feed — updates automatically every minute. Full feed unlocked on this device.";
+        return;
+      }
+
+      /* free = the newest FREE_PER_DAY signals of the most recent day */
+      var latestDay = dayKey(signals[0].ts);
+      var freeIds = {};
+      var freeCount = 0;
+      signals.forEach(function (s, i) {
+        if (freeCount < FREE_PER_DAY && dayKey(s.ts) === latestDay) {
+          freeIds[i] = true;
+          freeCount++;
+        }
+      });
+
+      var html = "";
+      var lockedShown = 0;
+      signals.forEach(function (s, i) {
+        if (freeIds[i]) {
+          html += '<div class="sig-card">' + cardInner(s)
+               + '<div class="sig-time">' + esc(fmtTime(s.ts)) + '</div></div>';
+        }
+      });
+
+      html += unlockPanelHTML();
+
+      signals.forEach(function (s, i) {
+        if (!freeIds[i] && lockedShown < LOCKED_TEASERS) {
+          html += '<div class="sig-card sig-locked">' + renderLocked(s)
+               + '<span class="sig-lock" aria-hidden="true">🔒</span></div>';
+          lockedShown++;
+        }
+      });
+      box.innerHTML = html;
+    }
+
+    function load() {
+      fetch(FEED_URL, {cache: "no-store"})
+        .then(function (r) { return r.ok ? r.json() : {signals: []}; })
+        .then(render)
+        .catch(function () { render({signals: []}); });
+    }
+    load();
+    setInterval(load, REFRESH_MS);
+
+    /* ---------- unlock form ---------- */
+    (function () {
+      var BROKER_NAMES = {
+        vantage: "Vantage", etoro: "eToro", avatrade: "AvaTrade",
+        xmtrading: "XM Trading", xmglobal: "XM Global", fxgt: "FXGT"
+      };
+      var form = document.getElementById("unlockForm");
+      var wrap = document.getElementById("unlockFormWrap");
+      var note = document.getElementById("unlockNote");
+      if (!form || !wrap) return;
+
+      /* visitors who already unlocked don't need the form */
+      if (KEY_CONFIGURED && (lsGet() === "1" || urlKey() === UNLOCK_KEY)) {
+        wrap.innerHTML = '<p class="form-note">✅ Full feed unlocked on this device — every signal above is shown in full.</p>';
+        return;
+      }
+
+      /* broker dropdown from ACTIVE_BROKERS (falls back to all known links) */
+      var select = document.getElementById("uBroker");
+      var active = (CFG.ACTIVE_BROKERS && CFG.ACTIVE_BROKERS.length)
+        ? CFG.ACTIVE_BROKERS
+        : Object.keys(CFG.AFFILIATE_LINKS || {});
+      if (select) {
+        if (!active.length) {
+          select.innerHTML = '<option value="" disabled selected>Coming soon</option>';
+          select.disabled = true;
+        } else {
+          select.innerHTML = '<option value="" disabled selected>Choose your broker…</option>'
+            + active.map(function (k) {
+                return '<option value="' + esc(k) + '">' + esc(BROKER_NAMES[k] || k) + '</option>';
+              }).join("");
+        }
+      }
+
+      var formId = CFG.FORMSPREE_FORM_ID || "";
+      var configured = formId && formId.indexOf("REPLACE_ME") === -1;
+      var btn = form.querySelector('button[type="submit"]');
+
+      if (!configured) {
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          if (note) note.textContent = "Coming soon — access verification isn't live yet. The first signals of each day stay free in the meantime.";
+        });
+        return;
+      }
+
+      form.action = "https://formspree.io/f/" + formId;
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        if (btn) { btn.disabled = true; btn.textContent = "Sending…"; }
+        fetch(form.action, { method: "POST", body: new FormData(form), headers: { "Accept": "application/json" } })
+          .then(function (r) {
+            if (note) note.textContent = r.ok
+              ? "Request received — we verify your registration in the partner portal and, once it checks out, your full-access link lands in your inbox within 24 hours."
+              : "Something went wrong — please try again.";
+            if (r.ok) form.reset();
+          })
+          .catch(function () { if (note) note.textContent = "Something went wrong — please try again."; })
+          .finally(function () { if (btn) { btn.disabled = false; btn.textContent = "Send for verification"; } });
+      });
+    })();
+  })();
+  </script>
 </body>
 </html>

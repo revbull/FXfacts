@@ -22,6 +22,14 @@ window.AFFILIATE_CONFIG = {
   /* Formspree form ID (from https://formspree.io dashboard) */
   FORMSPREE_FORM_ID: "REPLACE_ME",
 
+  /* Access key for the full /signals/ feed. The signals page unlocks
+     when it sees ?key=THIS_VALUE (or after the unlock form verifies
+     the visitor and hands out a link containing it). While this is
+     still "REPLACE_ME" the feed stays in free-preview mode.
+     MVP NOTE: this is security-through-obscurity — replace with real
+     server-side verification before treating the gate as protection. */
+  UNLOCK_KEY: "REPLACE_ME",
+
   /* Telegram channel invite link */
   TELEGRAM_CHANNEL: "https://t.me/REPLACE_ME",
 

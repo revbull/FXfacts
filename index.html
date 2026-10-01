@@ -752,8 +752,13 @@ async function detectRegion(){
 }
 /* =========================================================
    Live track record — last N signals from the same bot feed
-   as /signals/. If the feed is unreachable (offline/CORS),
-   the table falls back to a link to the live signals page.
+   as /signals/. Two feed shapes are supported:
+     · legacy:  ts, asset, side, price/entry, sl, tp
+     · extended: + status (open/tp1_hit/tp2_hit/sl_hit/closed),
+       pnl_r, tp1/tp2, reason — when detected, the table shows
+       SL / TP1·TP2 / Status / Result (R) with win-loss colours.
+   If the feed is unreachable (offline/CORS), the table falls
+   back to a link to the live signals page.
    ========================================================= */
 (function(){
   var FEED_URL = 'https://web-production-49f47.up.railway.app/signals.json';
@@ -767,10 +772,25 @@ async function detectRegion(){
     if (v == null || isNaN(v)) return '—';
     return Number(v).toLocaleString('en-US', { maximumFractionDigits: 4 });
   }
+  /* epoch seconds / epoch millis / ISO strings — accept all */
+  function toDate(ts){
+    if (ts == null) return null;
+    if (typeof ts === 'number') return new Date(ts < 1e12 ? ts * 1000 : ts);
+    var s = String(ts).trim();
+    if (/^\d+(\.\d+)?$/.test(s)){
+      var n = Number(s);
+      return new Date(n < 1e12 ? n * 1000 : n);
+    }
+    var d = new Date(s);
+    return isNaN(d.getTime()) ? null : d;
+  }
   function fmtDate(ts){
-    var d = new Date(ts * 1000);
+    var d = toDate(ts);
+    if (!d) return '—';
     return d.getUTCDate() + ' ' + MONTHS[d.getUTCMonth()];
   }
+
+  /* ---------- legacy row (old feed shape) ---------- */
   function row(s){
     var side = (s.side || s.direction || '').toUpperCase();
     var long = side === 'LONG' || side === 'BUY';
@@ -791,6 +811,50 @@ async function detectRegion(){
       + '<td class="' + resCls + '">' + res + '</td>'
       + '<td>' + badge + '</td></tr>';
   }
+
+  /* ---------- extended row (feed carries status / pnl_r / tp1·tp2) ---------- */
+  function extRow(s){
+    var side = (s.side || s.direction || '').toUpperCase();
+    var long = side === 'LONG' || side === 'BUY';
+    var st = (s.status || 'open').toLowerCase();
+
+    var pnl = (s.pnl_r == null || isNaN(s.pnl_r)) ? null : Number(s.pnl_r);
+    var win  = pnl != null ? pnl > 0
+             : ['tp1_hit','tp2_hit','tp','closed_tp','win'].indexOf(st) !== -1;
+    var loss = pnl != null ? pnl < 0
+             : ['sl_hit','sl','closed_sl','loss'].indexOf(st) !== -1;
+
+    var labels = { open:'Open', tp1_hit:'TP1 hit', tp2_hit:'TP2 hit', sl_hit:'SL hit',
+                   closed:'Closed', tp:'TP hit', closed_tp:'TP hit', win:'TP hit',
+                   sl:'SL hit', closed_sl:'SL hit', loss:'SL hit' };
+    var label = labels[st] || 'Open';
+    var badge = win ? '<span class="badge tp">' + esc(label) + '</span>'
+              : loss ? '<span class="badge sl">' + esc(label) + '</span>'
+                     : '<span class="badge run">' + esc(label) + '</span>';
+
+    var resCls = win ? 'res-win' : loss ? 'res-loss' : '';
+    var res = pnl != null
+      ? (pnl > 0 ? '+' : '') + pnl.toFixed(2) + ' R'
+      : (win ? 'TP ✓' : loss ? 'SL ✗' : '—');
+
+    var tpCell = (s.tp1 != null || s.tp2 != null)
+      ? fmt(s.tp1) + ' / ' + fmt(s.tp2)
+      : fmt(s.tp);
+
+    return '<tr><td>' + esc(fmtDate(s.ts)) + '</td>'
+      + '<td class="pair">' + esc(s.asset || '—') + '</td>'
+      + '<td><span class="side ' + (long ? 'long' : 'short') + '">' + esc(side || '—') + '</span></td>'
+      + '<td>' + fmt(s.entry != null ? s.entry : s.price) + '</td>'
+      + '<td>' + fmt(s.sl) + '</td>'
+      + '<td>' + tpCell + '</td>'
+      + '<td>' + badge + '</td>'
+      + '<td class="' + resCls + '">' + res + '</td></tr>';
+  }
+
+  function isExtended(sigs){
+    return sigs.some(s => s.status != null || s.pnl_r != null || s.tp1 != null || s.tp2 != null);
+  }
+
   function fallback(){
     tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;padding:32px 20px;white-space:normal">'
       + '<a href="/signals/" style="color:var(--gold-bright);border-bottom:1px solid var(--gold)">See live signals →</a>'
@@ -803,9 +867,23 @@ async function detectRegion(){
       var sigs = (j.signals || []).filter(s => {
         var t = (s.type || '').toLowerCase();
         return t !== 'reversal' && t !== 'warning' && s.asset;
-      }).slice(0, N);
+      });
+      sigs.sort((a, b) => {
+        var da = toDate(a.ts), db = toDate(b.ts);
+        return (db ? db.getTime() : 0) - (da ? da.getTime() : 0);
+      });
+      sigs = sigs.slice(0, N);
       if (!sigs.length) return fallback();
-      tbody.innerHTML = sigs.map(row).join('');
+      if (isExtended(sigs)){
+        var thead = document.querySelector('#sigRows').parentElement.querySelector('thead tr');
+        if (thead){
+          thead.innerHTML = '<th>Date</th><th>Instrument</th><th>Side</th><th>Entry</th>'
+            + '<th>Stop Loss</th><th>Take Profit</th><th>Status</th><th>Result</th>';
+        }
+        tbody.innerHTML = sigs.map(extRow).join('');
+      } else {
+        tbody.innerHTML = sigs.map(row).join('');
+      }
     })
     .catch(fallback);
 })();
