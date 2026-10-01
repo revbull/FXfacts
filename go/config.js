@@ -51,7 +51,7 @@ window.AFFILIATE_CONFIG = {
   UNLOCK_KEY: "REPLACE_ME",
 
   /* Telegram channel invite link */
-  TELEGRAM_CHANNEL: "https://t.me/REPLACE_ME",
+  TELEGRAM_CHANNEL: "https://t.me/+q8wO4N1hQs0yNWQ8",
 
   /* Brokers that are live. Anything not listed here is treated
      as "coming soon" (no redirect, CTA disabled). */
