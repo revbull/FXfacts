@@ -16,29 +16,32 @@
 <meta name="twitter:description" content="Free daily trading signals delivered in real time on Telegram and the site. No payment required.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#101e2e;
-  --bg-deep:#0b1521;
-  --bg-raise:#162638;
-  --line:rgba(252,225,182,.14);
-  --gold:#af915f;
-  --gold-bright:#d9b878;
-  --cream:#fce1b6;
-  --text:#f4f6f8;
-  --text-dim:rgba(244,246,248,.62);
-  --text-faint:rgba(244,246,248,.38);
-  --up:#4ade80;
-  --down:#f87171;
+  --bg:#0a130f;
+  --bg-deep:#060c09;
+  --bg-raise:#0f1d16;
+  --line:rgba(201,164,63,.16);
+  --gold:#b08a2e;
+  --gold-bright:#e0be5a;
+  --cream:#efe3c0;
+  --text:#f1ecdc;
+  --text-dim:rgba(241,236,220,.62);
+  --text-faint:rgba(241,236,220,.38);
+  --up:#35c26e;
+  --down:#e05c5c;
   --mono:'IBM Plex Mono',monospace;
   --sans:'IBM Plex Sans',system-ui,sans-serif;
-  --display:'Marcellus',serif;
+  --display:'Fraunces',Georgia,serif;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
-  background:var(--bg);
+  background:
+    radial-gradient(1400px 700px at 50% -10%,rgba(201,164,63,.07),transparent 60%),
+    repeating-linear-gradient(90deg,rgba(241,236,220,.012) 0 1px,transparent 1px 120px),
+    var(--bg);
   color:var(--text);
   font-family:var(--sans);
   font-weight:300;
@@ -92,7 +95,7 @@ nav.mainnav a:hover::after{width:100%}
   display:flex;flex-direction:column;justify-content:center;
   padding:140px 0 90px;
   overflow:hidden;
-  background:radial-gradient(1200px 600px at 75% -10%,rgba(175,145,95,.12),transparent 60%),var(--bg);
+  background:radial-gradient(1200px 600px at 75% -10%,rgba(176,138,46,.12),transparent 60%),var(--bg);
 }
 .hero svg.chart-bg{
   position:absolute;inset:0;width:100%;height:100%;
@@ -110,7 +113,7 @@ h1{
   line-height:1.06;letter-spacing:.06em;text-transform:uppercase;
   max-width:14ch;
 }
-h1 .g{color:var(--gold-bright)}
+h1 .g{color:var(--gold-bright);font-style:italic}
 .hero p.lede{
   max-width:52ch;margin-top:26px;font-size:clamp(16px,1.4vw,19px);
   color:var(--text-dim);font-weight:300;
@@ -190,14 +193,14 @@ caption{
 th{
   font-family:var(--mono);font-weight:500;font-size:11px;letter-spacing:.2em;text-transform:uppercase;
   color:var(--gold-bright);text-align:left;padding:15px 20px;border-bottom:1px solid var(--line);
-  background:rgba(175,145,95,.06);white-space:nowrap;
+  background:rgba(176,138,46,.08);white-space:nowrap;
 }
 td{
   font-family:var(--mono);font-size:14px;padding:15px 20px;
   border-bottom:1px solid var(--line);color:var(--text-dim);white-space:nowrap;
 }
 tbody tr{transition:background .25s}
-tbody tr:hover{background:rgba(175,145,95,.05)}
+tbody tr:hover{background:rgba(176,138,46,.07)}
 td.pair{color:var(--text);font-weight:600}
 td.res-win{color:var(--up);font-weight:600}
 td.res-loss{color:var(--down);font-weight:600}
@@ -243,7 +246,7 @@ td.res-loss{color:var(--down);font-weight:600}
   padding:clamp(26px,3vw,40px);display:flex;flex-direction:column;position:relative;
   transition:border-color .3s;
 }
-.wk-card:hover{border-color:rgba(252,225,182,.32)}
+.wk-card:hover{border-color:rgba(239,227,192,.32)}
 .wk-tag{
   font-family:var(--mono);font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;
   color:var(--gold-bright);margin-bottom:20px;
@@ -269,7 +272,7 @@ td.res-loss{color:var(--down);font-weight:600}
 .broker{background:var(--bg-deep);position:relative;overflow:hidden}
 .broker::before{
   content:"";position:absolute;right:-180px;top:-180px;width:520px;height:520px;border-radius:50%;
-  background:radial-gradient(circle,rgba(175,145,95,.14),transparent 65%);pointer-events:none;
+  background:radial-gradient(circle,rgba(176,138,46,.14),transparent 65%);pointer-events:none;
 }
 .broker-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(36px,6vw,90px);align-items:center}
 @media(max-width:880px){.broker-grid{grid-template-columns:1fr}}
@@ -382,7 +385,7 @@ td.res-loss{color:var(--down);font-weight:600}
 .faq-a p{color:var(--text-dim);font-size:15px;padding:0 0 26px;max-width:64ch}
 
 /* ---------- final cta ---------- */
-.final{ text-align:center;background:radial-gradient(800px 400px at 50% 120%,rgba(175,145,95,.16),transparent 65%),var(--bg)}
+.final{ text-align:center;background:radial-gradient(800px 400px at 50% 120%,rgba(176,138,46,.16),transparent 65%),var(--bg)}
 .final h2{margin:0 auto 24px}
 .final p{color:var(--text-dim);max-width:46ch;margin:0 auto 40px}
 
@@ -417,14 +420,14 @@ footer{background:var(--bg-deep);border-top:1px solid var(--line);padding:56px 0
   <svg class="chart-bg" viewBox="0 0 1440 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
     <defs>
       <linearGradient id="lineG" x1="0" y1="0" x2="1" y2="0">
-        <stop offset="0" stop-color="#af915f" stop-opacity="0"/>
-        <stop offset=".5" stop-color="#af915f" stop-opacity=".55"/>
-        <stop offset="1" stop-color="#d9b878" stop-opacity=".9"/>
+        <stop offset="0" stop-color="#b08a2e" stop-opacity="0"/>
+        <stop offset=".5" stop-color="#b08a2e" stop-opacity=".55"/>
+        <stop offset="1" stop-color="#e0be5a" stop-opacity=".9"/>
       </linearGradient>
     </defs>
     <g id="candles" stroke-width="1"></g>
     <path id="trendline" fill="none" stroke="url(#lineG)" stroke-width="2"/>
-    <g font-family="IBM Plex Mono, monospace" font-size="11" fill="rgba(252,225,182,.22)">
+    <g font-family="IBM Plex Mono, monospace" font-size="11" fill="rgba(239,227,192,.22)">
       <text x="40" y="120">XAUUSD</text>
       <text x="40" y="760">EURUSD</text>
       <text x="1300" y="200">GBPJPY</text>
