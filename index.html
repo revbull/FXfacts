@@ -95,11 +95,14 @@ nav.mainnav a:hover::after{width:100%}
   display:flex;flex-direction:column;justify-content:center;
   padding:140px 0 90px;
   overflow:hidden;
-  background:radial-gradient(1200px 600px at 75% -10%,rgba(176,138,46,.12),transparent 60%),var(--bg);
+  background:
+    linear-gradient(180deg,rgba(6,12,9,.86) 0%,rgba(6,12,9,.62) 40%,rgba(10,19,15,.92) 78%,var(--bg) 100%),
+    url('/assets/hero-floor.jpg') center 32%/cover no-repeat,
+    var(--bg);
 }
 .hero svg.chart-bg{
   position:absolute;inset:0;width:100%;height:100%;
-  opacity:.5;pointer-events:none;
+  opacity:.28;pointer-events:none;
 }
 .hero .wrap{position:relative;z-index:2}
 .kicker{
@@ -659,6 +662,7 @@ footer{background:var(--bg-deep);border-top:1px solid var(--line);padding:56px 0
     <div class="foot-copy">
       <span>© 2026 Smart FX Facts</span>
       <span>Educational content only · Not financial advice</span>
+      <span>Hero photo: Lars Plougmann · CC BY-SA 2.0</span>
     </div>
   </div>
 </footer>
